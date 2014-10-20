@@ -1,0 +1,35 @@
+<h1>Listing owners</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Password salt</th>
+      <th>Password hash</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Usertype</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @owners.each do |owner| %>
+      <tr>
+        <td><%= owner.username %></td>
+        <td><%= owner.password_salt %></td>
+        <td><%= owner.password_hash %></td>
+        <td><%= owner.email %></td>
+        <td><%= owner.company %></td>
+        <td><%= owner.usertype %></td>
+        <td><%= link_to 'Show', owner %></td>
+        <td><%= link_to 'Edit', edit_owner_path(owner) %></td>
+        <td><%= link_to 'Destroy', owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Owner', new_owner_path %>
