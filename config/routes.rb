@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+    root 'home#index'
+    get 'login' => 'home#login'
+    get 'signup' => 'home#signup'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
