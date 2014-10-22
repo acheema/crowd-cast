@@ -6,10 +6,11 @@ class UserController < ApplicationController
     def createUser
          status = 0
          # Depending on usertype, create an Advertiser or Owner
-         if params[ :usertype ].equal? 0
-            status = Advertiser.createUser create_params
-         elsif params[ :usertype ].equal? 1
-            status = Owner.createUser(create_params)
+         params = create_params
+         if params[ :usertype ].eql? "0" or params[ :usertype ].equal? 0
+            status = Advertiser.createUser params
+         elsif params[ :usertype ].eql? "1" or params[ :usertype ].equal? 1
+            status = Owner.createUser(params)
          else
             #Should never reach here
             render :json => { status: -5 } and return
@@ -54,7 +55,7 @@ class UserController < ApplicationController
     def resetFixture
         Owner.TESTAPI_resetFixture
         Advertiser.TESTAPI_resetFixture
-        render :json => { errCode: SUCCESS }
+        render :json => { status: SUCCESS }
     end
     
     private
@@ -65,7 +66,7 @@ class UserController < ApplicationController
     
     # The necessary parameter for logging in an owner/advertiser
     def login_params
-        params.permit(:username, :password)
+        params.require(:user).permit(:username, :password)
     end
 end
 
