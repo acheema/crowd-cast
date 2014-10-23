@@ -28,6 +28,10 @@ gem 'spring',        group: :development
 
 gem "bcrypt-ruby", :require => "bcrypt"
 gem  "curb"
+
+gem 'geocoder'
+gem 'gmaps4rails'
+
 # for heroku
 group :production do
   gem 'rails_12factor'
