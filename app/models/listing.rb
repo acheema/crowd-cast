@@ -1,4 +1,11 @@
 class Listing < ActiveRecord::Base
+   #geocoded_by :address
+   #after_validation :geocode, :if => :address_changed?
+
+   #def address
+   #   [street, city, state].compact.join(', ')
+   #end   
+
 	# Code Written By : Sukriti Singal
 	$SUCCESS = 1
 	$ERR_INVALID_TITLE = -1 
