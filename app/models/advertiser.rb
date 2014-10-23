@@ -19,7 +19,7 @@ class Advertiser < ActiveRecord::Base
   end
 
   def self.createUser(params)
-    # Verify that the username doesn't already exist in the Advertiser table
+    # Verify that the username doesn't already exist in the Owner table
     if Owner.exists?( :username => params[ :username ])
         return -1
     end
