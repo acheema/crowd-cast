@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :listings
+
     root 'home#index'
     get 'login' => 'home#login'
     get 'signup' => 'home#signup'
