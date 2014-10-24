@@ -1,151 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-     <link rel="shortcut icon" href="assets/ico/favicon.png">
-
-    <title>CrowdCast</title>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">CR<i class="fa fa-circle"></i>WDCAST</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-          <section>
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target=".navbar-collapse"
+                data-toggle="collapse" type="button"><span class=
+                "icon-bar"></span> <span class="icon-bar"></span> <span class=
+                "icon-bar"></span></button> <a class="navbar-brand" href=
+                "#">CR<i class="fa fa-circle"></i>WDCAST</a>
+            </div>
 
-					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-						<button type="button">Login</button>
-						<div class="morph-content">
-							<div>
-								<div class="content-style-form content-style-form-1">
-									<span class="icon icon-close"></span>
-									<h2>Login</h2>
-									<form>
-										<p><label>Email</label><input type="text" /></p>
-										<p><label>Password</label><input type="password" /></p>
-										<p><button>Login</button></p>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div><!-- morph-button -->
+            <div class="navbar-collapse collapse">
+                <div class="nav navbar-nav navbar-right" style=
+                "margin-left: 2em">
+                    <section>
+                        <div class=
+                        "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                        <button type="button" >Login</button>
+
+                            <div class="morph-content">
+                                <div>
+                                    <div class=
+                                    "content-style-form content-style-form-1">
+                                        <span class="icon icon-close"></span>
+
+                                        <h2>Login</h2>
+
+                                        <form>
+                                            <p><label>Email</label><input type=
+                                            "text"></p>
+
+                                            <p>
+                                            <label>Password</label><input type=
+                                            "password"></p>
+
+                                            <p><button>Login</button></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- morph-button -->
+
+                        <div class=
+                        "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                        <button type="button">Signup</button>
+
+                            <div class="morph-content">
+                                <div>
+                                    <div class=
+                                    "content-style-form content-style-form-2">
+                                        <span class="icon icon-close"></span>
+
+                                        <h2>Sign Up</h2>
 
 
-					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-						<button type="button">Signup</button>
-						<div class="morph-content">
-							<div>
-								<div class="content-style-form content-style-form-2">
-									<span class="icon icon-close"></span>
-									<h2>Sign Up</h2>
-									<form>
-										<p><label>Email</label><input type="text" /></p>
-										<p><label>Password</label><input type="password" /></p>
-										<p><label>Repeat Password</label><input type="password" /></p>
-										<p><button>Sign Up</button></p>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div><!-- morph-button -->
-                    
-                    <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                        <button type="button" onclick="location.href='listings/createlisting.html'" >Create</button>
-                    </div>
-                    
-                    <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                        <button type="button" onclick="location.href='#'" >Search</button>
-                    </div>
-                    
-				</div><!-- /form-mockup -->
-			</section>
-          </ul>
+
+                                            <p><label id = "email-signup">Email</label><input type=
+                                            "text"></p>
+
+                                            <p>
+                                            <label id = "password-signup">Password</label><input type=
+                                            "password"></p>
+
+                                            <p><button id = "signup">Sign Up</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- morph-button -->
+
+                        <div class=
+                        "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                        <button onclick=
+                        "location.href='listings/createlisting.html'" type=
+                        "button">Create</button>
+                        </div>
+
+                        <div class=
+                        "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                        <button onclick="location.href='#'" type=
+                        "button">Search</button>
+                        </div>
+                    </section>
+                </div>
+            </div><!-- /form-mockup -->
         </div><!--/.nav-collapse -->
-      </div>
     </div>
 
-	<div id="headerwrap">
-		<div class="container">
-			<div class="row centered">
-				<div class="col-lg-8 col-lg-offset-2">
-				<h1>Advertising has never been <b>easier</b></h1>
-        <h2>'Request a quote' is now a thing of the past</h2>
-				</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- headerwrap -->
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Advertising has never been <b>easier</b></h1>
 
+                    <h2>'Request a quote' is now a thing of the past</h2>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- headerwrap -->
 
-	<div class="container w">
-		<div class="row centered">
-			<br><br>
-			<div class="col-lg-4">
-				<i class="fa fa-money"></i>
-				<h4>NO THIRD PARTY FEES</h4>
-				<p>We are cutting out the middleman.</p>
-			</div><!-- col-lg-4 -->
+    <div class="container w">
+        <div class="row centered">
+            <br>
+            <br>
 
-			<div class="col-lg-4">
-				<i class="fa fa-map-marker"></i>
-				<h4>FIND A PERFECT DIGITAL SPACE IN THE BAY AREA TO ADVERTISE YOUR BUSINESS</h4>
-				<p>Search through available digital signage spaces and see how much </p>
-			</div><!-- col-lg-4 -->
+            <div class="col-lg-4">
+                <i class="fa fa-money"></i>
 
-			<div class="col-lg-4">
-				<i class="fa fa-laptop"></i>
-				<h4>UPLOAD YOUR AD IN THE COMFORT OF YOUR OWN OFFICE</h4>
-				<p> </p>
-			</div><!-- col-lg-4 -->
-		</div><!-- row -->
-		<br>
-		<br>
-	</div><!-- container -->
+                <h4>NO THIRD PARTY FEES</h4>
 
+                <p>We are cutting out the middleman.</p>
+            </div><!-- col-lg-4 -->
 
+            <div class="col-lg-4">
+                <i class="fa fa-map-marker"></i>
 
+                <h4>FIND A PERFECT DIGITAL SPACE IN THE BAY AREA TO ADVERTISE
+                YOUR BUSINESS</h4>
 
+                <p>Search through available digital signage spaces and see how
+                much</p>
+            </div><!-- col-lg-4 -->
 
-	<!-- FOOTER -->
-	<div id="f">
-		<div class="container">
-			<div class="row centered">
-				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
+            <div class="col-lg-4">
+                <i class="fa fa-laptop"></i>
 
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- Footer -->
+                <h4>UPLOAD YOUR AD IN THE COMFORT OF YOUR OWN OFFICE</h4>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/modernizr.custom.js"></script>
+                <p></p>
+            </div><!-- col-lg-4 -->
+        </div><!-- row -->
+        <br>
+        <br>
+    </div><!-- container -->
 
-    <script src="assets/js/classie.js"></script>
-		<script src="assets/js/uiMorphingButton_fixed.js"></script>
+<script>
+ $('#signup').click(function() {
+   $.ajax({
+            //First send a post request, get the response back. On successful message back, check the data
+            url: "" + window.location + "api/create_user",
+            type: "POST",
+            data: JSON.stringify({email: $('#email-signup').val(), password: $('#password-signup').val()}),
+            contentType: "application/json",
+            dataType: "json",
+            success: function(data){
+            },
+            failure: function(errorMsg) {
+            }
+         });
+  })
 
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/uiMorphingButton_fixed.js"></script>
-		<script>
+</script>
+	<script>
 			(function() {
 				var docElem = window.document.documentElement, didScroll, scrollPosition;
 
@@ -206,5 +209,3 @@
 
 			})();
 		</script>
-  </body>
-</html>
