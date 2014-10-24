@@ -2,6 +2,14 @@
 Note: Button styles were borrowed from codrops.com (around line 100), but the designs were modifed to fit the theme of our application
 */
 
+.logged-in {
+  visibility:hidden;
+}
+.alert {
+  color: #bc1919;
+  text-transform:uppercase;
+}
+
 
 .navbar {
   font-weight: 800;
@@ -326,6 +334,8 @@ Note: Button styles were borrowed from codrops.com (around line 100), but the de
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
+  line-height:10px;
+
 }
 
 .content-style-form input[type="text"],
@@ -401,18 +411,7 @@ Note: Button styles were borrowed from codrops.com (around line 100), but the de
 
 
 
-.morph-button.open .content-style-form-4 p {
-  opacity: 1;
-  -webkit-transition: opacity 0.4s 0.2s, -webkit-transform 0.4s 0.2s;
-  transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
-  -webkit-transform: rotateY(0deg);
-  transform: rotateY(0deg);
-}
 
-.morph-button.open .content-style-form-4 p:nth-child(2) {
-  -webkit-transition-delay: 0.35s;
-  transition-delay: 0.35s;
-}
 
 @media screen and (max-width: 770px) {
   .content-style-overlay {
@@ -594,6 +593,7 @@ Note: Button styles were borrowed from codrops.com (around line 100), but the de
 
 
 
+
 .morph-button-modal-3 > button,
 .morph-button-modal-3 .morph-content {
   background-color: #fbfbfb;
@@ -606,6 +606,8 @@ Note: Button styles were borrowed from codrops.com (around line 100), but the de
   width: 420px;
   height: 550px;
 }
+
+
 
 .morph-button-modal-3.open .morph-content > div {
   height: 420px;

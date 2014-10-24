@@ -3,11 +3,12 @@ class UserController < ApplicationController
    def new
      @user = User.new
    end
-   
+
     SUCCESS = 1
 
     # Create a user
     def createUser
+
          status = 0
          # Depending on usertype, create an Advertiser or Owner
          params = create_params
