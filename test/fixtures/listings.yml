@@ -5,7 +5,7 @@ one:
   height: 1.5
   width: 1.5
   time_per_click: 1
-  clicks_per_week: 1
+  views_per_week: 1
   cost_per_week: 1.5
   street: MyString
   city: MyString
@@ -21,7 +21,7 @@ two:
   height: 1.5
   width: 1.5
   time_per_click: 1
-  clicks_per_week: 1
+  views_per_week: 1
   cost_per_week: 1.5
   street: MyString
   city: MyString
