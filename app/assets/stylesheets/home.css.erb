@@ -1,72 +1,15 @@
-/* OVERALL ASPECT */
+/* Jessica Wong
+Note: Button styles were borrowed from codrops.com (around line 100), but the designs were modifed to fit the theme of our application
+*/
 
-body {
-  background-color: #f2f2f2;
-    font-family: "Lato";
-    font-weight: 300;
-    font-size: 16px;
-    color: #555;
-
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
-
-    margin-top: 70px;
+.logged-in {
+  visibility:hidden;
+}
+.alert {
+  color: #bc1919;
+  text-transform:uppercase;
 }
 
-/* Titles */
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway";
-    font-weight: 300;
-    color: #333;
-}
-
-
-/* Paragraph & Typographic */
-p {
-    line-height: 28px;
-    margin-bottom: 25px;
-}
-
-.centered {
-    text-align: center;
-}
-
-/* Links */
-a {
-    color: #f85c37;
-    word-wrap: break-word;
-
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-a:hover,
-a:focus {
-    color: #7b7b7b;
-    text-decoration: none;
-    outline: 0;
-}
-
-a:before,
-a:after {
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
- hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
 
 .navbar {
   font-weight: 800;
@@ -97,22 +40,7 @@ a:after {
   letter-spacing: 1px;
 }
 
-/*TILT*/
-.tilt {
-  -webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
-       -o-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-          transition: all 0.5s ease;
-}
 
-.tilt:hover {
-  -webkit-transform: rotate(-10deg);
-     -moz-transform: rotate(-10deg);
-       -o-transform: rotate(-10deg);
-      -ms-transform: rotate(-10deg);
-          transform: rotate(-10deg);
-}
 
 /* ==========================================================================
    Wrap Sections
@@ -406,6 +334,8 @@ a:after {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
+  line-height:10px;
+
 }
 
 .content-style-form input[type="text"],
@@ -481,18 +411,7 @@ a:after {
 
 
 
-.morph-button.open .content-style-form-4 p {
-  opacity: 1;
-  -webkit-transition: opacity 0.4s 0.2s, -webkit-transform 0.4s 0.2s;
-  transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
-  -webkit-transform: rotateY(0deg);
-  transform: rotateY(0deg);
-}
 
-.morph-button.open .content-style-form-4 p:nth-child(2) {
-  -webkit-transition-delay: 0.35s;
-  transition-delay: 0.35s;
-}
 
 @media screen and (max-width: 770px) {
   .content-style-overlay {
@@ -674,6 +593,7 @@ a:after {
 
 
 
+
 .morph-button-modal-3 > button,
 .morph-button-modal-3 .morph-content {
   background-color: #fbfbfb;
@@ -682,10 +602,12 @@ a:after {
 
 
 .morph-button-modal-3.open .morph-content {
-  margin: -255px 0 0 -210px;
+	margin: 0 0 0 -210px;
   width: 420px;
-  height: 550px;
+  height: 650px;
 }
+
+
 
 .morph-button-modal-3.open .morph-content > div {
   height: 420px;
@@ -706,9 +628,7 @@ a:after {
 }
 
 /* Helper classes */
-.noscroll {
-  overflow: hidden;
-}
+
 
 .morph-button-overlay.scroll .morph-content {
   overflow-y: scroll;

@@ -1,3 +1,4 @@
+# Written by Jhoong Roh
 require 'test_helper'
 
 class OwnerTest < ActiveSupport::TestCase
