@@ -13,7 +13,7 @@
           <section>
 
 					<div class="morph-button morph-button-modal morph-button-modal-3 large morph-button-fixed">
-						<button type="button">Login</button>
+						<button type="button" class="test">Login</button>
 						<div class="morph-content">
               <div>
 								<div class="content-style-form content-style-form-1">
@@ -35,7 +35,7 @@
 
 
 					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-						<button type="button">Signup</button>
+						<button type="button" class = "test">Signup</button>
 						<div class="morph-content">
 							<div>
 								<div class="content-style-form content-style-form-2">
@@ -150,7 +150,7 @@ $('#signup').click(function(e) {
            contentType: "application/json",
            dataType: "json",
            success: function(data){
-             signinSuccess(data);
+             signupSuccess(data);
            },
            failure: function(errorMsg) {
              failure(data);
@@ -159,10 +159,17 @@ $('#signup').click(function(e) {
 })
 
 
-function signinSuccess(data) {
-  console.log(data);
-}
+function signupSuccess(data) {
+  if (data.status == 1) {
+    if (checkedValue == 0) {
+      window.location.href = window.location + '/search';
 
+    }
+    else {
+window.location.href = window.location + '/listings/new';
+  }
+}
+}
  $('#login').click(function(e) {
    e.preventDefault();
    $.ajax({
@@ -183,6 +190,7 @@ function signinSuccess(data) {
 
  function loginSuccess(data){
    // Wrong login credentials
+   console.log(data.status);
    if (data.status == -1) {
      // error message
      $('#login-error').show();
@@ -194,7 +202,9 @@ function signinSuccess(data) {
     }, 5000);
   }
    else if (data.status == 1) {
-     $('.morph-button').addClass('logged-in');
+     $('.test').addClass('logged-in');
+     window.location.href = window.location + '/search';
+
    }
 
   };
