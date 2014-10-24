@@ -64,6 +64,7 @@ class Listing < ActiveRecord::Base
 
    def self.getListingDetails(id)
       listing = Listing.find(id)
+      
       return listing
    end
 end

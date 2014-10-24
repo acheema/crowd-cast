@@ -5,103 +5,22 @@
       <input type="text" id="searchBox" name="city" class="barInitial" placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
       <input type="button" id="searchButton">
     </form>
-    <div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div>
-    <div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div><div class="result">
-	    <div class="content">
-	  	  <h3 class="title">
-	  	  	<a href="" style="">Nice sidewalk ad space.</a>
-	  	  </h3>
-	  	  <p class="listingInfo"><b>Height:</b> 30ft</p>
-	  	  <p class="listingInfo"><b>Width:</b> 40ft</p>
-	  	  <p class="listingInfo"><b>Time per view:</b> 8 seconds </p>
-	  	  <p class="listingInfo"><b>Views per week:</b> 1300</p>
-	  	  <p class="listingInfo"><b>Cost per week:</b> $300</p>
-	  	  <p class="listingInfo"><b>Address:</b> 1234 South Street Berkeley, CA 94704</p>
-	     </div>
-     </div>
-
+    <%if @listings then %>
+	    <% @listings.each do |listing|%>
+	      <%= div_for listing, :class => "result" do %>
+		    <div class="content">
+		      <h3 class="title">
+		        <a href="" style=""></a>
+		      </h3>
+		      <p class="listingInfo">Height: <%= listing.height %></p>
+		      <p class="listingInfo">Width: <%= listing.width %></p>
+		      <p class="listingInfo">Time per view: <%= listing.time_per_click %></p>
+		      <p class="listingInfo">Views per week: <%= listing.clicks_per_week %></p>
+		      <p class="listingInfo">Cost per week: <%= listing.cost_per_week %></p>
+		      <p class="listingInfo">Address: <%= "#{listng.street} #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+		    </div>
+	      <% end %>
+	   <% end %>
+	<% end %>
+  </div>
 </div>

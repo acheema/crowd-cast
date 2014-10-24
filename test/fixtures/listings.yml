@@ -5,7 +5,11 @@ one:
   height: 1.5
   width: 1.5
   time_per_click: 1
+<<<<<<< HEAD
   clicks_per_week: 1
+=======
+  views_per_week: 1
+>>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
   cost_per_week: 1.5
   street: MyString
   city: MyString
@@ -13,15 +17,22 @@ one:
   zip: MyString
   latitude: 1.5
   longitude: 1.5
+<<<<<<< HEAD
   screen_resolution: 1
   owner_id: 
+=======
+>>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
 
 two:
   title: MyString
   height: 1.5
   width: 1.5
   time_per_click: 1
+<<<<<<< HEAD
   clicks_per_week: 1
+=======
+  views_per_week: 1
+>>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
   cost_per_week: 1.5
   street: MyString
   city: MyString
@@ -29,5 +40,8 @@ two:
   zip: MyString
   latitude: 1.5
   longitude: 1.5
+<<<<<<< HEAD
   screen_resolution: 1
   owner_id: 
+=======
+>>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
