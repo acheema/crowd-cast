@@ -3,11 +3,15 @@ Rails.application.routes.draw do
     get 'login' => 'home#login'
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
+    get 'search' => 'listings#search'
+    get 'listings/new' => 'listings#new'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
     match '/api/TESTAPI_resetFixture', to: 'user#resetFixture', via: 'get'
-    
+    #match '/api/create_listing', to: 'listing#create_user', via: 'post'
+    #match 'listings/new', to: 'listing#new', via: 'get'
+
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
     

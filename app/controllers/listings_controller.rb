@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    #listing = Listing.new
   end
 
   # GET /listings/1/edit
@@ -144,6 +144,11 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @city = params[:city]
+    @Listings = Listing.getListings(@city) unless @city.nil?
   end
 
   private
