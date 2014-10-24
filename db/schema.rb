@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141024175659) do
-=======
-ActiveRecord::Schema.define(version: 20141024192146) do
->>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +32,7 @@ ActiveRecord::Schema.define(version: 20141024192146) do
     t.float    "height"
     t.float    "width"
     t.integer  "time_per_click"
-<<<<<<< HEAD
     t.integer  "clicks_per_week"
-=======
-    t.integer  "views_per_week"
->>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
     t.float    "cost_per_week"
     t.string   "street"
     t.string   "city"
@@ -48,20 +40,14 @@ ActiveRecord::Schema.define(version: 20141024192146) do
     t.string   "zip"
     t.float    "latitude"
     t.float    "longitude"
-<<<<<<< HEAD
     t.integer  "screen_resolution"
     t.integer  "owner_id"
-=======
->>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
 
-=======
->>>>>>> d760eaf75abb3a62ec01df1c4f401512dac90325
   create_table "owners", force: true do |t|
     t.string   "username"
     t.string   "password_salt"
