@@ -1,28 +1,10 @@
-== README
+== CROWDCAST
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Put any todo for iteration 1 here so we know what tasks need to be
+finished before the deadline:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+-Add listing table in the schema, manually test the add listing
+	functionality (with owner/listing association) so it saves
+	a listing in the database and displays properly
+-Figure out how to save/display images
+	(useful gem for this is "paperclip")
