@@ -1,20 +1,20 @@
 class Listing < ActiveRecord::Base
    belongs_to :owner
   
-   geocoded_by :address
-   after_validation :geocode
+  geocoded_by :address
+  after_validation :geocode
       
-   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
-   validates :height, presence: true, numericality: { only_integer: true }
-   validates :width, presence: true, numericality: { only_integer: true }
-   validates :time_per_click, presence: true, numericality: { only_integer: true }
-   validates :views_per_week, presence: true, numericality: { only_integer: true }
-   validates :cost_per_week, presence: true, numericality: true
-   validates :street, presence: true, if: :gpsSet?
-   validates :city, presence: true, if: :gpsSet?
-   validates :state, presence: true, if: :gpsSet?
-   validates :zip, presence: true, if: :gpsSet?
-   validates :owner, :presence => true 
+  validates :title, presence: true, length: { maximum: 128, minimum: 4 }
+  validates :height, presence: true, numericality: { only_integer: true }
+  validates :width, presence: true, numericality: { only_integer: true }
+  validates :time_per_click, presence: true, numericality: { only_integer: true }
+  validates :views_per_week, presence: true, numericality: { only_integer: true }
+  validates :cost_per_week, presence: true, numericality: true
+  validates :street, presence: true, if: :gpsSet?
+  validates :city, presence: true, if: :gpsSet?
+  validates :state, presence: true, if: :gpsSet?
+  validates :zip, presence: true, if: :gpsSet?
+  validates :owner, :presence => true 
    
    def address
       [street, city, state].compact.join(', ')
@@ -55,11 +55,12 @@ class Listing < ActiveRecord::Base
    def self.getListings(city)
       listings = Listing.where("city = '#{city}'")
       listings
-      array = []
-      listings.each do |listing|
-         array << { "listing_id" => listing.id, "title" => listing.title }
-      end
-      return array
+      return listings
+      # array = []
+      # listings.each do |listing|
+      #    array << { "listing_id" => listing.id, "title" => listing.title }
+      # end
+      # return array
    end 
 
    def self.getListingDetails(id)

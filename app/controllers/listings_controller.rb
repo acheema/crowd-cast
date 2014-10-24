@@ -12,6 +12,17 @@ class ListingsController < ApplicationController
     render :json => { status: 1, listings: listings }    
    end 
 
+  def search
+    # @city = params[:city]
+    # if @city then
+    #   @listings = Listing.getListings(@city) 
+    # end
+    @city = params[:city]
+    if @city then
+      @listings = Listing.getListings(@city)
+    end   
+  end
+
   def getListingDetails
     response = Listing.getListingDetails(listing_details_params[:id])
     render :json => { status: 1, listing: response }
