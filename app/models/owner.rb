@@ -1,3 +1,4 @@
+# Written by: Jhoong Roh
 class Owner < ActiveRecord::Base
     
   attr_accessor :password

@@ -148,7 +148,9 @@ class ListingsController < ApplicationController
 
   def search
     @city = params[:city]
-    @Listings = Listing.getListings(@city) unless @city.nil?
+    if @city then
+      @listings = Listing.getListings(@city) 
+    end
   end
 
   private

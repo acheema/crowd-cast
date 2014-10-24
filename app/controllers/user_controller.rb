@@ -1,3 +1,4 @@
+# Written by Jhoong Roh
 class UserController < ApplicationController
 
    def new
