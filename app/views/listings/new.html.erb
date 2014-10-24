@@ -138,7 +138,7 @@
                           
                           <div class=
                               "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                              <button onclick="location.href='createlisting.html'"
+                              <button onclick="location.href='/listings/new'"
                                   type="button">Create</button>
                           </div>
                           
@@ -175,6 +175,13 @@
           <label class="control-label col-lg-1" for="width">Width</label>
           <div class="col-lg-2">          
             <input type="number" class="form-control" id="width" placeholder="Enter width">
+          </div>
+        </div>
+
+    <div class="form-group">
+          <label class="control-label col-lg-1" for="time">Time per click</label>
+          <div class="col-lg-2">          
+            <input type="number" class="form-control" id="time" placeholder="Enter time (s)">
           </div>
         </div>
 		
@@ -318,6 +325,7 @@
           listingTitle = $('#title').val();
           listingHeight = $('#height').val();
           listingWidth = $('#width').val();
+          listingTime = $('#time').val();
           listingViews = $('#views').val();  
           listingCost = $('#cost').val();
           listingResolution = $('#resolution').val();
@@ -328,18 +336,23 @@
           listingLat = $('#lat').val();
           listingLng = $('#lng').val();
           listingDescription = $('#description').val();
-          /*$.ajax({
+          $.ajax({
               type: 'POST',
                 url: "api/create_listing",
-                data: JSON.stringify({ user: username, password: password }),
+                data: JSON.stringify({ title: listingTtile, height: listingHeight, width: listingWidth,
+                time_per_click: listingTime, views_per_week: listingViews, cost_per_week: listingCost,
+                street: listingStreet, city: listingCity, state: listingState, zip: listingZip,
+                latitude: listingLat, longitude: listingLng, description: listingDescription }),
                 contentType: "application/json",
                 dataType: "json",
-                success: function(data) { return handle_add_user_response(data, username); }
+                success: function(data) { return handle_response(data)}
             });
-          alert("The title of the listing is " +listingTitle+". The size is "+listingHeight+"x"+listingWidth+
-                ". The resolution is "+listingResolution+"p, and the address is "+listingStreet+ " " +listingCity+ ", " +listingZip+
-                ". The descripton for this listing is: " +listingDescription);*/
+            return false;
        });
+
+      function handle_response(data) {
+        alert("Got data successfully!");
+      }
 
        //Add markers when the user interacts with the map
        handler.buildMap({ internal: {id: 'select_location'}, provider: { zoom: 10, center: new google.maps.LatLng(37.75, -122.2833)} }, function(){

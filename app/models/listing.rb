@@ -8,7 +8,7 @@ class Listing < ActiveRecord::Base
    validates :height, presence: true, numericality: { only_integer: true }
    validates :width, presence: true, numericality: { only_integer: true }
    validates :time_per_click, presence: true, numericality: { only_integer: true }
-   validates :clicks_per_week, presence: true, numericality: { only_integer: true }
+   validates :views_per_week, presence: true, numericality: { only_integer: true }
    validates :cost_per_week, presence: true, numericality: true
    validates :street, presence: true, if: :gpsSet?
    validates :city, presence: true, if: :gpsSet?
@@ -38,7 +38,7 @@ class Listing < ActiveRecord::Base
          return -2 if errors[:height].any?
          return -3 if errors[:width].any?
          return -4 if errors[:time_per_click].any?
-         return -5 if errors[:clicks_per_week].any?
+         return -5 if errors[:views_per_week].any?
          return -6 if errors[:cost_per_week].any?
          return -7 if errors[:street].any?
          return -8 if errors[:city].any?
