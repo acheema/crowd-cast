@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
     match '/api/TESTAPI_resetFixture', to: 'user#resetFixture', via: 'get'
-    #match '/api/create_listing', to: 'listing#create_user', via: 'post'
+    match '/api/create_listing', to: 'listings#createListing', via: 'post'
+    match '/api/get_listings', to: 'listings#getListings', via: 'post'
+    match '/api/get_listing_details', to: 'listings#getListingDetails', via: 'post'
     #match 'listings/new', to: 'listing#new', via: 'get'
 
     # The priority is based upon order of creation: first created -> highest priority.
