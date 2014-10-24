@@ -33,6 +33,17 @@ class ListingsController < ApplicationController
     render :json => { status: 1, listings: listings }    
    end 
 
+  def search
+    # @city = params[:city]
+    # if @city then
+    #   @listings = Listing.getListings(@city) 
+    # end
+    @city = params[:city]
+    if @city then
+      @listings = Listing.getListings(@city)
+    end   
+  end
+
   def getListingDetails
     response = Listing.getListingDetails(listing_details_params[:id])
     render :json => { status: 1, listing: response }
@@ -94,6 +105,6 @@ class ListingsController < ApplicationController
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :time_per_click, :clicks_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
+      params.require(:listing).permit(:title, :height, :width, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
     end
 end
