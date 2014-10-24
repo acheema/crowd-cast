@@ -142,7 +142,7 @@
                           
                           <div class=
                               "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                              <button onclick="location.href='search.html'"
+                              <button onclick="location.href='/search'"
                                   type="button">Search</button>
                           </div>
                           
@@ -177,9 +177,9 @@
         </div>
 		
 		<div class="form-group">
-          <label class="control-label col-lg-1" for="clicks">Clicks per week</label>
+          <label class="control-label col-lg-1" for="views">Views per week</label>
           <div class="col-lg-2">          
-            <input type="number" class="form-control" id="clicks" placeholder="Enter clicks">
+            <input type="number" class="form-control" id="views" placeholder="Enter views">
           </div>
         </div>
 		
@@ -315,6 +315,8 @@
           listingTitle = $('#title').val();
           listingHeight = $('#height').val();
           listingWidth = $('#width').val();
+          listingViews = $('#views').val();  
+          listingCost = $('#cost').val();
           listingResolution = $('#resolution').val();
           listingStreet = $('#street').val();
           listingCity = $('#city').val();
@@ -330,10 +332,10 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function(data) { return handle_add_user_response(data, username); }
-            });*/
+            });
           alert("The title of the listing is " +listingTitle+". The size is "+listingHeight+"x"+listingWidth+
                 ". The resolution is "+listingResolution+"p, and the address is "+listingStreet+ " " +listingCity+ ", " +listingZip+
-                ". The descripton for this listing is: " +listingDescription);
+                ". The descripton for this listing is: " +listingDescription);*/
        });
 
        handler.buildMap({ internal: {id: 'select_location'}, provider: { zoom: 10, center: new google.maps.LatLng(37.75, -122.2833)} }, function(){
