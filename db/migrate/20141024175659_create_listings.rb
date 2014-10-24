@@ -5,7 +5,7 @@ class CreateListings < ActiveRecord::Migration
       t.float :height
       t.float :width
       t.integer :time_per_click
-      t.integer :clicks_per_week
+      t.integer :views_per_week
       t.float :cost_per_week
       t.string :street
       t.string :city
