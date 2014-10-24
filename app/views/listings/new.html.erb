@@ -337,13 +337,14 @@
           listingLng = $('#lng').val();
           listingDescription = $('#description').val();
           alert(listingDescription);
-          alert(window.location.protocol + '//' + window.location.host + "/api/create_listing");
+          alert(window.location.protocol + '//' + window.location.host + "/api/create_listing/");
           $.ajax({
               type: 'POST',
-              url: window.location.protocol + '//' + window.location.host + "/api/create_listing",
-              data: JSON.stringify({ title: listingTtile, height: listingHeight, width: listingWidth,
+              url: window.location.protocol + '//' + window.location.host + "/api/create_listing/",
+              data: JSON.stringify({ title: listingTitle, height: listingHeight, width: listingWidth,
                   time_per_click: listingTime, views_per_week: listingViews, cost_per_week: listingCost,
-                  street: listingStreet, city: listingCity, state: listingState, zip: listingZip,
+                  screen_resolution: listingResolution, street: listingStreet, city: listingCity, 
+                  state: listingState, zip: listingZip, 
                   latitude: listingLat, longitude: listingLng, description: listingDescription }),
               contentType: "application/json",
               dataType: "json",

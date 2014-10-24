@@ -1,7 +1,11 @@
 class ListingsController < ApplicationController
 
   def createListing 
-    username = cookies.signed[:username]
+    username = cookies[:username]
+    puts "Something"
+    puts username
+    puts cookies
+    puts "Fuck"
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
     render :json => { status: response }
