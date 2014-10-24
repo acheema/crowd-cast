@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'login' => 'home#login'
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
+    get 'search' => 'listings#search'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
