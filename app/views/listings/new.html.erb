@@ -202,16 +202,16 @@
 			<div class="col-lg-8">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" class="form-control" id="street" placeholder="Enter street" onchange="addressChange()">
+						<input type="text" class="form-control address" id="street" placeholder="Enter street">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="city" placeholder="Enter city" onchange="addressChange()">
+						<input type="text" class="form-control address" id="city" placeholder="Enter city">
 					</div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="state" placeholder="Enter state" onchange="addressChange()">
+                        <input type="text" class="form-control address" id="state" placeholder="Enter state">
                     </div>
 					<div class="form-group">
-						<input type="number" class="form-control" id="zip" placeholder="Enter zipcode" onchange="addressChange()">
+						<input type="number" class="form-control address" id="zip" placeholder="Enter zipcode">
 					</div>
 				</div>
 			</div>
@@ -221,10 +221,10 @@
 			<div class="col-lg-8">
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="text" class="form-control" id="lat" placeholder="Enter latitude">
+						<input type="text" class="form-control gps" id="lat" placeholder="Enter latitude">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="lng" placeholder="Enter longitude">
+						<input type="text" class="form-control gps" id="lng" placeholder="Enter longitude">
 					</div>
             </div><br>
             <div style='width: 800px;'>
@@ -250,12 +250,9 @@
 		
         <div class="form-group">        
           <div class="col-lg-offset-1 col-lg-10">
-            <button type="submit" class="btn btn-default" onclick="createListing()">Submit</button>
+            <button type="submit" class="btn btn-default" id="submit">Submit</button>
           </div>
         </div>
-		
-		
-
 		
       </form>
     </div>
@@ -263,23 +260,58 @@
     <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 	<script type="text/javascript">
        $(document).ready(function() {
-       });
        var oldMarker;
        handler = Gmaps.build('Google');
 
-       function addressChange() {
+       $('.address').change(function() {
           listingStreet = document.getElementById('street').value;
           listingCity = document.getElementById('city').value;
           listingState = document.getElementById('state').value;
           listingZip = document.getElementById('zip').value;
-          if ((listingStreet != null) && (listingCity != null) && (
-            // http://nominatim.openstreetmap.org/search?q=135+pilkington+avenue,+birmingham&format=xml&polygon=1&addressdetails=1
-             var url = "http://nominatim.openstreetmap.org/search?q=" + listingStreet.replace(" ","+") + "," + listingCity.replace(" ","+") + "," + listingState + "," + listingZip + "&format=xml&polygon=1&addressdetails=1";
-          alert(listingCity); 
-       }
-
-       function createListing() {
-
+          
+          if ((listingStreet != "") && (listingCity != "") && (listingState != "") && (listingZip != "")){
+             clearGPS();
+             //Next iteration, stick with Google. Open source ones are terrible
+             var url = "http://nominatim.openstreetmap.org/search?q=";
+             url += listingStreet.replace(" ","+") + ",";
+             url += listingCity.replace(" ","+") + ",";
+             url += listingState + "," + listingZip;
+             url += "&format=json";
+             $.ajax({
+                url: url,
+                type: "GET",
+                success: function( data ) {
+                   json = { "lat": data[0]["lat"], "lng": data[0]["lon"] };
+                   if (oldMarker != null){
+                     handler.removeMarker(oldMarker);
+                   }
+                   oldMarker = handler.addMarker(json, { "draggable": true } );
+                   oldMarker.panTo(); 
+                   handler.getMap().setZoom(14);
+                   markerMouseUp();
+                }
+             });
+         }
+       });
+         
+       $('.gps').change(function() {
+          listingLat = document.getElementById('lat').value;
+          listingLng = document.getElementById('lng').value;
+          
+          if ((listingLat != "") && (listingLng != "")){
+             clearAddress(); 
+             if (oldMarker != null){
+               handler.removeMarker(oldMarker);
+             }
+             json = { "lat": listingLat, "lng": listingLng };
+             oldMarker = handler.addMarker(json, { "draggable": true } );
+             oldMarker.panTo(); 
+             handler.getMap().setZoom(14);
+             markerMouseUp();
+          }
+       });
+       
+       $('#submit').click(function() {
           listingTitle = $('#title').val();
           listingHeight = $('#height').val();
           listingWidth = $('#width').val();
@@ -302,40 +334,47 @@
           alert("The title of the listing is " +listingTitle+". The size is "+listingHeight+"x"+listingWidth+
                 ". The resolution is "+listingResolution+"p, and the address is "+listingStreet+ " " +listingCity+ ", " +listingZip+
                 ". The descripton for this listing is: " +listingDescription);
-       }
+       });
 
        handler.buildMap({ internal: {id: 'select_location'}, provider: { zoom: 10, center: new google.maps.LatLng(37.75, -122.2833)} }, function(){
           google.maps.event.addListener(handler.getMap(), 'click', function(object){
              var lat = object.latLng.lat();
              var lng = object.latLng.lng();
-             var json = { "lat": lat, "lng": lng };
+             var json = { "lat": object.latLng.lat(), "lng": object.latLng.lng() };
              if (oldMarker != null){
                 handler.removeMarker(oldMarker);
              }
              oldMarker = handler.addMarker(json, { "draggable": true } );
-             document.getElementById('lat').value = lat;
-             document.getElementById('lng').value = lng;
-             document.getElementById('street').value = null;
-             document.getElementById('city').value = null;
-             document.getElementById('state').value = null;
-             document.getElementById('zip').value = null;
-             google.maps.event.addListener(oldMarker.getServiceObject(), 'mouseup', function(object){
-                lat = object.latLng.lat();
-                lng = object.latLng.lng();
-                document.getElementById('lat').value = lat;
-                document.getElementById('lng').value = lng;
-                document.getElementById('street').value = null;
-                document.getElementById('city').value = null;
-                document.getElementById('state').value = null;
-                document.getElementById('zip').value = null;
-                json = { "lat": lat, "lng": lng };
-             });
+             setLatLng(lat, lng);
+             markerMouseUp(); 
           });
           handler.fitMapToBounds();
        });
+      
+      function markerMouseUp() {
+         google.maps.event.addListener(oldMarker.getServiceObject(), 'mouseup', function(object){
+            lat = object.latLng.lat();
+            lng = object.latLng.lng();
+            setLatLng(lat, lng);
+         });
+      }
+      function setLatLng(lat, lng){
+         document.getElementById('lat').value = lat;
+         document.getElementById('lng').value = lng;
+         clearAddress();
+      }
+      function clearAddress(){
+         document.getElementById('street').value = null;
+         document.getElementById('city').value = null;
+         document.getElementById('state').value = null;
+         document.getElementById('zip').value = null;
+      }
+      function clearGPS(){
+         document.getElementById('lat').value = null;
+         document.getElementById('lng').value = null;
+      }
+    });
     </script>
-	
-	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
