@@ -31,6 +31,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    puts "INSIDE SHOW ACTION"
     @listing = Listing.getListingDetails(params[:listing_id])
     #render :json => { status: 1, listing: response }
   end
