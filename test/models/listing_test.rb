@@ -23,8 +23,7 @@ class ListingTest < ActiveSupport::TestCase
   end 
 
   test 'should be valid' do
-    response = Listing.createListing(@params)
-    assert_equal 1, response 
+    assert Listing.new(@params).valid?
   end 
 
   test "Not sending a title, give error" do
@@ -33,25 +32,18 @@ class ListingTest < ActiveSupport::TestCase
     assert_equal -1, response 
   end
 
-  test "Sending a string height should fail, give error" do
-    @params[:height] = "2"
-    response = Listing.createListing(@params)
-    assert_equal -2, response 
-  end
-
-  test "Sending a string width should fail, give error" do
-    @params[:width] = "2"
-    response = Listing.createListing(@params)
-    assert_equal -3, response 
-  end
-
   test "Not sending a height, give error" do
     @params.delete :height
     response = Listing.createListing(@params)
     assert_equal -2, response 
   end
 
-
+  test "Not sending a width, give error" do
+    @params.delete :width
+    response = Listing.createListing(@params)
+    assert_equal -3, response 
+  end
+  
   test "Not sending a time_per_click, give error" do
     @params.delete :time_per_click
     response = Listing.createListing(@params)
@@ -59,7 +51,7 @@ class ListingTest < ActiveSupport::TestCase
   end
 
   test "sending a non-integer time_per_click, give error" do
-    @params[:time_per_click] = "89"
+    @params[:time_per_click] = 89.9
     response = Listing.createListing(@params)
     assert_equal -4, response 
   end
@@ -71,7 +63,7 @@ class ListingTest < ActiveSupport::TestCase
   end
 
   test "sending a non-integer views_per_week, give error" do
-    @params[:views_per_week] = "89"
+    @params[:views_per_week] = 89.9
     response = Listing.createListing(@params)
     assert_equal -5, response 
   end

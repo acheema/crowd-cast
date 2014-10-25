@@ -5,15 +5,15 @@ class Listing < ActiveRecord::Base
   after_validation :geocode
       
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
-  validates :height, presence: true, numericality: { only_integer: true }
-  validates :width, presence: true, numericality: { only_integer: true }
+  validates :height, presence: true, numericality: true
+  validates :width, presence: true, numericality: true
   validates :time_per_click, presence: true, numericality: { only_integer: true }
   validates :views_per_week, presence: true, numericality: { only_integer: true }
   validates :cost_per_week, presence: true, numericality: true
-  validates :street, presence: true, if: :gpsSet?
-  validates :city, presence: true, if: :gpsSet?
-  validates :state, presence: true, if: :gpsSet?
-  validates :zip, presence: true, if: :gpsSet?
+  validates :street, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip, presence: true
   validates :owner, :presence => true 
    
    def address
@@ -68,4 +68,9 @@ class Listing < ActiveRecord::Base
       
       return listing
    end
+
+  # Clear out the table
+  def self.TESTAPI_resetFixture
+    Listing.delete_all
+  end
 end

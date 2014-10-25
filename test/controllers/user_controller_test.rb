@@ -10,7 +10,7 @@ class UserControllerTest < ActionController::TestCase
    #Post request for sign up
    def create_user_helper(json_array, reset=true)
       # Clean database
-      Curl::Easy.http_get(TESTSERVERURL + "/api/TESTAPI_resetFixture") if reset
+      Curl::Easy.http_get(TESTSERVERURL + "/api/TESTAPI_resetUserFixture") if reset
       return Curl::Easy.http_post("http://localhost:3000/api/create_user", json_array) do |curl|
          curl.headers['Content-Type'] = 'application/json'
       end

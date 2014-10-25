@@ -2,10 +2,6 @@ class ListingsController < ApplicationController
 
   def createListing 
     username = cookies[:username]
-    puts "Something"
-    puts username
-    puts cookies
-    puts "Fuck"
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
     render :json => { status: response }
@@ -49,5 +45,11 @@ class ListingsController < ApplicationController
 
     def create_listing_params
       params.require(:listing).permit(:title, :height, :width, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
+    end
+    
+   # Clean out the tables
+    def resetFixture
+        Listing.TESTAPI_resetFixture
+        render :json => { status: SUCCESS }
     end
 end
