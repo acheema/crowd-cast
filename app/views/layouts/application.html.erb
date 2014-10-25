@@ -7,7 +7,58 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target=".navbar-collapse"
+            data-toggle="collapse" type="button"><span class=
+            "icon-bar"></span> <span class="icon-bar"></span> <span class=
+            "icon-bar"></span></button> <a class="navbar-brand" href=
+            "#">CR<i class="fa fa-circle"></i>WDCAST</a>
+        </div>
 
+
+
+<div class="navbar-collapse collapse">
+    <div class="nav navbar-nav navbar-right" style=
+    "margin-left: 2em">
+        <section>
+            <div class=
+            "morph-button morph-button-modal morph-button-modal-3 large morph-button-fixed">
+            <button type="button" data-toggle = "modal" data-target="#login-modal">Login</button>
+          </div>
+
+            <div class=
+            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            <button type="button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
+            </div>
+
+
+            <div class=
+            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            <button onclick="location.href='/listings/new'"
+                type="button">Create</button>
+            </div>
+
+            <div class=
+            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            <button onclick="location.href='/search'" type=
+            "button">Search</button>
+            </div>
+        </section>
+    </div>
+</div><!-- /form-mockup -->
+
+
+
+
+
+
+
+
+
+    </div><!--/.nav-collapse -->
+</div>
 <%= yield %>
 
 </body>

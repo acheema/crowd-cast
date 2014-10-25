@@ -55,7 +55,7 @@
             markers[index] = handler.addMarker(json, { "opacity": 0.5 });
             handler.removeMarker(blah);
          });
-         
+
          temp[index] = json;
       });
       markers = handler.addMarkers(temp, { "opacity": 0.5 });
@@ -67,16 +67,15 @@
          if (oldMarker != null){
             handler.removeMarker(oldMarker);
          }
-         oldMarker = handler.addMarker(json, { "draggable": true } ); 
+         oldMarker = handler.addMarker(json, { "draggable": true } );
          google.maps.event.addListener(oldMarker.getServiceObject(), 'mouseup', function(object){
             lat = object.latLng.lat();
             lng = object.latLng.lng();
             json = { "lat": lat, "lng": lng };
-         }); 
-      });  
+         });
+      });
       handler.fitMapToBounds();
    });
 </script>
 
 <%= link_to 'New Location', new_location_path %>
-
