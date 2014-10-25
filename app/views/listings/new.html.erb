@@ -337,8 +337,6 @@
           listingLat = $('#lat').val();
           listingLng = $('#lng').val();
           listingDescription = $('#description').val();
-          alert(listingDescription);
-          alert(window.location.protocol + '//' + window.location.host + "/api/create_listing/");
           $.ajax({
               type: 'POST',
               url: window.location.protocol + '//' + window.location.host + "/api/create_listing/",
