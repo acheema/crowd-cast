@@ -34,7 +34,7 @@ gem  "curb"
 
 gem 'geocoder'
 gem 'gmaps4rails'
-
+gem 'simplecov', :require => false, :group  => :test
 # for heroku
 group :production do
   gem 'rails_12factor'

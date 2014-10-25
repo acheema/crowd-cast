@@ -163,8 +163,4 @@ class UserControllerTest < ActionController::TestCase
       assert(JSON.parse(response.body)["status"].equal? -1)
    end 
 
-   test "valid signout" do
-      response = signout_user_helper()
-      assert(JSON.parse(response.body)["status"].equal? 1)
-   end
 end
