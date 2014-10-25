@@ -164,7 +164,7 @@
       </div>
 
 <div class="container">
-      <h2>South SF - high traffic!</h2>
+      <h2><%= @listing.title %></h2>
       <div class="row">
           <br>
           <div class="col-lg-6">
@@ -177,23 +177,27 @@
                       <tbody>
                           <tr>
                               <td class="listinfo">Address</td>
-                              <td>4567 Gary Street, San Francisco, 94587</td>
+                              <td><%= "#{@listing.street} #{@listing.city}, #{@listing.state} #{@listing.zip}" %></td>
                           </tr>
                           <tr>
                               <td class="listinfo">Size</td>
-                              <td>4000x3000</td>
+                              <td><%= "#{@listing.height}x#{@listing.width}"%></td>
                           </tr>
                           <tr>
                               <td class="listinfo">Resolution</td>
-                              <td>1080p</td>
+                              <td><%= @listing.screen_resolution %></td>
                           </tr>
                           <tr>
-                              <td class="listinfo">Clicks per week</td>
-                              <td>3000</td>
+                              <td class="listinfo">Views per week</td>
+                              <td><%= @listing.views_per_week %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Time per click</td>
+                              <td><%= @listing.time_per_click %></td>
                           </tr>
                           <tr>
                               <td class="listinfo">Cost per week</td>
-                              <td>$900</td>
+                              <td><%= @listing.cost_per_week %></td>
                           </tr>
                           <tr>
                               <td class="listinfo">Description</td>
