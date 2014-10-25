@@ -53,7 +53,7 @@ class UserController < ApplicationController
     # Signout just deletes the cookie
     def signoutUser
         cookies.delete :username
-        render :json => { status: SUCCESS }
+        redirect_to root_path
     end
 
     # Clean out the tables
