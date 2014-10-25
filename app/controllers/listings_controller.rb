@@ -32,8 +32,10 @@ class ListingsController < ApplicationController
 
   def show
     puts "INSIDE SHOW ACTION"
+    puts "LISTING ID"
+    puts params[:listing_id]
     @listing = Listing.getListingDetails(params[:listing_id])
-    #render :json => { status: 1, listing: response }
+    puts "after getListingDetails"
   end
 
   private
