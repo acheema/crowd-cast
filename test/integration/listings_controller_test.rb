@@ -1,23 +1,20 @@
 require 'test_helper'
 
-class ListingsControllerTest < ActionDispatch::IntegrationTest
+class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
 
+   TESTSERVERURL = ENV["TEST_SERVER"]  
+   
+
    def get_listings_helper(json_array, reset=true)
-      return Curl::Easy.http_post("http://localhost:3000/api/get_listings", json_array) do |curl|
+      return Curl::Easy.http_post(TESTSERVERURL + "/api/get_listings", json_array) do |curl|
          curl.headers['Content-Type'] = 'application/json'
          curl.enable_cookies = true 
       end
    end
 
-   def get_listing_details_helper(json_array, reset=true)
-      return Curl::Easy.http_get("http://localhost:3000/search", json_array) do |curl|
-         curl.headers['Content-Type'] = 'application/json'
-         curl.enable_cookies = true 
-      end
-   end
    
    test 'valid create listing' do
       get 'api/TESTAPI_resetUserFixture'
