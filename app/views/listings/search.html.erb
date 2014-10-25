@@ -6,11 +6,12 @@
       <input type="button" id="searchButton">
     </form>
     <%if @listings then %>
+
 	    <% @listings.each do |listing|%>
 	      <%= div_for listing, :class => "result" do %>
 		    <div class="content">
 		      <h3 class="title">
-		        <a href="" style="">: <%= listing.title %></a>
+		        <a href="/listings/show?listing_id=<%=listing.id%>" style=""><%= listing.title %></a>
 		      </h3>
 		      <p class="listingInfo">Height: <%= listing.height %></p>
 		      <p class="listingInfo">Width: <%= listing.width %></p>

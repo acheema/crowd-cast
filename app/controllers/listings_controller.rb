@@ -31,11 +31,7 @@ class ListingsController < ApplicationController
   end
 
   def show
-    puts "INSIDE SHOW ACTION"
-    puts "LISTING ID"
-    puts params[:listing_id]
     @listing = Listing.getListingDetails(params[:listing_id])
-    puts "after getListingDetails"
   end
 
   private
