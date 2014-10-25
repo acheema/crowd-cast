@@ -26,6 +26,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.getListingDetails(params[:listing_id])
+    #render :json => { status: 1, listing: response }
   end
    # Clean out the tables
     def resetFixture
