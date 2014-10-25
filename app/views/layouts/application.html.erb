@@ -49,17 +49,264 @@
     </div>
 </div><!-- /form-mockup -->
 
-
-
-
-
-
-
-
-
     </div><!--/.nav-collapse -->
 </div>
+
+
+
+<!--Login lightbox-->
+<div class="modal fade login" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <p>
+            <label>Username</label><input id="username-login"
+            type="text"></p>
+
+            <p>
+            <label>Password</label><input id="password-login"
+            type="password"></p>
+
+            <p><button id=
+            "login">Login</button></p>
+
+            <div class="alert fade in" id=
+            "login-error" style=
+            "display:none;">
+                 Invalid
+                credentials! Please enter your
+                username and password again.
+            </div>
+        </form>
+      </div>
+
+      <div class="alert fade in" id=
+      "login-error" style=
+      "display:none;">
+           Invalid
+          credentials! Please enter your
+          username and password again.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Signup lightbox -->
+
+<div class="modal fade login" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Sign up</h4>
+      </div>
+      <div class="modal-body">
+
+        <form>
+            <label><input checked class=
+            "user-option" id=
+            "advertiser-option" name=
+            "signup-user" type="radio" value=
+            "0"> Advertiser</label>
+            <label><input class="user-option"
+            id="owner-option" name=
+            "signup-user" type="radio" value=
+            "1"> Property owner</label>
+
+            <p>
+            <label>Username</label><input id='username-signup'
+            type="text"></p>
+
+            <p>
+            <label>Password</label><input id='password-signup'
+            type="password"></p>
+
+            <p><label>Email</label><input id=
+            'email-signup' type="text"></p>
+
+            <p><label>Company</label><input id=
+            'company-signup' type="text"></p>
+
+            <p><button id="signup">Sign
+            Up</button></p>
+
+            <div class="alert fade in" id=
+            "signup-usernametaken-e" style=
+            "display:none;">
+              This username has already been
+                taken.
+            </div>
+            <div class="alert fade in" id=
+            "signup-username-e" style=
+            "display:none;">
+              Please enter a valid username. Must have more than 8 characters.
+            </div>
+
+            <div class="alert fade in" id=
+            "signup-password-e" style=
+            "display:none;">
+                Please enter a valid password. A
+                password must have more than 6
+                characters.
+            </div>
+
+            <div class="alert fade in" id=
+            "signup-email-e" style=
+            "display:none;">
+              Please enter a valid email.
+            </div>
+        </form>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
 <%= yield %>
 
 </body>
+
+
+
+
+    <script type="text/javascript">
+    // Deal with radio button options (choose either advertiser or owner)
+    var radio = $('input[name=signup-user]');
+    var checkedValue = 0;
+    $('.user-option').click(function() {
+    checkedValue = radio.filter(':checked').val();
+    });
+
+    // Click signup button
+    $('#signup').click(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+           //First send a post request, get the response back. On successful message back, check the data
+           url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
+           type: "POST",
+           /* radio button vals: 0 = advertiser, 1 = owner */
+
+           data: JSON.stringify({username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val(), usertype: checkedValue}),
+           contentType: "application/json",
+           dataType: "json",
+           success: function(data){
+             signupSuccess(data);
+           },
+           failure: function(errorMsg) {
+             failure(data);
+           }
+        });
+    })
+
+
+    function signupSuccess(data) {
+    var status = data.status;
+    if (status == 1) {
+    if (checkedValue == 0) {
+      window.location.href = window.location + '/search';
+
+    }
+    else {
+    window.location.href = window.location + '/listings/new';
+    }
+    }
+    else {
+    if (status == -1) {
+    // error message
+    $('#signup-usernametaken-e').show();
+    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    // hide error message after five seconds, or it will stay there forever
+    $("#signup-usernametaken-e").hide();
+
+    }, 5000);
+    }
+    if (status == -2) {
+    // error message
+    $('#signup-username-e').show();
+    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    // hide error message after five seconds, or it will stay there forever
+    $("#signup-username-e").hide();
+
+    }, 5000);
+    }
+    if (status == -3) {
+    // error message
+    $('#signup-password-e').show();
+    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    // hide error message after five seconds, or it will stay there forever
+    $("#signup-password-e").hide();
+
+    }, 5000);
+    }
+    if (status == -4) {
+    // error message
+    $('#signup-email-e').show();
+    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    // hide error message after five seconds, or it will stay there forever
+    $("#signup-email-e").hide();
+
+    }, 5000);
+    }
+    }
+    }
+    $('#login').click(function(e) {
+    e.preventDefault();
+    $.ajax({
+            //First send a post request, get the response back. On successful message back, check the data
+            url: "" + window.location.protocol + '//' + window.location.host + "/api/login",
+            type: "POST",
+            data: JSON.stringify({username: $('#username-login').val(), password: $('#password-login').val()}),
+            contentType: "application/json",
+            dataType: "json",
+            success: function(data){
+              loginSuccess(data);
+            },
+            failure: function(errorMsg) {
+              failure(data);
+            }
+         });
+    })
+
+    function loginSuccess(data){
+    // Wrong login credentials
+    if (data.status == -1) {
+     // error message
+     $('#login-error').show();
+     setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    // hide error message after five seconds, or it will stay there forever
+      $("#login-error").hide();
+
+    }, 5000);
+    }
+    else if (data.status == 1) {
+     $('.test').addClass('logged-in');
+     window.location.href = window.location + '/search';
+
+    }
+
+    };
+
+
+
+    </script>
 </html>
