@@ -4,6 +4,7 @@ class ListingsController < ApplicationController
     username = cookies[:username]
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
+    #render :action => 'show'
     render :json => { status: response }
   end 
 
@@ -23,10 +24,14 @@ class ListingsController < ApplicationController
     end   
   end
 
-  def getListingDetails
-    response = Listing.getListingDetails(listing_details_params[:id])
-    render :json => { status: 1, listing: response }
-  end 
+  def show
+    @listing = Listing.getListingDetails(params[:listing_id])
+  end
+   # Clean out the tables
+    def resetFixture
+        Listing.TESTAPI_resetFixture
+        render :json => { status: 1 }
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -35,7 +40,7 @@ class ListingsController < ApplicationController
     end
    
     def listing_details_params
-       params.require(:listing).permit(:id)
+       #params.require(:listing).permit(:id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -44,12 +49,7 @@ class ListingsController < ApplicationController
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
+      params.require(:listing).permit(:title, :height, :width, :screen_resolution, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
     end
     
-   # Clean out the tables
-    def resetFixture
-        Listing.TESTAPI_resetFixture
-        render :json => { status: SUCCESS }
-    end
 end
