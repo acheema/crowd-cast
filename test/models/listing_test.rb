@@ -103,4 +103,63 @@ class ListingTest < ActiveSupport::TestCase
   	response = Listing.createListing(@params)
   	assert_equal -11, response
   end
+
+   test "valid get listings" do
+   @params2 = {
+      title: "Listing 2", 
+      height: 30, 
+      width: 31, 
+      time_per_click: 8, 
+        views_per_week: 8, 
+        cost_per_week: 100, 
+        street: "College Ave", 
+        city: "SF", 
+        state: "CA", 
+        zip: "94704", 
+        owner: @owner
+    }
+     response1 = Listing.createListing(@params)
+    response2 = Listing.createListing(@params2)
+    listing2 = Listing.find(response2)
+    response = Listing.getListings("SF")
+
+    assert_equal [listing2], response
+  end 
+
+  test "more valid get listings" do
+    @params2 = {
+      title: "Listing 2", 
+      height: 30, 
+      width: 31, 
+      time_per_click: 8, 
+      views_per_week: 8, 
+      cost_per_week: 100, 
+      street: "College Ave", 
+      city: "SF", 
+      state: "CA", 
+      zip: "94704", 
+      owner: @owner
+    }
+    @params3 = {
+      title: "Listing 3", 
+      height: 30, 
+      width: 31, 
+      time_per_click: 8, 
+      views_per_week: 8, 
+      cost_per_week: 100, 
+      street: "Bancroft Ave", 
+      city: "SF", 
+      state: "CA", 
+      zip: "94704", 
+      owner: @owner
+    }
+    Listing.createListing(@params)
+    response2 = Listing.createListing(@params2)
+    response3 = Listing.createListing(@params2)
+    listing2 = Listing.find(response2)
+    listing3 = Listing.find(response3)
+    response = Listing.getListings("SF")
+
+    assert_equal [listing2, listing3], response
+  end 
 end
