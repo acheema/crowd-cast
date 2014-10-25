@@ -51,6 +51,6 @@ class ListingsController < ApplicationController
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
+      params.require(:listing).permit(:title, :height, :width, :screen_resolution, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
     end
 end
