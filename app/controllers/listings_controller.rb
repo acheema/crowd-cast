@@ -28,6 +28,11 @@ class ListingsController < ApplicationController
     @listing = Listing.getListingDetails(params[:listing_id])
     #render :json => { status: 1, listing: response }
   end
+   # Clean out the tables
+    def resetFixture
+        Listing.TESTAPI_resetFixture
+        render :json => { status: 1 }
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -48,9 +53,4 @@ class ListingsController < ApplicationController
       params.require(:listing).permit(:title, :height, :width, :screen_resolution, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
     end
     
-   # Clean out the tables
-    def resetFixture
-        Listing.TESTAPI_resetFixture
-        render :json => { status: SUCCESS }
-    end
 end
