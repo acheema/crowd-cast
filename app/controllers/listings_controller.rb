@@ -8,8 +8,10 @@ class ListingsController < ApplicationController
     puts "Fuck"
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
-    render 'listings/show'
-    #render :json => { status: response }
+    #render :action => 'show'
+    puts "RESPONSE: " 
+    puts response
+    render :json => { status: response }
   end 
 
   def getListings
