@@ -6,18 +6,19 @@
       <input type="button" id="searchButton">
     </form>
     <%if @listings then %>
+
 	    <% @listings.each do |listing|%>
 	      <%= div_for listing, :class => "result" do %>
 		    <div class="content">
 		      <h3 class="title">
-		        <a href="" style=""></a>
+		        <a href="/listings/show?listing_id=<%=listing.id%>" style=""><%= listing.title %></a>
 		      </h3>
 		      <p class="listingInfo">Height: <%= listing.height %></p>
 		      <p class="listingInfo">Width: <%= listing.width %></p>
 		      <p class="listingInfo">Time per view: <%= listing.time_per_click %></p>
-		      <p class="listingInfo">Views per week: <%= listing.clicks_per_week %></p>
+		      <p class="listingInfo">Views per week: <%= listing.views_per_week %></p>
 		      <p class="listingInfo">Cost per week: <%= listing.cost_per_week %></p>
-		      <p class="listingInfo">Address: <%= "#{listng.street} #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+		      <p class="listingInfo">Address: <%= "#{listing.street} #{listing.city}, #{listing.state} #{listing.zip}" %></p>
 		    </div>
 	      <% end %>
 	   <% end %>

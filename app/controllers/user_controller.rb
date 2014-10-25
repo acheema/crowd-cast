@@ -4,12 +4,11 @@ class UserController < ApplicationController
    def new
      @user = User.new
    end
-
+   
     SUCCESS = 1
 
     # Create a user
     def createUser
-
          status = 0
          # Depending on usertype, create an Advertiser or Owner
          params = create_params
@@ -25,7 +24,7 @@ class UserController < ApplicationController
          # If it's a string, then it was a success
          # Else, then it was a failure
          if status.is_a? String
-            cookies.signed[ :username ] = status
+            cookies[ :username ] = status
             render :json => { status: SUCCESS }
          else
             render :json => { status: status }
@@ -37,14 +36,14 @@ class UserController < ApplicationController
         #If they're an advertiser, then render and return
         status = Advertiser.validateUser login_params
         if status.is_a? String
-           cookies.signed[ :username ] = status
+           cookies[ :username ] = status
            render :json => { status: SUCCESS } and return
         end
 
         #If they aren't an advertiser, they might be an owner
         status = Owner.validateUser login_params
         if status.is_a? String
-           cookies.signed[ :username ] = status
+           cookies[ :username ] = status
            render :json => { status: SUCCESS }
         else
            render :json => { status: status }

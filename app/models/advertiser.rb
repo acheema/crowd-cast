@@ -37,8 +37,6 @@ class Advertiser < ActiveRecord::Base
           return -1
         else
           #At this point, something is wrong with the username
-          p params[:username]
-          p advertiser.errors[:username]
           return -2
         end
       elsif pwError.any?

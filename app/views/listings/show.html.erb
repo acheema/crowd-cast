@@ -1,54 +1,66 @@
 
   <style>
-	.form-inline .form-group{
-		margin-left: 0;
-		margin-right: 0;
-	}
-	.main-container{
-		background-color: #f1f1f1;
+  .form-inline .form-group{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .main-container{
+    background-color: #f1f1f1;
         padding-left: 50px;
         padding-top: 50px;
-	}
+  }
     body{
         background-color: #f1f1f1;
     }
-	.btn{
-		  border: 1px solid #3079ed;
-		  color: #ffffff;
-		  text-shadow: 0 1px rgba(0,0,0,0.1);
-		  background-color: #4d90fe;
-		  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
-		  background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
-		  background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
-		  background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
-		  background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
-		  background-image: linear-gradient(top,#4d90fe,#4787ed);
-	}
-	.btn:hover{
-		  border: 1px solid #2f5bb7;
-		  color: #ffffff;
-		  text-shadow: 0 1px rgba(0,0,0,0.3);
-		  background-color: #357ae8;
-		  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-		  background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-		  background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-		  background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-		  background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-		  background-image: linear-gradient(top,#4d90fe,#357ae8);
-	}
-	.btn:active{
-		background-color: #357ae8;
-		background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-		background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-		background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-		background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-		background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-		background-image: linear-gradient(top,#4d90fe,#357ae8);
-		-webkit-box-shadow: inset 0 1px 2px rgb	a(0,0,0,0.3);
-		-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-		box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-	}
+  h2{
+      text-align: center;
+  }
+  .btn{
+      border: 1px solid #3079ed;
+      color: #ffffff;
+      text-shadow: 0 1px rgba(0,0,0,0.1);
+      background-color: #4d90fe;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
+      background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: linear-gradient(top,#4d90fe,#4787ed);
+  }
+  .btn:hover{
+      border: 1px solid #2f5bb7;
+      color: #ffffff;
+      text-shadow: 0 1px rgba(0,0,0,0.3);
+      background-color: #357ae8;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+      background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+      background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
+      background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
+      background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+      background-image: linear-gradient(top,#4d90fe,#357ae8);
+  }
+  .btn:active{
+    background-color: #357ae8;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+    background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+    background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
+    background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
+    background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+    background-image: linear-gradient(top,#4d90fe,#357ae8);
+    -webkit-box-shadow: inset 0 1px 2px rgb a(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .listinfo{
+       font-weight: bold;
+  }
+  
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
   </style>
+
   <body>
       <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
@@ -124,13 +136,13 @@
 
                           <div class=
                               "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                              <button onclick="location.href='createlisting.html'"
+                              <button onclick="location.href='listings/new'"
                                   type="button">Create</button>
                           </div>
 
                           <div class=
                               "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-                              <button onclick="location.href='search.html'"
+                              <button onclick="location.href='/search'"
                                   type="button">Search</button>
                           </div>
 
@@ -140,9 +152,60 @@
           </div><!--/.nav-collapse -->
       </div>
 
-<div class="main-container">
-      <h2>Listing Details</h2>
+<div class="container">
+    <h2></h2>
+      <div class="row">
+          <br><br><br><br><br>
+          <div class="col-lg-6">
+          <!--MAP STUFF SHOULD GO HERE -->
+          </div>
+          <div class="col-lg-6">
+              <br><br>
+              <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                      <tbody>
+                          <tr>
+                              <td class="listinfo">Title</td>
+                              <td><%= @listing.title %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Address</td>
+                              <td><%= "#{@listing.street} #{@listing.city}, #{@listing.state} #{@listing.zip}" %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Size</td>
+                              <td><%= "#{@listing.height}x#{@listing.width}"%></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Resolution</td>
+                              <td><%= "#{@listing.screen_resolution}p" %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Views per week</td>
+                              <td><%= @listing.views_per_week %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Time per click</td>
+                              <td><%= @listing.time_per_click %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Cost per week</td>
+                              <td><%= @listing.cost_per_week %></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              
+          </div>
+      </div>
+      
+          
+          
+          </div>
+      
+      
 </div>
+
 
 
 
