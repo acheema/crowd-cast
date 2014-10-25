@@ -8,7 +8,8 @@ class ListingsController < ApplicationController
     puts "Fuck"
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
-    render :json => { status: response }
+    render 'listings/show'
+    #render :json => { status: response }
   end 
 
   def getListings
@@ -27,10 +28,10 @@ class ListingsController < ApplicationController
     end   
   end
 
-  def getListingDetails
-    response = Listing.getListingDetails(listing_details_params[:id])
-    render :json => { status: 1, listing: response }
-  end 
+  def show
+    @listing = Listing.getListingDetails(params[:listing_id])
+    #render :json => { status: 1, listing: response }
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -39,7 +40,7 @@ class ListingsController < ApplicationController
     end
    
     def listing_details_params
-       params.require(:listing).permit(:id)
+       #params.require(:listing).permit(:id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
