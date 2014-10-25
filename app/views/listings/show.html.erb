@@ -165,17 +165,21 @@
       </div>
 
 <div class="container">
-      <h2><%= @listing.title %></h2>
+    <h2></h2>
       <div class="row">
-          <br>
+          <br><br><br><br><br>
           <div class="col-lg-6">
-          <img src="http://fr.ooh-tv.com/wp-content/uploads/2013/01/CBS-Outdoor-France-Digital.jpg">
+          <!--MAP STUFF SHOULD GO HERE -->
           </div>
           <div class="col-lg-6">
               <br><br>
               <div class="table-responsive">
                   <table class="table table-striped table-bordered">
                       <tbody>
+                          <tr>
+                              <td class="listinfo">Title</td>
+                              <td><%= @listing.title %></td>
+                          </tr>
                           <tr>
                               <td class="listinfo">Address</td>
                               <td><%= "#{@listing.street} #{@listing.city}, #{@listing.state} #{@listing.zip}" %></td>
@@ -199,10 +203,6 @@
                           <tr>
                               <td class="listinfo">Cost per week</td>
                               <td><%= @listing.cost_per_week %></td>
-                          </tr>
-                          <tr>
-                              <td class="listinfo">Description</td>
-                              <td>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah </td>
                           </tr>
                       </tbody>
                   </table>
