@@ -1,3 +1,5 @@
+# Written by Jason
+# World written by Jhoong (to be discarded)
 class HomeController < ApplicationController
   def index
   end

@@ -1,3 +1,4 @@
+# Written by Jhoong, Sukriti, Jason
 class ListingsController < ApplicationController
 
   def createListing 
