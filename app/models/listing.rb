@@ -1,3 +1,5 @@
+#Written by Jason, Sukriti, Jhoong
+
 class Listing < ActiveRecord::Base
    belongs_to :owner
   

@@ -1,3 +1,5 @@
+#Default
+
 class AdvertisersController < ApplicationController
   before_action :set_advertiser, only: [:show, :edit, :update, :destroy]
 
