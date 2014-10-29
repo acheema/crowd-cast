@@ -1,3 +1,5 @@
+# Written by: Jason Clark
+
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
