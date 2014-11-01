@@ -1,221 +1,152 @@
 <!DOCTYPE html>
 <!--Written by: Akaljot Cheema -->
 <!--Maps and GPS portions written by: Jhoong Roh -->
+
+
+<!DOCTYPE html>
 <html>
 <head>
-
-    <style>
-.form-inline .form-group{
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .main-container{
-        background-color: #f1f1f1;
-        padding-left: 50px;
-        padding-top: 50px;
-    }
-    body{
-        background-color: #f1f1f1;
-    }
-    .btn{
-          border: 1px solid #3079ed;
-          color: #ffffff;
-          text-shadow: 0 1px rgba(0,0,0,0.1);
-          background-color: #4d90fe;
-          background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
-          background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
-          background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
-          background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
-          background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
-          background-image: linear-gradient(top,#4d90fe,#4787ed);
-    }
-    .btn:hover{
-          border: 1px solid #2f5bb7;
-          color: #ffffff;
-          text-shadow: 0 1px rgba(0,0,0,0.3);
-          background-color: #357ae8;
-          background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-          background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-          background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-          background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-          background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-          background-image: linear-gradient(top,#4d90fe,#357ae8);
-    }
-    .btn:active{
-        background-color: #357ae8;
-        background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-        background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-        background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-        background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-        background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-        background-image: linear-gradient(top,#4d90fe,#357ae8);
-        -webkit-box-shadow: inset 0 1px 2px rgb a(0,0,0,0.3);
-        -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-        box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-    }
-    </style>
-
     <title></title>
 </head>
 
 <body>
-    <div class="main-container">
+    <div class="container main">
         <h2>Create your listing</h2>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal col-lg-8 col-lg-offset-2">
             <div class="form-group">
-                <label class="control-label col-lg-1" for="title">Title</label>
-
-                <div class="col-lg-4">
-                    <input class="form-control" id="title" placeholder=
-                    "Enter title" type="text">
-                </div>
+                <label for="title">Title</label> <input class="form-control"
+                id="title" placeholder="Enter title" type="text">
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-lg-1" for=
-                "height">Height</label>
+            <div class="form-group info">
+                <label>Address</label>
 
-                <div class="col-lg-2">
-                    <input class="form-control" id="height" placeholder=
-                    "Enter height" type="number">
-                </div>
-            </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control address" id="street"
+                        placeholder="Enter street" type="text">
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-lg-1" for="width">Width</label>
+                    <div class="form-group">
+                        <input class="form-control address" id="city"
+                        placeholder="Enter city" type="text">
+                    </div>
 
-                <div class="col-lg-2">
-                    <input class="form-control" id="width" placeholder=
-                    "Enter width" type="number">
-                </div>
-            </div>
+                    <div class="form-group">
+                        <input class="form-control address" id="state"
+                        placeholder="Enter state" type="text">
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-lg-1" for="time">Time per
-                click</label>
-
-                <div class="col-lg-2">
-                    <input class="form-control" id="time" placeholder=
-                    "Enter time (s)" type="number">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-lg-1" for="views">Views per
-                week</label>
-
-                <div class="col-lg-2">
-                    <input class="form-control" id="views" placeholder=
-                    "Enter views" type="number">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-lg-1" for="cost">Cost per
-                week</label>
-
-                <div class="col-lg-2">
-                    <input class="form-control" id="cost" placeholder=
-                    "Enter cost" type="number">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-lg-1" for=
-                "resolution">Resolution</label>
-
-                <div class="col-lg-2">
-                    <input class="form-control" id="resolution" placeholder=
-                    "Enter resolution" type="number">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-1 control-label">Address</label>
-
-                <div class="col-lg-8">
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input class="form-control address" id="street"
-                            placeholder="Enter street" type="text">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control address" id="city"
-                            placeholder="Enter city" type="text">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control address" id="state"
-                            placeholder="Enter state" type="text">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control address" id="zip"
-                            placeholder="Enter zipcode" type="number">
-                        </div>
+                    <div class="form-group">
+                        <input class="form-control address" id="zip"
+                        placeholder="Enter zipcode" type="number">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-lg-1 control-label">GPS Location</label>
+              <label>GPS Location</label>
 
-                <div class="col-lg-8">
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input class="form-control gps" id="lat"
-                            placeholder="Enter latitude" type="text">
-                        </div>
+                <div class="form-inline">
 
-                        <div class="form-group">
-                            <input class="form-control gps" id="lng"
-                            placeholder="Enter longitude" type="text">
-                        </div>
-                    </div><br>
-
-                    <div style='width: 800px;'>
-                        <div id="select_location" style=
-                        'width: 800px; height: 400px;'></div>
+<div class="form-group">
+  <input class=
+    "form-control gps" id="lat" placeholder=
+    "Enter latitude" type="text"> <input class=
+    "form-control gps" id="lng" placeholder=
+    "Enter longitude" type="text">
+</div>
+                    <div class="form-group">
+                        <div class="select-gps" id="select_location"></div>
                     </div>
                 </div>
-            </div><br>
-
-            <div class="fileinput fileinput-new input-group col-lg-8"
-            data-provides="fileinput">
-                <span class=
-                "input-group-addon btn btn-default btn-file"><span class=
-                "fileinput-new">Upload Image</span><span class=
-                "fileinput-exists">Change</span><input name="..." type=
-                "file"></span>
-
-                <div class="form-control" data-trigger="fileinput">
-                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                    <span class="fileinput-filename"></span>
-                </div><a class=
-                "input-group-addon btn btn-default fileinput-exists"
-                data-dismiss="fileinput" href="#">Remove</a>
             </div>
 
-            <div class="form-group">
-                <label class="col-lg-1" for="description">Description</label>
+<div class = 'form-group'>
 
-                <div class="col-lg-7">
-                    <textarea class="form-control" id="description"
-                    placeholder="Enter more information" rows="6">
+            <div class = "col-lg-12">
+
+            <div class="col-lg-4">
+                <div class="form-group info">
+                    <div class='form-inline'>
+                        <label class="control-label" for=
+                        "height">Height</label> <input class="form-control" id=
+                        "height" placeholder="Enter height" type="number">
+                        <label class="control-label" for="width">Width</label>
+                        <input class="form-control" id="width" placeholder=
+                        "Enter width" type="number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group info">
+                    <div class='form-inline'>
+                        <label for="views">Views per week</label> <input class=
+                        "form-control" id="views" placeholder="Enter views"
+                        type="number"> <label for="cost">Cost per week</label>
+                        <input class="form-control" id="cost" placeholder=
+                        "Enter cost" type="number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group info">
+                    <div class='form-inline'>
+                        <label for="time">Time per click</label> <input class=
+                        "form-control" id="time" placeholder="Enter time (s)"
+                        type="number"> <label for=
+                        "resolution">Resolution</label> <input class=
+                        "form-control" id="resolution" placeholder=
+                        "Enter resolution" type="number">
+                    </div>
+                </div>
+            </div>
+</div>
+</div>
+
+<div class="form-group">
+    <input id="file-3" type="file" multiple=true>
+</div>
+
+
+
+                <div class="form-group">
+                    <label for=
+                    "description">Description</label>
+
+                         <textarea class="form-control" id="description"
+                        placeholder="Enter more information" rows="6">
 </textarea>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-lg-offset-1 col-lg-10">
-                    <button class="btn btn-default" id="submit" type=
-                    "submit">Submit</button>
+                <div class="form-group">
+                    <div class="col-lg-offset-1 col-lg-10">
+                        <button class="btn btn-default" id="submit" type=
+                        "submit">Submit</button>
+                    </div>
                 </div>
             </div>
         </form>
-    </div><script type="text/javascript">
+    </div>
+</body>
+</html>
+
+
+
+    <script type="text/javascript">
+
+
+    $("#file-3").fileinput({
+      showUpload: false,
+      showCaption: false,
+      browseClass: "btn btn-primary btn-lg",
+      fileType: "any"
+    });
+
+
    $(document).ready(function() {
        var oldMarker;
        handler = Gmaps.build('Google');
@@ -405,5 +336,4 @@
 "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <script src=
 "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> <script src=
 "http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-</body>
-</html>
+ </body>
