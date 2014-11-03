@@ -30,7 +30,9 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
-                                              zip: "94065" }}
+                                              zip: "94065", \
+                                              screen_resolution_x: 45, \
+                                              screen_resolution_y: 45}}
       assert(Listing.all.count == 1)
       assert_equal 200, status
    end
@@ -47,7 +49,9 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
-                                              zip: "94065" }}
+                                              zip: "94065", \
+                                              screen_resolution_x: 45, \
+                                              screen_resolution_y: 45}}
       assert(Listing.all.count == 0)
    end
    
@@ -63,7 +67,9 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
-                                              zip: "94065" }}
+                                              zip: "94065", \
+                                              screen_resolution_x: 45, \
+                                              screen_resolution_y: 45}}
       my_array = { city: 'Redwood City' }.to_json 
       response = get_listings_helper(my_array)     
       assert(JSON.parse(response.body)["status"].equal? 1)

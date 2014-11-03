@@ -2,36 +2,50 @@
 
 class Listing < ActiveRecord::Base
    belongs_to :owner
-  
+ 
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+    end
+  end
+  after_validation :reverse_geocode, :if => [:latitude?, :longitude?]
   geocoded_by :address
   after_validation :geocode
-      
+  
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
   validates :height, presence: true, numericality: true
   validates :width, presence: true, numericality: true
   validates :time_per_click, presence: true, numericality: { only_integer: true }
   validates :views_per_week, presence: true, numericality: { only_integer: true }
   validates :cost_per_week, presence: true, numericality: true
-  validates :street, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip, presence: true
+  validates :street, presence: true, :unless => [ :latitude?, :longitude? ]
+  validates :city, presence: true, :unless => [:latitude?, :longitude?]
+  validates :state, presence: true, :unless => [:latitude?, :longitude?]
+  validates :zip, presence: true, :unless => [:latitude?, :longitude?]
   validates :owner, :presence => true 
-   
+  validates :screen_resolution_x, presence: true, numericality: {only_integer: true}
+  validates :screen_resolution_y, presence: true, numericality: {only_integer: true}
+  validates :active, presence: true, :inclusion => {:in => [true, false]}
+  validates :views, presence: true, numericality: {only_integer: true}
+ 
    def address
       [street, city, state].compact.join(', ')
    end
 
-   def gpsSet?
-      if :latitude == nil or :longitude == nil
-         return true
-      else
-         return false
-      end
+   def activate(id)
+      listing = Listing.find(id)
+      listing.update_attributes(:active => true)
+      return listing
+   end
+   
+   def deactivate(id)
+      listing = Listing.find(id)
+      listing.update_attributes(:active => false)
+      return listing
    end
   
    def self.createListing(params)
-      listing = Listing.new(params)
+      listing = Listing.new(params.merge(:views => 0, :active => true))
       if listing.save
          return listing.id
       else
@@ -47,6 +61,8 @@ class Listing < ActiveRecord::Base
          return -9 if errors[:state].any?
          return -10 if errors[:zip].any?
          return -11 if errors[:owner].any?
+         return -12 if errors[:screen_resolution_x].any?
+         return -13 if errors[:screen_resolution_y].any?
          #Shouldn't reach here
          errors.each do |key, value|
             puts "#{key}:#{value}"
@@ -56,18 +72,13 @@ class Listing < ActiveRecord::Base
 
    def self.getListings(city)
       listings = Listing.where("city = '#{city}'")
-      listings
       return listings
-      # array = []
-      # listings.each do |listing|
-      #    array << { "listing_id" => listing.id, "title" => listing.title }
-      # end
-      # return array
    end 
 
    def self.getListingDetails(id)
       listing = Listing.find(id)
-      
+      views = listing.views + 1
+      listing.update_attributes(:views => views)
       return listing
    end
 

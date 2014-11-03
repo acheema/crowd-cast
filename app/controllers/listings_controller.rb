@@ -15,19 +15,32 @@ class ListingsController < ApplicationController
    end 
 
   def search
-    # @city = params[:city]
-    # if @city then
-    #   @listings = Listing.getListings(@city) 
-    # end
     @city = params[:city]
     if @city then
       @listings = Listing.getListings(@city)
     end   
+    @markers = Gmaps4rails.build_markers(@listings) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+      marker.infowindow render_to_string(:partial => "/listings/infowindow", :locals => { :location => location})
+      marker.json({:id => location.id})
+    end 
   end
 
   def show
     @listing = Listing.getListingDetails(params[:listing_id])
   end
+
+  def activate
+    Listing.activate( activate_params[:id] )
+    render :json => { status: 1 }
+  end
+
+  def deactivate
+    Listing.deactivate( activate_params[:id] )
+    render :json => { status: 1 }
+  end
+
    # Clean out the tables
     def resetFixture
         Listing.TESTAPI_resetFixture
@@ -40,6 +53,10 @@ class ListingsController < ApplicationController
       @listing = Listing.find(params[:id])
     end
    
+    def activate_params
+      params.require(:listing).permit(:id)
+    end
+   
     def listing_details_params
        #params.require(:listing).permit(:id)
     end
@@ -50,7 +67,7 @@ class ListingsController < ApplicationController
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :screen_resolution, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude)
+      params.require(:listing).permit(:title, :height, :width, :screen_resolution_x, :screen_resolution_y, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude, :description, :image_url)
     end
     
 end

@@ -18,9 +18,25 @@ html {
 
 #contentDiv {
     width: 605px;
-    height: 440px;
     margin-left:auto;
     margin-right:auto;
+}
+
+#results {
+display: inline-block;
+vertical-align: middle;
+float: right;
+    margin-left:auto;
+    margin-right:500px;
+}
+
+#googlemap {
+display: inline-block;
+vertical-align: middle;
+float: left;
+    margin-left:200px;
+    margin-right:auto;
+
 }
 
 #searchForm {

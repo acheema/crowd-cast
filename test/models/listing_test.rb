@@ -19,8 +19,12 @@ class ListingTest < ActiveSupport::TestCase
 		city: "Berkeley", 
 		state: "CA", 
 		zip: "94704", 
-		owner: @owner
-	}
+		owner: @owner,
+      screen_resolution_x: 56,
+      screen_resolution_y: 57,
+	   active: true,
+      views: 0
+   }
   end 
 
   test 'should be valid' do
@@ -104,31 +108,44 @@ class ListingTest < ActiveSupport::TestCase
   	response = Listing.createListing(@params)
   	assert_equal -11, response
   end
+  
+  test "Not sending a screen_resolution_x, give error" do 
+  	@params.delete :screen_resolution_x 
+  	response = Listing.createListing(@params)
+  	assert_equal -12, response
+  end
+  
+  test "Not sending a screen_resolution_y, give error" do 
+  	@params.delete :screen_resolution_y
+  	response = Listing.createListing(@params)
+  	assert_equal -13, response
+  end
 
    test "valid get listings" do
-   @params2 = {
-      title: "Listing 2", 
-      height: 30, 
-      width: 31, 
-      time_per_click: 8, 
-        views_per_week: 8, 
-        cost_per_week: 100, 
-        street: "College Ave", 
-        city: "SF", 
-        state: "CA", 
-        zip: "94704", 
-        owner: @owner
-    }
-     response1 = Listing.createListing(@params)
-    response2 = Listing.createListing(@params2)
-    listing2 = Listing.find(response2)
-    response = Listing.getListings("SF")
-
-    assert_equal [listing2], response
+      params2 = {
+         title: "Listing 2", 
+         height: 30, 
+         width: 31, 
+         time_per_click: 8, 
+         views_per_week: 8, 
+         cost_per_week: 100, 
+         street: "College Ave", 
+         city: "SF", 
+         state: "CA", 
+         zip: "94704", 
+         owner: @owner,
+         screen_resolution_x: 56,
+         screen_resolution_y: 57
+      }
+      response1 = Listing.createListing(@params)
+      response2 = Listing.createListing(params2)
+      listing2 = Listing.find(response2)
+      response = Listing.getListings("SF")
+      assert_equal [listing2], response
   end 
 
   test "more valid get listings" do
-    @params2 = {
+    params2 = {
       title: "Listing 2", 
       height: 30, 
       width: 31, 
@@ -139,9 +156,11 @@ class ListingTest < ActiveSupport::TestCase
       city: "SF", 
       state: "CA", 
       zip: "94704", 
-      owner: @owner
+      owner: @owner,
+      screen_resolution_x: 56,
+      screen_resolution_y: 57
     }
-    @params3 = {
+    params3 = {
       title: "Listing 3", 
       height: 30, 
       width: 31, 
@@ -152,11 +171,13 @@ class ListingTest < ActiveSupport::TestCase
       city: "SF", 
       state: "CA", 
       zip: "94704", 
-      owner: @owner
+      owner: @owner,
+      screen_resolution_x: 56,
+      screen_resolution_y: 57
     }
     Listing.createListing(@params)
-    response2 = Listing.createListing(@params2)
-    response3 = Listing.createListing(@params2)
+    response2 = Listing.createListing(params2)
+    response3 = Listing.createListing(params3)
     listing2 = Listing.find(response2)
     listing3 = Listing.find(response3)
     response = Listing.getListings("SF")

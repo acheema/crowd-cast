@@ -221,11 +221,11 @@
     var status = data.status;
     if (status == 1) {
     if (checkedValue == 0) {
-      window.location.href = window.location + '/search';
+      window.location.href = window.location.protocol + "//" + window.location.host + '/search';
 
     }
     else {
-    window.location.href = window.location + '/listings/new';
+    window.location.href = window.location.protocol + "//" + window.location.host + '/listings/new';
     }
     }
     else {
