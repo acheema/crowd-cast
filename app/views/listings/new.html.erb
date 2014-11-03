@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <input class="form-control address" id="zip"
-                        placeholder="Enter zipcode" type="number">
+                        placeholder="Enter zip" type="number">
                     </div>
                 </div>
             </div>
@@ -98,8 +98,11 @@
                         <label for="time">Time per click</label> <input class=
                         "form-control" id="time" placeholder="Enter time (s)"
                         type="number"> <label for=
-                        "resolution">Resolution</label> <input class=
-                        "form-control" id="resolution" placeholder=
+                        "resolution">Screen Resolution X</label> <input class=
+                        "form-control" id="screen_resolution_x" placeholder=
+                        "Enter resolution" type="number"> <label for=
+                        "resolution">Screen Resolution Y</label> <input class=
+                        "form-control" id="screen_resolution_y" placeholder=
                         "Enter resolution" type="number">
                     </div>
                 </div>
@@ -211,7 +214,8 @@
           listingTime = $('#time').val();
           listingViews = $('#views').val();
           listingCost = $('#cost').val();
-          listingResolution = $('#resolution').val();
+          listingResolutionX = $('#screen_resolution_x').val();
+          listingResolutionY = $('#screen_resolution_y').val();
           listingStreet = $('#street').val();
           listingCity = $('#city').val();
           listingState = $('#state').val();
@@ -224,8 +228,8 @@
               url: window.location.protocol + '//' + window.location.host + "/api/create_listing/",
               data: JSON.stringify({ title: listingTitle, height: listingHeight, width: listingWidth,
                   time_per_click: listingTime, views_per_week: listingViews, cost_per_week: listingCost,
-                  screen_resolution: listingResolution, street: listingStreet, city: listingCity,
-                  state: listingState, zip: listingZip,
+                  screen_resolution_x: listingResolutionX, street: listingStreet, city: listingCity,
+                  state: listingState, zip: listingZip, screen_resolution_y: listingResolutionY,
                   latitude: listingLat, longitude: listingLng, description: listingDescription }),
               contentType: "application/json",
               dataType: "json",
@@ -279,6 +283,12 @@
         }
         else if (response == -11){
           alert("Error, you must sign in or create an account ")
+        }
+        else if (response == -12){
+          alert("Error, you must have valid screen resolution x ")
+        }
+        else if (response == -13){
+          alert("Error, you must have valid screen resolution y ")
         }
         else{
           alert("An error occured while trying to create your listing, please try again.")

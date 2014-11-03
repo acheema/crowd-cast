@@ -13,7 +13,11 @@ one:
   zip: MyString
   latitude: 1.5
   longitude: 1.5
-  screen_resolution: 1
+  screen_resolution_x: 1
+  screen_resolution_y: 1
+  description: MyString
+  views: 1
+  active: true
   owner_id: 
 
 two:
@@ -29,5 +33,9 @@ two:
   zip: MyString
   latitude: 1.5
   longitude: 1.5
-  screen_resolution: 1
+  screen_resolution_x: 1
+  screen_resolution_y: 1
+  description: MyString
+  views: 1
+  active: true
   owner_id: 

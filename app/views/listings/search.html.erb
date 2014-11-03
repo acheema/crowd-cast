@@ -22,8 +22,12 @@
 		      <h3 class="title">
 		        <a href="/listings/show?listing_id=<%=listing.id%>" style=""><%= listing.title %></a>
 		      </h3>
-		      <p class="listingInfo">Address: <%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
-		    </div>
+            <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
+		         <p class="listingInfo">Address: <%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+		      <%else%>
+		         <p class="listingInfo">GPS Coordinate: <%= "#{listing.latitude}, #{listing.longitude}" %></p>
+            <%end%> 
+         </div>
 	      <% end %>
 	   <% end %>
 	<% end %>
@@ -51,13 +55,13 @@
             });
             $(".location" + json.id).on('mouseleave', function() {
                var blah = markers[index]
-               markers[index] = handler.addMarker(json, { "opacity": 0.2 });
+               markers[index] = handler.addMarker(json, { "opacity": 0.5 });
                handler.removeMarker(blah);
             });
 
             temp[index] = json;
          });
-         markers = handler.addMarkers(temp, { "opacity": 0.2 });
+         markers = handler.addMarkers(temp, { "opacity": 0.5 });
          handler.bounds.extendWith(markers);
          handler.fitMapToBounds();
       });
