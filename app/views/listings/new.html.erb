@@ -160,21 +160,21 @@
 
           if ((listingStreet != "") && (listingCity != "") && (listingState != "") && (listingZip != "")){
              clearGPS();
-             //Next iteration, stick with Google. Open source ones are terrible
-             var url = "http://nominatim.openstreetmap.org/search?q=";
+             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=";
              url += listingStreet.replace(" ","+") + ",";
              url += listingCity.replace(" ","+") + ",";
              url += listingState + "," + listingZip;
-             url += "&format=json";
              //Get request the GPS coordinates of this address
              $.ajax({
                 url: url,
                 type: "GET",
                 success: function( data ) {
-                   json = { "lat": data[0]["lat"], "lng": data[0]["lon"] };
+                   var location = data["results"][0]["geometry"]["location"];
+                   json = { "lat": location["lat"], "lng": location["lng"] };
                    if (oldMarker != null){
                      handler.removeMarker(oldMarker);
                    }
+
                    oldMarker = handler.addMarker(json, { "draggable": true } );
                    oldMarker.panTo();
                    handler.getMap().setZoom(14);
