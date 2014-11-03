@@ -14,7 +14,7 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-03T02:01:14-08:00">2014-11-03T02:01:14-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-03T02:42:50-08:00">2014-11-03T02:42:50-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -163,7 +163,7 @@
       <tr>
         <td class="strong"><a href="#02468477d6b0d3564ee601bb58e858b30d2bb3a7" class="src_link" title="app/models/listing.rb">app/models/listing.rb</a></td>
         <td class="red strong">77.78 %</td>
-        <td>90</td>
+        <td>89</td>
         <td>63</td>
         <td>49</td>
         <td>14</td>
@@ -2217,514 +2217,508 @@
         <li class="never" data-hits="" data-linenumber="5">
           
           
-          <code class="ruby">  </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="6">
-          
-          
           <code class="ruby"> </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="7">
+        <li class="covered" data-hits="2" data-linenumber="6">
           <span class="hits">2</span>
           
           <code class="ruby">  reverse_geocoded_by :latitude, :longitude do |obj,results|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="8">
+        <li class="missed" data-hits="0" data-linenumber="7">
           
           
           <code class="ruby">    if geo = results.first</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="9">
+        <li class="missed" data-hits="0" data-linenumber="8">
           
           
           <code class="ruby">      obj.city    = geo.city</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="10">
+        <li class="never" data-hits="" data-linenumber="9">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="10">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="12">
+        <li class="covered" data-hits="2" data-linenumber="11">
           <span class="hits">2</span>
           
           <code class="ruby">  after_validation :reverse_geocode, :if =&gt; [:latitude?, :longitude?]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="13">
+        <li class="covered" data-hits="2" data-linenumber="12">
           <span class="hits">2</span>
           
           <code class="ruby">  geocoded_by :address</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="14">
+        <li class="covered" data-hits="2" data-linenumber="13">
           <span class="hits">2</span>
           
           <code class="ruby">  after_validation :geocode</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="14">
           
           
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="16">
+        <li class="covered" data-hits="2" data-linenumber="15">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :title, presence: true, length: { maximum: 128, minimum: 4 }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="17">
+        <li class="covered" data-hits="2" data-linenumber="16">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :height, presence: true, numericality: true</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="18">
+        <li class="covered" data-hits="2" data-linenumber="17">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :width, presence: true, numericality: true</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="19">
+        <li class="covered" data-hits="2" data-linenumber="18">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :time_per_click, presence: true, numericality: { only_integer: true }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="20">
+        <li class="covered" data-hits="2" data-linenumber="19">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :views_per_week, presence: true, numericality: { only_integer: true }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="21">
+        <li class="covered" data-hits="2" data-linenumber="20">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :cost_per_week, presence: true, numericality: true</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="22">
+        <li class="covered" data-hits="2" data-linenumber="21">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :street, presence: true, :unless =&gt; [ :latitude?, :longitude? ]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="23">
+        <li class="covered" data-hits="2" data-linenumber="22">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :city, presence: true, :unless =&gt; [:latitude?, :longitude?]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="24">
+        <li class="covered" data-hits="2" data-linenumber="23">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :state, presence: true, :unless =&gt; [:latitude?, :longitude?]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="25">
+        <li class="covered" data-hits="2" data-linenumber="24">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :zip, presence: true, :unless =&gt; [:latitude?, :longitude?]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="26">
+        <li class="covered" data-hits="2" data-linenumber="25">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :owner, :presence =&gt; true </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="27">
+        <li class="covered" data-hits="2" data-linenumber="26">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :screen_resolution_x, presence: true, numericality: {only_integer: true}</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="28">
+        <li class="covered" data-hits="2" data-linenumber="27">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :screen_resolution_y, presence: true, numericality: {only_integer: true}</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="29">
+        <li class="covered" data-hits="2" data-linenumber="28">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :active, presence: true, :inclusion =&gt; {:in =&gt; [true, false]}</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="30">
+        <li class="covered" data-hits="2" data-linenumber="29">
           <span class="hits">2</span>
           
           <code class="ruby">  validates :views, presence: true, numericality: {only_integer: true}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby"> </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="32">
+        <li class="covered" data-hits="2" data-linenumber="31">
           <span class="hits">2</span>
           
           <code class="ruby">   def address</code>
         </li>
       
-        <li class="covered" data-hits="45" data-linenumber="33">
+        <li class="covered" data-hits="45" data-linenumber="32">
           <span class="hits">45</span>
           
           <code class="ruby">      [street, city, state].compact.join(&#39;, &#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="never" data-hits="" data-linenumber="33">
           
           
           <code class="ruby">   end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="never" data-hits="" data-linenumber="34">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="36">
+        <li class="covered" data-hits="2" data-linenumber="35">
           <span class="hits">2</span>
           
           <code class="ruby">   def activate(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="37">
+        <li class="missed" data-hits="0" data-linenumber="36">
           
           
           <code class="ruby">      listing = Listing.find(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="38">
+        <li class="missed" data-hits="0" data-linenumber="37">
           
           
           <code class="ruby">      listing.update_attributes(:active =&gt; true)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="39">
+        <li class="missed" data-hits="0" data-linenumber="38">
           
           
           <code class="ruby">      return listing</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
+          
+          
+          <code class="ruby">   end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
           
           
-          <code class="ruby">   end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="41">
-          
-          
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="42">
+        <li class="covered" data-hits="2" data-linenumber="41">
           <span class="hits">2</span>
           
           <code class="ruby">   def deactivate(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="43">
+        <li class="missed" data-hits="0" data-linenumber="42">
           
           
           <code class="ruby">      listing = Listing.find(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="44">
+        <li class="missed" data-hits="0" data-linenumber="43">
           
           
           <code class="ruby">      listing.update_attributes(:active =&gt; false)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="45">
+        <li class="missed" data-hits="0" data-linenumber="44">
           
           
           <code class="ruby">      return listing</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby">   end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">   end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="47">
-          
-          
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="48">
+        <li class="covered" data-hits="2" data-linenumber="47">
           <span class="hits">2</span>
           
           <code class="ruby">   def self.createListing(params)</code>
         </li>
       
-        <li class="covered" data-hits="43" data-linenumber="49">
+        <li class="covered" data-hits="43" data-linenumber="48">
           <span class="hits">43</span>
           
           <code class="ruby">      listing = Listing.new(params.merge(:views =&gt; 0, :active =&gt; true))</code>
         </li>
       
-        <li class="covered" data-hits="43" data-linenumber="50">
+        <li class="covered" data-hits="43" data-linenumber="49">
           <span class="hits">43</span>
           
           <code class="ruby">      if listing.save</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="51">
+        <li class="covered" data-hits="11" data-linenumber="50">
           <span class="hits">11</span>
           
           <code class="ruby">         return listing.id</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="32" data-linenumber="53">
+        <li class="covered" data-hits="32" data-linenumber="52">
           <span class="hits">32</span>
           
           <code class="ruby">         errors = listing.errors</code>
         </li>
       
-        <li class="covered" data-hits="32" data-linenumber="54">
+        <li class="covered" data-hits="32" data-linenumber="53">
           <span class="hits">32</span>
           
           <code class="ruby">         return -1 if errors[:title].any?</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="55">
+        <li class="covered" data-hits="30" data-linenumber="54">
           <span class="hits">30</span>
           
           <code class="ruby">         return -2 if errors[:height].any?</code>
         </li>
       
-        <li class="covered" data-hits="28" data-linenumber="56">
+        <li class="covered" data-hits="28" data-linenumber="55">
           <span class="hits">28</span>
           
           <code class="ruby">         return -3 if errors[:width].any?</code>
         </li>
       
-        <li class="covered" data-hits="26" data-linenumber="57">
+        <li class="covered" data-hits="26" data-linenumber="56">
           <span class="hits">26</span>
           
           <code class="ruby">         return -4 if errors[:time_per_click].any?</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="58">
+        <li class="covered" data-hits="20" data-linenumber="57">
           <span class="hits">20</span>
           
           <code class="ruby">         return -5 if errors[:views_per_week].any?</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="59">
+        <li class="covered" data-hits="16" data-linenumber="58">
           <span class="hits">16</span>
           
           <code class="ruby">         return -6 if errors[:cost_per_week].any?</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="60">
+        <li class="covered" data-hits="14" data-linenumber="59">
           <span class="hits">14</span>
           
           <code class="ruby">         return -7 if errors[:street].any?</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="61">
+        <li class="covered" data-hits="12" data-linenumber="60">
           <span class="hits">12</span>
           
           <code class="ruby">         return -8 if errors[:city].any?</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="62">
+        <li class="covered" data-hits="10" data-linenumber="61">
           <span class="hits">10</span>
           
           <code class="ruby">         return -9 if errors[:state].any?</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="63">
+        <li class="covered" data-hits="8" data-linenumber="62">
           <span class="hits">8</span>
           
           <code class="ruby">         return -10 if errors[:zip].any?</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="64">
+        <li class="covered" data-hits="6" data-linenumber="63">
           <span class="hits">6</span>
           
           <code class="ruby">         return -11 if errors[:owner].any?</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="65">
+        <li class="covered" data-hits="4" data-linenumber="64">
           <span class="hits">4</span>
           
           <code class="ruby">         return -12 if errors[:screen_resolution_x].any?</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="66">
+        <li class="covered" data-hits="2" data-linenumber="65">
           <span class="hits">2</span>
           
           <code class="ruby">         return -13 if errors[:screen_resolution_y].any?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="66">
           
           
           <code class="ruby">         #Shouldn&#39;t reach here</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="68">
+        <li class="missed" data-hits="0" data-linenumber="67">
           
           
           <code class="ruby">         errors.each do |key, value|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="69">
+        <li class="missed" data-hits="0" data-linenumber="68">
           
           
           <code class="ruby">            puts &quot;#{key}:#{value}&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="never" data-hits="" data-linenumber="69">
           
           
           <code class="ruby">         end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="70">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">   end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="72">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="74">
+        <li class="covered" data-hits="2" data-linenumber="73">
           <span class="hits">2</span>
           
           <code class="ruby">   def self.getListings(city)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="75">
+        <li class="covered" data-hits="4" data-linenumber="74">
           <span class="hits">4</span>
           
           <code class="ruby">      listings = Listing.where(&quot;city = &#39;#{city}&#39;&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="76">
+        <li class="covered" data-hits="4" data-linenumber="75">
           <span class="hits">4</span>
           
           <code class="ruby">      return listings</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="never" data-hits="" data-linenumber="76">
           
           
           <code class="ruby">   end </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
+        <li class="never" data-hits="" data-linenumber="77">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="79">
+        <li class="covered" data-hits="2" data-linenumber="78">
           <span class="hits">2</span>
           
           <code class="ruby">   def self.getListingDetails(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="80">
+        <li class="missed" data-hits="0" data-linenumber="79">
           
           
           <code class="ruby">      listing = Listing.find(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="81">
+        <li class="missed" data-hits="0" data-linenumber="80">
           
           
           <code class="ruby">      views = listing.views + 1</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="82">
+        <li class="missed" data-hits="0" data-linenumber="81">
           
           
           <code class="ruby">      listing.update_attributes(:views =&gt; views)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="83">
+        <li class="missed" data-hits="0" data-linenumber="82">
           
           
           <code class="ruby">      return listing</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="never" data-hits="" data-linenumber="83">
           
           
           <code class="ruby">   end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="85">
           
           
           <code class="ruby">  # Clear out the table</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="87">
+        <li class="covered" data-hits="2" data-linenumber="86">
           <span class="hits">2</span>
           
           <code class="ruby">  def self.TESTAPI_resetFixture</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="88">
+        <li class="covered" data-hits="3" data-linenumber="87">
           <span class="hits">3</span>
           
           <code class="ruby">    Listing.delete_all</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="89">
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
+        <li class="never" data-hits="" data-linenumber="89">
           
           
           <code class="ruby">end</code>

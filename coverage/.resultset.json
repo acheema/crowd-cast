@@ -269,7 +269,6 @@
         1,
         1,
         null,
-        null,
         1,
         0,
         0,
@@ -1149,43 +1148,6 @@
         null,
         null
       ],
-      "/Users/JhoongRoh/code/rails_projects/crowdcast/app/controllers/home_controller.rb": [
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/JhoongRoh/code/rails_projects/crowdcast/app/controllers/application_controller.rb": [
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
       "/Users/JhoongRoh/code/rails_projects/crowdcast/app/controllers/user_controller.rb": [
         null,
         1,
@@ -1261,6 +1223,43 @@
         null,
         1,
         0,
+        null,
+        null
+      ],
+      "/Users/JhoongRoh/code/rails_projects/crowdcast/app/controllers/application_controller.rb": [
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/JhoongRoh/code/rails_projects/crowdcast/app/controllers/home_controller.rb": [
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
         null,
         null
       ],
@@ -1340,7 +1339,7 @@
         null
       ]
     },
-    "timestamp": 1415008874
+    "timestamp": 1415011370
   },
   "Unit Tests": {
     "coverage": {
@@ -1611,7 +1610,6 @@
         null,
         1,
         1,
-        null,
         null,
         1,
         0,
@@ -1955,6 +1953,6 @@
         null
       ]
     },
-    "timestamp": 1415008844
+    "timestamp": 1415010783
   }
 }
