@@ -39,27 +39,28 @@
    $(document).ready(function() {
    var markers;
    var oldMarker;
-   handler = Gmaps.build('Google');
-   handler.buildMap({ internal: {id: 'map'}}, function(){
-      var temp = {};
-      _.each(<%=raw @markers.to_json %>, function(json, index){
-         $(".location" + json.id).on('mouseenter', function() {
-            var blah = markers[index]
-            markers[index] = handler.addMarker(json, { "opacity": 1.0 });
-            handler.removeMarker(blah);
-         });
-         $(".location" + json.id).on('mouseleave', function() {
-            var blah = markers[index]
-            markers[index] = handler.addMarker(json, { "opacity": 0.2 });
-            handler.removeMarker(blah);
-         });
+   if (<%=raw @listings.to_json%> != null){
+      handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'map'}}, function(){
+         var temp = {};
+         _.each(<%=raw @markers.to_json %>, function(json, index){
+            $(".location" + json.id).on('mouseenter', function() {
+               var blah = markers[index]
+               markers[index] = handler.addMarker(json, { "opacity": 1.0 });
+               handler.removeMarker(blah);
+            });
+            $(".location" + json.id).on('mouseleave', function() {
+               var blah = markers[index]
+               markers[index] = handler.addMarker(json, { "opacity": 0.2 });
+               handler.removeMarker(blah);
+            });
 
-         temp[index] = json;
+            temp[index] = json;
+         });
+         markers = handler.addMarkers(temp, { "opacity": 0.2 });
+         handler.bounds.extendWith(markers);
+         handler.fitMapToBounds();
       });
-      markers = handler.addMarkers(temp, { "opacity": 0.2 });
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-   });
-   });
+   }});
 </script>
 

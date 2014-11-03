@@ -26,6 +26,7 @@ class ListingsController < ApplicationController
     @markers = Gmaps4rails.build_markers(@listings) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
+      marker.infowindow render_to_string(:partial => "/listings/infowindow", :locals => { :location => location})
       marker.json({:id => location.id})
     end 
   end
