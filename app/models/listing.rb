@@ -1,86 +1,78 @@
+#Written by Jason, Sukriti, Jhoong
+
 class Listing < ActiveRecord::Base
-	# Code Written By : Sukriti Singal
-	$SUCCESS = 1
-	$ERR_INVALID_TITLE = -1 
-	$ERR_INVALID_HEIGHT = -2
-	$ERR_INVALID_WIDTH = -3
-	$ERR_INVALID_TIME_CLICK = -4 
-	$ERR_INVALID_CLICK_WEEK = -5 
-	$ERR_INVALID_COST_WEEK = -6
-	$ERR_INVALID_STREET = -7
-	$ERR_INVALID_CITY = -8 
-	$ERR_INVALID_STATE = -9 
-	$ERR_INVALID_ZIP = -10	
-	$ERR_INVALID_LATITUDE = -11 
-	$ERR_INVALID_LONGITUDE = -12 
-	$ERR_SAVE_FAILURE = -13
-	$ERR_LISTING_NOT_EXIST = -14
-    
-    def self.create_listing(listing_params) 
+   belongs_to :owner
+  
+  geocoded_by :address
+  after_validation :geocode
+      
+  validates :title, presence: true, length: { maximum: 128, minimum: 4 }
+  validates :height, presence: true, numericality: true
+  validates :width, presence: true, numericality: true
+  validates :time_per_click, presence: true, numericality: { only_integer: true }
+  validates :views_per_week, presence: true, numericality: { only_integer: true }
+  validates :cost_per_week, presence: true, numericality: true
+  validates :street, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip, presence: true
+  validates :owner, :presence => true 
+   
+   def address
+      [street, city, state].compact.join(', ')
+   end
 
-  	  	if listing_params[:title].length < 1 
-  			response[0] = $ERR_INVALID_TITLE
+   def gpsSet?
+      if :latitude == nil or :longitude == nil
+         return true
+      else
+         return false
+      end
+   end
+  
+   def self.createListing(params)
+      listing = Listing.new(params)
+      if listing.save
+         return listing.id
+      else
+         errors = listing.errors
+         return -1 if errors[:title].any?
+         return -2 if errors[:height].any?
+         return -3 if errors[:width].any?
+         return -4 if errors[:time_per_click].any?
+         return -5 if errors[:views_per_week].any?
+         return -6 if errors[:cost_per_week].any?
+         return -7 if errors[:street].any?
+         return -8 if errors[:city].any?
+         return -9 if errors[:state].any?
+         return -10 if errors[:zip].any?
+         return -11 if errors[:owner].any?
+         #Shouldn't reach here
+         errors.each do |key, value|
+            puts "#{key}:#{value}"
+         end
+      end
+   end
 
-	    elsif listing_params[:height] <= 0
-	  		response[0] = $ERR_INVALID_HEIGHT
+   def self.getListings(city)
+      listings = Listing.where("city = '#{city}'")
+      listings
+      return listings
+      # array = []
+      # listings.each do |listing|
+      #    array << { "listing_id" => listing.id, "title" => listing.title }
+      # end
+      # return array
+   end 
 
-	  	elsif listing_params[:width].length <= 0
-	  		response[0] = $ERR_INVALID_WIDTH
+   def self.getListingDetails(id)
+      listing = Listing.find(id)
+      
+      return listing
+   end
 
-	  	elsif listing_params[:time_per_click] <= 0 
-	  		response[0] = $ERR_INVALID_TIME_CLICK 
-
-	  	elsif listing_params[:clicks_per_week] <= 0
-	  		response[0] = $ERR_INVALID_CLICK_WEEK
-
-	  	elsif listing_params[:cost_per_week] <= 0
-	  		respose[0] = $ERR_INVALID_COST_WEEK
-
-	  	elsif listing_params[:street].length < 1 
-	  		response[0] = $ERR_INVALID_STREET
-
-	  	elsif listing_params[:city].length < 1 
-	  		response[0] = $ERR_INVALID_CITY
-
-	  	elsif listing_params[:state].length < 1 
-	  		response[0] = $ERR_INVALID_STATE
-
-	  	elsif listing_params[:zip].length < 1 
-	  		response[0] = $ERR_INVALID_ZIP
-
-	  	elsif listing_params[:latitude].length < 1 
-	  		response[0] = $ERR_INVALID_LATITUDE
-
-	  	elsif listing_params[:longitude].length < 1
-	  		response[0] = $ERR_INVALID_LONGITUDE
-
-	  	else 
-	  		listing = Listing.new(listing_params)
-	  		booleanSaved = listing.save
-	  		if booleanSaved 
-	  			response[0] = $SUCCESS
-	  			response[1] = listing.id
-	  		else 
-	  			response[0] = $ERR_SAVE_FAILURE
-	  		end 
-	  	end 
-
-	  	return response
-    end
-
-    def self.getListings(city) 
-    	listing = Listing.where("city = ?", city)
-    	return listing
-    end
-
-    def self.getListingDetails(listing_id) 
-    	listing = Listing.find(listing_id)
-    	if listing 
-    		response[0] = $SUCCESS
-    		response[1] = listing
-    	else 
-    		response[0] = $ERR_LISTING_NOT_EXIST
-    	end
-    	return response
-    end
+  # Clear out the table
+  def self.TESTAPI_resetFixture
+    Listing.delete_all
+  end
 end

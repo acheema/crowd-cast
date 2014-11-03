@@ -1,5 +1,6 @@
+# Written by: Jhoong Roh
 class Advertiser < ActiveRecord::Base
-    
+
   attr_accessor :password
   before_save :encrypt_password
   validates :password, presence: true, length: { maximum: 128, minimum: 8 }
@@ -7,7 +8,7 @@ class Advertiser < ActiveRecord::Base
   validates_presence_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
   validates :usertype, presence: true
-    
+
   def self.validateUser(params)
     user = find_by_username( params[ :username ] )
     # Because we salted and hashed, we have to do this to check the password
@@ -23,7 +24,7 @@ class Advertiser < ActiveRecord::Base
     if Owner.exists?( :username => params[ :username ])
         return -1
     end
-   
+
     advertiser = Advertiser.new(params)
     if advertiser.save
       return advertiser.username

@@ -1,3 +1,4 @@
+# Written by Jhoong Roh
 require 'test_helper'
 require 'json'
 require 'curb'
@@ -6,20 +7,23 @@ class UserControllerTest < ActionController::TestCase
 
    TESTSERVERURL = ENV["TEST_SERVER"]  
 
+   #Post request for sign up
    def create_user_helper(json_array, reset=true)
       # Clean database
-      Curl::Easy.http_get(TESTSERVERURL + "/api/TESTAPI_resetFixture") if reset
+      Curl::Easy.http_get(TESTSERVERURL + "/api/TESTAPI_resetUserFixture") if reset
       return Curl::Easy.http_post("http://localhost:3000/api/create_user", json_array) do |curl|
          curl.headers['Content-Type'] = 'application/json'
       end
    end
 
+   #Post request for login
    def login_user_helper(json_array)
       return Curl::Easy.http_post(TESTSERVERURL + "/api/login", json_array) do |curl|
          curl.headers['Content-Type'] = 'application/json'
       end
    end
 
+   #Get request for logout
    def signout_user_helper()
       return Curl::Easy.http_get(TESTSERVERURL + "/api/signout")
    end
@@ -159,8 +163,4 @@ class UserControllerTest < ActionController::TestCase
       assert(JSON.parse(response.body)["status"].equal? -1)
    end 
 
-   test "valid signout" do
-      response = signout_user_helper()
-      assert(JSON.parse(response.body)["status"].equal? 1)
-   end
 end

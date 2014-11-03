@@ -1,5 +1,6 @@
+# Written by: Jhoong Roh
 class Owner < ActiveRecord::Base
-    
+  has_many :listings    
   attr_accessor :password
   before_save :encrypt_password
   validates :password, presence: true, length: { maximum: 128, minimum: 8 }

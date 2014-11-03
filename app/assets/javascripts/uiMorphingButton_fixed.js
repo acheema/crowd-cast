@@ -95,6 +95,7 @@
 					// open: first opacity then width/height/left/top
 					// close: first width/height/left/top then opacity
 					if( self.expanded && ev.propertyName !== 'opacity' || !self.expanded && ev.propertyName !== 'width' && ev.propertyName !== 'height' && ev.propertyName !== 'left' && ev.propertyName !== 'top' ) {
+
 						return false;
 					}
 					this.removeEventListener( transEndEventName, onEndTransitionFn );

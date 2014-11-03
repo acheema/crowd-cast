@@ -1,0 +1,529 @@
+/* Jessica Wong
+*/
+
+.logged-in {
+  visibility:hidden;
+}
+.alert {
+  color: #bc1919;
+  text-transform:uppercase;
+}
+
+
+.navbar {
+  font-weight: 800;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.navbar-inverse {
+  background: rgba(220, 220, 220, 0.98);
+  border-color: #2d2d2d;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+  background: #67ABBB
+}
+
+/* The logo hack */
+.navbar-inverse .navbar-brand {
+  color: #999999;
+  font-weight: bolder;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.navbar-inverse .navbar-brand i {
+  color: #67ABBB;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+
+
+/* ==========================================================================
+   Wrap Sections
+   ========================================================================== */
+
+#headerwrap {
+  background: url(<%= asset_path 'header-bg.jpg' %>) no-repeat center top;
+  margin-top: -10px;
+  padding-top:20px;
+  font-family: 'Raleway';
+  text-align:center;
+  background-attachment: relative;
+  background-position: center center;
+  min-height: 600px;
+  width: 100%;
+
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#headerwrap h1 {
+  margin-top: 100px;
+  color: white;
+  font-size: 70px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+#headerwrap h2 {
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+
+
+/****** SECTIONS *****/
+
+.w {
+  padding-top: 35px;
+}
+
+.w h4 {
+  font-weight: 700;
+}
+
+.w i {
+  color: #67ABBB;
+  font-size: 30px;
+}
+
+
+
+
+/***** MODAL CONTACT *****/
+.modal-dialog {
+  width:400px !important;
+
+}
+.modal-content {
+  border-radius: 0px;
+}
+
+.modal-header {
+  color: #e39938;
+  font-family: "Lato";
+  border:none !important;
+  text-align:center;
+  font-size:40px !important;
+  text-transform:uppercase;
+}
+
+.modal-title {
+  font-size:30px ;
+}
+
+.modal-body {
+    font-family: "Lato";
+    font-weight: 100;
+    font-size: 16px;
+    color: #555;
+}
+
+
+/* Style for text modal */
+
+
+.modal-body p {
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  font-size: 1.15em;
+  line-height: 1.4;
+}
+
+
+/* Style for form modal */
+.modal-body form {
+  position: relative;
+  margin: 0 auto;
+padding: 10px 30px;
+  text-align: left;
+}
+
+
+
+
+.modal-body label {
+  display: block;
+  padding: 10px 0 0;
+  color: #365485;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size:10px;
+  font-weight: bold;
+  line-height:10px;
+
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="password"] {
+  border: 2px solid #6d91a3;
+  background: transparent;
+  font-weight:100 !important;
+  color: #313131;
+  font-size: 1.5em;
+}
+
+.modal-body input[type="text"]:focus,
+.modal-body input[type="password"]:focus {
+  border-color: #ef7e7e;
+  font-size: 1.5em;
+
+  color: #313131;
+}
+
+.modal-body input:focus {
+  outline: 0;
+}
+
+.modal-body button {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  border: none;
+  background: #347faa;
+  color: #f9f6e5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 770px) {
+  .content-style-overlay {
+    font-size: 75%;
+  }
+
+  .content-style-overlay .icon-close {
+    top: 5px;
+    right: 5px;
+  }
+}
+/* Morph Button: Default Styles */
+
+.morph-button {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.morph-button > button {
+  position: relative;
+  padding: 0 1em;
+  border: none;
+  color: #f9f6e5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.morph-button.open > button {
+  pointer-events: none;
+}
+
+.morph-content {
+  pointer-events: none;
+}
+
+.morph-button.open .morph-content {
+  pointer-events: auto;
+}
+
+/* Common styles for overlay and modal type (fixed morph) */
+.morph-button-fixed,
+.morph-button-fixed .morph-content {
+  width: 100px;
+  height: 50px;
+}
+
+.morph-button-fixed > button {
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.1s 0.5s;
+  transition: opacity 0.1s 0.5s;
+}
+
+.morph-button-fixed.open > button {
+  opacity: 0;
+  -webkit-transition: opacity 0.1s;
+  transition: opacity 0.1s;
+}
+
+.morph-button-fixed .morph-content {
+  position: fixed;
+  z-index: 900;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+  transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+.morph-button-fixed.open .morph-content {
+  opacity: 1;
+}
+
+.morph-button-fixed .morph-content > div {
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.1s, visibility 0s 0.1s, height 0s 0.1s;
+  transition: opacity 0.1s, visibility 0s 0.1s, height 0s 0.1s;
+}
+
+.morph-button-fixed.open .morph-content > div {
+  visibility: visible;
+  height: auto;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s 0.5s;
+  transition: opacity 0.3s 0.5s;
+}
+
+.morph-button-fixed.active > button {
+  z-index: 2000;
+}
+
+.morph-button-fixed.active .morph-content {
+  z-index: 1900;
+}
+
+/* Transitions for overlay button and sidebar button */
+.morph-button-overlay .morph-content,
+.morph-button-sidebar .morph-content {
+  -webkit-transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+  transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+}
+
+.morph-button-overlay.open .morph-content,
+.morph-button-sidebar.open .morph-content {
+  -webkit-transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+  transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+}
+
+/* Morph Button Style: Overlay */
+.morph-button.morph-button-overlay {
+  margin: 50px auto;
+}
+
+.morph-button-overlay .morph-content {
+  overflow: hidden;
+  background: #e85657;
+}
+
+.morph-button-overlay.open .morph-content {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+/* Morph Button Style: Modal */
+.morph-button-modal::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 800;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  content: '';
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.morph-button-modal.open::before {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.morph-button-modal.active::before {
+  z-index: 1800;
+}
+
+.morph-button-modal .morph-content {
+  overflow: hidden;
+  -webkit-transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+  transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+.morph-button-modal.open .morph-content {
+  top: 50% !important;
+  left: 50% !important;
+  margin: -210px 0 0 -300px;
+  width: 600px;
+  height: 420px;
+  -webkit-transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+  transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+/* Colors and sizes for individual modals */
+
+
+ .morph-button.morph-button-modal-3 {
+  display: inline-block;
+  margin:0px 15px;
+}
+
+
+
+
+
+.morph-button-modal-3 > button,
+.morph-button-modal-3 .morph-content {
+  background-color: #fbfbfb;
+  color: #4f76ab;
+}
+
+
+.morph-button-modal-3.open .morph-content {
+	margin: 0 0 0 -210px;
+  width: 420px;
+  height: 650px;
+}
+
+
+
+.morph-button-modal-3.open .morph-content > div {
+  height: 420px;
+}
+
+ .morph-button-modal-3.open .morph-content > div {
+   -webkit-transition: opacity 0.3s 0.3s;
+  transition: opacity 0.3s 0.3s;
+}
+
+
+
+/* Let's add some nice easing for all cases */
+.morph-button .morph-content,
+.morph-button.open .morph-content {
+  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+/* Helper classes */
+
+
+.morph-button-overlay.scroll .morph-content {
+  overflow-y: scroll;
+}
+
+.morph-button-sidebar.scroll .morph-content {
+  overflow: auto;
+}
+
+/* No JS fallback: let's hide the button and show the content */
+.no-js .morph-button > button {
+  display: none;
+}
+
+.no-js .morph-button {
+  margin: 10px 0;
+  float: none;
+}
+
+.no-js .morph-button,
+.no-js .morph-button .morph-content,
+.no-js .morph-button .morph-content > div {
+  position: relative;
+  width: auto;
+  height: auto;
+  opacity: 1;
+  visibility: visible;
+  top: auto;
+  left: auto;
+  -webkit-transform: none;
+  transform: none;
+  pointer-events: auto;
+}
+
+.no-js .morph-button .morph-content .icon-close {
+  display: none;
+}
+
+.no-js .morph-button-sidebar {
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  height: 100%;
+  background: #e85657;
+  overflow: auto;
+}
+
+.no-transition {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 600px) {
+  .morph-button-modal.open .morph-content {
+    top: 0% !important;
+    left: 0% !important;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+    transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .morph-button-fixed,
+  .morph-button-fixed .morph-content {
+    width: 200px;
+    height: 80px;
+  }
+
+  .morph-button-fixed > button {
+    font-size: 75%;
+  }
+
+  .morph-button-sidebar > button {
+    font-size: 1.6em;
+  }
+
+  .morph-button-inflow .morph-content .morph-clone {
+    font-size: 0.9em;
+  }
+ o--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.morph-button-sidebar,
+.morph-button-sidebar .morph-content {
+  width: 100% !important;
+  height: 60px !important;
+}
+
+.morph-button-sidebar {
+  bottom: 0px;
+  left: 0px;
+}
+
+.morph-button-sidebar.open .morph-content {
+  height: 100% !important;
+}
+}

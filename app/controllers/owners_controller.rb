@@ -1,3 +1,5 @@
+# Default
+
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
 

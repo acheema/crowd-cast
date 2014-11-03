@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="assets/css/main.css" rel="stylesheet">
+	<link href="assets/css/login.css" rel="stylesheet">
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+  </head>
+  <style>
+	.form-inline .form-group{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.main-container{
+		background-color: #f1f1f1;
+        padding-left: 50px;
+        padding-top: 50px;
+	}
+    body{
+        background-color: #f1f1f1;
+    }
+  h2{
+      text-align: center;
+  }
+	.btn{
+		  border: 1px solid #3079ed;
+		  color: #ffffff;
+		  text-shadow: 0 1px rgba(0,0,0,0.1);
+		  background-color: #4d90fe;
+		  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
+		  background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+		  background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
+		  background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
+		  background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
+		  background-image: linear-gradient(top,#4d90fe,#4787ed);
+	}
+	.btn:hover{
+		  border: 1px solid #2f5bb7;
+		  color: #ffffff;
+		  text-shadow: 0 1px rgba(0,0,0,0.3);
+		  background-color: #357ae8;
+		  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+		  background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+		  background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
+		  background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
+		  background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+		  background-image: linear-gradient(top,#4d90fe,#357ae8);
+	}
+	.btn:active{
+		background-color: #357ae8;
+		background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+		background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+		background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
+		background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
+		background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+		background-image: linear-gradient(top,#4d90fe,#357ae8);
+		-webkit-box-shadow: inset 0 1px 2px rgb	a(0,0,0,0.3);
+		-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+	}
+  .listinfo{
+       font-weight: bold;
+  }
+
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+  </style>
+  <body>
+      <div class="navbar navbar-inverse">
+          <div class="container">
+              <div class="navbar-header">
+                  <button class="navbar-toggle" data-target=".navbar-collapse"
+                      data-toggle="collapse" type="button"><span class=
+                          "icon-bar"></span> <span class="icon-bar"></span> <span class=
+                              "icon-bar"></span></button> <a class="navbar-brand" href=
+                                  "/">CR<i class="fa fa-circle"></i>WDCAST</a>
+              </div>
+
+              <div class="navbar-collapse collapse">
+                  <div class="nav navbar-nav navbar-right" style=
+                      "margin-left: 2em">
+                      <section>
+                          <div class=
+                              "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                              <button type="button">Login</button>
+
+                              <div class="morph-content">
+                                  <div>
+                                      <div class=
+                                          "content-style-form content-style-form-1">
+                                          <span class="icon icon-close"></span>
+
+                                          <h2>Login</h2>
+
+                                          <form>
+                                              <p><label>Email</label><input type=
+                                                  "text"></p>
+
+                                                  <p>
+                                                  <label>Password</label><input type=
+                                                      "password"></p>
+
+                                                      <p><button>Login</button></p>
+                                                      </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!-- morph-button -->
+
+                          <div class=
+                              "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                              <button type="button">Signup</button>
+
+                              <div class="morph-content">
+                                  <div>
+                                      <div class=
+                                          "content-style-form content-style-form-2">
+                                          <span class="icon icon-close"></span>
+
+                                          <h2>Sign Up</h2>
+
+                                          <form>
+                                              <p><label>Email</label><input type=
+                                                  "text"></p>
+
+                                                  <p>
+                                                  <label>Password</label><input type=
+                                                      "password"></p>
+
+                                                      <p><label>Repeat
+                                                          Password</label><input type=
+                                                              "password"></p>
+
+                                                              <p><button>Sign Up</button></p>
+                                                              </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!-- morph-button -->
+
+                          <div class=
+                              "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                              <button onclick="location.href='createlisting.html'"
+                                  type="button">Create</button>
+                          </div>
+
+                          <div class=
+                              "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+                              <button onclick="location.href='search.html'"
+                                  type="button">Search</button>
+                          </div>
+
+                      </section>
+                  </div>
+              </div><!-- /form-mockup -->
+          </div><!--/.nav-collapse -->
+      </div>
+
+<div class="container">
+      <h2><%= @listing.title %></h2>
+      <div class="row">
+          <br>
+          <div class="col-lg-6">
+          <img src="http://fr.ooh-tv.com/wp-content/uploads/2013/01/CBS-Outdoor-France-Digital.jpg">
+          </div>
+          <div class="col-lg-6">
+              <br><br>
+              <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                      <tbody>
+                          <tr>
+                              <td class="listinfo">Address</td>
+                              <td><%= "#{@listing.street} #{@listing.city}, #{@listing.state} #{@listing.zip}" %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Size</td>
+                              <td><%= "#{@listing.height}x#{@listing.width}"%></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Resolution</td>
+                              <td><%= @listing.screen_resolution %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Views per week</td>
+                              <td><%= @listing.views_per_week %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Time per click</td>
+                              <td><%= @listing.time_per_click %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Cost per week</td>
+                              <td><%= @listing.cost_per_week %></td>
+                          </tr>
+                          <tr>
+                              <td class="listinfo">Description</td>
+                              <td>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+
+
+
+          </div>
+
+
+</div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+  </body>
+</html>

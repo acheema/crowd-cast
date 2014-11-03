@@ -1,0 +1,119 @@
+/* Written by: Jason Clark */
+
+html {
+    margin:0px;
+}
+
+#logo {	
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	height: 100px;
+	margin-bottom: 60px;
+}
+#container {
+	width:100%;
+	min-height:100%;
+}
+
+#contentDiv {
+    width: 605px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#results {
+display: inline-block;
+vertical-align: middle;
+float: right;
+    margin-left:auto;
+    margin-right:500px;
+}
+
+#googlemap {
+display: inline-block;
+vertical-align: middle;
+float: left;
+    margin-left:200px;
+    margin-right:auto;
+
+}
+
+#searchForm {
+	border:solid 3px #B4BFBF;
+	border: none;
+	height:40px;
+	width:605px;
+	background: white;
+	margin-top: 100px;
+	margin-bottom: 30px;
+}
+
+#searchButton{
+	border:solid 3px #B4BFBF;
+	border-left:none;
+	background: url("/assets/search_icon.png") no-repeat;
+	width:40px;
+	height:38px;
+	float:left;
+	background-color:#ffffff;
+	margin: 0px;
+
+}
+
+#listingInfo {
+}
+
+#searchButton:hover {
+	
+}
+
+#searchBox {
+	padding-left:20px;
+	border:solid 3px #B4BFBF;
+    height: 38px;
+    width: 554px;
+    margin-top: 2px;
+    font-size: 1em;
+    float:left;
+    margin:0px;
+    margin-left:4px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+.ui-widget {
+    font-family: arial !important;
+    font-size: 1em !important;
+    background: white;
+}
+
+.ui-autocomplete {
+	background: white !important;
+	width: 602px;
+}
+
+#tip {
+	text-align: center;
+	margin-top: 40px;
+	font-family:arial;
+	color: gray;
+}
+
+.result {
+	border-top-style: solid; 
+	border-right-style: none; 
+	border-bottom-width: 5px; 
+	border-left-width: 10px; 
+	border-top-width: 3px; 
+	background: rgb(255, 255, 251);
+}
+
+
+
+
+
+
+
