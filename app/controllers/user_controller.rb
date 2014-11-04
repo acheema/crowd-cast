@@ -16,6 +16,24 @@ class UserController < ApplicationController
             status = Advertiser.createUser params
          elsif params[ :usertype ].eql? "1" or params[ :usertype ].equal? 1
             status = Owner.createUser(params)
+         elsif params[ :usertype ].eql? "2" or params[ :usertype ].equal? 2
+            if (advertiser = Advertiser.find_by_username( cookies[ :username ] ) and advertiser.usertype != 2)
+               params = { :username => advertiser.username, \
+                          :password => advertiser.password, \
+                          :company => create_params[:company], \
+                          :usertype => 2, \
+                          :email => advertiser.email }
+               Owner.createUser( params )
+               advertiser.update_attributes(:usertype => 2)
+            elsif (owner = Owner.find_by_username( cookies[ :username ]) and owner.usertype != 2)
+               params = { :username => owner.username, \
+                          :password => owner.password, \
+                          :company => create_params[:company], \
+                          :usertype => 2, \
+                          :email => owner.email }
+               Advertiser.createUser( params )
+               Owner.update_attributes(:usertype => 2)
+            end
          else
             #Should never reach here
             render :json => { status: -5 } and return

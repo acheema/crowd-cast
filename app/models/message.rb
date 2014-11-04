@@ -4,19 +4,22 @@ class Message < ActiveRecord::Base
   validates :from_username, presence: true, length: { maximum: 128, minimum: 6 }
   validates_presence_of :message
   validates_format_of :viewed, :with => /\A\d{4}-\d{2}-\d{2}\z/
-  validates :type, presence: true, :inclusion => {:in => [0, 1]}
+  validates :message_type, presence: true, :inclusion => {:in => [0, 1]}
   validates :listing, :presence => true 
 
   def createMessage(params)
-      message = Listing.new(params.merge(:type => 1))
-      if listing.save
-         return listing.id
+      message = Message.new(params)
+      if message.save
+         return 1
       else
-         errors = listing.errors
+         if message.errors.any?
+            return -1
+         end
       end
   end
 
   def getMessages(to_username)
+      messages = Message.where( "to_username = '#{to_username}'" )
+      return messages
   end
-
 end

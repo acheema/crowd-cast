@@ -7,7 +7,7 @@
       <th>To username</th>
       <th>From username</th>
       <th>Message</th>
-      <th>Type</th>
+      <th>Message type</th>
       <th>Viewed</th>
       <th colspan="3"></th>
     </tr>
@@ -20,7 +20,7 @@
         <td><%= message.to_username %></td>
         <td><%= message.from_username %></td>
         <td><%= message.message %></td>
-        <td><%= message.type %></td>
+        <td><%= message.message_type %></td>
         <td><%= message.viewed %></td>
         <td><%= link_to 'Show', message %></td>
         <td><%= link_to 'Edit', edit_message_path(message) %></td>

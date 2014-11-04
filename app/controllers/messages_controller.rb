@@ -1,6 +1,13 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  def sendMessage
+    username = cookies[:username]
+    message = Message.createMessage(create_message_params.merge( :from_username => username, \
+                                                                 :message_type => 1 ))
+    render :json => { status: message }
+  end
+
   # GET /messages
   # GET /messages.json
   def index
@@ -66,9 +73,9 @@ class MessagesController < ApplicationController
     def set_message
       @message = Message.find(params[:id])
     end
-
+   
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:listing_id, :to_username, :from_username, :message, :type, :viewed)
+      params.require(:message).permit(:listing_id, :to_username, :message)
     end
 end

@@ -5,7 +5,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :to_username
       t.string :from_username
       t.string :message
-      t.integer :type
+      t.integer :message_type
       t.string :viewed
 
       t.timestamps

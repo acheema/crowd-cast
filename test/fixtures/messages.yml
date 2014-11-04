@@ -5,7 +5,7 @@ one:
   to_username: MyString
   from_username: MyString
   message: MyString
-  type: 1
+  message_type: 1
   viewed: MyString
 
 two:
@@ -13,5 +13,5 @@ two:
   to_username: MyString
   from_username: MyString
   message: MyString
-  type: 1
+  message_type: 1
   viewed: MyString
