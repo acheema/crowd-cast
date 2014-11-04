@@ -10,6 +10,7 @@
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+
         <div class="navbar-header">
             <button class="navbar-toggle" data-target=".navbar-collapse"
             data-toggle="collapse" type="button"><span class=
@@ -21,33 +22,39 @@
 
 
 <div class="navbar-collapse collapse">
-    <div class="nav navbar-nav navbar-right" style=
-    "margin-left: 2em">
+    <div class="nav navbar-nav navbar-right">
+    <% if not current_user %>
+
         <section>
             <div class=
-            "morph-button morph-button-modal morph-button-modal-3 large morph-button-fixed">
-            <button type="button" data-toggle = "modal" data-target="#login-modal">Login</button>
+            "morph-button morph-button-modal morph-button-fixed">
+            <button type="button" data-toggle = "modal" data-target="#login-modal" >Login</button>
           </div>
 
             <div class=
-            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            "morph-button morph-button-modal morph-button-fixed">
             <button type="button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
             </div>
+            <% end %>
 
 
             <div class=
-            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            "morph-button morph-button-modal morph-button-fixed">
             <button onclick="location.href='/listings/new'"
                 type="button">Create</button>
             </div>
 
             <div class=
-            "morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+            "morph-button morph-button-modal morph-button-fixed">
             <button onclick="location.href='/search'" type=
             "button">Search</button>
 
             </div>
+            <% if current_user %>
+
         <a href="/api/signout">Sign out</a>
+        <% end %>
+
         </section>
     </div>
 </div><!-- /form-mockup -->
@@ -222,7 +229,6 @@
     if (status == 1) {
     if (checkedValue == 0) {
       window.location.href = window.location.protocol + "//" + window.location.host + '/search';
-
     }
     else {
     window.location.href = window.location.protocol + "//" + window.location.host + '/listings/new';
@@ -271,6 +277,7 @@
     }
     }
     }
+
     $('#login').click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -292,6 +299,7 @@
     function loginSuccess(data){
     // Wrong login credentials
     if (data.status == -1) {
+
      // error message
      $('#login-error').show();
      setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
@@ -302,8 +310,7 @@
     }, 5000);
     }
     else if (data.status == 1) {
-     $('.test').addClass('logged-in');
-     window.location.href = window.location + '/search';
+     window.location.href =  window.location.protocol + '//' + window.location.host + '/search';
 
     }
 
