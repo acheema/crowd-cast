@@ -22,7 +22,14 @@
 
 
 <div class="navbar-collapse collapse">
+  <form class="navbar-form navbar-left" name="searchForm" onsubmit="/search" role="search">
+  <div class="form-group">
+    <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
+  </div>
+
+</form>
     <div class="nav navbar-nav navbar-right">
+
     <% if not current_user %>
 
         <section>
@@ -221,6 +228,11 @@
              failure(data);
            }
         });
+    })
+
+    $('#searchform').click(function() {
+      console.log('clicked');
+
     })
 
 
