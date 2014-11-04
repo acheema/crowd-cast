@@ -22,13 +22,13 @@ class OwnerTest < ActiveSupport::TestCase
 
     #Already existing Owner username
     params = { username: "Valid Username", password: "validpassword", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("Valid Username", Owner.createUser(params), "Username should be 'Valid Username'")
+    assert_equal("Valid Username", Owner.createUser(params).username, "Username should be 'Valid Username'")
     params = { username: "Valid Username", password: "validpassword", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
     assert_equal(-1, Owner.createUser(params), "Username already exists")
 
     #Already existing Advertiser username
     params = { username: "Valid Username 2", password: "validpassword", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("Valid Username 2", Advertiser.createUser(params), "Username should be 'Valid Username'")
+    assert_equal("Valid Username 2", Advertiser.createUser(params).username, "Username should be 'Valid Username'")
     params = { username: "Valid Username 2", password: "validpassword", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
     assert_equal(-1, Owner.createUser(params), "Username already exists")
   end
@@ -36,9 +36,9 @@ class OwnerTest < ActiveSupport::TestCase
   test "valid createUser username field" do
     #Valid username
     params = { username: "a" * 6, password: "valid password", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("a" * 6, Owner.createUser(params), "Username should be 6 'a's")
+    assert_equal("a" * 6, Owner.createUser(params).username, "Username should be 6 'a's")
     params = { username: "a" * 128, password: "valid password", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("a" * 128, Owner.createUser(params), "Username should be 128 'a's")
+    assert_equal("a" * 128, Owner.createUser(params).username, "Username should be 128 'a's")
   end
 
   test "invalid createUser password field" do
@@ -58,9 +58,9 @@ class OwnerTest < ActiveSupport::TestCase
   test "valid createUser password field" do
     #Valid username
     params = { username: "Valid Username", password: "a" * 128, email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("Valid Username", Owner.createUser(params), "Password is valid")
+    assert_equal("Valid Username", Owner.createUser(params).username, "Password is valid")
     params = { username: "Valid Username 2", password: "a" * 8, email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("Valid Username 2", Owner.createUser(params), "Password is valid")
+    assert_equal("Valid Username 2", Owner.createUser(params).username, "Password is valid")
   end
 
   test "invalid createUser email field" do
@@ -76,15 +76,15 @@ class OwnerTest < ActiveSupport::TestCase
   test "valid createUser company field" do
      #Blank company is valid
     params = { username: "Valid Username", password: "Valid Password", email: "bob@cnn.com", company: "", usertype: 1 }
-    assert_equal("Valid Username", Owner.createUser(params), "Everything is valid")
+    assert_equal("Valid Username", Owner.createUser(params).username, "Everything is valid")
   end
 
   test "valid loginUser and invalid loginUser username and password field" do
     #Valid username
     params = { username: "Valid Username", password: "Valid Password", email: "bob@cnn.com", company: "Some Company", usertype: 1 }
-    assert_equal("Valid Username", Owner.createUser(params), "Everything is valid")
+    assert_equal("Valid Username", Owner.createUser(params).username, "Everything is valid")
     params = { username: "Valid Username", password: "Valid Password" }
-    assert_equal("Valid Username", Owner.validateUser(params), "Everything is valid")
+    assert_equal("Valid Username", Owner.validateUser(params).username, "Everything is valid")
 
     #Invalid username
     params = { username: "Invalid Username", password: "Valid Password" }
