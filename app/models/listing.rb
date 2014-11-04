@@ -2,6 +2,7 @@
 
 class Listing < ActiveRecord::Base
    belongs_to :owner
+   has_many :messages    
  
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
