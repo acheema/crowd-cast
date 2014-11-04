@@ -6,5 +6,5 @@ rake db:migrate
 Run rails s in the app folder.
 
 To run tests:
-rake test TESTSERVER="#{the url of the localhost}"
-ie. rake test TESTSERVER="http://localhost:3000"  
+rake test TEST_SERVER="#{the url of the localhost}"
+ie. rake test TEST_SERVER="http://localhost:3000"  

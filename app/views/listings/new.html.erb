@@ -110,9 +110,14 @@
 </div>
 </div>
 
+<!--Image upload - work in progress
 <div class="form-group">
     <input id="file" type="file" multiple=true>
 </div>
+-->
+<%= form_for :listing, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :image %>
+<% end %>
 
 
 
