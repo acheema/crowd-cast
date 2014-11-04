@@ -13,7 +13,7 @@ class Advertiser < ActiveRecord::Base
     user = find_by_username( params[ :username ] )
     # Because we salted and hashed, we have to do this to check the password
     if user && user.password_hash == BCrypt::Engine.hash_secret( params[ :password ], user.password_salt )
-      return user.username
+      return user
     else
       return -1
     end
@@ -27,7 +27,7 @@ class Advertiser < ActiveRecord::Base
 
     advertiser = Advertiser.new(params)
     if advertiser.save
-      return advertiser.username
+      return advertiser
     else
       usernameError = advertiser.errors[:username]
       pwError = advertiser.errors[:password]

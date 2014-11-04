@@ -22,7 +22,14 @@
 
 
 <div class="navbar-collapse collapse">
+  <form class="navbar-form navbar-left" name="searchForm" onsubmit="/search" role="search">
+  <div class="form-group">
+    <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
+  </div>
+
+</form>
     <div class="nav navbar-nav navbar-right">
+
     <% if not current_user %>
 
         <section>
@@ -52,7 +59,18 @@
             </div>
             <% if current_user %>
 
-        <a href="/api/signout">Sign out</a>
+            <div class= "morph-button morph-button-modal morph-button-fixed">
+          <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+              Action <span class="caret"></span>
+            </button>
+
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Account</a></li>
+                <li class="divider"></li>
+                <li><a class = "signout-link" href="/api/signout">Log out</a></li>
+              </ul>
+            </div>
+
         <% end %>
 
         </section>
@@ -223,6 +241,11 @@
         });
     })
 
+    $('#searchform').click(function() {
+      console.log('clicked');
+
+    })
+
 
     function signupSuccess(data) {
     var status = data.status;
@@ -315,6 +338,7 @@
     }
 
     };
+
 
 
 

@@ -4,7 +4,11 @@ html {
     margin:0px;
 }
 
-#logo {	
+.search-results {
+  margin-top:300px;
+}
+
+#logo {
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
@@ -65,7 +69,7 @@ float: left;
 }
 
 #searchButton:hover {
-	
+
 }
 
 #searchBox {
@@ -103,17 +107,10 @@ textarea:focus, input:focus{
 }
 
 .result {
-	border-top-style: solid; 
-	border-right-style: none; 
-	border-bottom-width: 5px; 
-	border-left-width: 10px; 
-	border-top-width: 3px; 
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-width: 5px;
+	border-left-width: 10px;
+	border-top-width: 3px;
 	background: rgb(255, 255, 251);
 }
-
-
-
-
-
-
-

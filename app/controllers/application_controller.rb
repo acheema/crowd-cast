@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    @current_user ||= cookies[:username]
+    @current_username ||= cookies[:username]
   rescue ActiveRecord::RecordNotFound
     session[:user_id] = nil
 end
