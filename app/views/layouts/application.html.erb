@@ -59,7 +59,21 @@
             </div>
             <% if current_user %>
 
-        <a href="/api/signout">Sign out</a>
+            <div class=
+            "morph-button morph-button-modal morph-button-fixed">
+          <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+              Action <span class="caret"></span>
+            </button>
+
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Account</a></li>
+                <li class="divider"></li>
+                <li><a class = "signout-link" href="/api/signout">Log out</a></li>
+              </ul>
+            </div>
+
+
+
         <% end %>
 
         </section>
@@ -327,6 +341,7 @@
     }
 
     };
+
 
 
 
