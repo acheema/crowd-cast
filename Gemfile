@@ -32,6 +32,9 @@ gem 'spring',        group: :development
 gem "bcrypt-ruby", :require => "bcrypt"
 gem  "curb"
 
+#For image uploads to S3
+gem 'paperclip'
+gem 'aws-sdk'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'simplecov', :require => false, :group  => :test
