@@ -10,7 +10,15 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    @current_user ||= cookies[:username]
+    if cookie[:username]
+      #if usertype ==2 just query the advertiser database....if they are both an advertiser and owner, then the information is in both databases
+      if cookie[:usertype] == 0 || cookie[:usertype] == 2:
+
+        @current_user ||= Advertiser.find(cookie[:username]) if cookie[:username]
+
+      elsif cookie[:usertype] == 1:
+        @current_user ||= Owner.find(cookie[:username]) if cookie[:username]
+      # user is both an advertiser and owner
   rescue ActiveRecord::RecordNotFound
     session[:user_id] = nil
 end
