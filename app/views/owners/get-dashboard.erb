@@ -1,4 +1,4 @@
-<!--Written by Jessica-->
+<!--Written by Jessica Wong-->
 
 <div class="container">
 
@@ -11,11 +11,11 @@
           <h3 class="title">
             <a href="/listings/show?listing_id=<%=listing.id%>" style=""><%= listing.title %></a>
           </h3>
-            <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
-             <p class="listingInfo">Address: <%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
-          <%else%>
-             <p class="listingInfo">GPS Coordinate: <%= "#{listing.latitude}, #{listing.longitude}" %></p>
-            <%end%>
+            <p> Description: <%=listing.description%><p>
+            <p>Views: <%=listing.views %></p>
+            <p>Status: <%if listing.active %> Active <%else%> Inactive <%end%></p>
+            <a href="/listings/edit?listing_id=<%=listing.id%>" style="">Edit</a>
+
          </div>
         <% end %>
      <% end %>
