@@ -17,7 +17,7 @@ Note: Advertiser: 0, Owner: 1 -->
             data-toggle="collapse" type="button"><span class=
             "icon-bar"></span> <span class="icon-bar"></span> <span class=
             "icon-bar"></span></button> <a class="navbar-brand" href=
-            "http://crowd-cast.herokuapp.com">CR<i class="fa fa-circle"></i>WDCAST</a>
+            "/">CR<i class="fa fa-circle"></i>WDCAST</a>
 
         </div>
 
@@ -49,13 +49,13 @@ Note: Advertiser: 0, Owner: 1 -->
 
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" onclick="location.href='/listings/new'"
+            <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
                 type="button">List space</button>
             </div>
             <% if (@current_user and @current_user.usertype == 1) or (@current_user and @current_user.usertype ==2)%>
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" onclick="location.href='/dashboard.html'" method = 'get'
+            <button class = "regular-button" onclick="location.href='<%=dashboard_path%>'"
                 type="button">View My Listings</button>
             </div>
             <%end%>
