@@ -19,8 +19,9 @@ def set_current_user
     elsif cookies[:usertype] == "1"
       @current_user ||= Owner.find_by(username: cookies[:username])
     # user is both an advertiser and owner
+    p 'current user is ', @current_user.username, 'and the number is', @current_user.usertype==1
   end
-  p 'current user is ', @current_user.username, 'and the number is', @current_user.usertype==1
+  
 end
 rescue ActiveRecord::RecordNotFound
   session[:user_id] = nil
