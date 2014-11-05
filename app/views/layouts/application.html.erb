@@ -55,7 +55,7 @@ Note: Advertiser: 0, Owner: 1 -->
             <% if (@current_user and @current_user.usertype == 1) or (@current_user and @current_user.usertype ==2)%>
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" action="/owner-dashboard" method = 'get'
+            <button class = "regular-button" onclick="location.href='/dashboard.html'" method = 'get'
                 type="button">View My Listings</button>
             </div>
             <%end%>
