@@ -1,4 +1,4 @@
-# Written by Jhoong Roh
+# Written by Jhoong Roh a few lines by Jason Clark
 class UserController < ApplicationController
 
    def new
@@ -12,10 +12,21 @@ class UserController < ApplicationController
          status = 0
          # Depending on usertype, create an Advertiser or Owner
          params = create_params
-         if params[ :usertype ].eql? "0" or params[ :usertype ].equal? 0
+         type = params[:usertype]
+         if type.eql? "0" or type.equal? 0
             status = Advertiser.createUser params
-         elsif params[ :usertype ].eql? "1" or params[ :usertype ].equal? 1
+         elsif type.eql? "1" or type.equal? 1
             status = Owner.createUser(params)
+         #user exists and wants to add user type
+         elsif type.eql? "2" or type.equal? 2
+            usertype = cookies[:usertype] 
+            #user is already an advertiser
+            if usertype.equal? 0 or usertype.eql? '0'
+                status = Owner.createUser(params)
+            #user is already an owner
+            elsif usertype.equal? 1 or usertype.eql? '1'
+                status = Advertiser.createUser(params)
+            end
          else
             #Should never reach here
             render :json => { status: -5 } and return
@@ -37,6 +48,7 @@ class UserController < ApplicationController
         status = Advertiser.validateUser login_params
         if status.is_a? String
            cookies[ :username ] = status
+           cookies[:usertype] = 0
            render :json => { status: SUCCESS } and return
         end
 
@@ -44,11 +56,14 @@ class UserController < ApplicationController
         status = Owner.validateUser login_params
         if status.is_a? String
            cookies[ :username ] = status
+           cookies[:usertype] = 1
            render :json => { status: SUCCESS }
         else
            render :json => { status: status }
         end
     end
+
+    def 
 
     # Signout just deletes the cookie
     def signoutUser

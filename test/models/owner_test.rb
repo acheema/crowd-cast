@@ -1,4 +1,4 @@
-# Written by Jhoong Roh
+# Written by Jhoong Roh and Jason Clark (last two tests)
 require 'test_helper'
 
 class OwnerTest < ActiveSupport::TestCase
@@ -94,4 +94,19 @@ class OwnerTest < ActiveSupport::TestCase
     params = { username: "Valid Username", password: "Invalid Password" }
     assert_equal(-1, Owner.validateUser(params), "Invalid password")
   end
+
+  test "valid advertiser can add owner type" do
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
+    assert_equal("User Name", Advertiser.createUser(params), "Created advertiser")
+    params[:usertype] = 2
+    assert_equal("User Name", Owner.createUser(params), "Created owner after advertiser")
+  end
+
+  test "users of different type cannot choose same username" do
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
+    assert_equal("User Name", Advertiser.createUser(params), "Created advertiser")
+    params[:usertype] = 1
+    assert_equal(-1, Owner.createUser(params), "Different user cannot use existing advertiser username")
+  end
+    
 end

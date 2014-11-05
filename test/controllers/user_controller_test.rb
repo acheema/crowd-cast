@@ -163,4 +163,5 @@ class UserControllerTest < ActionController::TestCase
       assert(JSON.parse(response.body)["status"].equal? -1)
    end 
 
+
 end
