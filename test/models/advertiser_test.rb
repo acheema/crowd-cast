@@ -1,4 +1,4 @@
-# Written by Jhoong Roh
+# Written by Jhoong Roh and Jason Clark (last two tests)
 require 'test_helper'
 
 class AdvertiserTest < ActiveSupport::TestCase
@@ -93,5 +93,23 @@ class AdvertiserTest < ActiveSupport::TestCase
     #Invalid password
     params = { username: "Valid Username", password: "Invalid Password" }
     assert_equal(-1, Advertiser.validateUser(params), "Invalid password")
+  end
+
+  test "valid owner can add advertiser type" do
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 1}
+    Owner.createUser(params)
+    assert_difference "Advertiser.count()", 1 do
+      params[:usertype] = 2
+      Advertiser.createUser(params)
+    end
+  end
+
+  test "users of different type cannot choose same username" do
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 1}
+    Owner.createUser(params)
+    assert_difference "Advertiser.count()", 0 do
+      params[:usertype] = 0
+      Advertiser.createUser(params)
+    end
   end
 end

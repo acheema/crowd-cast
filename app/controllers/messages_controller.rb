@@ -12,6 +12,10 @@ class MessagesController < ApplicationController
      @messages = Message.getMessages(cookies[:username])
   end
 
+  def TESTAPI_resetFixture
+     Message.TESTAPI_resetFixture
+  end
+
   # GET /messages
   # GET /messages.json
   def index
@@ -80,6 +84,6 @@ class MessagesController < ApplicationController
    
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:listing_id, :to_username, :text)
+      params.require(:message).permit(:listing_id, :listing_title, :to_username, :text)
     end
 end

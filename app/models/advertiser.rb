@@ -1,4 +1,4 @@
-# Written by: Jhoong Roh
+# Written by: Jhoong Roh and a few lines by Jason Clark
 class Advertiser < ActiveRecord::Base
 
   attr_accessor :password
@@ -20,10 +20,20 @@ class Advertiser < ActiveRecord::Base
   end
 
   def self.createUser(params)
-    # Verify that the username doesn't already exist in the Owner table
-    if Owner.exists?( :username => params[ :username ])
+    usertype = params[:usertype]
+    #check if the user is adding additional usertype
+    if usertype.equal? 2 or usertype.eql? '2'
+      if not Owner.exists? :username => params[:username]
+        #trying to add addtional user type when username does not exist in Owner table
         return -1
+      end
+    else
+      # Verify that the username doesn't already exist in the Owner table
+      if Owner.exists?( :username => params[ :username ])
+          return -1
+      end
     end
+
 
     advertiser = Advertiser.new(params)
     if advertiser.save

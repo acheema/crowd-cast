@@ -77,7 +77,7 @@ class Listing < ActiveRecord::Base
          end
       end
    end
-
+   
    def self.getListings(city)
       listings = Listing.where("city = '#{city}'")
       return listings
