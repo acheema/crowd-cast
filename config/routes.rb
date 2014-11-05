@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   resources :advertisers
 
   resources :listings
-
+  resources :owners
     root 'home#index'
     get 'login' => 'home#login'
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
     get 'search' => 'listings#search'
+   get '/dashboard', :controller => 'owners', :action => 'get_dashboard'
+
+
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
@@ -16,6 +19,8 @@ Rails.application.routes.draw do
     match '/api/create_listing', to: 'listings#createListing', via: 'post'
     match '/api/get_listings', to: 'listings#getListings', via: 'post'
     match '/api/TESTAPI_resetListingsFixture', to: 'listings#resetFixture', via: 'get'
+    match '/advertiser-dashboard', to: 'advertisers#make_dashboard', via: 'get'
+
     #match 'listings/new', to: 'listing#new', via: 'get'
 
     # The priority is based upon order of creation: first created -> highest priority.

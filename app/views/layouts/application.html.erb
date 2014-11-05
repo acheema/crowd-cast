@@ -55,7 +55,7 @@ Note: Advertiser: 0, Owner: 1 -->
             <% if (@current_user and @current_user.usertype == 1) or (@current_user and @current_user.usertype ==2)%>
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" onclick="location.href='/listings/new'"
+            <button class = "regular-button" action="/owner-dashboard" method = 'get'
                 type="button">View My Listings</button>
             </div>
             <%end%>
@@ -70,6 +70,9 @@ Note: Advertiser: 0, Owner: 1 -->
             </button>
 
               <ul class="dropdown-menu" role="menu">
+                <!-- is advertiser -->
+                <li><% if @current_user.usertype == 0 or @current_user.usertype ==2 %>  <a href="">Switch to Owner</a> <%end%></li>
+                <li><% if @current_user.usertype == 1 or @current_user.usertype ==2 %> <a href = "">Switch to Advertiser</a> <%end%></li>
                 <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
 
                 <li class="divider"></li>
