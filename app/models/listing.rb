@@ -30,7 +30,11 @@ class Listing < ActiveRecord::Base
   validates :views, presence: true, numericality: {only_integer: true}
   #Image validation
   #validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-  has_attached_file :image, styles: { small: '100x100#', square: '300x300#', large: '600>' }
+    has_attached_file :image, :storage => :s3, :bucket => ENV['AWS_BUCKET'], styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
  
    def address
       [street, city, state].compact.join(', ')
