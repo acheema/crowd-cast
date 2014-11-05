@@ -72,7 +72,7 @@ Note: Advertiser: 0, Owner: 1 -->
               <ul class="dropdown-menu" role="menu">
                 <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
                 <li><% if @dashboard_state == 0 %>  <a href = "<%=dashboard_path%>">Switch to Owner</a> <%end%></li>
-                <li><% if @dashboard_state == 1 %> <a href = "">Switch to Advertiser</a> <%end%></li>
+                <li><% if @dashboard_state == 1 %> <a href = "<%=advertiserdashboard_path%>">Switch to Advertiser</a> <%end%></li>
                 <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
 
                 <li class="divider"></li>

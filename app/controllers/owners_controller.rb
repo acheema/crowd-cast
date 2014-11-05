@@ -71,6 +71,7 @@ class OwnersController < ApplicationController
     render 'get-dashboard'
   end
 
+
   def reset_cookie
     cookies.permanent[:dashboard_state] = 1
     @dashboard_state = 1

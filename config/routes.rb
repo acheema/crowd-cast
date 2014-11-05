@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
     get 'search' => 'listings#search'
-    get 'dashboard' => 'owners#get_dashboard'
+    get '/dashboard', :controller => 'owners', :action => 'get_dashboard'
+    get '/advertiserdashboard', :controller => 'advertisers', :action => 'get_dashboard'
 
 
     match '/api/signout', to: 'user#signoutUser', via: 'get'
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
     match '/api/create_listing', to: 'listings#createListing', via: 'post'
     match '/api/get_listings', to: 'listings#getListings', via: 'post'
     match '/api/TESTAPI_resetListingsFixture', to: 'listings#resetFixture', via: 'get'
-    match '/advertiser-dashboard', to: 'advertisers#make_dashboard', via: 'get'
 
     #match 'listings/new', to: 'listing#new', via: 'get'
 
