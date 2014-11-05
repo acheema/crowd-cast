@@ -6,50 +6,44 @@ class UserController < ApplicationController
    end
    
     SUCCESS = 1
+    FAILURE = -1
 
     # Create a user
     def createUser
          user = 0
          # Depending on usertype, create an Advertiser or Owner
          params = create_params
-<<<<<<< HEAD
          type = params[:usertype]
          if type.eql? "0" or type.equal? 0
-            status = Advertiser.createUser params
+            user = Advertiser.createUser params
          elsif type.eql? "1" or type.equal? 1
-            status = Owner.createUser(params)
+            user = Owner.createUser(params)
          #user exists and wants to add user type
          elsif type.eql? "2" or type.equal? 2
-            usertype = cookies[:usertype] 
-            #user is already an advertiser
-            if usertype.equal? 0 or usertype.eql? '0'
-                status = Owner.createUser(params)
+            current_type = cookies[:usertype] 
             #user is already an owner
-            elsif usertype.equal? 1 or usertype.eql? '1'
-                status = Advertiser.createUser(params)
-=======
-         if params[ :usertype ].eql? "0" or params[ :usertype ].equal? 0
-            user = Advertiser.createUser params
-         elsif params[ :usertype ].eql? "1" or params[ :usertype ].equal? 1
-            user = Owner.createUser(params)
-         elsif params[ :usertype ].eql? "2" or params[ :usertype ].equal? 2
-            if (advertiser = Advertiser.find_by_username( cookies[ :username ] ) and advertiser.usertype != 2)
-               params = { :username => advertiser.username, \
-                          :password => advertiser.password, \
-                          :company => create_params[:company], \
-                          :usertype => 2, \
-                          :email => advertiser.email }
-               Owner.createUser( params )
-               advertiser.update_attributes(:usertype => 2)
-            elsif (owner = Owner.find_by_username( cookies[ :username ]) and owner.usertype != 2)
-               params = { :username => owner.username, \
-                          :password => owner.password, \
-                          :company => create_params[:company], \
-                          :usertype => 2, \
-                          :email => owner.email }
-               Advertiser.createUser( params )
-               Owner.update_attributes(:usertype => 2)
->>>>>>> 828ee1debd63b2480ce9aa5242c91b4201f3a37a
+            if current_type.equal? 1 or current_type.eql? '1'
+               owner = Owner.find_by_username(cookies[:username])
+               user = Advertiser.createUser({:username => owner.username, \
+                                        :password => 'dummy password', \
+                                        :company => owner[:company], \
+                                        :usertype => 2, \
+                                        :email => owner.email})
+               owner.update_attributes :usertype => 2
+               user.update_attributes :password_hash => owner.password_hash, 
+                                      :password_salt => owner.password_salt
+
+            #user is already an advertiser
+            elsif current_type.equal? 0 or current_type.eql? '0'
+               advertiser = Advertiser.find_by_username(cookies[:username])
+               user = Owner.createUser({:username => advertiser.username, \
+                                        :password => 'dummy password', \
+                                        :company => create_params[:company], \
+                                        :usertype => 2, \
+                                        :email => advertiser.email})
+               advertiser.update_attributes :usertype => 2
+               user.update_attributes :password_hash => advertiser.password_hash, 
+                                      :password_salt => advertiser.password_salt
             end
          else
             #Should never reach here
@@ -70,39 +64,23 @@ class UserController < ApplicationController
     # Login user
     def loginUser
         #If they're an advertiser, then render and return
-<<<<<<< HEAD
-        status = Advertiser.validateUser login_params
-        if status.is_a? String
-           cookies[ :username ] = status
-           cookies[:usertype] = 0
-=======
         advertiser = Advertiser.validateUser login_params
         if not advertiser.is_a? Integer
            cookies[ :username ] = advertiser.username
-           cookies[ :usertype ] = advertiser.usertype
->>>>>>> 828ee1debd63b2480ce9aa5242c91b4201f3a37a
+           cookies[:usertype] = advertiser.usertype
            render :json => { status: SUCCESS } and return
         end
 
         #If they aren't an advertiser, they might be an owner
-<<<<<<< HEAD
-        status = Owner.validateUser login_params
-        if status.is_a? String
-           cookies[ :username ] = status
-           cookies[:usertype] = 1
-=======
         owner = Owner.validateUser login_params
         if not owner.is_a? Integer
            cookies[ :username ] = owner.username
-           cookies[ :usertype ] = owner.usertype
->>>>>>> 828ee1debd63b2480ce9aa5242c91b4201f3a37a
+           cookies[:usertype] = owner.usertype
            render :json => { status: SUCCESS }
         else
-           render :json => { status: owner }
+           render :json => { status: FAILURE }
         end
     end
-
-    def 
 
     # Signout just deletes the cookie
     def signoutUser

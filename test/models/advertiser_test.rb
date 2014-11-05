@@ -97,15 +97,19 @@ class AdvertiserTest < ActiveSupport::TestCase
 
   test "valid owner can add advertiser type" do
     params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 1}
-    assert_equal("User Name", Advertiser.createUser(params), "Created advertiser")
-    params[:usertype] = 2
-    assert_equal("User Name", Owner.createUser(params), "Created owner after advertiser")
+    Owner.createUser(params)
+    assert_difference "Advertiser.count()", 1 do
+      params[:usertype] = 2
+      Advertiser.createUser(params)
+    end
   end
 
   test "users of different type cannot choose same username" do
     params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 1}
-    assert_equal("User Name", Advertiser.createUser(params), "Created advertiser")
-    params[:usertype] = 0
-    assert_equal(-1, Owner.createUser(params), "Different user cannot use existing advertiser username")
+    Owner.createUser(params)
+    assert_difference "Advertiser.count()", 0 do
+      params[:usertype] = 0
+      Advertiser.createUser(params)
+    end
   end
 end
