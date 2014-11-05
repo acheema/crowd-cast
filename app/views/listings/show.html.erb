@@ -145,6 +145,27 @@
 
 </div>
 
+<!--Message lightbox-->
+<div class="modal fade message" id="message-modal" tabindex="15" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
+  <div class="modal-dialog" style="width:600px !important" >
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Send Message To Owner</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <p><label>Message</label><textarea class="message_area" id="message" style="width:500px; resize: vertical; color:#000000"></textarea></p>
+            <p><button id="send">Send</button></p>
+            <div class="alert fade in" id="message-error" style="display:none;">
+                 Invalid message!
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script src= "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry" type="text/javascript">
@@ -166,8 +187,43 @@
          handler.getMap().setZoom(18);
       });
    });
+    $('#send').click(function(e) {
+      e.preventDefault();
+      $.ajax({
+            //First send a post request, get the response back. On successful message back, check the data
+            url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
+            type: "POST",
+            data: JSON.stringify({listing_id: '<%=@listing.id%>', to_username: '<%=@owner_username %>', text: $('#message').val()}),
+            contentType: "application/json",
+            dataType: "json",
+            success: function(data){
+              loginSuccess(data);
+            },
+            failure: function(errorMsg) {
+              failure(data);
+            }
+         });
+    })
+
+    function loginSuccess(data){
+      // Wrong login credentials
+      if (data.status == -1) {
+
+         // error message
+         $('#message-error').show();
+         setTimeout(function() { 
+         // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+         // hide error message after five seconds, or it will stay there forever
+            $("#message-error").hide();
+
+         }, 5000);
+      }
+      else if (data.status == 1) {
+         window.location.href =  window.location.protocol + '//' + window.location.host + '/search';
+      }
+   };
+
 </script>
 
 
-  </body>
-</html>

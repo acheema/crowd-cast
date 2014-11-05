@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :messages
 
   resources :listings
 
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
     get 'search' => 'listings#search'
+    get 'messages' => 'messages#messages'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     match '/api/create_listing', to: 'listings#createListing', via: 'post'
     match '/api/get_listings', to: 'listings#getListings', via: 'post'
     match '/api/TESTAPI_resetListingsFixture', to: 'listings#resetFixture', via: 'get'
+    match '/api/send_message', to: 'messages#sendMessage', via: 'post'
     #match 'listings/new', to: 'listing#new', via: 'get'
 
     # The priority is based upon order of creation: first created -> highest priority.

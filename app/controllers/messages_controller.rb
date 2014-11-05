@@ -3,9 +3,13 @@ class MessagesController < ApplicationController
 
   def sendMessage
     username = cookies[:username]
-    message = Message.createMessage(create_message_params.merge( :from_username => username, \
-                                                                 :message_type => 1 ))
+    message = Message.createMessage(message_params.merge( :from_username => username, \
+                                                          :message_type => 1 ))
     render :json => { status: message }
+  end
+
+  def messages
+     @messages = Message.getMessages(cookies[:username])
   end
 
   # GET /messages
@@ -76,6 +80,6 @@ class MessagesController < ApplicationController
    
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:listing_id, :to_username, :message)
+      params.require(:message).permit(:listing_id, :to_username, :text)
     end
 end

@@ -67,7 +67,7 @@ class UserController < ApplicationController
            cookies[ :usertype ] = owner.usertype
            render :json => { status: SUCCESS }
         else
-           render :json => { status: owner }
+           render :json => { status: -1 }
         end
     end
 

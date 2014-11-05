@@ -4,7 +4,7 @@ one:
   listing_id: 
   to_username: MyString
   from_username: MyString
-  message: MyString
+  text: MyString
   message_type: 1
   viewed: MyString
 
@@ -12,6 +12,6 @@ two:
   listing_id: 
   to_username: MyString
   from_username: MyString
-  message: MyString
+  text: MyString
   message_type: 1
   viewed: MyString
