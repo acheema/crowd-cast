@@ -112,7 +112,7 @@
 
 <!--Image upload - work in progress
 <div class="form-group">
-    <input id="file-3" type="file" multiple=true>
+    <input id="file" type="file" multiple=true>
 </div>
 -->
 <%= form_for :listing, :html => { :multipart => true } do |form| %>
@@ -145,15 +145,6 @@
 
 
     <script type="text/javascript">
-
-
-    $("#file-3").fileinput({
-      showUpload: false,
-      showCaption: false,
-      browseClass: "btn btn-primary btn-lg",
-      fileType: "any"
-    });
-
 
    $(document).ready(function() {
        var oldMarker;
@@ -343,7 +334,19 @@
          document.getElementById('lng').value = null;
       }
     });
-    </script> <script src=
+
+/* Script for image upload */
+
+        $("#file").fileinput({
+          showUpload: false,
+          showCaption: false,
+          browseClass: "btn btn-primary btn-lg",
+          fileType: "any"
+        });
+
+    </script>
+
+    <script src=
     "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry"
     type="text/javascript"></script> <script src=
 '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js'

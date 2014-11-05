@@ -29,6 +29,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.getListingDetails(params[:listing_id])
+    @owner_username = Owner.find(@listing.owner_id).username
   end
 
   def activate
@@ -67,7 +68,7 @@ class ListingsController < ApplicationController
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :screen_resolution_x, :screen_resolution_y, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude, :description, :image_url, :image)
+      params.require(:listing).permit(:title, :height, :width, :screen_resolution_x, :screen_resolution_y, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude, :description, :image)
     end
     
 end
