@@ -63,9 +63,17 @@ class OwnersController < ApplicationController
     end
   end
 
+
   def get_dashboard
+    #reset the cookie to owner view and reset the dashboard state
     @current_listings = Listing.getOwnerListings(@current_user.id)
+    self.reset_cookie
     render 'get-dashboard'
+  end
+
+  def reset_cookie
+    cookies.permanent[:dashboard_state] = 1
+    @dashboard_state = 1
   end
 
   private
@@ -78,4 +86,6 @@ class OwnersController < ApplicationController
     def owner_params
       params.require(:owner).permit(:username, :password_salt, :password_hash, :email, :company, :usertype)
     end
+
+
 end
