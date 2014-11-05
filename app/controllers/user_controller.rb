@@ -9,13 +9,31 @@ class UserController < ApplicationController
 
     # Create a user
     def createUser
-         status = 0
+         user = 0
          # Depending on usertype, create an Advertiser or Owner
          params = create_params
          if params[ :usertype ].eql? "0" or params[ :usertype ].equal? 0
-            status = Advertiser.createUser params
+            user = Advertiser.createUser params
          elsif params[ :usertype ].eql? "1" or params[ :usertype ].equal? 1
-            status = Owner.createUser(params)
+            user = Owner.createUser(params)
+         elsif params[ :usertype ].eql? "2" or params[ :usertype ].equal? 2
+            if (advertiser = Advertiser.find_by_username( cookies[ :username ] ) and advertiser.usertype != 2)
+               params = { :username => advertiser.username, \
+                          :password => advertiser.password, \
+                          :company => create_params[:company], \
+                          :usertype => 2, \
+                          :email => advertiser.email }
+               Owner.createUser( params )
+               advertiser.update_attributes(:usertype => 2)
+            elsif (owner = Owner.find_by_username( cookies[ :username ]) and owner.usertype != 2)
+               params = { :username => owner.username, \
+                          :password => owner.password, \
+                          :company => create_params[:company], \
+                          :usertype => 2, \
+                          :email => owner.email }
+               Advertiser.createUser( params )
+               Owner.update_attributes(:usertype => 2)
+            end
          else
             #Should never reach here
             render :json => { status: -5 } and return
@@ -23,36 +41,40 @@ class UserController < ApplicationController
 
          # If it's a string, then it was a success
          # Else, then it was a failure
-         if status.is_a? String
-            cookies[ :username ] = status
+         if not user.is_a? Integer
+            cookies[ :username ] = user.username
+            cookies[ :usertype ] = user.usertype
             render :json => { status: SUCCESS }
          else
-            render :json => { status: status }
+            render :json => { status: user }
          end
     end
 
     # Login user
     def loginUser
         #If they're an advertiser, then render and return
-        status = Advertiser.validateUser login_params
-        if status.is_a? String
-           cookies[ :username ] = status
+        advertiser = Advertiser.validateUser login_params
+        if not advertiser.is_a? Integer
+           cookies[ :username ] = advertiser.username
+           cookies[ :usertype ] = advertiser.usertype
            render :json => { status: SUCCESS } and return
         end
 
         #If they aren't an advertiser, they might be an owner
-        status = Owner.validateUser login_params
-        if status.is_a? String
-           cookies[ :username ] = status
+        owner = Owner.validateUser login_params
+        if not owner.is_a? Integer
+           cookies[ :username ] = owner.username
+           cookies[ :usertype ] = owner.usertype
            render :json => { status: SUCCESS }
         else
-           render :json => { status: status }
+           render :json => { status: owner }
         end
     end
 
     # Signout just deletes the cookie
     def signoutUser
         cookies.delete :username
+        cookies.delete :usertype
         redirect_to root_path
     end
 

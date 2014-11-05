@@ -1,34 +1,35 @@
 # Written by Jhoong, Sukriti, Jason
 class ListingsController < ApplicationController
 
-  def createListing 
+  def createListing
     username = cookies[:username]
     owner_id = Owner.find_by_username(username).id
     response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
     #render :action => 'show'
     render :json => { status: response }
-  end 
+  end
 
   def getListings
     listings = Listing.getListings(listings_params[:city])
-    render :json => { status: 1, listings: listings }    
-   end 
+    render :json => { status: 1, listings: listings }
+   end
 
   def search
     @city = params[:city]
     if @city then
       @listings = Listing.getListings(@city)
-    end   
+    end
     @markers = Gmaps4rails.build_markers(@listings) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
       marker.infowindow render_to_string(:partial => "/listings/infowindow", :locals => { :location => location})
       marker.json({:id => location.id})
-    end 
+    end
   end
 
   def show
     @listing = Listing.getListingDetails(params[:listing_id])
+    @owner_username = Owner.find(@listing.owner_id).username
   end
 
   def activate
@@ -52,22 +53,22 @@ class ListingsController < ApplicationController
     def set_listing
       @listing = Listing.find(params[:id])
     end
-   
+
     def activate_params
       params.require(:listing).permit(:id)
     end
-   
+
     def listing_details_params
        #params.require(:listing).permit(:id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def listings_params 
+    def listings_params
       params.require(:listing).permit(:city)
     end
 
     def create_listing_params
-      params.require(:listing).permit(:title, :height, :width, :screen_resolution_x, :screen_resolution_y, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude, :description, :image_url, :image)
+      params.require(:listing).permit(:title, :height, :width, :screen_resolution_x, :screen_resolution_y, :time_per_click, :views_per_week, :cost_per_week, :street, :city, :state, :zip, :latitude, :longitude, :description, :image)
     end
-    
+
 end

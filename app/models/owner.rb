@@ -7,27 +7,27 @@ class Owner < ActiveRecord::Base
   validates :username, presence: true, length: { maximum: 128, minimum: 6 }, uniqueness: true
   validates_presence_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
-  validates :usertype, presence: true
+  validates :usertype, presence: true, :inclusion => {:in => [0, 1, 2]}
     
   def self.validateUser(params)
     user = find_by_username( params[ :username ] )
     # Because we salted and hashed, we have to do this to check the password
     if user && user.password_hash == BCrypt::Engine.hash_secret( params[ :password ], user.password_salt )
-      return user.username
+      return user
     else
       return -1
     end
   end
 
   def self.createUser(params)
-    # Verify that the username doesn't already exist in the Advertiser table
-    if Advertiser.exists?( :username => params[ :username ])
+    # Verify that the username doesn't already exist in the Advertiser table, unless we want them both to exist (2)
+    if params[:usertype] != 2 and Advertiser.exists?( :username => params[ :username ])
         return -1
     end
    
     owner = Owner.new(params)
     if owner.save
-      return owner.username
+      return owner
     else
       usernameError = owner.errors[:username]
       pwError = owner.errors[:password]
