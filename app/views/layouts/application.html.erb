@@ -14,16 +14,15 @@ Note: Advertiser: 0, Owner: 1 -->
 
         <div class="navbar-header">
             <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-               <span class="icon-bar"></span> 
-               <span class="icon-bar"></span> 
                <span class="icon-bar"></span>
-            </button> 
-            <% if @current_user == nil then %>
-               window.alert(<%=@dashboard_state%>)
-               <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a>
-            <% elsif @current_user %>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <% if @current_user == nil%>
+               <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a><%end%>
+            <% if @current_user%>
                <% if @dashboard_state == 0 %>
-                  <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
+                  <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle" style = "color:#d4b02e"></i>WDCAST</a>
                <% elsif @dashboard_state == 1 %>
                   <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
                <% end %>
@@ -60,7 +59,7 @@ Note: Advertiser: 0, Owner: 1 -->
                <div class=
                "morph-button morph-button-modal morph-button-fixed">
                   <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
-                  type="button">List Display</button>
+                  type="button">Create Listing</button>
                </div>
             <% elsif @dashboard_state == 0%>
                <div class=
@@ -77,9 +76,10 @@ Note: Advertiser: 0, Owner: 1 -->
 
               <ul class="dropdown-menu" role="menu">
                 <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
-                <li><% if @dashboard_state == 0 %>  <a href = "<%=owner_dashboard_path%>">Switch to Owner</a> <%end%></li>
-                <li><% if @dashboard_state == 1 %> <a href = "<%=advertiser_dashboard_path%>">Switch to Advertiser</a> <%end%></li>
-                <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
+                <li><% if @dashboard_state == 0 %>  <a href = "<%=owner_dashboard_path%>">Switch to Owner</a> <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
+</li><%end%>
+                <li><% if @dashboard_state == 1 %> <a href = "<%=advertiser_dashboard_path%>">Switch to Advertiser</a><li><%= link_to 'My Account', owner_path(@current_user) %></li>
+ <%end%></li>
 
                 <li class="divider"></li>
                 <li><a class = "signout-link" href="/api/signout">Log out</a></li>

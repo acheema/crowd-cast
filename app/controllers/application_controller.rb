@@ -6,9 +6,8 @@ class ApplicationController < ActionController::Base
    #protect_from_forgery with: :exception
    #protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
 
-   before_filter :set_cache_buster
+   before_filter :set_cache_buster, :set_current_user
    helper_method :set_current_user
-   before_filter :set_current_user
 
 private
   def set_cache_buster

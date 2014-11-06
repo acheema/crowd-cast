@@ -2,11 +2,7 @@
 <!--Written by: Akaljot Cheema -->
 <!--Maps and GPS portions written by: Jhoong Roh -->
 <!DOCTYPE html>
-<html>
-   <head>
-      <title></title>
-   </head>
-   <body>
+
       <div class="container main">
          <h2>Create your listing</h2>
          <form class="form-horizontal col-lg-8 col-lg-offset-2">
@@ -39,7 +35,7 @@
                <label>GPS Location</label>
                <div class="form-inline">
                   <div class="form-group">
-                     <input class="form-control gps" id="lat" placeholder="Enter latitude" type="text"> 
+                     <input class="form-control gps" id="lat" placeholder="Enter latitude" type="text">
                      <input class="form-control gps" id="lng" placeholder="Enter longitude" type="text">
                   </div>
                   <div class="form-group">
@@ -52,7 +48,7 @@
                   <div class="col-lg-4">
                      <div class="form-group info">
                         <div class='form-inline'>
-                           <label class="control-label" for="height">Height</label> 
+                           <label class="control-label" for="height">Height</label>
                            <input class="form-control" id="height" placeholder="Enter height" type="number">
                            <label class="control-label" for="width">Width</label>
                            <input class="form-control" id="width" placeholder="Enter width" type="number">
@@ -73,17 +69,17 @@
                   <div class="col-lg-4">
                      <div class="form-group info">
                         <div class='form-inline'>
-                           <label for="time">Time per click</label> 
-                           <input class="form-control" id="time" placeholder="Enter time (s)" type="number"> 
-                           <label for="resolution">Screen Resolution X</label> 
-                           <input class="form-control" id="screen_resolution_x" placeholder="Enter resolution" type="number"> 
+                           <label for="time">Time per click</label>
+                           <input class="form-control" id="time" placeholder="Enter time (s)" type="number">
+                           <label for="resolution">Screen Resolution X</label>
+                           <input class="form-control" id="screen_resolution_x" placeholder="Enter resolution" type="number">
                         </div>
                      </div>
                   </div>
                   <div class="col-lg-4">
                      <div class="form-group info">
                         <div class='form-inline'>
-                           <label for="resolution">Screen Resolution Y</label> 
+                           <label for="resolution">Screen Resolution Y</label>
                            <input class="form-control" id="screen_resolution_y" placeholder="Enter resolution" type="number">
                         </div>
                      </div>
@@ -116,14 +112,14 @@
    $(document).ready(function() {
        var oldMarker;
        handler = Gmaps.build('Google');
-   
+
        //When the address changes, create a marker on the map
        $('.address').change(function() {
           listingStreet = document.getElementById('street').value;
           listingCity = document.getElementById('city').value;
           listingState = document.getElementById('state').value;
           listingZip = document.getElementById('zip').value;
-   
+
           if ((listingStreet != "") && (listingCity != "") && (listingState != "") && (listingZip != "")){
              clearGPS();
              var url = "http://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -140,7 +136,7 @@
                    if (oldMarker != null){
                      handler.removeMarker(oldMarker);
                    }
-   
+
                    oldMarker = handler.addMarker(json, { "draggable": true } );
                    oldMarker.panTo();
                    handler.getMap().setZoom(14);
@@ -149,7 +145,7 @@
              });
          }
        });
-   
+
        //When the user inputs GPS coordinates, create a marker
        $('.gps').change(function() {
           listingLat = document.getElementById('lat').value;
@@ -166,7 +162,7 @@
              markerMouseUp();
           }
        });
-   
+
        $('#submit').click(function(e) {
          console.log("hello");
           e.preventDefault();
@@ -201,7 +197,7 @@
               failure: function(data) { alert("Failure"); }
             });
        });
-   
+
       function handle_response(data) {
         if(data['status'] > 0){
           window.location.href = window.location.protocol + '//' + window.location.host + "/listings/show?listing_id=" + data['status'];
@@ -210,7 +206,7 @@
           handle_error(data);
         }
       }
-   
+
       function handle_error(data){
         response = data['status']
         if(response == -1){
@@ -256,7 +252,7 @@
           alert("An error occured while trying to create your listing, please try again.")
         }
       }
-   
+
        //Add markers when the user interacts with the map
        handler.buildMap({ internal: {id: 'select_location'}, provider: { zoom: 10, center: new google.maps.LatLng(37.75, -122.2833)} }, function(){
           google.maps.event.addListener(handler.getMap(), 'click', function(object){
@@ -272,7 +268,7 @@
           });
           handler.fitMapToBounds();
        });
-   
+
       //When the user stops dragging the marker, we set the GPS fields
       function markerMouseUp() {
          google.maps.event.addListener(oldMarker.getServiceObject(), 'mouseup', function(object){
@@ -300,9 +296,9 @@
          document.getElementById('lng').value = null;
       }
     });
-   
+
    /* Script for image upload */
-   
+
         $("#file").fileinput({
           showUpload: false,
           showCaption: false,
@@ -310,7 +306,7 @@
           fileType: "any"
         });
    
-    
+
 </script>
 <script src=
    "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry"

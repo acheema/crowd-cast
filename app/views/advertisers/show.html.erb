@@ -1,20 +1,13 @@
 <p id="notice"><%= notice %></p>
-<%= advertisers_path(@advertiser) %>
-
-<
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class = "container">
 <p>
   <strong>Username:</strong>
   <%= @advertiser.username %>
-</p>
-
-<p>
-  <strong>Password salt:</strong>
-  <%= @advertiser.password_salt %>
-</p>
-
-<p>
-  <strong>Password hash:</strong>
-  <%= @advertiser.password_hash %>
 </p>
 
 <p>
@@ -31,6 +24,27 @@
   <strong>Usertype:</strong>
   <%= @advertiser.usertype %>
 </p>
+<a id = "create_a" class = "create_a">Create an Owner Account</a></div>
+<%= link_to 'Edit Account', edit_owner_path(@advertiser) %> |
 
-<%= link_to 'Edit', edit_advertiser_path(@advertiser) %> |
-<%= link_to 'Back', advertisers_path %>
+<script>
+
+// Click signup button
+$('#create_a').click(function() {
+
+$.ajax({
+       //First send a post request, get the response back. On successful message back, check the data
+       url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
+       type: "POST",
+       data: JSON.stringify({username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val() }),
+       contentType: "application/json",
+       dataType: "json",
+       success: function(data){
+         signupSuccess(data);
+       },
+       failure: function(errorMsg) {
+         failure(data);
+       }
+    });
+})
+</script>
