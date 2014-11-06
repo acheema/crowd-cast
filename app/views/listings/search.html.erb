@@ -1,22 +1,23 @@
  <!-- Written by: Jason Clark -->
 <div id="search">
    <div id="googlemap">
-      <%if @listings then %>
-         <div id="map"></div>
-      <%end%>
+      <div id="map"></div>
    </div>
    <div id="results">
     <%if @listings then %>
 	    <% @listings.each do |listing|%>
-	      <%= div_for listing, :class => "result location#{listing.id}" do %>
+	      <%= div_for listing, :class => "col-lg-3 result location#{listing.id}" do %>
 		    <div class="content">
-		      <h3 class="title">
-		        <a href="/listings/show?listing_id=<%=listing.id%>" style=""><%= listing.title %></a>
-		      </h3>
+            <a href="/listings/show?listing_id=<%=listing.id%>">
+		         <div class="content" style="background-color: #d3d3d3; height: 200px;"></div>
+            </a>
+            <h4>
+		        <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>
+		      </h4>
             <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
-		         <p class="listingInfo">Address: <%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+		         <p><%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
 		      <%else%>
-		         <p class="listingInfo">GPS Coordinate: <%= "#{listing.latitude}, #{listing.longitude}" %></p>
+		         <p><%= "#{sprintf('%.2f', listing.latitude)}, #{sprintf('%.2f', listing.longitude)}" %></p>
             <%end%>
          </div>
 	      <% end %>
@@ -31,30 +32,32 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'>
 </script>
 <script type="text/javascript">
+   <% if @listings and @listings.any? then %>
    $(document).ready(function() {
    var markers;
    var oldMarker;
    if (<%=raw @listings.to_json%> != null){
       handler = Gmaps.build('Google');
       handler.buildMap({ internal: {id: 'map'}}, function(){
-         var temp = {};
+         new_markers = {};
          _.each(<%=raw @markers.to_json %>, function(json, index){
             $(".location" + json.id).on('mouseenter', function() {
-               var blah = markers[index]
+               var current_marker = markers[index]
                markers[index] = handler.addMarker(json, { "opacity": 1.0 });
-               handler.removeMarker(blah);
+               handler.removeMarker(current_marker);
             });
             $(".location" + json.id).on('mouseleave', function() {
-               var blah = markers[index]
+               var current_marker = markers[index]
                markers[index] = handler.addMarker(json, { "opacity": 0.5 });
-               handler.removeMarker(blah);
+               handler.removeMarker(current_marker);
             });
 
-            temp[index] = json;
+            new_markers[index] = json;
          });
-         markers = handler.addMarkers(temp, { "opacity": 0.5 });
+         markers = handler.addMarkers(new_markers, { "opacity": 0.5 });
          handler.bounds.extendWith(markers);
          handler.fitMapToBounds();
       });
    }});
+   <% end %>
 </script>

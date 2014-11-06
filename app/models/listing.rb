@@ -10,8 +10,8 @@ class Listing < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode, :if => [:latitude?, :longitude?]
-  geocoded_by :address, :if => [:street?, :city?, :state?, :zip?]
-  after_validation :geocode
+  geocoded_by :address
+  after_validation :geocode, :if => [:street?, :city?, :state?, :zip?]
 
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
   validates :height, presence: true, numericality: true

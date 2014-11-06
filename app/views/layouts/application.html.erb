@@ -13,22 +13,30 @@ Note: Advertiser: 0, Owner: 1 -->
     <div class="container">
 
         <div class="navbar-header">
-            <button class="navbar-toggle" data-target=".navbar-collapse"
-            data-toggle="collapse" type="button"><span class=
-            "icon-bar"></span> <span class="icon-bar"></span> <span class=
-            "icon-bar"></span></button> <a class="navbar-brand" href=
-            "/">CR<i class="fa fa-circle"></i>WDCAST</a>
-
+            <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+               <span class="icon-bar"></span> 
+               <span class="icon-bar"></span> 
+               <span class="icon-bar"></span>
+            </button> 
+            <% if @current_user == nil then %>
+               <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a>
+            <% elsif @current_user %>
+               <% if @dashboard_state == 0 %>
+                  <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
+               <% elsif @dashboard_state == 1 %>
+                  <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
+               <% end %>
+            <% end %>
         </div>
 
 
 
 <div class="navbar-collapse collapse">
-<form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
-<div class="form-group">
-  <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
-</div>
-</form>
+   <form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
+      <div class="form-group">
+         <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
+      </div>
+   </form>
     <div class="nav navbar-nav navbar-right">
 
     <% if @current_user == nil %>
@@ -45,24 +53,16 @@ Note: Advertiser: 0, Owner: 1 -->
             </div>
             <% end %>
 
-<% if @current_user == nil or @dashboard_state == 1%>
+     <% if @current_user %>
 
+            <% if @dashboard_state == 1%>
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
             <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
                 type="button">List space</button>
             </div>
-            <% if @dashboard_state == 1%>
-            <div class=
-            "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" onclick="location.href='<%=dashboard_path%>'"
-                type="button">Dashboard</button>
-            </div>
+            <% elsif @dashboard_state == 0%>
             <%end%>
-            <%end%>
-
-
-            <% if @current_user %>
 
             <div class= "morph-button morph-button-modal morph-button-fixed">
           <button type="button" class="dropdown-toggle account" data-toggle="dropdown">
@@ -71,8 +71,8 @@ Note: Advertiser: 0, Owner: 1 -->
 
               <ul class="dropdown-menu" role="menu">
                 <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
-                <li><% if @dashboard_state == 0 %>  <a href = "<%=dashboard_path%>">Switch to Owner</a> <%end%></li>
-                <li><% if @dashboard_state == 1 %> <a href = "<%=advertiserdashboard_path%>">Switch to Advertiser</a> <%end%></li>
+                <li><% if @dashboard_state == 0 %>  <a href = "<%=owner_dashboard_path%>">Switch to Owner</a> <%end%></li>
+                <li><% if @dashboard_state == 1 %> <a href = "<%=advertiser_dashboard_path%>">Switch to Advertiser</a> <%end%></li>
                 <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
 
                 <li class="divider"></li>

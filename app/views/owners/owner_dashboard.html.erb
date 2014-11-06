@@ -1,30 +1,8 @@
 <!--Written by Jessica Wong-->
 
-<div class="container">
-   <div class="owner-dashboard-listings-outer">
-   <div id="current_listings">
-    <%if @current_listings then %>
-	    <% @current_listings.each do |listing|%>
-	      <%= div_for listing, :class => "col-lg-3 result location#{listing.id}" do %>
-		    <div class="content">
-            <a href="/listings/show?listing_id=<%=listing.id%>">
-		         <div class="content" style="background-color: #d3d3d3; height: 200px;"></div>
-            </a>
-            <h4>
-		        <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>
-		      </h4>
-            <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
-		         <p><%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
-		      <%else%>
-		         <p><%= "#{sprintf('%.2f', listing.latitude)}, #{sprintf('%.2f', listing.longitude)}" %></p>
-            <%end%>
-         </div>
-	      <% end %>
-	   <% end %>
-	<% end %>
-  </div>
-      <div class="container main">
-         <h1>Messages</h1>
+<div id="dashboard">
+  <div id="messages">
+         <h1 align="center">Messages</h1>
          <form class="form-horizontal col-lg-8 col-lg-offset-2">
             <label for="title">New Messages</label> 
             <div class="form-group" style="overflow-y: scroll; height: 300px; border: 1px solid;">
@@ -52,7 +30,28 @@
                <% end %>
             </div>
          </form>
-      </div>
+   </div>
+   <div id="listings">
+   <h1 align="center">Current Listings</h1>
+    <%if @current_listings then %>
+	    <% @current_listings.each do |listing|%>
+	      <%= div_for listing, :class => "col-lg-4 result location#{listing.id}" do %>
+		    <div class="content">
+            <a href="/listings/show?listing_id=<%=listing.id%>">
+		         <div class="content" style="background-color: #d3d3d3; height: 200px;"></div>
+            </a>
+            <h4>
+		        <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>
+		      </h4>
+            <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
+		         <p><%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+		      <%else%>
+		         <p><%= "#{sprintf('%.2f', listing.latitude)}, #{sprintf('%.2f', listing.longitude)}" %></p>
+            <%end%>
+         </div>
+	      <% end %>
+	   <% end %>
+	<% end %>
   </div>
 </div>
 

@@ -64,10 +64,10 @@ class AdvertisersController < ApplicationController
   end
 
 
-  def get_dashboard
+  def advertiser_dashboard
     #reset the cookie to owner view and reset the dashboard state
     self.reset_cookie
-    render 'advertiser-dashboard'
+    render 'advertiser_dashboard'
   end
 
 

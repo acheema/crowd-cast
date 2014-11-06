@@ -176,8 +176,6 @@
       handler = Gmaps.build('Google');
       var mapOptions = { mapTypeId: google.maps.MapTypeId.HYBRID };
       handler.buildMap({ internal: {id: 'map'}, provider: mapOptions}, function(){
-         alert(<%=@listing.latitude%>)
-         alert(<%=@listing.longitude%>)
          var location = { "lat": <%=@listing.latitude%>, "lng": <%=@listing.longitude%> };
          marker = handler.addMarker(location, { "opacity": 1.0 });
          handler.bounds.extendWith(marker);

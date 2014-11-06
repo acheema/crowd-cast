@@ -7,7 +7,7 @@ html {
 
 #search {
    position: absolute;
-   top: 60px;
+   top: 61.5px;
    bottom: 0px;
    left: 0px;
    right: 0px;
@@ -36,16 +36,17 @@ html {
 }
 
 #results {
-display: inline-block;
-vertical-align: middle;
-float: right;
-    margin-left:auto;
-    margin-right:500px;
+vertical-align: middle;   
+   padding-left:10px;
+   overflow-y: scroll; 
+   float: center;
+   width: 60%;
+   height: 100%;
 }
 
 #googlemap {
     float: left;
-    padding:0px;
+    padding-left:0px;
     width:40%;
     height:100%;
 }
@@ -118,10 +119,5 @@ textarea:focus, input:focus{
 }
 
 .result {
-	border-top-style: solid;
-	border-right-style: none;
-	border-bottom-width: 5px;
-	border-left-width: 10px;
-	border-top-width: 3px;
-	background: rgb(255, 255, 251);
+	padding: 10px;
 }

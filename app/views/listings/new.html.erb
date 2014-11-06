@@ -185,8 +185,6 @@
           listingLat = document.getElementById('lat').value;
           listingLng = document.getElementById('lng').value;
           listingDescription = $('#description').val();
-          alert(listingLat);
-          alert(listingLng);
           $.ajax({
               type: 'POST',
               url: window.location.protocol + '//' + window.location.host + "/api/create_listing/",
