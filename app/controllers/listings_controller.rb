@@ -4,9 +4,9 @@ class ListingsController < ApplicationController
   def createListing
     username = cookies[:username]
     owner_id = Owner.find_by_username(username).id
-    response = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
+    status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
     #render :action => 'show'
-    render :json => { status: response }
+    render :json => { status: status }
   end
 
   def getListings

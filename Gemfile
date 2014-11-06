@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
@@ -31,7 +30,6 @@ gem 'spring',        group: :development
 
 gem "bcrypt-ruby", :require => "bcrypt"
 gem  "curb"
-
 #For image uploads to S3
 gem 'paperclip'
 gem 'aws-sdk'

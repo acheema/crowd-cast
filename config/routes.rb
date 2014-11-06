@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
     get 'search' => 'listings#search'
-    get 'messages' => 'messages#messages'
     get '/dashboard', :controller => 'owners', :action => 'get_dashboard'
     get '/advertiserdashboard', :controller => 'advertisers', :action => 'get_dashboard'
     match '/api/signout', to: 'user#signoutUser', via: 'get'

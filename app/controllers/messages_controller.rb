@@ -8,10 +8,6 @@ class MessagesController < ApplicationController
     render :json => { status: message }
   end
 
-  def messages
-     @messages = Message.getMessages(cookies[:username])
-  end
-
   def TESTAPI_resetFixture
      Message.TESTAPI_resetFixture
   end
