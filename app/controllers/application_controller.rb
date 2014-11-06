@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
    before_filter :set_current_user
    
    # POST /api/TESTAPI_tests
-   def tests(command="rake test")
+   def tests(command="rake test RAILS_ENV=test")
       # Run the command
       output = `#{command}`
       output_split = output.split("\n")
