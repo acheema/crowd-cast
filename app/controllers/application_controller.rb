@@ -9,6 +9,30 @@ class ApplicationController < ActionController::Base
    before_filter :set_cache_buster
    helper_method :set_current_user
    before_filter :set_current_user
+   
+   # POST /api/TESTAPI_tests
+   def tests(command="rake test")
+      # Run the command
+      output = `#{command}`
+      output_split = output.split("\n")
+      result_line = nil
+      # For each line in the shell output
+      output_split.each do |output_line|
+         # Match it with "%d example(s), %d failure(s)" that appears after running rspec
+         correct_line_match = output_line.match /(\d+)\s+example(?:s)?,\s+(\d+)\s+failure(?:s)?/
+         if correct_line_match
+            result_line = correct_line_match
+            break
+         end
+      end
+
+      # If we found the matching result line, then the command didn't error out
+      if result_line
+         render :json => { nrFailed: result_line[2].to_i, output: output, totalTests: result_line[1].to_i }
+      else
+         render :json => { output: output }
+      end
+   end
 
 private
   def set_cache_buster
