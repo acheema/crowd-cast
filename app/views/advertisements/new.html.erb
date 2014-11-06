@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--Written by: Jhoong Roh -->
+<!DOCTYPE html>
+<html>
+   <head>
+      <title></title>
+   </head>
+   <body>
+      <div class="container main">
+         <h2>Create your advertisement</h2>
+         <form class="form-horizontal col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+               <label for="title">Title</label> <input class="form-control"
+                  id="title" placeholder="Enter title" type="text">
+            <div class="form-group">
+               <label for="screen_resolution_x">Screen resolution x</label> <input class="form-control"
+                  id="screen_resolution_x" placeholder="Enter screen resolution x" type="text">
+            </div>
+            <div class="form-group">
+               <label for="screen_resolution_y">Screen resolution y</label> <input class="form-control"
+                  id="screen_resolution_y" placeholder="Enter screen resolution y" type="text">
+            </div>
+            <div class="form-group">
+               <label for="advertisement_url">Advertisement url</label> <input class="form-control"
+                  id="advertisement_url" placeholder="Enter advertisement url" type="text">
+            </div>
+            <div class="form-group">
+               <label for="description">Description</label>
+               <textarea class="form-control" id="description" placeholder="Enter more information" rows="6">
+               </textarea>
+            </div>
+            <div class="form-group">
+               <div class="col-lg-offset-1 col-lg-10">
+                  <button class="btn btn-default" id="submit" type="submit">Submit</button>
+               </div>
+            </div>
+         </form>
+         <!--Image upload - work in progress
+            <div class="form-group">
+               <input id="file" type="file" multiple=true>
+            </div>
+         -->
+         <%= form_for :listing, :html => { :multipart => true } do |form| %>
+            <%= form.file_field :image %>
+         <% end %>
+      </div>
+   </body>
+</html>
+<script type="text/javascript">
+   $(document).ready(function() {
+       $('#submit').click(function(e) {
+          e.preventDefault();
+          adTitle = $('#title').val();
+          adUrl = $('#advertisement_url').val();
+          adResolutionX = $('#screen_resolution_x').val();
+          adResolutionY = $('#screen_resolution_y').val();
+          adDescription = $('#description').val();
+          $.ajax({
+              type: 'POST',
+              url: window.location.protocol + '//' + window.location.host + "/api/create_ad/",
+              data: JSON.stringify({ title: adTitle, advertisement_url: adUrl, screen_resolution_x: adResolutionX, 
+                  screen_resolution_y: adResolutionY, description: adDescription }),
+              contentType: "application/json",
+              dataType: "json",
+              success: function(data) {
+                handle_response(data)
+              },
+              failure: function(data) { alert("Failure"); }
+            });
+       });
+   
+      function handle_response(data) {
+        if(data['status'] > 0){
+          window.location.href = window.location.protocol + '//' + window.location.host + "/advertiser_dashboard";
+        }
+        else{
+          handle_error(data);
+        }
+      }
+   
+      function handle_error(data){
+        response = data['status']
+        if(response == -1){
+          alert("Error, malformed title")
+        }
+        else if (response == -2){
+          alert("Error, malformed advertisement_url")
+        }
+        else if (response == -3){
+          alert("Error, malformed screen_resolution_x")
+        }
+        else if (response == -4){
+          alert("Error, malformed screen_resolution_y")
+        }
+        else if (response == -5){
+          alert("Error, you must sign in or create an account ")
+        }
+        else{
+          alert("An error occured while trying to create your ad, please try again.")
+        }
+      }
+   
+   /* Script for image upload */
+   
+        $("#file").fileinput({
+          showUpload: false,
+          showCaption: false,
+          browseClass: "btn btn-primary btn-lg",
+          fileType: "any"
+        });
+         
+    })
+</script>
+<script src=
+   "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <script src=
+   "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> <script src=
+   "http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>

@@ -38,8 +38,8 @@ def set_current_user
    # user is both an advertiser and owner
  end
 end
+end
 rescue ActiveRecord::RecordNotFound
  session[:user_id] = nil
 end
 
-end

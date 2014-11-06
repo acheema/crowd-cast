@@ -1,5 +1,6 @@
 # Written by: Jhoong Roh and a few lines by Jason Clark
 class Advertiser < ActiveRecord::Base
+   has_many :advertisements
 
   attr_accessor :password
   before_save :encrypt_password

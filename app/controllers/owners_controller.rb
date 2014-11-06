@@ -1,5 +1,4 @@
-# Dashboard written by Jessica Wong
-
+# Dashboard written by Jessica Wong, Jhoong, Sukriti
 
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]

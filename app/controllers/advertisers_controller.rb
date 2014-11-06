@@ -65,7 +65,9 @@ class AdvertisersController < ApplicationController
 
 
   def advertiser_dashboard
-    #reset the cookie to owner view and reset the dashboard state
+    @current_ads = Advertisement.getAds(@current_user.id)
+    @messages = Message.getMessages(cookies[:username])
+    #reset the cookie to advertiser view and reset the dashboard state
     self.reset_cookie
     render 'advertiser_dashboard'
   end

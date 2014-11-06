@@ -19,6 +19,7 @@ Note: Advertiser: 0, Owner: 1 -->
                <span class="icon-bar"></span>
             </button> 
             <% if @current_user == nil then %>
+               window.alert(<%=@dashboard_state%>)
                <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a>
             <% elsif @current_user %>
                <% if @dashboard_state == 0 %>
@@ -56,12 +57,17 @@ Note: Advertiser: 0, Owner: 1 -->
      <% if @current_user %>
 
             <% if @dashboard_state == 1%>
-            <div class=
-            "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
-                type="button">List space</button>
-            </div>
+               <div class=
+               "morph-button morph-button-modal morph-button-fixed">
+                  <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
+                  type="button">List Display</button>
+               </div>
             <% elsif @dashboard_state == 0%>
+               <div class=
+               "morph-button morph-button-modal morph-button-fixed">
+                  <button class = "regular-button" onclick="location.href='<%=new_advertisement_path%>'"
+                  type="button">Add Advertisement</button>
+               </div>
             <%end%>
 
             <div class= "morph-button morph-button-modal morph-button-fixed">

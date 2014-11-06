@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :advertisements
+
   resources :messages
   resources :advertisers
   resources :listings
@@ -19,7 +21,9 @@ Rails.application.routes.draw do
     match '/api/TESTAPI_resetListingsFixture', to: 'listings#resetFixture', via: 'get'
     match '/api/send_message', to: 'messages#sendMessage', via: 'post'
     match '/api/TESTAPI_resetMessageFixture', to: 'listings#resetFixture', via: 'get'
-    #match 'listings/new', to: 'listing#new', via: 'get'
+    match '/api/create_ad', to: 'advertisements#createAd', via: 'post'
+    
+   #match 'listings/new', to: 'listing#new', via: 'get'
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".

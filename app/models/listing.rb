@@ -53,12 +53,8 @@ class Listing < ActiveRecord::Base
    end
 
    def self.createListing(params)
-      puts params[:latitude]
-      puts params[:longitude]
       listing = Listing.new(params.merge(:views => 0, :active => true))
       if listing.save
-         puts listing.latitude
-         puts listing.longitude
          return listing.id
       else
          errors = listing.errors

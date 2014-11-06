@@ -5,18 +5,10 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
-
-   TESTSERVERURL = ENV["TEST_SERVER"]  
-   
-
-   def get_listings_helper(json_array, reset=true)
-      return Curl::Easy.http_post(TESTSERVERURL + "/api/get_listings", json_array) do |curl|
-         curl.headers['Content-Type'] = 'application/json'
-         curl.enable_cookies = true 
-      end
+   def json_response
+      ActiveSupport::JSON.decode @response.body
    end
 
-   
    test 'valid create listing' do
       get 'api/TESTAPI_resetUserFixture'
       get 'api/TESTAPI_resetListingsFixture' 
@@ -70,10 +62,9 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               zip: "94065", \
                                               screen_resolution_x: 45, \
                                               screen_resolution_y: 45}}
-      my_array = { city: 'Redwood City' }.to_json 
-      response = get_listings_helper(my_array)     
-      assert(JSON.parse(response.body)["status"].equal? 1)
-      assert(JSON.parse(response.body)["listings"].count 1)
+      post 'api/get_listings', { listing: { city: 'Redwood City' } }
+      assert(json_response["status"].equal? 1)
+      assert(json_response["listings"].count 1)
    end
  
 end

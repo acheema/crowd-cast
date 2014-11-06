@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  screen_resolution_x: 1
+  screen_resolution_y: 1
+  advertiser_id: 
+  advertisement_url: MyString
+
+two:
+  title: MyString
+  description: MyString
+  screen_resolution_x: 1
+  screen_resolution_y: 1
+  advertiser_id: 
+  advertisement_url: MyString
