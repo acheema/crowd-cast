@@ -1,4 +1,5 @@
-# Default
+# Dashboard written by Jessica Wong
+
 
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
@@ -63,6 +64,20 @@ class OwnersController < ApplicationController
     end
   end
 
+
+  def get_dashboard
+    #reset the cookie to owner view and reset the dashboard state
+    @current_listings = Listing.getOwnerListings(@current_user.id)
+    self.reset_cookie
+    render 'get-dashboard'
+  end
+
+
+  def reset_cookie
+    cookies.permanent[:dashboard_state] = 1
+    @dashboard_state = 1
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_owner
@@ -73,4 +88,6 @@ class OwnersController < ApplicationController
     def owner_params
       params.require(:owner).permit(:username, :password_salt, :password_hash, :email, :company, :usertype)
     end
+
+
 end

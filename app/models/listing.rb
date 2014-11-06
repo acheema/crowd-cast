@@ -2,8 +2,8 @@
 
 class Listing < ActiveRecord::Base
    belongs_to :owner
-   has_many :messages    
- 
+   has_many :messages
+
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
       obj.city    = geo.city
@@ -12,7 +12,7 @@ class Listing < ActiveRecord::Base
   after_validation :reverse_geocode, :if => [:latitude?, :longitude?]
   geocoded_by :address
   after_validation :geocode
-  
+
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
   validates :height, presence: true, numericality: true
   validates :width, presence: true, numericality: true
@@ -23,7 +23,7 @@ class Listing < ActiveRecord::Base
   validates :city, presence: true, :unless => [:latitude?, :longitude?]
   validates :state, presence: true, :unless => [:latitude?, :longitude?]
   validates :zip, presence: true, :unless => [:latitude?, :longitude?]
-  validates :owner, :presence => true 
+  validates :owner, :presence => true
   validates :screen_resolution_x, presence: true, numericality: {only_integer: true}
   validates :screen_resolution_y, presence: true, numericality: {only_integer: true}
   validates :active, presence: true, :inclusion => {:in => [true, false]}
@@ -35,7 +35,7 @@ class Listing < ActiveRecord::Base
     square: '200x200#',
     medium: '300x300>'
   }
- 
+
    def address
       [street, city, state].compact.join(', ')
    end
@@ -45,13 +45,13 @@ class Listing < ActiveRecord::Base
       listing.update_attributes(:active => true)
       return listing
    end
-   
+
    def deactivate(id)
       listing = Listing.find(id)
       listing.update_attributes(:active => false)
       return listing
    end
-  
+
    def self.createListing(params)
       listing = Listing.new(params.merge(:views => 0, :active => true))
       if listing.save
@@ -81,7 +81,7 @@ class Listing < ActiveRecord::Base
    def self.getListings(city)
       listings = Listing.where("city = '#{city}'")
       return listings
-   end 
+   end
 
    def self.getListingDetails(id)
       listing = Listing.find(id)
@@ -89,6 +89,11 @@ class Listing < ActiveRecord::Base
       listing.update_attributes(:views => views)
       return listing
    end
+
+  def self.getOwnerListings(ownerid)
+    listings = Listing.where("owner_id = '#{ownerid}'")
+    return listings
+  end
 
   # Clear out the table
   def self.TESTAPI_resetFixture

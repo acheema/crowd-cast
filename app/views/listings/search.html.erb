@@ -1,12 +1,7 @@
  <!-- Written by: Jason Clark -->
 
 <div id="container">
-  <div id="contentDiv">
-    <form action="" id="searchForm" name="searchForm" onsubmit="/search">
-      <input type="text" id="searchBox" name="city" class="barInitial" placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
-      <input type="button" id="searchButton">
-    </form>
-   </div>
+  
    <div style='width: 800px;' id="googlemap">
       <%if @listings then %>
          <div id="map" style='width: 800px; height: 400px;'></div>

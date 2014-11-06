@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-
+  resources :messages
+  resources :advertisers
   resources :listings
-
+  resources :owners
     root 'home#index'
     get 'login' => 'home#login'
     get 'signup' => 'home#signup'
     get 'world' => 'home#world'
     get 'search' => 'listings#search'
     get 'messages' => 'messages#messages'
+    get '/dashboard', :controller => 'owners', :action => 'get_dashboard'
+    get '/advertiserdashboard', :controller => 'advertisers', :action => 'get_dashboard'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'
@@ -21,19 +24,19 @@ Rails.application.routes.draw do
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
-    
+
     # You can have the root of your site routed with "root"
     # root 'welcome#index'
-    
+
     # Example of regular route:
     #   get 'products/:id' => 'catalog#view'
-    
+
     # Example of named route that can be invoked with purchase_url(id: product.id)
     #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-    
+
     # Example resource route (maps HTTP verbs to controller actions automatically):
     #   resources :products
-    
+
     # Example resource route with options:
     #   resources :products do
     #     member do
@@ -45,13 +48,13 @@ Rails.application.routes.draw do
     #       get 'sold'
     #     end
     #   end
-    
+
     # Example resource route with sub-resources:
     #   resources :products do
     #     resources :comments, :sales
     #     resource :seller
     #   end
-    
+
     # Example resource route with more complex sub-resources:
     #   resources :products do
     #     resources :comments
@@ -59,14 +62,14 @@ Rails.application.routes.draw do
     #       get 'recent', on: :collection
     #     end
     #   end
-    
+
     # Example resource route with concerns:
     #   concern :toggleable do
     #     post 'toggle'
     #   end
     #   resources :posts, concerns: :toggleable
     #   resources :photos, concerns: :toggleable
-    
+
     # Example resource route within a namespace:
     #   namespace :admin do
     #     # Directs /admin/products/* to Admin::ProductsController

@@ -63,6 +63,19 @@ class AdvertisersController < ApplicationController
     end
   end
 
+
+  def get_dashboard
+    #reset the cookie to owner view and reset the dashboard state
+    self.reset_cookie
+    render 'advertiser-dashboard'
+  end
+
+
+  def reset_cookie
+    cookies.permanent[:dashboard_state] = 0
+    @dashboard_state = 0
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_advertiser
