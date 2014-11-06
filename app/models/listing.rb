@@ -10,7 +10,7 @@ class Listing < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode, :if => [:latitude?, :longitude?]
-  geocoded_by :address
+  geocoded_by :address, :if => [:street?, :city?, :state?, :zip?]
   after_validation :geocode
 
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
@@ -53,8 +53,12 @@ class Listing < ActiveRecord::Base
    end
 
    def self.createListing(params)
+      puts params[:latitude]
+      puts params[:longitude]
       listing = Listing.new(params.merge(:views => 0, :active => true))
       if listing.save
+         puts listing.latitude
+         puts listing.longitude
          return listing.id
       else
          errors = listing.errors

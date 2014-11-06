@@ -2,6 +2,15 @@
 
 html {
     margin:0px;
+    height: 100%;
+}
+
+#search {
+   position: absolute;
+   top: 60px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
 }
 
 .search-results {
@@ -35,12 +44,14 @@ float: right;
 }
 
 #googlemap {
-display: inline-block;
-vertical-align: middle;
-float: left;
-    margin-left:200px;
-    margin-right:auto;
-
+    float: left;
+    padding:0px;
+    width:40%;
+    height:100%;
+}
+#map {
+   width: 100%;
+   height: 100%;
 }
 
 #searchForm {

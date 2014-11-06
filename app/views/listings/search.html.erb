@@ -1,14 +1,12 @@
  <!-- Written by: Jason Clark -->
-<div id="container">
-   <h2></h2>
-   <div style='width: 800px;' id="googlemap">
+<div id="search">
+   <div id="googlemap">
       <%if @listings then %>
-         <div id="map" style='width: 800px; height: 400px;'></div>
+         <div id="map"></div>
       <%end%>
    </div>
    <div id="results">
     <%if @listings then %>
-
 	    <% @listings.each do |listing|%>
 	      <%= div_for listing, :class => "result location#{listing.id}" do %>
 		    <div class="content">
