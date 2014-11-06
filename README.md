@@ -5,6 +5,8 @@ rake db:reset
 rake db:migrate
 Run rails s in the app folder.
 
-To run tests:
-rake test TEST_SERVER="#{the url of the localhost}"
-ie. rake test TEST_SERVER="http://localhost:3000"  
+To run tests locally:
+rake test
+
+or in postman, get
+http://crowd-cast.herokuapp.com/api/TESTAPI_tests for the heroku app

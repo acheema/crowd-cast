@@ -14,7 +14,7 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-06T13:49:22-08:00">2014-11-06T13:49:22-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-06T14:34:26-08:00">2014-11-06T14:34:26-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -251,9 +251,9 @@
       </tr>
       
       <tr>
-        <td class="strong"><a href="#fe1d8849680747ea5741981776c5f9a741c24799" class="src_link" title="config/environments/development.rb">config/environments/development.rb</a></td>
+        <td class="strong"><a href="#0b7ea84f343cd67ebe1a48d5fdc514b2521ae29e" class="src_link" title="config/environments/test.rb">config/environments/test.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>46</td>
+        <td>39</td>
         <td>11</td>
         <td>11</td>
         <td>0</td>
@@ -871,7 +871,7 @@
         <li class="covered" data-hits="1" data-linenumber="14">
           <span class="hits">1</span>
           
-          <code class="ruby">   def tests(command=&quot;rake test&quot;)</code>
+          <code class="ruby">   def tests(command=&quot;rake test RAILS_ENV=test&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="15">
@@ -5186,9 +5186,9 @@
   </pre>
 </div>
       
-        <div class="source_table" id="fe1d8849680747ea5741981776c5f9a741c24799">
+        <div class="source_table" id="0b7ea84f343cd67ebe1a48d5fdc514b2521ae29e">
   <div class="header">
-    <h3>config/environments/development.rb</h3>
+    <h3>config/environments/test.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>11</b> relevant lines. 
@@ -5221,85 +5221,85 @@
         <li class="never" data-hits="" data-linenumber="4">
           
           
-          <code class="ruby">  # In the development environment your application&#39;s code is reloaded on</code>
+          <code class="ruby">  # The test environment is used exclusively to run your application&#39;s</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="5">
           
           
-          <code class="ruby">  # every request. This slows down response time but is perfect for development</code>
+          <code class="ruby">  # test suite. You never need to work with it otherwise. Remember that</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="6">
           
           
-          <code class="ruby">  # since you don&#39;t have to restart the web server when you make code changes.</code>
+          <code class="ruby">  # your test database is &quot;scratch space&quot; for the test suite and is wiped</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="7">
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby">  # and recreated between test runs. Don&#39;t rely on the data there!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.cache_classes = false</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="8">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">  config.cache_classes = true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
           
           
-          <code class="ruby">  # Do not eager load code on boot.</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="10">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="10">
           
-          <code class="ruby">  config.eager_load = false</code>
+          
+          <code class="ruby">  # Do not eager load code on boot. This avoids loading your whole application</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # just for the purpose of running a single test. If you are using a tool that</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="12">
           
           
-          <code class="ruby">  # Show full error reports and disable caching.</code>
+          <code class="ruby">  # preloads Rails for running tests, you may have to set it to true.</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.consider_all_requests_local       = true</code>
+          <code class="ruby">  config.eager_load = false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="14">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  config.action_controller.perform_caching = false</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="14">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="never" data-hits="" data-linenumber="15">
           
           
-          <code class="ruby">  # Don&#39;t care if the mailer can&#39;t send.</code>
+          <code class="ruby">  # Configure static asset server for tests with Cache-Control for performance.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  config.serve_static_assets  = true</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="17">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.action_mailer.raise_delivery_errors = false</code>
+          <code class="ruby">  config.static_cache_control = &#39;public, max-age=3600&#39;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="18">
@@ -5311,166 +5311,124 @@
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">  # Print deprecation notices to the Rails logger.</code>
+          <code class="ruby">  # Show full error reports and disable caching.</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.active_support.deprecation = :log</code>
+          <code class="ruby">  config.consider_all_requests_local       = true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  config.action_controller.perform_caching = false</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">  # Raise an error on page load if there are pending migrations.</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">  # Raise exceptions instead of rendering exception templates.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.active_record.migration_error = :page_load</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="24">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">  config.action_dispatch.show_exceptions = false</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="25">
           
           
-          <code class="ruby">  # Debug mode disables concatenation and preprocessing of assets.</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
           
           
-          <code class="ruby">  # This option may cause significant delays in view rendering with a large</code>
+          <code class="ruby">  # Disable request forgery protection in test environment.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
-          
-          
-          <code class="ruby">  # number of complex assets.</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="28">
+        <li class="covered" data-hits="1" data-linenumber="27">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.assets.debug = true</code>
+          <code class="ruby">  config.action_controller.allow_forgery_protection = false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # Tell Action Mailer not to deliver emails to the real world.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">  # Adds additional error checking when serving assets at runtime.</code>
+          <code class="ruby">  # The :test delivery method accumulates sent emails in the</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="31">
           
           
-          <code class="ruby">  # Checks for improperly declared sprockets dependencies.</code>
+          <code class="ruby">  # ActionMailer::Base.deliveries array.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
-          
-          
-          <code class="ruby">  # Raises helpful error messages.</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="33">
+        <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
-          <code class="ruby">  config.assets.raise_runtime_errors = true</code>
+          <code class="ruby">  config.action_mailer.delivery_method = :test</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="never" data-hits="" data-linenumber="33">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="never" data-hits="" data-linenumber="34">
           
           
-          <code class="ruby">  # Raises error for missing translations</code>
+          <code class="ruby">  # Print deprecation notices to the stderr.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  config.active_support.deprecation = :stderr</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="36">
           
           
-          <code class="ruby">  # config.action_view.raise_on_missing_translations = true</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="37">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="37">
           
-          <code class="ruby">  config.paperclip_defaults = {</code>
+          
+          <code class="ruby">  # Raises error for missing translations</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="38">
           
           
-          <code class="ruby">  :storage =&gt; :s3,</code>
+          <code class="ruby">  # config.action_view.raise_on_missing_translations = true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="39">
-          
-          
-          <code class="ruby">  :s3_protocol =&gt; &#39;http&#39;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="40">
-          
-          
-          <code class="ruby">  :s3_credentials =&gt; {</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="41">
-          
-          
-          <code class="ruby">    :bucket =&gt; ENV[&#39;AWS_BUCKET&#39;],</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="42">
-          
-          
-          <code class="ruby">    :access_key_id =&gt; ENV[&#39;AWS_ACCESS_KEY_ID&#39;],</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="43">
-          
-          
-          <code class="ruby">    :secret_access_key =&gt; ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="44">
-          
-          
-          <code class="ruby">  }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="45">
-          
-          
-          <code class="ruby">}</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">end</code>
