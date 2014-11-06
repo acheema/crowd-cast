@@ -1,3 +1,4 @@
+#written by Jason Clark
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
@@ -8,7 +9,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get root_path
     assert_template 'home/index'
     assert_select "a[href=?]", root_path
-    assert_select "button[onclick=?]", "location.href='#{new_listing_path}'"
     assert_select "button[data-target=?]", "#login-modal"
     assert_select "button[data-target=?]", "#signup-modal"
   end

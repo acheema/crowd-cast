@@ -38,7 +38,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'geocoder'
 gem 'gmaps4rails'
-gem 'simplecov', :require => false, :group  => :test
+gem 'simplecov', :require => false
 # for heroku
 group :production do
   gem 'rails_12factor'

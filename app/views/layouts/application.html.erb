@@ -244,7 +244,7 @@ Note: Advertiser: 0, Owner: 1 -->
            type: "POST",
            /* radio button vals: 0 = advertiser, 1 = owner */
 
-           data: JSON.stringify({username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val(), usertype: checkedValue}),
+           data: JSON.stringify( {username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val(), usertype: checkedValue} ),
            contentType: "application/json",
            dataType: "json",
            success: function(data){

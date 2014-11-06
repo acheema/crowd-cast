@@ -1,3 +1,29 @@
+#dashboard {
+   position: absolute;
+   top: 61.5px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+}
+
+#ads {
+   vertical-align: middle;   
+   padding-left:10px;
+   overflow-y: scroll; 
+   float: right;
+   width: 50%;
+   height: 100%;
+}
+
+#messages {
+    float: left;
+    overflow-y: scroll; 
+    vertical-align: middle;   
+    padding-left:0px;
+    width:50%;
+    height:100%;
+}
+
 /* Jessica Wong
 */
 
@@ -10,7 +36,11 @@
   text-transform:uppercase;
   font-weight:bold;
 }
-
+.success {
+  color: #00ff00;
+  text-transform:uppercase;
+  font-weight:bold;
+}
 
 .navbar {
   font-weight: 800;
@@ -110,8 +140,8 @@ margin-right: -80px !important;
 /***** MODAL CONTACT *****/
 .modal-dialog {
   width:400px !important;
-
 }
+
 .modal-content {
   border-radius: 0px;
 }
@@ -226,7 +256,6 @@ padding: 10px 30px;
 .morph-button > button {
   position: relative;
   border: none;
-  color: #478ba0;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 200;
@@ -234,7 +263,17 @@ padding: 10px 30px;
   background:transparent;
 
 }
-.morph-button > button:hover{
+
+.regular-button {
+color: #478ba0;
+}
+.account {
+  color: #cbd1d4;
+}
+.account:hover {
+  color: #807f7b;
+}
+.regular-button:hover{
   color: #29abe2
 }
 
@@ -365,46 +404,48 @@ padding: 10px 30px;
 }
 /* line 2, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 body {
+  margin-top: 60px;
   font-family: "Lato" !important;
+  height: 100%;
 }
 
-/* line 7, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 8, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .info .form-control {
   margin-right: 35px;
 }
 
-/* line 11, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 12, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .form-horizontal {
   margin: auto;
   display: inline-block;
 }
 
-/* line 15, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 16, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .test {
   margin-left: 100px;
 }
 
-/* line 21, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 20, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .main {
   margin-top: 100px;
   text-align: center;
 }
 
-/* line 26, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 25, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .main h2 {
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 30px;
 }
 
-/* line 32, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 31, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .select-gps {
   width: 600px;
   height: 400px;
   margin-top: 30px;
 }
 
-/* line 37, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 36, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .btn {
   border: 1px solid #3079ed;
   color: #ffffff;
@@ -412,7 +453,7 @@ body {
   background-color: #4d90fe;
 }
 
-/* line 44, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 43, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .btn:hover {
   border: 1px solid #2f5bb7;
   color: #ffffff;
@@ -420,7 +461,7 @@ body {
   background-color: #357ae8;
 }
 
-/* line 51, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 50, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .btn:active {
   background-color: #357ae8;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#4d90fe), to(#357ae8));
@@ -446,12 +487,12 @@ body {
  * Year: 2014
  * For more Yii related demos visit http://demos.krajee.com
  */
-/* line 79, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 78, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-input {
   overflow-x: auto;
 }
 
-/* line 83, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 82, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-loading {
   top: 0;
   right: 0;
@@ -464,13 +505,13 @@ body {
   border: none;
 }
 
-/* line 94, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 93, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .btn-file {
   position: relative;
   overflow: hidden;
 }
 
-/* line 99, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 98, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .btn-file input[type=file] {
   position: absolute;
   top: 0;
@@ -485,7 +526,7 @@ body {
   display: block;
 }
 
-/* line 113, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 112, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-caption .glyphicon {
   display: inline-block;
   min-width: 18px;
@@ -493,7 +534,7 @@ body {
   margin-top: 2px;
 }
 
-/* line 120, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 119, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-caption-name {
   display: inline-block;
   float: left;
@@ -503,7 +544,7 @@ body {
   width: 85%;
 }
 
-/* line 128, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 127, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-error-message {
   background-color: #f2dede;
   color: #a94442;
@@ -512,19 +553,19 @@ body {
   padding: 5px;
 }
 
-/* line 135, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 134, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-caption-disabled {
   background-color: #EEEEEE;
   cursor: not-allowed;
   opacity: 1;
 }
 
-/* line 141, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 140, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-input .btn[disabled], .file-input .btn .disabled {
   cursor: not-allowed;
 }
 
-/* line 145, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 144, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview {
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -533,7 +574,7 @@ body {
   margin-bottom: 5px;
 }
 
-/* line 153, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 152, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview-frame {
   display: table;
   margin: 8px;
@@ -545,19 +586,19 @@ body {
   text-align: center;
 }
 
-/* line 164, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 163, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview-frame:hover {
   background-color: #eee;
   box-shadow: 2px 2px 5px 0px #333;
 }
 
-/* line 169, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 168, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview-image {
   height: 160px;
   vertical-align: text-center;
 }
 
-/* line 174, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 173, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview-text {
   display: table-cell;
   width: 160px;
@@ -568,7 +609,7 @@ body {
   text-align: center;
 }
 
-/* line 184, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 183, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-preview-other {
   display: table-cell;
   width: 160px;
@@ -579,21 +620,52 @@ body {
   text-align: center;
 }
 
-/* line 194, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 193, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .file-input-new .file-preview, .file-input-new .close, .file-input-new .glyphicon-file, .file-input-new .fileinput-remove-button, .file-input-new .fileinput-upload-button {
   display: none;
 }
 
-/* line 198, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 197, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .loading {
   background: transparent url("../img/loading.gif") no-repeat scroll center center content-box !important;
 }
 
-/* line 202, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
+/* line 201, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/listings.css.scss */
 .wrap-indicator {
   font-weight: bold;
   color: #245269;
   cursor: pointer;
+}
+#dashboard {
+   position: absolute;
+   top: 61.5px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+}
+
+#listings {
+   vertical-align: middle;   
+   padding-left:10px;
+   overflow-y: scroll; 
+   float: right;
+   width: 50%;
+   height: 100%;
+}
+
+#messages {
+    float: left;
+   overflow-y: scroll; 
+   vertical-align: middle;   
+    padding-left:0px;
+    width:50%;
+    height:100%;
+}
+
+/* line 5, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/owners.css.scss */
+.owner-dashboard-listings-outer {
+  border-style: 0px;
+  margin-top: 130px;
 }
 /* line 2, /Users/JhoongRoh/code/rails_projects/crowdcast/app/assets/stylesheets/scaffolds.css.scss */
 #notice {
@@ -637,6 +709,15 @@ body {
 
 html {
     margin:0px;
+    height: 100%;
+}
+
+#search {
+   position: absolute;
+   top: 61.5px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
 }
 
 .search-results {
@@ -662,20 +743,23 @@ html {
 }
 
 #results {
-display: inline-block;
-vertical-align: middle;
-float: right;
-    margin-left:auto;
-    margin-right:500px;
+vertical-align: middle;   
+   padding-left:10px;
+   overflow-y: scroll; 
+   float: center;
+   width: 60%;
+   height: 100%;
 }
 
 #googlemap {
-display: inline-block;
-vertical-align: middle;
-float: left;
-    margin-left:200px;
-    margin-right:auto;
-
+    float: left;
+    padding-left:0px;
+    width:40%;
+    height:100%;
+}
+#map {
+   width: 100%;
+   height: 100%;
 }
 
 #searchForm {
@@ -742,72 +826,8 @@ textarea:focus, input:focus{
 }
 
 .result {
-	border-top-style: solid;
-	border-right-style: none;
-	border-bottom-width: 5px;
-	border-left-width: 10px;
-	border-top-width: 3px;
-	background: rgb(255, 255, 251);
+	padding: 10px;
 }
-  .form-inline .form-group{
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .main-container{
-    background-color: #f1f1f1;
-        padding-left: 50px;
-        padding-top: 50px;
-  }
-    body{
-        background-color: #f1f1f1;
-    }
-  h2{
-      text-align: center;
-  }
-  .btn{
-      border: 1px solid #3079ed;
-      color: #ffffff;
-      text-shadow: 0 1px rgba(0,0,0,0.1);
-      background-color: #4d90fe;
-      background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
-      background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
-      background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
-      background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
-      background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
-      background-image: linear-gradient(top,#4d90fe,#4787ed);
-  }
-  .btn:hover{
-      border: 1px solid #2f5bb7;
-      color: #ffffff;
-      text-shadow: 0 1px rgba(0,0,0,0.3);
-      background-color: #357ae8;
-      background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-      background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-      background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-      background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-      background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-      background-image: linear-gradient(top,#4d90fe,#357ae8);
-  }
-  .btn:active{
-    background-color: #357ae8;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
-    background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
-    background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
-    background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
-    background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
-    background-image: linear-gradient(top,#4d90fe,#357ae8);
-    -webkit-box-shadow: inset 0 1px 2px rgb a(0,0,0,0.3);
-    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-  }
-  .listinfo{
-       font-weight: bold;
-  }
-
-  table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-  }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -868,6 +888,7 @@ p {
 }
 
 
+
 .nav a:visited, a {
 position: relative;
 border: none;
@@ -885,7 +906,6 @@ background:transparent;
     margin: 1em 0;
     padding: 0;
 }
-
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.

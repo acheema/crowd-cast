@@ -1,3 +1,4 @@
+# Written by Jhoong
 require 'test_helper'
 
 class MessageTest < ActiveSupport::TestCase
