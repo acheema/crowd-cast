@@ -112,20 +112,20 @@
       border-collapse: collapse;
   }
   </style>
-
-<div class="container">
-    <h2></h2>
-      <div class="row">
-          <br><br><br><br><br>
+      <div class="show_listing">
+         <div class="googlemap">
+            <div>
+               <div id="map" style='height: 300px; width: 100%;'></div>
+            </div>
+         </div>
+         <br>
           <div class="col-lg-6">
           <!--MAP STUFF SHOULD GO HERE-->
-          <%= image_tag @listing.image.url %>
-            <div style='width: 300px;' id="googlemap">
-               <div id="map" style='width: 300px; height: 400px;'></div>
-            </div>
+		      <div style="max-width:400px;">
+		         <div style="background-color: #d3d3d3;"><%= image_tag @listing.image.url %></div>
+            </div>         
           </div>
           <div class="col-lg-6">
-              <br><br>
               <div>
                 <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
               </div>
@@ -190,7 +190,6 @@
           </div>
       </div>
    </div>
-</div>
 
 <div class="modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
   <div class="modal-dialog">
@@ -233,7 +232,7 @@
          marker = handler.addMarker(location, { "opacity": 1.0 });
          handler.bounds.extendWith(marker);
          handler.fitMapToBounds();
-         handler.getMap().setZoom(18);
+         handler.getMap().setZoom(17);
       });
     $('#send').click(function(e) {
       e.preventDefault();

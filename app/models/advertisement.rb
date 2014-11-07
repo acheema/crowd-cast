@@ -1,11 +1,10 @@
 # Written by Jhoong
 class Advertisement < ActiveRecord::Base
   belongs_to :advertiser
-   validates :advertisement_url, presence: true
-   validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 128, minimum: 4 }
    validates :advertiser, :presence => true
-   validates :screen_resolution_x, presence: true, numericality: {only_integer: true}
-   validates :screen_resolution_y, presence: true, numericality: {only_integer: true}
+   validates :height, presence: true, numericality: {only_integer: true}
+   validates :width, presence: true, numericality: {only_integer: true}
 
    has_attached_file :ad, :storage => :s3, :bucket => ENV['AWS_BUCKET'], styles: {
      thumb: '100x100>',
@@ -21,10 +20,9 @@ class Advertisement < ActiveRecord::Base
       else
          errors = ad.errors
          return -1 if errors[:title].any?
-         return -2 if errors[:advertisement_url].any?
-         return -3 if errors[:screen_resolution_x].any?
-         return -4 if errors[:screen_resolution_y].any?
-         return -5 if errors[:advertiser_id].any?
+         return -2 if errors[:height].any?
+         return -3 if errors[:width].any?
+         return -4 if errors[:advertiser].any?
       end 
    end 
    

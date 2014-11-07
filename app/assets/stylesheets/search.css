@@ -1,5 +1,5 @@
 /* Written by: Jason Clark */
-
+/* Tiny changes by: Jhoong  */
 html {
     margin:0px;
     height: 100%;
@@ -36,7 +36,7 @@ html {
 }
 
 #results {
-vertical-align: middle;   
+   vertical-align: middle;   
    padding-left:10px;
    overflow-y: scroll; 
    float: center;

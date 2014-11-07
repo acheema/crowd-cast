@@ -1,4 +1,4 @@
-# Written by Jessica
+# Written by Jessica, few changes by Jhoong
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
