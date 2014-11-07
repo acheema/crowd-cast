@@ -77,15 +77,18 @@ Note: Advertiser: 0, Owner: 1 -->
 
               <ul class="dropdown-menu" role="menu">
                 <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
-                <li><% if @dashboard_state == 0 %>
-                  <%if cookies[:usertype] == 2%>
-                  <a href = "<%=owner_dashboard_path%>">Switch to Owner</a><%end%>
-                  <li><%= link_to 'My Account', advertiser_path(@current_user) %></li><%end%>
-                <li><% if @dashboard_state == 1 %>
-                  <% if cookies[:usertype] == 2 %>
-                  <a href = "<%=advertiser_dashboard_path%>">Switch to Advertiser</a><%end%>
-                  <li><%= link_to 'My Account', owner_path(@current_user) %></li>
+                <% if @dashboard_state == 0 %>
+                  <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+                    <li><%= link_to 'Switch to Owner', owner_dashboard_path %></li>
                   <%end%>
+                  <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
+                <%end%>
+                <% if @dashboard_state == 1 %>
+                  <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+                    <li><%= link_to 'Switch to Advertiser', advertiser_dashboard_path %></li>
+                  <%end%>
+                  <li><%= link_to 'My Account', owner_path(@current_user) %></li>
+                <%end%>
 
                 <li class="divider"></li>
                 <li><a class = "signout-link" href="/api/signout">Log out</a></li>
