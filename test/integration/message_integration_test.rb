@@ -11,8 +11,7 @@ class MessageIntegrationTest < ActionDispatch::IntegrationTest
 
    def setup
       post 'api/create_user', { user: { username: 'valid_username', password: 'vPassword', email: 'validemail@gmail.com', company: '', usertype: "1" }}
-      post 'api/create_listing', { "HTTP_COOKIE" => "username=valid_username;", \
-                                   listing: { title: 'Title1111', \
+      post 'api/create_listing', { listing: { title: 'Title1111', \
                                               width: 1, height: 1, \
                                               time_per_click: 1, \
                                               views_per_week: 1, \

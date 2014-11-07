@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
    before_filter :set_cache_buster, :set_current_user
    helper_method :set_current_user
 
-
    # POST /api/TESTAPI_tests
    def tests(command="rake test RAILS_ENV=test")
       # Run the command
@@ -42,9 +41,6 @@ private
   end
 
 def set_current_user
-   puts "Hello"
-   puts cookies[:username]
-   puts "Yellow"  
    if cookies[:username]
     #if usertype ==2 just query the advertiser database....if they are both an advertiser and owner, then the information is in both databases
    if cookies[:usertype] == "0"

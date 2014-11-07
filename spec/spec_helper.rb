@@ -14,14 +14,8 @@
 # users commonly want.
 
 
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
 
-# Add this to load Capybara integration:
-require 'capybara/rspec'
-require 'capybara/rails'
-
+ 
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
