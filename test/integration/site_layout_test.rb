@@ -12,4 +12,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "button[data-target=?]", "#login-modal"
     assert_select "button[data-target=?]", "#signup-modal"
   end
+
+  test "listings page" do
+    get new_listing_path
+    assert_template 'listings/new'
+    assert_select "form[class=?]", "form-horizontal col-lg-8 col-lg-offset-2"
+  end
 end
