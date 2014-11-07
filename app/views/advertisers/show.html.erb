@@ -24,13 +24,14 @@
   <strong>Usertype:</strong>
   <%= @advertiser.usertype %>
 </p>
-<a id = "create_a" class = "create_a">Create an Owner Account</a></div>
+<button id = "create_a" class = "create_a">Create an Owner Account</button></div>
 <%= link_to 'Edit Account', edit_owner_path(@advertiser) %> |
 
 <script>
 
 // Click signup button
 $('#create_a').click(function() {
+  console.log('CLICKED A');
 
 $.ajax({
        //First send a post request, get the response back. On successful message back, check the data
@@ -41,11 +42,27 @@ $.ajax({
        contentType: "application/json",
        dataType: "json",
        success: function(data){
-         signupSuccess(data);
+         console.log('SUCCESSSS S');
+         postSignup(data);
        },
        failure: function(errorMsg) {
+         console.log('FAIL A');
          failure(data);
        }
     });
 })
+
+function postSignup(data) {
+var status = data.status;
+console.log(data.status)
+console.log(<%=cookies[:usertype]%>)
+console.log('hey')
+if (status == 1) {
+  console.log(<%cookies[:usertype]%>)
+  }
+else {
+ }
+
+}
+
 </script>
