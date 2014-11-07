@@ -23,7 +23,9 @@
   <strong>Usertype:</strong>
   <%= @owner.usertype %>
 </p>
-<button id = "create_a">Create an Advertiser Account</button>
+<% if @owner.usertype != 2 %>
+   <button id = "create_a">Create an Advertiser Account</button>
+<% end %>
 <%= link_to 'Edit Account', edit_owner_path(@owner) %> |
 
 <script>
@@ -35,7 +37,6 @@ $.ajax({
        url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
        type: "POST",
        data: JSON.stringify( {usertype: 2} ),
-       //data: JSON.stringify({'user': {'username': "<%=@current_user.username%>", 'usertype': 2 }}),
        contentType: "application/json",
        dataType: "json",
        success: function(data){
