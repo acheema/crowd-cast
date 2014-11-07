@@ -17,14 +17,16 @@ class ListingsController < ApplicationController
       status = Listing.createListing(create_listing_params.merge(:owner_id => @owner.id))
       if status > 0
          params = {
-         :listing_id => status,
+            :listing_id => status,
          }
          url = "/listings/show?#{params.to_query}"
          redirect_to url
+      else
+         @listingStatus = status
       end
-    else
-      render :json => { status: -11 }
-    end
+   else
+       @listingStatus = -11
+   end
   end
 
   def new
