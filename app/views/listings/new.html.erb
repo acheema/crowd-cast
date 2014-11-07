@@ -5,8 +5,7 @@
    <%= form_for @listing, remote: true, url: {action: "createListingWithImage"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
       <% if @listing.errors.any? %>
          <div id="error_explanation">
-            <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this advertisement from being saved:</h2>
-
+            <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
             <ul>
             <% @listing.errors.full_messages.each do |message| %>
                <li><%= message %></li>
