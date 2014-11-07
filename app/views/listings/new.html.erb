@@ -2,7 +2,7 @@
 <!--Maps and GPS portions written by: Jhoong Roh -->
 <div class="create_listing">
    <h2>Create your listing</h2>
-   <%= form_for @listing, remote: true, url: {action: "createListing"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
+   <%= form_for @listing, remote: true, url: {action: "createListingWithImage"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
       <% if @listing.errors.any? %>
          <div id="error_explanation">
             <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this advertisement from being saved:</h2>
@@ -85,8 +85,9 @@
                <label for="description">Description</label>
                <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
                <%= f.label :image %>
-               <%= f.file_field :image %>
-               <%= f.submit 'Create listing' %>
+               <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+               <%= f.submit 'Create listing', id:"submit", style: "display:none", class: "btn btn-default submit" %>
+               <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create listing</button>
             </div>
          </div>
       </div>
@@ -94,15 +95,11 @@
 </div>
 
 <script type="text/javascript">
-      $('#new_listing').on('ajax:success', function(event, data, status, xhr) {
-         alert('Shai');
-         alert(data['status']);
-      });
-      $('#new_listing').on('ajax:error', function(event, data, status, xhr) {
-         window.alert('Shti');
-         alert(data['status']);
-      });
    $(document).ready(function() {
+      $('#listing_image').change(function() {
+         $('#submit').attr('style','display:show');
+         $('#hidden_submit').attr('style','display:none');
+      });
       
        var oldMarker;
        handler = Gmaps.build('Google');
@@ -157,7 +154,7 @@
           }
        });
 
-       $('#submit').click(function(e) {
+       $('#hidden_submit').click(function(e) {
           e.preventDefault();
           listingTitle = $('#listing_title').val();
           listingHeight = $('#listing_height').val();
@@ -174,8 +171,6 @@
           listingLat = document.getElementById('listing_latitude').value;
           listingLng = document.getElementById('listing_longitude').value;
           listingDescription = $('#listing_description').val();
-          imageurl = $('#listing_image').val();
-          window.alert(imageurl);
 
           $.ajax({
               type: 'POST',
@@ -184,7 +179,7 @@
                   time_per_click: listingTime, views_per_week: listingViews, cost_per_week: listingCost,
                   screen_resolution_x: listingResolutionX, street: listingStreet, city: listingCity,
                   state: listingState, zip: listingZip, screen_resolution_y: listingResolutionY,
-                  latitude: listingLat, longitude: listingLng, description: listingDescription, image: imageurl }),
+                  latitude: listingLat, longitude: listingLng, description: listingDescription }),
               contentType: "application/json",
               dataType: "json",
               success: function(data) {

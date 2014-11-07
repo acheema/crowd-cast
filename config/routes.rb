@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     match '/api/TESTAPI_resetMessageFixture', to: 'listings#resetFixture', via: 'get'
     match '/api/create_ad', to: 'advertisements#createAd', via: 'post'
     match '/api/TESTAPI_tests', to: 'application#tests', via: 'get'
+    match '/api/create_listing_with_image', to: 'listings#createListingWithImage', via: 'post'
+
        #match 'listings/new', to: 'listing#new', via: 'get'
 
     # The priority is based upon order of creation: first created -> highest priority.
