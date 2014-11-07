@@ -12,17 +12,14 @@ class ListingsController < ApplicationController
     username = cookies[:username]
     owner_id = Owner.find_by_username(username).id
     status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
-    respond_to do |format|
-      if status > 0
-        params = {
-          :listing_id => status,
-        }
-        url = "/listings/show?#{params.to_query}"
-        redirect_to url
-      else
-        format.html { render action: 'createListingWithImage' }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
-      end
+    if status > 0
+      params = {
+        :listing_id => status,
+      }
+      url = "/listings/show?#{params.to_query}"
+      redirect_to url
+    else
+      @listingStatus = status
     end
   end
 
