@@ -42,7 +42,7 @@
          new_markers = {};
          _.each(<%=raw @markers.to_json %>, function(json, index){
             $(".location" + json.id).on('mouseenter', function() {
-               var current_marker = markers[index]
+               var current_marker = markers[index];
                markers[index] = handler.addMarker(json, { "opacity": 1.0 });
                handler.removeMarker(current_marker);
             });
