@@ -5,13 +5,19 @@ class ListingsController < ApplicationController
     username = cookies[:username]
     owner_id = Owner.find_by_username(username).id
     status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
+    render :json => { status: status }
+  end
+  
+  def createListingWithImage
+    username = cookies[:username]
+    owner_id = Owner.find_by_username(username).id
+    status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
     if status > 0
       params = {
         :listing_id => status,
       }
       url = "/listings/show?#{params.to_query}"
       redirect_to url
-      #render :json => { status: status }
     end
   end
 
