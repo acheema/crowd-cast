@@ -1,51 +1,55 @@
 <!--Written by Jhoong-->
-<div id="dashboard">
-  <div id="messages">
-         <h1 align="center">Messages</h1>
-         <form class="form-horizontal col-lg-8 col-lg-offset-2">
-            <label for="title">New Messages</label> 
-            <div class="form-group" style="overflow-y: scroll; height: 300px; border: 1px solid;">
-               <div class="table-responsive">
-                  <table class="table table-striped table-bordered">
-                     <tbody>
-                        <% @messages.each do |message|%>
-                           <% if not message.viewed then %>
-                              <tr onclick="send_message('<%=message.listing_title%>', '<%=message.text%>', '<%=message.from_username%>')">
-                                 <td class="listinfo"><%=message.listing_title%></td>
-                                 <td class="listinfo"><%=message.text%></td>
-                              </tr>
-                           <% end %>
-                        <% end %>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-            <label for="title">Viewed Messages</label> 
-            <div class="form-group" style="overflow-y: scroll; height: 300px; border: 2px solid;">
-               <% @messages.each do |message|%>
-               <% if message.viewed then %>
-               <h3> <%= message.text %> <%= message.viewed %> </h3>
-               <% end %>
-               <% end %>
-            </div>
-         </form>
-   </div>
-   <div id="ads">
-   <h1 align="center">Current Advertisements</h1>
-    <%if @current_ads then %>
-	    <% @current_ads.each do |ad|%>
-	      <%= div_for ad, :class => "col-lg-4 result" do %>
-		    <div class="content">
-		         <div class="content" style="background-color: #d3d3d3; height: 200px;"></div>
-            <h4>
-		        <a><%= ad.title %></a>
-		      </h4>
-		         <p><%= "#{ad.screen_resolution_x}, #{ad.screen_resolution_y}" %></p>
-		         <p><%= "#{ad.description}" %></p>
-         </div>
-	      <% end %>
-	   <% end %>
-	<% end %>
-  </div>
-</div>
 
+    <div id="dashboard">
+        <div id="messages">
+            <h1 style="text-align: center">Messages</h1>
+
+            <form class="form-horizontal col-lg-8 col-lg-offset-2">
+                <label for="title">New Messages</label>
+
+                <div class="form-group" style=
+                "overflow-y: scroll; height: 300px; border: 1px solid;">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <% @messages.each do |message|%><% if not message.viewed then %>
+
+                                <tr onclick=
+                                "send_message('&lt;%=message.listing_title%&gt;', '&lt;%=message.text%&gt;', '&lt;%=message.from_username%&gt;')">
+                                <td class="listinfo">
+                                <%=message.listing_title%></td>
+
+                                    <td class="listinfo"><%=message.text%></td>
+                                </tr><% end %><% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><label for="title">Viewed Messages</label>
+
+                <div class="form-group" style=
+                "overflow-y: scroll; height: 300px; border: 2px solid;">
+                    <% @messages.each do |message|%><% if message.viewed then %>
+
+                    <h3><%= message.text %>
+                    <%= message.viewed %></h3><% end %><% end %>
+                </div>
+            </form>
+        </div>
+
+        <div id="ads">
+            <h1 style="text-align: center">Current
+            Advertisements</h1><%if @current_ads then %><% @current_ads.each do |ad|%><%= div_for ad, :class => "col-lg-4 result" do %>
+
+            <div class="content">
+                <div class="content" style=
+                "background-color: #d3d3d3; height: 200px;"></div>
+
+                <h4><a><%= ad.title %></a></h4>
+
+                <p>
+                <%= "#{ad.screen_resolution_x}, #{ad.screen_resolution_y}" %></p>
+
+                <p><%= "#{ad.description}" %></p>
+            </div><% end %><% end %><% end %>
+        </div>
+    </div>

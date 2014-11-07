@@ -1,18 +1,12 @@
 <p id="notice"><%= notice %></p>
+<br>
+<br>
+<br>
+<br>
 
 <p>
   <strong>Username:</strong>
   <%= @owner.username %>
-</p>
-
-<p>
-  <strong>Password salt:</strong>
-  <%= @owner.password_salt %>
-</p>
-
-<p>
-  <strong>Password hash:</strong>
-  <%= @owner.password_hash %>
 </p>
 
 <p>
@@ -29,6 +23,41 @@
   <strong>Usertype:</strong>
   <%= @owner.usertype %>
 </p>
+<button id = "create_a">Create an Advertiser Account</button>
+<%= link_to 'Edit Account', edit_owner_path(@owner) %> |
 
-<%= link_to 'Edit', edit_owner_path(@owner) %> |
-<%= link_to 'Back', owners_path %>
+<script>
+
+// Click signup button
+$('#create_a').click(function() {
+$.ajax({
+       //First send a post request, get the response back. On successful message back, check the data
+       url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
+       type: "POST",
+       data: JSON.stringify({username: "<%=@current_user.username%>", usertype: 2 }),
+       contentType: "application/json",
+       dataType: "json",
+       success: function(data){
+         console.log("sign up success");
+         signupSuccess(data);
+       },
+       failure: function(errorMsg) {
+          console.log("sign up fail");
+
+         failure(data);
+       }
+
+    });
+})
+
+function signupSuccess(data) {
+var status = data.status;
+if (status == 1) {
+  }
+else {
+ 
+ }
+
+}
+
+</script>

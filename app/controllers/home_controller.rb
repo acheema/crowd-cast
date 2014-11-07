@@ -22,7 +22,7 @@ def set_current_user
    #if usertype ==2 just query the advertiser database....if they are both an advertiser and owner, then the information is in both databases
    if cookies[:usertype] == "0" || cookies[:usertype] == "2"
      @current_user ||= Advertiser.find_by(username: cookies[:username])
-
+  
    elsif cookies[:usertype] == "1"
      @current_user ||= Owner.find_by(username: cookies[:username])
    # user is both an advertiser and owner

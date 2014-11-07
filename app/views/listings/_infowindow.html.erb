@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-   <div>
-      <h1>What up</h1>
-   </div>
+   <a href="/listings/show?listing_id=<%=listing.id%>">
+      <div>
+         <h1><%=listing.title%></h1>
+         <h5><%=listing.views_per_week%></h5>
+         <h5>$<%=listing.cost_per_week%></h5>
+      </div>
+   </a>
 </html>

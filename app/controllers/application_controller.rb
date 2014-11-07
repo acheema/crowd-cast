@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
    #protect_from_forgery with: :exception
    #protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
 
-   before_filter :set_cache_buster
+   before_filter :set_cache_buster, :set_current_user
    helper_method :set_current_user
-   before_filter :set_current_user
-   
+
+
    # POST /api/TESTAPI_tests
    def tests(command="rake test RAILS_ENV=test")
       # Run the command
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
          render :json => { output: output }
       end
    end
-
+ 
 private
   def set_cache_buster
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
@@ -42,9 +42,12 @@ private
   end
 
 def set_current_user
+   puts "Hello"
+   puts cookies[:username]
+   puts "Yellow"  
    if cookies[:username]
     #if usertype ==2 just query the advertiser database....if they are both an advertiser and owner, then the information is in both databases
-    if cookies[:usertype] == "0"
+   if cookies[:usertype] == "0"
       @current_user ||= Advertiser.find_by(username: cookies[:username])
       @dashboard_state = 0
     elsif cookies[:usertype] == "1"
