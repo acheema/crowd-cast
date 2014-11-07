@@ -12,18 +12,10 @@
 #
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-
-
-
- 
-
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require File.expand_path("../../config/environment", __FILE__)
 RSpec.configure do |config|
-
-
-  config.include Capybara::DSL
-
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
