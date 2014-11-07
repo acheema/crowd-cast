@@ -12,12 +12,12 @@
 
 <p>
   <strong>Screen resolution x:</strong>
-  <%= @advertisement.screen_resolution_x %>
+  <%= @advertisement.width %>
 </p>
 
 <p>
   <strong>Screen resolution y:</strong>
-  <%= @advertisement.screen_resolution_y %>
+  <%= @advertisement.height %>
 </p>
 
 <p>
@@ -27,7 +27,7 @@
 
 <p>
   <strong>Advertisement url:</strong>
-  <%= @advertisement.advertisement_url %>
+  <%= @advertisement.ad.url %>
 </p>
 
 <%= link_to 'Edit', edit_advertisement_path(@advertisement) %> |
