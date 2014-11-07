@@ -1,94 +1,46 @@
 <!--Written by: Akaljot Cheema -->
 <!--Maps and GPS portions written by: Jhoong Roh -->
-
-<br><br><br><br><br><br>
-<%= form_for @listing, url: {action: "createListing"}, html: {class: "container-main"}, method: "post" do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <br>
-    <%= f.label :height %>
-    <%= f.number_field :height %>
-    <br>
-    <%= f.label :width %>
-    <%= f.number_field :width %>
-    <br>
-    <%= f.label :screen_resolution_x %>
-    <%= f.number_field :screen_resolution_x %>
-    <br>
-    <%= f.label :screen_resolution_y %>
-    <%= f.number_field :screen_resolution_y%>
-    <br>
-    <%= f.label :time_per_click %>
-    <%= f.number_field :time_per_click %>
-    <br>
-    <%= f.label :views_per_week %>
-    <%= f.number_field :views_per_week %>
-    <br>
-    <%= f.label :cost_per_week %>
-    <%= f.number_field :cost_per_week %>
-    <br>
-    <%= f.label :street %>
-    <%= f.text_field :street %>
-    <br>
-    <%= f.label :city%>
-    <%= f.text_field :city %>
-    <br>
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-    <br>
-    <%= f.label :zip %>
-    <%= f.number_field :zip %>
-    <br>
-    <%= f.label :latitude %>
-    <%= f.number_field :latitude %>
-    <br>
-    <%= f.label :longitude %>
-    <%= f.number_field :longitude %>
-    <br>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-    <br>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-    <br>
-    <%= f.submit 'Create listing' %>
- <% end %>
-<!--
-<div class="container main">
+<div class="create_listing">
    <h2>Create your listing</h2>
-   <form class="form-horizontal col-lg-8 col-lg-offset-2">
+   <%= form_for @listing, remote: true, url: {action: "createListing"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
+      <% if @listing.errors.any? %>
+         <div id="error_explanation">
+            <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this advertisement from being saved:</h2>
+
+            <ul>
+            <% @listing.errors.full_messages.each do |message| %>
+               <li><%= message %></li>
+            <% end %>
+            </ul>
+         </div>
+      <% end %>
       <div class="form-group">
-         <label for="title">Title</label> <input class="form-control"
-            id="title" placeholder="Enter title" type="text">
+            <label for="title">Title</label>
+            <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
       </div>
       <div class="form-group info">
          <label>Address</label>
          <div class="form-inline">
              <div class="form-group">
-               <input class="form-control address" id="street"
-                  placeholder="Enter street" type="text">
+               <%= f.text_field :street, class: "form-control address", placeholder: "Enter street"%>
             </div>
             <div class="form-group">
-               <input class="form-control address" id="city"
-                  placeholder="Enter city" type="text">
+               <%= f.text_field :city, class: "form-control address", placeholder: "Enter city"%>
             </div>
             <div class="form-group">
-
-               <input class="form-control address" id="state"
-                  placeholder="Enter state" type="text">
-            </div>
+               <%= f.text_field :state, class: "form-control address", placeholder: "Enter state"%>
+            </div> 
             <div class="form-group">
-               <input class="form-control address" id="zip"
-                  placeholder="Enter zip" type="number">
-            </div>
+               <%= f.text_field :zip, class: "form-control address", placeholder: "Enter zip"%>
+            </div> 
          </div>
       </div>
       <div class="form-group">
          <label>GPS Location</label>
          <div class="form-inline">
             <div class="form-group">
-               <input class="form-control gps" id="lat" placeholder="Enter latitude" type="text">
-               <input class="form-control gps" id="lng" placeholder="Enter longitude" type="text">
+               <%= f.number_field :latitude, step: 'any', class: "text_field form-control gps", placeholder: "Enter latitude" %>
+               <%= f.number_field :longitude, step: 'any', class: "text_field form-control gps", placeholder: "Enter longitude" %>
             </div>
             <div class="form-group">
                <div class="select-gps" id="select_location"></div>
@@ -101,20 +53,19 @@
                <div class="form-group info">
                   <div class='form-inline'>
                      <label class="control-label" for="height">Height</label>
-                     <input class="form-control" id="height" placeholder="Enter height" type="number">
+                     <%= f.number_field :height, class: "form-control", placeholder: "Enter height" %>
                      <label class="control-label" for="width">Width</label>
-                     <input class="form-control" id="width" placeholder="Enter width" type="number">
+                     <%= f.number_field :width, class: "form-control", placeholder: "Enter width" %>
                   </div>
                </div>
             </div>
             <div class="col-lg-4">
                <div class="form-group info">
                   <div class='form-inline'>
-                     <label for="views">Views per week</label> <input class=
-                        "form-control" id="views" placeholder="Enter views"
-                        type="number"> <label for="cost">Cost per week</label>
-                     <input class="form-control" id="cost" placeholder=
-                        "Enter cost" type="number">
+                     <label for="views">Views per week</label> 
+                     <%= f.number_field :views_per_week, class: "form-control", placeholder: "Enter views" %>
+                     <label for="cost">Cost per week</label>
+                     <%= f.number_field :cost_per_week, class:"form-control", placeholder:"Enter cost" %>
                   </div>
                </div>
             </div>
@@ -122,53 +73,46 @@
                <div class="form-group info">
                   <div class='form-inline'>
                      <label for="time">Time per click</label>
-                     <input class="form-control" id="time" placeholder="Enter time (s)" type="number">
+                     <%= f.number_field :time_per_click, class: "form-control", placeholder: "Enter time (s)" %>
                      <label for="resolution">Screen Resolution X</label>
-                     <input class="form-control" id="screen_resolution_x" placeholder="Enter resolution" type="number">
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-4">
-               <div class="form-group info">
-                  <div class='form-inline'>
+                     <%= f.number_field :screen_resolution_x, class:"form-control", placeholder:"Enter resolution x" %>
                      <label for="resolution">Screen Resolution Y</label>
-                     <input class="form-control" id="screen_resolution_y" placeholder="Enter resolution" type="number">
+                     <%= f.number_field :screen_resolution_y, class:"form-control", placeholder:"Enter resolution y" %>
                   </div>
                </div>
             </div>
+            <div class="form-group">
+               <label for="description">Description</label>
+               <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
+               <%= f.label :image %>
+               <%= f.file_field :image %>
+               <%= f.submit 'Create listing' %>
+            </div>
          </div>
       </div>
-      <div class="form-group">
-         <label for="description">Description</label>
-         <textarea class="form-control" id="description" placeholder="Enter more information" rows="6">
-         </textarea>
-
-      <input type="file" id="files" name="files[]" multiple />
-      <output id="list"></output>
-      <div class="form-group">
-         <div class="col-lg-offset-1 col-lg-10">
-            <button class="btn btn-default" id="submit" type="submit">Submit</button>
-         </div>
-      </div>
-   </form>
-
-
+   <% end %>
 </div>
--->
-
-
 
 <script type="text/javascript">
+      $('#new_listing').on('ajax:success', function(event, data, status, xhr) {
+         alert('Shai');
+         alert(data['status']);
+      });
+      $('#new_listing').on('ajax:error', function(event, data, status, xhr) {
+         window.alert('Shti');
+         alert(data['status']);
+      });
    $(document).ready(function() {
+      
        var oldMarker;
        handler = Gmaps.build('Google');
 
        //When the address changes, create a marker on the map
        $('.address').change(function() {
-          listingStreet = document.getElementById('street').value;
-          listingCity = document.getElementById('city').value;
-          listingState = document.getElementById('state').value;
-          listingZip = document.getElementById('zip').value;
+          listingStreet = document.getElementById('listing_street').value;
+          listingCity = document.getElementById('listing_city').value;
+          listingState = document.getElementById('listing_state').value;
+          listingZip = document.getElementById('listing_zip').value;
 
           if ((listingStreet != "") && (listingCity != "") && (listingState != "") && (listingZip != "")){
              clearGPS();
@@ -198,8 +142,8 @@
 
        //When the user inputs GPS coordinates, create a marker
        $('.gps').change(function() {
-          listingLat = document.getElementById('lat').value;
-          listingLng = document.getElementById('lng').value;
+          listingLat = document.getElementById('listing_latitude').value;
+          listingLng = document.getElementById('listing_longitude').value;
           if ((listingLat != "") && (listingLng != "")){
              clearAddress();
              if (oldMarker != null){
@@ -213,57 +157,25 @@
           }
        });
 
-       var reader = new FileReader();
-
-         function handleFileSelect(evt) {
-          var files = evt.target.files; // FileList object
-
-          // Loop through the FileList and render image files as thumbnails.
-          for (var i = 0, f; f = files[i]; i++) {
-
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-              continue;
-            }
-
-            // Closure to capture the file information.
-            reader.onload = (function(theFile) {
-              return function(e) {
-                // Render thumbnail.
-                var span = document.createElement('span');
-                span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                  '" title="', escape(theFile.name), '"/>'].join('');
-                document.getElementById('list').insertBefore(span, null);
-              };
-            })(f);
-
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
-          }
-        }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
        $('#submit').click(function(e) {
-         console.log("hello");
           e.preventDefault();
-          listingTitle = $('#title').val();
-          listingHeight = $('#height').val();
-          listingWidth = $('#width').val();
-          listingTime = $('#time').val();
-          listingViews = $('#views').val();
-          listingCost = $('#cost').val();
-          listingResolutionX = $('#screen_resolution_x').val();
-          listingResolutionY = $('#screen_resolution_y').val();
-          listingStreet = $('#street').val();
-          listingCity = $('#city').val();
-          listingState = $('#state').val();
-          listingZip = $('#zip').val();
-          listingLat = document.getElementById('lat').value;
-          listingLng = document.getElementById('lng').value;
-          listingDescription = $('#description').val();
-          imageurl = $('#imagefile').val();
-
+          listingTitle = $('#listing_title').val();
+          listingHeight = $('#listing_height').val();
+          listingWidth = $('#listing_width').val();
+          listingTime = $('#listing_time_per_click').val();
+          listingViews = $('#listing_views_per_week').val();
+          listingCost = $('#listing_cost_per_week').val();
+          listingResolutionX = $('#listing_screen_resolution_x').val();
+          listingResolutionY = $('#listing_screen_resolution_y').val();
+          listingStreet = $('#listing_street').val();
+          listingCity = $('#listing_city').val();
+          listingState = $('#listing_state').val();
+          listingZip = $('#listing_zip').val();
+          listingLat = document.getElementById('listing_latitude').value;
+          listingLng = document.getElementById('listing_longitude').value;
+          listingDescription = $('#listing_description').val();
+          imageurl = $('#listing_image').val();
+          window.alert(imageurl);
 
           $.ajax({
               type: 'POST',
@@ -272,7 +184,7 @@
                   time_per_click: listingTime, views_per_week: listingViews, cost_per_week: listingCost,
                   screen_resolution_x: listingResolutionX, street: listingStreet, city: listingCity,
                   state: listingState, zip: listingZip, screen_resolution_y: listingResolutionY,
-                  latitude: listingLat, longitude: listingLng, description: listingDescription }),
+                  latitude: listingLat, longitude: listingLng, description: listingDescription, image: imageurl }),
               contentType: "application/json",
               dataType: "json",
               success: function(data) {
@@ -363,21 +275,21 @@
       }
       //Set the GPS fields while clearing the address fields
       function setLatLng(lat, lng){
-         document.getElementById('lat').value = lat;
-         document.getElementById('lng').value = lng;
+         document.getElementById('listing_latitude').value = lat;
+         document.getElementById('listing_longitude').value = lng;
          clearAddress();
       }
       //Clear the address fields.
       function clearAddress(){
-         document.getElementById('street').value = null;
-         document.getElementById('city').value = null;
-         document.getElementById('state').value = null;
-         document.getElementById('zip').value = null;
+         document.getElementById('listing_street').value = null;
+         document.getElementById('listing_city').value = null;
+         document.getElementById('listing_state').value = null;
+         document.getElementById('listing_zip').value = null;
       }
       //Clear the GPS fields
       function clearGPS(){
-         document.getElementById('lat').value = null;
-         document.getElementById('lng').value = null;
+         document.getElementById('listing_latitude').value = null;
+         document.getElementById('listing_longitude').value = null;
       }
 
 
