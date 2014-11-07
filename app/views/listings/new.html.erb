@@ -1,6 +1,59 @@
 <!--Written by: Akaljot Cheema -->
 <!--Maps and GPS portions written by: Jhoong Roh -->
 
+<br><br><br><br><br><br>
+<%= form_for @listing, url: {action: "createListing"}, html: {class: "container-main"}, method: "post" do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :height %>
+    <%= f.number_field :height %>
+    <br>
+    <%= f.label :width %>
+    <%= f.number_field :width %>
+    <br>
+    <%= f.label :screen_resolution_x %>
+    <%= f.number_field :screen_resolution_x %>
+    <br>
+    <%= f.label :screen_resolution_y %>
+    <%= f.number_field :screen_resolution_y%>
+    <br>
+    <%= f.label :time_per_click %>
+    <%= f.number_field :time_per_click %>
+    <br>
+    <%= f.label :views_per_week %>
+    <%= f.number_field :views_per_week %>
+    <br>
+    <%= f.label :cost_per_week %>
+    <%= f.number_field :cost_per_week %>
+    <br>
+    <%= f.label :street %>
+    <%= f.text_field :street %>
+    <br>
+    <%= f.label :city%>
+    <%= f.text_field :city %>
+    <br>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+    <br>
+    <%= f.label :zip %>
+    <%= f.number_field :zip %>
+    <br>
+    <%= f.label :latitude %>
+    <%= f.number_field :latitude %>
+    <br>
+    <%= f.label :longitude %>
+    <%= f.number_field :longitude %>
+    <br>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <br>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <br>
+    <%= f.submit 'Create listing' %>
+ <% end %>
+<!--
 <div class="container main">
    <h2>Create your listing</h2>
    <form class="form-horizontal col-lg-8 col-lg-offset-2">
@@ -89,22 +142,22 @@
          <label for="description">Description</label>
          <textarea class="form-control" id="description" placeholder="Enter more information" rows="6">
          </textarea>
-      </div>
+
+      <input type="file" id="files" name="files[]" multiple />
+      <output id="list"></output>
       <div class="form-group">
          <div class="col-lg-offset-1 col-lg-10">
             <button class="btn btn-default" id="submit" type="submit">Submit</button>
          </div>
       </div>
    </form>
-   <!--Image upload - work in progress
-      <div class="form-group">
-         <input id="file" type="file" multiple=true>
-      </div>
-      -->
-   <%= form_for :listing, :html => { :multipart => true } do |form| %>
-   <%= form.file_field :image %>
-   <% end %>
+
+
 </div>
+-->
+
+
+
 <script type="text/javascript">
    $(document).ready(function() {
        var oldMarker;
@@ -160,6 +213,37 @@
           }
        });
 
+       var reader = new FileReader();
+
+         function handleFileSelect(evt) {
+          var files = evt.target.files; // FileList object
+
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+              continue;
+            }
+
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+              return function(e) {
+                // Render thumbnail.
+                var span = document.createElement('span');
+                span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                  '" title="', escape(theFile.name), '"/>'].join('');
+                document.getElementById('list').insertBefore(span, null);
+              };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+          }
+        }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
        $('#submit').click(function(e) {
          console.log("hello");
           e.preventDefault();
@@ -178,6 +262,9 @@
           listingLat = document.getElementById('lat').value;
           listingLng = document.getElementById('lng').value;
           listingDescription = $('#description').val();
+          imageurl = $('#imagefile').val();
+
+
           $.ajax({
               type: 'POST',
               url: window.location.protocol + '//' + window.location.host + "/api/create_listing/",

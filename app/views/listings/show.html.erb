@@ -1,5 +1,54 @@
 <!--Written by: Akaljot, Jessica, Jhoong -->
   <style>
+    #btn-messageOwner {
+      background-color: #4c4cff;
+      color: white;
+    }
+
+    #field-messageBody {
+      color:#000000;
+      height: 300px;
+      width:500px;  
+    }
+
+    #field-messageSubject {
+      color: #000000;
+      font-size: 15px;
+      height: 30px;
+      width: 500px;
+    }
+
+
+    .hideMessage {
+      display: none;
+    }
+
+    .field-boldFont {
+      font-weight: bold;
+    }
+
+    .modal-dialog {
+      width:600px !important;
+    }
+
+    #field-messageBody {
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      padding: 3px 0px 3px 3px;
+      margin: 5px 1px 3px 0px;
+      border: 2px solid #6d91a3;
+    }
+
+    #field-messageBody:focus {
+      box-shadow: 0 0 5px red;
+      padding: 3px 0px 3px 3px;
+      margin: 5px 1px 3px 0px;
+      border: 1px solid red;
+    }
+
   .form-inline .form-group{
     margin-left: 0;
     margin-right: 0;
@@ -75,7 +124,7 @@
           <div class="col-lg-6">
               <br><br>
               <div>
-                <button class="btn btn-default" type="button" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
+                <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
               </div>
               <div class="table-responsive">
                   <table class="table table-striped table-bordered">
@@ -141,7 +190,7 @@
 </div>
 
 <div class="modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
-  <div class="modal-dialog" style="width:600px !important" >
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -149,13 +198,15 @@
       </div>
       <div class="modal-body">
         <form>
-            <div class="alert in" id="message-error" style="display:none;">
+            <div class="alert in" id="message-error">
                  Invalid message!
             </div>
-            <div class="success in" id="message-success" style="display:none;">
+            <div class="success in hideMessage" id="message-success">
                  Successful message!
             </div>
-            <p><label>Message</label><textarea class="message_area" id="message" style="width:500px; resize: vertical; color:#000000"></textarea></p>
+            <p><label>To</label><div class="field-boldFont"><%= @owner_username %></div></p>
+            <p><label>Subject</label><div class="field-boldFont"><%= @listing.title %></div></p>
+            <p><label>Message</label><textarea class="message_field inlineField" id="field-messageBody"></textarea></p>
             <p><button id="send">Send</button></p>
         </form>
       </div>
@@ -187,7 +238,7 @@
             //First send a post request, get the response back. On successful message back, check the data
             url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
             type: "POST",
-            data: JSON.stringify({listing_id: '<%=@listing.id%>', listing_title: '<%=@listing.title%>', to_username: '<%=@owner_username %>', text: $('#message').val()}),
+            data: JSON.stringify({listing_id: '<%=@listing.id%>', listing_title: '<%=@listing.title%>', to_username: '<%=@owner_username %>', text: $('#field-messageBody').val()}),
             contentType: "application/json",
             dataType: "json",
             success: function(data){
@@ -203,7 +254,7 @@
             }
          });
     });
-    $('#message').on('change keyup paste', function(e) {
+    $('#field-messageBody').on('change keyup paste', function(e) {
       $('#message-error').hide();
       $('#message-success').hide();
    });
