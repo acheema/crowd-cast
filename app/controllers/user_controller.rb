@@ -30,7 +30,6 @@ class UserController < ApplicationController
                                         :usertype => 2, \
                                         :email => owner.email})
                owner.update_attribute(:usertype, 2)
-               puts owner.errors.full_messages.first
                user.update_attributes :password_hash => owner.password_hash,
                                       :password_salt => owner.password_salt
 
@@ -43,7 +42,7 @@ class UserController < ApplicationController
                                         :company => create_params[:company], \
                                         :usertype => 2, \
                                         :email => advertiser.email})
-               advertiser.usertype = 2
+               advertiser.update_attribute(:usertype, 2)
                user.update_attributes :password_hash => advertiser.password_hash,
                                       :password_salt => advertiser.password_salt
 
