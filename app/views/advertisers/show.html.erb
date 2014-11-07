@@ -36,7 +36,8 @@ $.ajax({
        //First send a post request, get the response back. On successful message back, check the data
        url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
        type: "POST",
-       data: JSON.stringify({username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val() }),
+       data: JSON.stringify( {usertype: 2} ),
+       //data: JSON.stringify({username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val() }),
        contentType: "application/json",
        dataType: "json",
        success: function(data){

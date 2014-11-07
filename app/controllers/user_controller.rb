@@ -29,7 +29,8 @@ class UserController < ApplicationController
                                         :company => owner[:company], \
                                         :usertype => 2, \
                                         :email => owner.email})
-               owner.update_attributes :usertype => 2
+               owner.update_attribute(:usertype, 2)
+               puts owner.errors.full_messages.first
                user.update_attributes :password_hash => owner.password_hash,
                                       :password_salt => owner.password_salt
 
@@ -42,13 +43,14 @@ class UserController < ApplicationController
                                         :company => create_params[:company], \
                                         :usertype => 2, \
                                         :email => advertiser.email})
-               advertiser.update_attributes :usertype => 2
+               advertiser.usertype = 2
                user.update_attributes :password_hash => advertiser.password_hash,
                                       :password_salt => advertiser.password_salt
 
             end
          else
             #Should never reach here
+            puts "SHOULDNT BE HERE"
             render :json => { status: -5 } and return
          end
 
