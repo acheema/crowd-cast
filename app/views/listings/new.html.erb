@@ -1,7 +1,8 @@
 <!--Written by: Akaljot Cheema -->
 <!--Maps and GPS portions written by: Jhoong Roh -->
 
-<br><br><br><br><br><br>
+<br><br><br>
+<h2>Create a listing</h2>
 <%= form_for @listing, url: {action: "createListing"}, html: {class: "container-main"}, method: "post" do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
