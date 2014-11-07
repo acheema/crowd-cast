@@ -3,17 +3,6 @@
 <div class="create_listing">
    <h2>Create your listing</h2>
    <%= form_for @listing, remote: true, url: {action: "createListingWithImage"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
-      <% if @listing.errors.any? %>
-         <div id="error_explanation">
-            <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this advertisement from being saved:</h2>
-
-            <ul>
-            <% @listing.errors.full_messages.each do |message| %>
-               <li><%= message %></li>
-            <% end %>
-            </ul>
-         </div>
-      <% end %>
       <div class="form-group">
             <label for="title">Title</label>
             <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
@@ -88,6 +77,9 @@
                <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
                <%= f.submit 'Create listing', id:"submit", style: "display:none", class: "btn btn-default submit" %>
                <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create listing</button>
+               <% if @listingStatus.inspect.to_f < 0 %>
+                  <p>Something went wrong bro</p>
+               <% end %>
             </div>
          </div>
       </div>

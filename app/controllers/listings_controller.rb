@@ -18,6 +18,8 @@ class ListingsController < ApplicationController
       }
       url = "/listings/show?#{params.to_query}"
       redirect_to url
+    else
+      @listingStatus = status
     end
   end
 
