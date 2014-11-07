@@ -39,6 +39,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'rmagick', '2.13.2'
 gem 'simplecov', :require => false
 # for heroku
 group :production do
