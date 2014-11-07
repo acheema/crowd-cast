@@ -75,10 +75,7 @@ class OwnersController < ApplicationController
 
   def reset_cookie
     cookies.permanent[:dashboard_state] = 1
-    p "before dashboard should be 0 - yellow", @dashboard_state
     @dashboard_state = 1
-    p "after dashboard 1 -blue for owner", @dashboard_state
-
   end
 
   private
