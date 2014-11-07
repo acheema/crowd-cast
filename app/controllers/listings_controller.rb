@@ -9,6 +9,11 @@ class ListingsController < ApplicationController
     render :json => { status: status }
   end
 
+  def new
+    @listing = Listing.new
+  end
+
+
   def getListings
     listings = Listing.getListings(listings_params[:city])
     render :json => { status: 1, listings: listings }
