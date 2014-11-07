@@ -1,5 +1,51 @@
 <!--Written by Jessica Wong-->
 
+<style>
+  .field-bold {
+    font-weight: bold;
+  }
+
+  .hideMessage {
+    display: none;
+  }
+
+  .messageLabel {
+    font-size: 14px !important;
+  }
+
+  #field-replyMessageBody {
+    color:#000000;
+    height: 300px;
+    width:500px;  
+  }
+
+  .modal-dialog {
+    width:600px !important;
+  }
+
+  #field-replyId {
+    display: none;
+  }
+
+   #field-replyMessageBody {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 2px solid #6d91a3;
+  }
+
+   #field-replyMessageBody:focus {
+    box-shadow: 0 0 5px red;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid red;
+  }
+</style>
+
 <div id="dashboard">
   <div id="messages">
          <h1 align="center">Messages</h1>
@@ -11,8 +57,11 @@
                      <tbody>
                         <% @messages.each do |message|%>
                            <% if not message.viewed then %>
-                              <tr onclick="send_message('<%=message.listing_title%>', '<%=message.text%>', '<%=message.from_username%>')">
-                                 <td class="listinfo"><%=message.listing_title%></td>
+                              <tr>
+                                 <td class="listinfo">
+                                  <a class="message-listing-link" data-toggle="modal" data-target="#reply-message-modal", data-subject="<%=message.listing.title%>" data-message="<%=message.text%>", data-from="<%=message.from_username%>" data-id="<%=message.listing.id%>", href="#">
+                                      <%=message.listing_title%>
+                                    </a></td>
                                  <td class="listinfo"><%=message.text%></td>
                               </tr>
                            <% end %>
@@ -31,6 +80,7 @@
             </div>
          </form>
    </div>
+  
    <div id="listings">
    <h1 align="center">Current Listings</h1>
     <%if @current_listings then %>
@@ -55,25 +105,75 @@
   </div>
 </div>
 
-<div class="modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
-  <div class="modal-dialog" style="width:600px !important" >
+<div class="modal" id="reply-message-modal" tabindex="-1" role="dialog" aria-labelledby="reply-message-modal" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Send Message</h4>
+        <h4 class="modal-title">Send Message To Owner</h4>
       </div>
       <div class="modal-body">
         <form>
-            <div class="alert in" id="message-error" style="display:none;">
+            <p><div class="field-bold" id="field-replyId" value=""></div></p>
+            <p><label class="messageLabel">From</label><div class="field-bold" id="field-replyFrom" value=""></div></p>
+            <p><label class="messageLabel">Subject</label><div class="field-bold" id="field-replySubject" value=""></div></p>
+            <p><label class="messageLabel">Message</label><div id="field-replyMessageContent" value=""></div></p>
+            <div class="alert in hideMessage" id="message-error">
                  Invalid message!
             </div>
-            <div class="success in" id="message-success" style="display:none;">
+            <div class="success in hideMessage" id="message-success">
                  Successful message!
             </div>
-            <p><label>Message</label><textarea class="message_area" id="message" style="width:500px; resize: vertical; color:#000000"></textarea></p>
+            <p><label>Reply</label><textarea class="message_field inlineField" id="field-replyMessageBody"></textarea></p>
             <p><button id="send">Send</button></p>
         </form>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).on("click", ".message-listing-link", function () {
+    var id =  $(this).data('id');
+    var message = $(this).data('message');
+    var from = $(this).data('from')
+    var subject = $(this).data('subject');
+
+    $('#field-replyId').text(id);
+    $("#field-replyFrom").text(from);
+    $("#field-replyMessageContent").text(message);
+    $('#field-replySubject').text(subject);
+  }); 
+
+  $('#send').click(function(e) {
+
+      var id =  document.getElementById('field-replyId').innerHTML;
+      var text = $('#field-replyMessageBody').val(); 
+      var title = document.getElementById('field-replySubject').innerHTML;
+      var to_user = document.getElementById('field-replyFrom').innerHTML;
+
+      e.preventDefault();
+      $.ajax({
+            //First send a post request, get the response back. On successful message back, check the data
+            url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
+            type: "POST",
+            data: JSON.stringify({listing_id: id, listing_title: title, to_username: to_user, text: text}),
+            contentType: "application/json",
+            dataType: "json",
+            success: function(data){
+               if (data.status == -1){
+                  $('#message-error').show();
+               }
+               else if (data.status == 1){
+                  $('#message-success').show();
+               } 
+            },
+            failure: function(errorMsg) {
+               failure(data);
+            }
+         });
+    });
+    $('#field-replySubject').on('change keyup paste', function(e) {
+      $('#message-error').hide();
+      $('#message-success').hide();
+   });
+</script>

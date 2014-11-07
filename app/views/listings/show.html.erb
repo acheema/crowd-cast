@@ -18,6 +18,9 @@
       width: 500px;
     }
 
+    .messageLabel {
+      font-size: 14px !important;
+    }
 
     .hideMessage {
       display: none;
@@ -198,15 +201,15 @@
       </div>
       <div class="modal-body">
         <form>
-            <div class="alert in" id="message-error">
+            <div class="alert in hideMessage" id="message-error">
                  Invalid message!
             </div>
             <div class="success in hideMessage" id="message-success">
                  Successful message!
             </div>
-            <p><label>To</label><div class="field-boldFont"><%= @owner_username %></div></p>
-            <p><label>Subject</label><div class="field-boldFont"><%= @listing.title %></div></p>
-            <p><label>Message</label><textarea class="message_field inlineField" id="field-messageBody"></textarea></p>
+            <p><label class="messageLabel">To</label><div class="field-boldFont"><%= @owner_username %></div></p>
+            <p><label class="messageLabel">Subject</label><div class="field-boldFont"><%= @listing.title %></div></p>
+            <p><label class="messageLabel">Message</label><textarea class="message_field inlineField" id="field-messageBody"></textarea></p>
             <p><button id="send">Send</button></p>
         </form>
       </div>

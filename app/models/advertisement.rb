@@ -6,6 +6,13 @@ class Advertisement < ActiveRecord::Base
    validates :advertiser, :presence => true
    validates :screen_resolution_x, presence: true, numericality: {only_integer: true}
    validates :screen_resolution_y, presence: true, numericality: {only_integer: true}
+
+   has_attached_file :ad, :storage => :s3, :bucket => ENV['AWS_BUCKET'], styles: {
+     thumb: '100x100>',
+     square: '200x200#',
+     medium: '300x300>'
+     }
+  validates_attachment_content_type :ad, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   
    def self.createAd(params)
       ad = Advertisement.new(params)
