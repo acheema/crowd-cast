@@ -19,6 +19,11 @@
     width:500px;  
   }
 
+  .tableInbox {
+    margin-left: 20px;
+    width: 900px;
+  }
+
   .modal-dialog {
     width:600px !important;
   }
@@ -48,38 +53,31 @@
 
 <div id="dashboard">
   <div id="messages">
-         <h1 align="center">Messages</h1>
-         <form class="form-horizontal col-lg-8 col-lg-offset-2">
-            <label for="title">New Messages</label> 
-            <div class="form-group" style="overflow-y: scroll; height: 300px; border: 1px solid;">
-               <div class="table-responsive">
-                  <table class="table table-striped table-bordered">
-                     <tbody>
-                        <% @messages.each do |message|%>
-                           <% if not message.viewed then %>
-                              <tr>
-                                 <td class="listinfo">
-                                  <a class="message-listing-link" data-toggle="modal" data-target="#reply-message-modal", data-subject="<%=message.listing.title%>" data-message="<%=message.text%>", data-from="<%=message.from_username%>" data-id="<%=message.listing.id%>", href="#">
-                                      <%=message.listing_title%>
-                                    </a></td>
-                                 <td class="listinfo"><%=message.text%></td>
-                              </tr>
-                           <% end %>
-                        <% end %>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-            <label for="title">Viewed Messages</label> 
-            <div class="form-group" style="overflow-y: scroll; height: 300px; border: 2px solid;">
-               <% @messages.each do |message|%>
-               <% if message.viewed then %>
-               <h3> <%= message.text %> <%= message.viewed %> </h3>
-               <% end %>
-               <% end %>
-            </div>
-         </form>
-   </div>
+     <h1 align="center">Messages</h1>
+      <div class="tableInbox">
+        <label for="title">New Messages</label> 
+        <div class="form-group" style="overflow-y: scroll; height: 300px; border: 1px solid;">
+           <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                 <tbody>
+                    <% @messages.each do |message|%>
+                      <tr>
+                        <td class="listinfo">
+                          <a class="message-listing-link" data-toggle="modal" data-target="#reply-message-modal", 
+                            data-subject="<%=message.listing.title%>" data-message="<%=message.text%>", 
+                            data-from="<%=message.from_username%>" data-id="<%=message.listing.id%>", href="#">
+                            <%=message.listing_title%>
+                          </a>
+                        </td>
+                        <td class="listinfo"><%=message.text%></td>
+                      </tr>
+                    <% end %>
+                 </tbody>
+              </table>
+           </div>
+        </div>
+      </div>
+    </div>
   
    <div id="listings">
    <h1 align="center">Current Listings</h1>

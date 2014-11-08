@@ -1,8 +1,10 @@
-<!--Written by: Akaljot Cheema -->
-<!--Maps and GPS portions written by: Jhoong Roh -->
-<div class="create_listing">
+<!--Written by: Akaljot, Jhoong-->
+<div class="container main">
    <h2>Create your listing</h2>
    <%= form_for @listing, remote: true, url: {action: "createListing"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
+    <% if @listingStatus and @listingStatus < 0 %>
+      <p>You messed up something - please try again</p>
+    <% end %>
       <div class="form-group">
             <label for="title">Title</label>
             <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
@@ -61,8 +63,6 @@
             <div class="col-lg-4">
                <div class="form-group info">
                   <div class='form-inline'>
-                     <label for="time">Time per click</label>
-                     <%= f.number_field :time_per_click, class: "form-control", placeholder: "Enter time (s)" %>
                      <label for="resolution">Screen Resolution X</label>
                      <%= f.number_field :screen_resolution_x, class:"form-control", placeholder:"Enter resolution x" %>
                      <label for="resolution">Screen Resolution Y</label>
@@ -70,6 +70,16 @@
                   </div>
                </div>
             </div>
+            <div class="col-lg-4">
+              <div class="form-group info">
+                <div class='form-inline'>
+                     <label for="time">Time per click</label>
+                     <%= f.number_field :time_per_click, class: "form-control", placeholder: "Enter time (s)" %>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
             <div class="form-group">
                <label for="description">Description</label>
                <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
@@ -77,9 +87,6 @@
                <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
                <%= f.submit 'Create listing', id:"submit", style: "display:none", class: "btn btn-default submit" %>
                <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create listing</button>
-               <% if @listingStatus and @listingStatus < 0 %>
-                  <p>Something went wrong bro</p>
-               <% end %>
             </div>
          </div>
       </div>

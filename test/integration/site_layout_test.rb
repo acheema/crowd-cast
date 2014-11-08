@@ -1,4 +1,4 @@
-#written by Jason Clark
+#written by Jason Clark, Jessica Wong
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
@@ -17,5 +17,34 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get new_listing_path
     assert_template 'listings/new'
     assert_select "form[class=?]", "form-horizontal col-lg-8 col-lg-offset-2"
+  end
+
+  test "search page layout by going to /search" do
+    get search_path
+    assert_template 'listings/search'
+  end
+
+  test "advertiser dashboard layout" do
+    post '/api/create_user',  { user: { username: "JohnDoe1", \
+                     password: "password1", \
+                     email: "asdf@asdf.com", \
+                     company: 'my comp', \
+                              usertype: '0' }}
+    assert_response :success
+
+    get advertiser_dashboard_path
+    assert_template 'advertisers/advertiser_dashboard'
+  end
+
+test "owner dashboard layout" do
+  post '/api/create_user',  { user: { username: "JohnDoe1", \
+                   password: "password1", \
+                   email: "asdf@asdf.com", \
+                   company: 'my comp', \
+                            usertype: '1' }}
+  assert_response :success
+
+  get owner_dashboard_path
+  assert_template 'owners/owner_dashboard'
   end
 end
