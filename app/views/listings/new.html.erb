@@ -2,7 +2,7 @@
 <!--Maps and GPS portions written by: Jhoong Roh -->
 <div class="create_listing">
    <h2>Create your listing</h2>
-   <%= form_for @listing, remote: true, url: {action: "createListingWithImage"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
+   <%= form_for @listing, remote: true, url: {action: "createListing"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
       <div class="form-group">
             <label for="title">Title</label>
             <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>

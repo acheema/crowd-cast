@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <!--Written by: Jhoong Roh -->
 <!DOCTYPE html>
-<html>
-   <head>
-      <title></title>
-   </head>
-   <body>
-      <div class="container main">
-         <h2>Create your advertisement</h2>
-         <form class="form-horizontal col-lg-8 col-lg-offset-2">
-            <div class="form-group">
-               <label for="title">Title</label> <input class="form-control"
-                  id="title" placeholder="Enter title" type="text">
-            <div class="form-group">
-               <label for="screen_resolution_x">Screen resolution x</label> <input class="form-control"
-                  id="screen_resolution_x" placeholder="Enter screen resolution x" type="text">
-            </div>
-            <div class="form-group">
-               <label for="screen_resolution_y">Screen resolution y</label> <input class="form-control"
-                  id="screen_resolution_y" placeholder="Enter screen resolution y" type="text">
-            </div>
-            <div class="form-group">
-               <label for="advertisement_url">Advertisement url</label> <input class="form-control"
-                  id="advertisement_url" placeholder="Enter advertisement url" type="text">
-            </div>
-            <div class="form-group">
-               <label for="description">Description</label>
-               <textarea class="form-control" id="description" placeholder="Enter more information" rows="6">
-               </textarea>
-            </div>
-            <div class="form-group">
-               <div class="col-lg-offset-1 col-lg-10">
-                  <button class="btn btn-default" id="submit" type="submit">Submit</button>
-               </div>
-            </div>
-         </form>
-         <!--Image upload - work in progress
-            <div class="form-group">
-               <input id="file" type="file" multiple=true>
-            </div>
-         -->
-         <%= form_for :listing, :html => { :multipart => true } do |form| %>
-            <%= form.file_field :image %>
-         <% end %>
+<div class="create_advertisement">
+   <h2>Create your Advertisement</h2>
+   <%= form_for @advertisement, remote: true, url: {action: "createAd"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
+      <div class="form-group">
+            <label for="title">Title</label>
+            <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
       </div>
-   </body>
-</html>
+      <div class="form-group info">
+         <div class="form-inline">
+             <div class="form-group">
+               <%= f.text_field :height, class: "form-control", placeholder: "Enter height"%>
+            </div>
+            <div class="form-group">
+               <%= f.text_field :width, class: "form-control", placeholder: "Enter width"%>
+            </div>
+         </div>
+      </div>
+      <div class="form-group">
+         <label for="description">Description</label>
+            <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
+            <%= f.label :ad %>
+            <%= f.file_field :ad, accept: 'image/png,image/gif,image/jpeg' %>
+            <%= f.submit 'Create ad', id:"submit", style: "display:none", class: "btn btn-default submit" %>
+            <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create Ad</button>
+            <% if @advertisementStatus and @advertisementStatus < 0 %>
+                  <p>Something went wrong bro</p>
+            <% end %>
+      </div>
+   <% end %>
+</div>
+
 <script type="text/javascript">
    $(document).ready(function() {
-       $('#submit').click(function(e) {
+      $('#advertisement_ad').change(function() {
+         $('#submit').attr('style','display:show');
+         $('#hidden_submit').attr('style','display:none');
+      });
+      
+       $('#hidden_submit').click(function(e) {
           e.preventDefault();
-          adTitle = $('#title').val();
-          adUrl = $('#advertisement_url').val();
-          adResolutionX = $('#screen_resolution_x').val();
-          adResolutionY = $('#screen_resolution_y').val();
-          adDescription = $('#description').val();
+          adTitle = $('#advertisement_title').val();
+          adHeight = $('#advertisement_height').val();
+          adWidth = $('#advertisement_width').val();
+          adDescription = $('#advertisement_description').val();
           $.ajax({
               type: 'POST',
               url: window.location.protocol + '//' + window.location.host + "/api/create_ad/",
-              data: JSON.stringify({ title: adTitle, advertisement_url: adUrl, screen_resolution_x: adResolutionX,
-                  screen_resolution_y: adResolutionY, description: adDescription }),
+              data: JSON.stringify({ title: adTitle, height: adHeight, width: adWidth, description: adDescription }),
               contentType: "application/json",
               dataType: "json",
               success: function(data) {

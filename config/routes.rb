@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     match '/api/create_ad', to: 'advertisements#createAd', via: 'post'
     match '/api/TESTAPI_tests', to: 'application#tests', via: 'get'
     match '/api/create_listing_with_image', to: 'listings#createListingWithImage', via: 'post'
+    match '/api/create_ad_with_image', to: 'advertisements#createAdWithImage', via: 'post'
 
        #match 'listings/new', to: 'listing#new', via: 'get'
 

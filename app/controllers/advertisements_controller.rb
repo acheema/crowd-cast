@@ -4,16 +4,25 @@ class AdvertisementsController < ApplicationController
    # create an ad, the user must be an advertiser
    def createAd
       username = cookies[:username]
-      if (@advertiser = Advertiser.find_by_username(username))
-         status = Advertisement.createAd(create_ad_params.merge(:advertiser_id => @advertiser.id))
-         render :json => { status: status }
+      advertiser = Advertiser.find_by_username(username)
+      status = Advertisement.createAd(create_ad_params.merge(:advertiser => advertiser))
+      if create_ad_params.has_key? (:ad)
+         if status > 0
+            redirect_to "/advertiser_dashboard"
+         else
+            @advertisement = Advertisement.new
+            @advertisementStatus = status
+            render :new
+         end
       else
-         # In case the cookie is not set. Ideally, this shouldn't be possible
-         render :json => { status: -4 }
+         render :json => { status: status }
       end 
    end
 
-   # get the ads of this user
+  def new
+    @advertisement = Advertisement.new
+  end
+
    def getAds
       username = cookies[:username]
       if (@advertiser = Advertiser.find_by_username(username))

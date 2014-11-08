@@ -38,18 +38,22 @@
 
         <div id="ads">
             <h1 style="text-align: center">Current
-            Advertisements</h1><%if @current_ads then %><% @current_ads.each do |ad|%><%= div_for ad, :class => "col-lg-4 result" do %>
+            Advertisements</h1>
+            <%if @current_ads then %>
+               <% @current_ads.each do |ad|%>
+                  <%= div_for ad, :class => "col-lg-4 result" do %>
 
-            <div class="content">
-                <div class="content" style=
-                "background-color: #d3d3d3; height: 200px;"></div>
+                     <div class="content">
+		                  <div style="background-color: #d3d3d3;"><%= image_tag ad.ad.url, class: "img"%></div>
 
-                <h4><a><%= ad.title %></a></h4>
+                        <h4><a><%= ad.title %></a></h4>
 
-                <p>
-                <%= "#{ad.screen_resolution_x}, #{ad.screen_resolution_y}" %></p>
+                        <p><%= "#{ad.width}, #{ad.height}" %></p>
 
-                <p><%= "#{ad.description}" %></p>
-            </div><% end %><% end %><% end %>
-        </div>
-    </div>
+                        <p><%= "#{ad.description}" %></p>
+                     </div>
+                  <% end %>
+               <% end %>
+            <% end %>
+       </div>
+  </div>
