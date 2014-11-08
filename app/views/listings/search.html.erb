@@ -6,10 +6,16 @@
    <div id="results">
     <%if @listings then %>
 	    <% @listings.each do |listing|%>
-	      <%= div_for listing, :class => "col-lg-3 result location#{listing.id}" do %>
+	      <%= div_for listing, :class => "col-lg-4 result location#{listing.id}" do %>
 		    <div class="content">
             <a href="/listings/show?listing_id=<%=listing.id%>">
-		         <div class="content" style="background-color: #d3d3d3; height: 200px;"></div>
+		         <div style="max-width:400px;">
+		            <% if listing.image %>
+                     <div><%= image_tag listing.image.url, class: "img"%></div>
+                  <% else %>
+                     <div style="background-color: #d3d3d3;"><img></img></div>
+                  <% end %>
+               </div>         
             </a>
             <h4>
 		        <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>

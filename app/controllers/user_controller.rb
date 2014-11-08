@@ -1,4 +1,4 @@
-# Written by Jhoong Roh a few lines by Jason Clark
+# Written by Jhoong Roh, Jason Clark
 class UserController < ApplicationController
 
    def new

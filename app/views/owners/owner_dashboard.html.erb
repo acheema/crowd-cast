@@ -1,4 +1,4 @@
-<!--Written by Jessica Wong-->
+<!--Written by Jessica Wong, Jhoong, Sukriti-->
 
 <style>
   .field-bold {
@@ -86,9 +86,9 @@
     <%if @current_listings then %>
 	    <% @current_listings.each do |listing|%>
 	      <%= div_for listing, :class => "col-lg-4 result location#{listing.id}" do %>
-		    <div class="content">
+		    <div style="max-width:400px;">
             <a href="/listings/show?listing_id=<%=listing.id%>">
-		         <div class="content" style="background-color: #d3d3d3; height: 200px;"><%= image_tag listing.image.url(:thumb) %></div>
+		         <div style="background-color: #d3d3d3;"><%= image_tag listing.image.url, class: "img"%></div>
             </a>
             <h4>
 		        <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>

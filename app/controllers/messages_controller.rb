@@ -1,6 +1,7 @@
 # Written by Jhoong
 class MessagesController < ApplicationController
 
+  # Just create the message in the message table
   def sendMessage
     username = cookies[:username]
     message = Message.createMessage(message_params.merge( :from_username => username, \

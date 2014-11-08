@@ -1,9 +1,29 @@
-.create_listing{
+// Some of this written by Jhoong
+.img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+.create_listing {
    position: absolute;
    top: 61.5px;
    bottom: 0px;
    left: 0px;
    right: 0px;
+}
+.show_listing {
+   position: absolute;
+   top: 61.5px;
+   bottom: 0px;
+   left: 5%;
+   right: 5%;
+}
+
+#googlemap {
+   vertical-align: middle;   
+   float: center;
+   width: 100%%;
+   height: 100%;
 }
 
 body {

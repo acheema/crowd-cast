@@ -3,24 +3,32 @@ class ListingsController < ApplicationController
 
   def createListing
     username = cookies[:username]
-    owner_id = Owner.find_by_username(username).id
-    status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
-    render :json => { status: status }
+    if (@owner = Owner.find_by_username(username))
+      status = Listing.createListing(create_listing_params.merge(:owner_id => @owner.id))
+      render :json => { status: status }
+    else
+      render :json => { status: -11 }
+    end
   end
   
   def createListingWithImage
     username = cookies[:username]
-    owner_id = Owner.find_by_username(username).id
-    status = Listing.createListing(create_listing_params.merge(:owner_id => owner_id))
-    if status > 0
-      params = {
-        :listing_id => status,
-      }
-      url = "/listings/show?#{params.to_query}"
-      redirect_to url
-    else
-      @listingStatus = status
-    end
+    if (@owner = Owner.find_by_username(username))
+      status = Listing.createListing(create_listing_params.merge(:owner_id => @owner.id))
+      if status > 0
+         params = {
+            :listing_id => status,
+         }
+         url = "/listings/show?#{params.to_query}"
+         redirect_to url
+      else
+         @listing = Listing.new
+         @listingStatus = status
+         render :new
+      end
+   else
+       @listingStatus = -11
+   end
   end
 
   def new
