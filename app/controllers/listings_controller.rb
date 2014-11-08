@@ -22,7 +22,9 @@ class ListingsController < ApplicationController
          url = "/listings/show?#{params.to_query}"
          redirect_to url
       else
+         @listing = Listing.new
          @listingStatus = status
+         render :new
       end
    else
        @listingStatus = -11
