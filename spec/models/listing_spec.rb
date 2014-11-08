@@ -1,3 +1,4 @@
+#written by Jason Clark
 require 'spec_helper'
 
 describe "Listing model" do
