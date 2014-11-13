@@ -1,4 +1,5 @@
-require 'test_helper'
+#written by Jason Clark
+require 'test_helper' 
 
 class UserOwnerAndAdvertiserTest < ActionDispatch::IntegrationTest
   # test "the truth" do
