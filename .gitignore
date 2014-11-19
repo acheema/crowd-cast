@@ -20,7 +20,7 @@
 .*.swo
 
 #Ignore coverage files
-coverage/.*.*
-coverage/*.*
+coverage/
+/coverage/.*.*
+/coverage/*.*
 /coverage/*
-coverage/*
