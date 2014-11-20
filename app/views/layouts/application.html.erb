@@ -45,12 +45,12 @@ Note: Advertiser: 0, Owner: 1 -->
         <section>
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" type="button" data-toggle = "modal" data-target="#login-modal" >Login</button>
+            <button class = "regular-button" type="button" id = "login-button" data-toggle = "modal" data-target="#login-modal" >Login</button>
           </div>
 
             <div class=
             "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" type="button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
+            <button class = "regular-button" type="button" id = "signup-button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
             </div>
             <% end %>
 
@@ -112,7 +112,7 @@ Note: Advertiser: 0, Owner: 1 -->
     <div class="modal-content">
 
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" id = "inner-login-button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
