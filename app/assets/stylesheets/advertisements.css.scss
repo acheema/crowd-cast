@@ -1,16 +1,6 @@
 // Place all the styles related to the Advertisements controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.create_advertisement {
-   position: absolute;
-   top: 61.5px;
-   bottom: 0px;
-   left: 0px;
-   right: 0px;
-}
-.heightWidthDiv {
-	margin-left: 15px;
-}
 
 .alignLine {
 	display: inline;
@@ -18,6 +8,26 @@
 
 #createAdBtnDiv, #AdField {
 	margin-top: 20px;
+}
+
+#createAdBtnDiv {
+	margin-left: 200px;
+}
+
+.create_advertisement {
+	bottom: 0px;
+	margin-left: 400px;
+   	position: absolute;
+   	top: 61.5px;
+   	width: 950px;
+}
+
+#heightField, #widthField {
+	width: 312.5px;
+}
+
+.heightWidthDiv {
+	margin-left: 15px;
 }
 
 #hidden_submit {
@@ -31,4 +41,10 @@
 
 #titlePage {
 	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+
+#widthField {
+	margin-right: 0px;
 }
