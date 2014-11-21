@@ -69,6 +69,16 @@ class Advertiser < ActiveRecord::Base
     end
   end
 
+  def unfavorite_listing listing_id 
+    if self.listings.exists?(:id => listing_id)
+      listing = Listing.find(listing_id)
+      self.listings.delete listing 
+      return true 
+    else
+      return false
+    end
+  end
+
   def self.listing_favorited listing_id, advertiser_username
     user = Advertiser.find_by_username advertiser_username
     return user.listings.exists? :id => listing_id

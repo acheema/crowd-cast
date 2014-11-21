@@ -150,6 +150,15 @@ class AdvertiserTest < ActiveSupport::TestCase
     end
   end
 
+  test "advertiser can unfavorite listing" do
+    favorite_setup false
+    @advertiser.favorite_listing @listing.id
+    assert_difference "@advertiser.listings.size", -1 do
+      success = @advertiser.unfavorite_listing @listing.id
+      assert success == true
+    end
+  end
+
   test "advertiser cant favorite nonexistant listing" do
     params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
     advertiser = Advertiser.createUser(params)

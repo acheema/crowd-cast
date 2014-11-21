@@ -107,6 +107,22 @@ class AdvertisersController < ApplicationController
     end
   end
 
+  def unfavorite_listing
+    username = cookies[:username]
+    listing_id = params[:listing_id]
+    if username and listing_id
+      advertiser = Advertiser.find_by_username(cookies[:username])
+      success = advertiser.unfavorite_listing listing_id 
+      if success
+        render :json => { :success => "success", :status_code => "200" }
+      else
+        render :json => { :success => "failure", :status_code => "200" }
+      end
+    else
+      render :json => { :success => "failure", :status_code => "200" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_advertiser

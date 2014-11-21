@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '/advertiser_dashboard/mail', :controller => 'advertisers', :action => 'advertiser_dashboard_mail'
     get '/advertiser_dashboard/ads', :controller => 'advertisers', :action => 'advertiser_dashboard_ads'
     get 'api/get_favorited_listings' => 'advertisers#get_favorited_listings'
+    post 'api/unfavorite_listing' => 'advertisers#unfavorite_listing'
     post '/api/favorite_listing' => 'advertisers#favorite_listing'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
