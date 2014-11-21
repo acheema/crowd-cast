@@ -72,6 +72,20 @@ class OwnersController < ApplicationController
     render 'owner_dashboard'
   end
 
+  def owner_dashboard_listings
+    #reset the cookie to owner view and reset the dashboard state
+    @current_listings = Listing.getOwnerListings(@current_user.id)
+    self.reset_cookie
+    render 'owner_dashboard_listings'
+  end
+
+  def owner_dashboard_mail
+    #reset the cookie to owner view and reset the dashboard state
+    @messages = Message.getMessages(cookies[:username])
+    self.reset_cookie
+    render 'owner_dashboard_mail'
+  end
+
 
   def reset_cookie
     cookies.permanent[:dashboard_state] = 1

@@ -1,19 +1,19 @@
 <!--Written by Jessica-->
 
- @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 .message_field{
   color:#000;
 }
 /* Messages */
 .content-panel {
   font-family:'Ruda';
- }
+}
 
- .dashboard-content {
-   padding-top:100px;
-   font-family:'Ruda';
+.dashboard-content {
+  padding-top:100px;
+  font-family:'Ruda';
 
- }
+}
 
 /* sidebar */
 
@@ -65,6 +65,7 @@ hr {
   height: 100%;
   padding-top:30px;
   position: fixed;
+  width:200px;
   background: rgba(18, 18, 18, 0.86);
 }
 
@@ -179,7 +180,6 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-  background: #2f8c93;
   color: #fff;
   display: block;
 
@@ -188,6 +188,15 @@ ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+.sidebar-menu.adr li a.active, .sidebar-menu.adr li a:hover, .sidebar-menu.adr li a:focus {
+  background-color: #e9c851;
+}
+
+
+.sidebar-menu.owner li a.active, .sidebar-menu.owner li a:hover, .sidebar-menu.owner li a:focus {
+background-color:#349bbb;
 }
 
 
