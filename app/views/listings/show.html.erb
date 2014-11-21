@@ -76,10 +76,12 @@
       <div>
         <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
         <% if not @listing_favorited%>
-        <button class="btn" id = "fave">favorite</button>
-        <% else %>
-        <button class="btn" id = "unfave">unfave</button>
-
+        <%= button_tag(id: "fave", class: "btn btn-default") do %>
+        <i class="fa fa-heart-o"></i> Favorite Listing
+        <% end %>        <% else %>
+        <%= button_tag(id: "unfave", class: "btn btn-warning") do %>
+        <i class="fa fa-heart-o"></i> Favorited!
+        <% end %>
         <% end %>
         <button class="btn" id = "book">reserve advertising space</button>
 
@@ -232,7 +234,7 @@
           contentType: "application/json",
           dataType:"json",
           success: function() {
-            console.log("favorited listing");
+            location.reload();
           }
         })
       });
@@ -247,7 +249,7 @@
         contentType: "application/json",
         dataType:"json",
         success: function() {
-          console.log("unfave listing");
+          location.reload();
         }
       })
     });
