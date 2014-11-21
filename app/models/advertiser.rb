@@ -71,8 +71,9 @@ class Advertiser < ActiveRecord::Base
     end
   end
 
-  def get_favorited_listings
-    return self.listings
+  def self.get_favorited_listings(advertiser_id)
+    user = Advertiser.find advertiser_id 
+    return user.listings
   end
 
   # Clear out the table

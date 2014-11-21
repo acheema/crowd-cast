@@ -162,7 +162,7 @@ class AdvertiserTest < ActiveSupport::TestCase
   test "advertiser can retrieve favorited listing" do
     favorite_setup false
     @advertiser.favorite_listing @listing.id
-    listings = @advertiser.get_favorited_listings
+    listings = Advertiser.get_favorited_listings @advertiser.id
     assert_equal 1, listings.size 
     assert_equal @listing.id, listings.first.id
   end
@@ -171,7 +171,7 @@ class AdvertiserTest < ActiveSupport::TestCase
     favorite_setup true
     @advertiser.favorite_listing @listing.id
     @advertiser.favorite_listing @listing2.id
-    listings = @advertiser.get_favorited_listings
+    listings = Advertiser.get_favorited_listings @advertiser.id
     assert_equal 2, listings.size 
     assert_equal @listing.id, listings.first.id
     assert_equal @listing2.id, listings.second.id
