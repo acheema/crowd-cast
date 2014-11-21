@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get 'search' => 'listings#search'
     get '/owner_dashboard', :controller => 'owners', :action => 'owner_dashboard'
     get '/advertiser_dashboard', :controller => 'advertisers', :action => 'advertiser_dashboard'
+    get '/advertiser_dashboard/mail', :controller => 'advertisers', :action => 'advertiser_dashboard_mail'
+    get '/advertiser_dashboard/ads', :controller => 'advertisers', :action => 'advertiser_dashboard_ads'
     match '/api/signout', to: 'user#signoutUser', via: 'get'
     match '/api/login', to: 'user#loginUser', via: 'post'
     match '/api/create_user', to: 'user#createUser', via: 'post'

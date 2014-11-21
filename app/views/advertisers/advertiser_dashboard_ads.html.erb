@@ -1,0 +1,73 @@
+<style> @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
+</style>
+
+<div class = "row">
+  <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
+    <div id="sidebar"  class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu" id="nav-accordion">
+        <h4 class="centered"><%=@current_user.username %></h4>
+
+        <li>
+          <%= link_to advertiser_dashboard_path do %>
+          <i class="fa fa-tasks"></i> Dashboard
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to advertiser_dashboard_mail_path do %>
+          <i class="fa fa-envelope"></i> Mail
+          <% end %>
+        </li>
+
+
+        <li>
+          <%= link_to(advertiser_dashboard_ads_path, :class => 'active') do %>
+          <i class="fa fa-tasks"></i> My Advertisements
+          <% end %>
+        </li>
+
+
+      </div></div>
+
+
+      <!--sidebar end-->
+
+      <div class = "dashboard-content col-lg-8 col-md-7 col-md-offset-1">
+        <section id="ads">
+          <section class="wrapper">
+            <div class="content-panel">
+              <table class="table table-hover">
+                <h4>My Advertisements</h4>
+                <hr>
+
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Photo</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tbody>
+                    <%if @current_ads then %>
+                    <% @current_ads.each do |ad|%>
+                                        <tr>
+                      <td>
+                        <%= "#{ad.title}" %>
+                    </td>
+                    <td> <div style="background-color: #d3d3d3;"><%= image_tag ad.ad.url, class: "img"%></div>
+                    </td>
+                    <td><%= "#{ad.description}" %></td>
+                  </tr>
+                  <% end %>
+                   <% end %>
+                </tbody>
+              </tbody>
+            </table>
+          </div><! --/content-panel -->
+        </div><!-- row -->
+
+
+      </section><! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->

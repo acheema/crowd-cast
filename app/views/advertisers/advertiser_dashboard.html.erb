@@ -1,179 +1,33 @@
-<!--Written by Jhoong, Sukriti-->
-<style>
-  .field-bold {
-    font-weight: bold;
-  }
+ <div class = "row">
+  <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
+   <div id="sidebar"  class="nav-collapse ">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu" id="nav-accordion">
+      <h4 class="centered"><%=@current_user.username %></h4>
 
-  .hideMessage {
-    display: none;
-  }
+      <li>
+        <%= link_to(advertiser_dashboard_path, :class => 'active') do %>
+        <i class="fa fa-tasks"></i> Dashboard
+          <% end %>
+      </li>
 
-  .messageLabel {
-    font-size: 14px !important;
-  }
+      <li>
+        <%= link_to advertiser_dashboard_mail_path do %>
+        <i class="fa fa-envelope"></i> Mail
+        <% end %>
+      </li>
 
-  #field-replyMessageBody {
-    color:#000000;
-    height: 300px;
-    width:500px;  
-  }
+      <li>
+        <%= link_to advertiser_dashboard_ads_path do %>
+        <i class="fa fa-tasks"></i> My Advertisements
+        <% end %>
+      </li>
 
-  .tableInbox {
-    margin-left: 20px;
-    width: 900px;
-  }
+ 
+    </div></div>
 
-  .modal-dialog {
-    width:600px !important;
-  }
 
-  #field-replyId {
-    display: none;
-  }
+<!--sidebar end-->
 
-   #field-replyMessageBody {
-    -webkit-transition: all 0.30s ease-in-out;
-    -moz-transition: all 0.30s ease-in-out;
-    -ms-transition: all 0.30s ease-in-out;
-    -o-transition: all 0.30s ease-in-out;
-    outline: none;
-    padding: 3px 0px 3px 3px;
-    margin: 5px 1px 3px 0px;
-    border: 2px solid #6d91a3;
-  }
 
-   #field-replyMessageBody:focus {
-    box-shadow: 0 0 5px red;
-    padding: 3px 0px 3px 3px;
-    margin: 5px 1px 3px 0px;
-    border: 1px solid red;
-  }
-</style>
-
-<div class = "container">
-    <div id="dashboard">
-        <div id="messages">
-            <h1 align="center">Messages</h1>
-            <div class="tableInbox">
-                <label for="title">New Messages</label> 
-                <div class="form-group" style="overflow-y: scroll; height: 300px; border: 1px solid;">
-                   <div class="table-responsive">
-                      <table class="table table-striped table-bordered">
-                         <tbody>
-                            <% @messages.each do |message|%>
-                              <tr>
-                                <td class="listinfo">
-                                  <a class="message-listing-link" data-toggle="modal" data-target="#reply-message-modal", 
-                                    data-subject="<%=message.listing.title%>" data-message="<%=message.text%>", 
-                                    data-from="<%=message.from_username%>" data-id="<%=message.listing.id%>", href="#">
-                                    <%=message.listing_title%>
-                                  </a>
-                                </td>
-                                <td class="listinfo"><%=message.text%></td>
-                              </tr>
-                            <% end %>
-                         </tbody>
-                      </table>
-                   </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="ads">
-            <h1 style="text-align: center">Current
-            Advertisements</h1>
-            <%if @current_ads then %>
-               <% @current_ads.each do |ad|%>
-                  <%= div_for ad, :class => "col-lg-4 result" do %>
-
-                     <div class="content">
-		                  <div style="background-color: #d3d3d3;"><%= image_tag ad.ad.url, class: "img"%></div>
-
-                        <h4><a><%= ad.title %></a></h4>
-
-                        <p><%= "#{ad.width}, #{ad.height}" %></p>
-
-                        <p><%= "#{ad.description}" %></p>
-                     </div>
-                  <% end %>
-               <% end %>
-            <% end %>
-        </div>
-    </div>
 </div>
-
-<div class="modal" id="reply-message-modal" tabindex="-1" role="dialog" aria-labelledby="reply-message-modal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Send Message To Owner</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-            <p><div class="field-bold" id="field-replyId" value=""></div></p>
-            <p><label class="messageLabel">From</label><div class="field-bold" id="field-replyFrom" value=""></div></p>
-            <p><label class="messageLabel">Subject</label><div class="field-bold" id="field-replySubject" value=""></div></p>
-            <p><label class="messageLabel">Message</label><div id="field-replyMessageContent" value=""></div></p>
-            <div class="alert in hideMessage" id="message-error">
-                 Invalid message!
-            </div>
-            <div class="success in hideMessage" id="message-success">
-                 Successful message!
-            </div>
-            <p><label>Reply</label><textarea class="message_field inlineField" id="field-replyMessageBody"></textarea></p>
-            <p><button id="send">Send</button></p>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $(document).on("click", ".message-listing-link", function () {
-    var id =  $(this).data('id');
-    var message = $(this).data('message');
-    var from = $(this).data('from')
-    var subject = $(this).data('subject');
-
-    $('#field-replyId').text(id);
-    $("#field-replyFrom").text(from);
-    $("#field-replyMessageContent").text(message);
-    $('#field-replySubject').text(subject);
-  }); 
-
-  $('#send').click(function(e) {
-
-      var id =  document.getElementById('field-replyId').innerHTML;
-      var text = $('#field-replyMessageBody').val(); 
-      var title = document.getElementById('field-replySubject').innerHTML;
-      var to_user = document.getElementById('field-replyFrom').innerHTML;
-
-      e.preventDefault();
-      $.ajax({
-            //First send a post request, get the response back. On successful message back, check the data
-            url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
-            type: "POST",
-            data: JSON.stringify({listing_id: id, listing_title: title, to_username: to_user, text: text}),
-            contentType: "application/json",
-            dataType: "json",
-            success: function(data){
-               if (data.status == -1){
-                  $('#message-error').show();
-               }
-               else if (data.status == 1){
-                  $('#message-success').show();
-               } 
-            },
-            failure: function(errorMsg) {
-               failure(data);
-            }
-         });
-    });
-    $('#field-replySubject').on('change keyup paste', function(e) {
-      $('#message-error').hide();
-      $('#message-success').hide();
-   });
-</script>
-
-
