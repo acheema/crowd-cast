@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<!--Written by: Jhoong Roh -->
+<!--Written by: Jhoong Roh, Sukriti Singal -->
 <!DOCTYPE html>
-<div class="create_advertisement">
-   <h2>Create your Advertisement</h2>
+<div class="create_advertisement">  
+   <h2 class="textField" id="titlePage">Create Your Advertisment</h2>
    <%= form_for @advertisement, remote: true, url: {action: "createAd"}, html: {class: "form-horizontal col-lg-8 col-lg-offset-2"}, method: "post" do |f| %>
       <% if @advertisementStatus and @advertisementStatus < 0 %>
          <p>Something you inputted was wrong - please try again</p>
       <% end %>
-      <div class="form-group">
-            <label for="title">Title</label>
-            <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
-      </div>
-      <div class="form-group info">
-         <div class="form-inline">
-             <div class="form-group">
-               <%= f.text_field :height, class: "form-control", placeholder: "Enter height"%>
-            </div>
-            <div class="form-group">
-               <%= f.text_field :width, class: "form-control", placeholder: "Enter width"%>
-            </div>
-         </div>
-      </div>
-      <div class="form-group">
-         <label for="description">Description</label>
-            <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
+        <div class="form-elements">
+        <div class="alignLine">
+          <div class="form-group">
+              <%= f.text_field :title, class: "form-control", placeholder: "Enter Title" %>
+          </div>
+        </div>
+        <div class="heightWidthDiv">
+          <div class="form-group info">
+             <div class="form-inline">
+                 <div class="form-group">
+                   <%= f.text_field :height, class: "form-control", id: "heightField" , placeholder: "Enter Height"%>
+                </div>
+                <div class="form-group">
+                   <%= f.text_field :width, class: "form-control", id: "widthField", placeholder: "Enter Width"%>
+                </div>
+             </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :description, class: "form-control", placeholder: "Enter more information" %>
+          <div id="AdField" class="textField">
             <%= f.label :ad %>
-            <%= f.file_field :ad, accept: 'image/png,image/gif,image/jpeg' %>
-            <%= f.submit 'Create ad', id:"submit", style: "display:none", class: "btn btn-default submit" %>
-            <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create Ad</button>
+          <div>
+          <%= f.file_field :ad, accept: 'image/png,image/gif,image/jpeg' %>
+          <%= f.submit 'Create ad', id:"submit", style: "display:none", class: "btn btn-default submit" %> 
+          <div id="createAdBtnDiv">
+            <button class="btn btn-default" id="hidden_submit" style="display:show" type="submit">Create Advertisment</button>
+          <div>
+        </div>
       </div>
    <% end %>
 </div>
