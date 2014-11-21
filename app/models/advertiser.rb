@@ -59,17 +59,38 @@ class Advertiser < ActiveRecord::Base
     end
   end
 
-  def favorite_listing(listing_id)
+  def favorite_listing listing_id 
     if Listing.exists?(:id => listing_id)
       listing = Listing.find(listing_id)
-      if listing
-        self.listings << listing 
-      end
+      self.listings << listing 
+      return true 
+    else
+      return false
     end
   end
 
-  def get_favorited_listings
-    return self.listings
+  def unfavorite_listing listing_id 
+    if self.listings.exists?(:id => listing_id)
+      listing = Listing.find(listing_id)
+      self.listings.delete listing 
+      return true 
+    else
+      return false
+    end
+  end
+
+  def self.listing_favorited listing_id, advertiser_username
+    user = Advertiser.find_by_username advertiser_username
+    return user.listings.exists? :id => listing_id
+  end
+
+  def self.get_favorited_listings advertiser_id 
+    if Advertiser.exists? :id => advertiser_id 
+      user = Advertiser.find advertiser_id 
+      return user.listings
+    else 
+      return nil
+    end
   end
 
   # Clear out the table

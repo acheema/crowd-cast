@@ -145,7 +145,17 @@ class AdvertiserTest < ActiveSupport::TestCase
   test "advertiser can favorite listing" do
     favorite_setup false
     assert_difference "@advertiser.listings.size", 1 do
-      @advertiser.favorite_listing @listing.id
+      success = @advertiser.favorite_listing @listing.id
+      assert success == true
+    end
+  end
+
+  test "advertiser can unfavorite listing" do
+    favorite_setup false
+    @advertiser.favorite_listing @listing.id
+    assert_difference "@advertiser.listings.size", -1 do
+      success = @advertiser.unfavorite_listing @listing.id
+      assert success == true
     end
   end
 
@@ -153,14 +163,15 @@ class AdvertiserTest < ActiveSupport::TestCase
     params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
     advertiser = Advertiser.createUser(params)
     assert_difference "advertiser.listings.size", 0 do
-      advertiser.favorite_listing 99999 
+      success = advertiser.favorite_listing 99999 
+      assert success == false
     end
   end
 
   test "advertiser can retrieve favorited listing" do
     favorite_setup false
     @advertiser.favorite_listing @listing.id
-    listings = @advertiser.get_favorited_listings
+    listings = Advertiser.get_favorited_listings @advertiser.id
     assert_equal 1, listings.size 
     assert_equal @listing.id, listings.first.id
   end
@@ -169,7 +180,7 @@ class AdvertiserTest < ActiveSupport::TestCase
     favorite_setup true
     @advertiser.favorite_listing @listing.id
     @advertiser.favorite_listing @listing2.id
-    listings = @advertiser.get_favorited_listings
+    listings = Advertiser.get_favorited_listings @advertiser.id
     assert_equal 2, listings.size 
     assert_equal @listing.id, listings.first.id
     assert_equal @listing2.id, listings.second.id

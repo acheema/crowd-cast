@@ -1,6 +1,5 @@
 <!--Written by Jessica-->
 
-@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 .message_field{
   color:#000;
 }
@@ -14,6 +13,7 @@
   font-family:'Ruda';
 
 }
+
 
 /* sidebar */
 
@@ -203,4 +203,79 @@ background-color:#349bbb;
 ul.sidebar-menu li a i {
   font-size: 15px;
   padding-right: 6px;
+}
+
+
+
+
+<!-- main -->
+
+
+
+  .box1 {
+  text-align: center;
+  color: #989898;
+  border-bottom: 1px solid #989898;
+}
+
+.box1 span {
+  font-size: 50px;
+
+}
+
+.box1 h3 {
+  text-align: center;
+}
+
+.box0:hover .box1 {
+  border-bottom: 1px solid #ffffff;
+}
+
+.box0 p {
+  text-align: center;
+  font-size: 12px;
+  color: #7b7b7b;
+}
+
+.box0:hover p {
+  color: #3f3f3f;
+}
+
+.box0:hover {
+  background: #e3e3e3;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.box0 {
+  margin:0px 20px 0px 20px;
+
+}
+
+
+/* MAIN CONTENT CONFIGURATION */
+#main-dashboard-content {
+  font-family:'Ruda';
+}
+
+
+/* MAIN CHART CONFIGURATION */
+.main-chart {
+  padding-top: 20px;
+  padding-left:80px;
+}
+
+.mtbox {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+
+.wrapper {
+  display: inline-block;
+  margin-top: 60px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-top: 0px;
+  width: 100%;
 }
