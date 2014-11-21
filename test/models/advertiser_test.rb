@@ -112,4 +112,67 @@ class AdvertiserTest < ActiveSupport::TestCase
       Advertiser.createUser(params)
     end
   end
+
+  def favorite_setup(multiple) 
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
+    @advertiser = Advertiser.createUser(params)
+    owner = Owner.create(:username => "Username1234", :password => "password", :email => "email@crowdcast.com", :company => "hello5")
+    params = {
+      title: "Listing 1", 
+      height: 30, 
+      width: 31, 
+      time_per_click: 8, 
+      views_per_week: 8, 
+      cost_per_week: 100, 
+      street: "College Ave", 
+      city: "Berkeley", 
+      state: "CA", 
+      zip: "94704", 
+      owner: owner,
+      screen_resolution_x: 56,
+      screen_resolution_y: 57,
+      active: true,
+      views: 0
+    }  
+    @listing = Listing.create(params)
+    if multiple
+      params[:title] = "Listing 2"
+      @listing2 = Listing.create(params)
+    end
+  end
+
+
+  test "advertiser can favorite listing" do
+    favorite_setup false
+    assert_difference "@advertiser.listings.size", 1 do
+      @advertiser.favorite_listing @listing.id
+    end
+  end
+
+  test "advertiser cant favorite nonexistant listing" do
+    params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
+    advertiser = Advertiser.createUser(params)
+    assert_difference "advertiser.listings.size", 0 do
+      advertiser.favorite_listing 99999 
+    end
+  end
+
+  test "advertiser can retrieve favorited listing" do
+    favorite_setup false
+    @advertiser.favorite_listing @listing.id
+    listings = @advertiser.get_favorited_listings
+    assert_equal 1, listings.size 
+    assert_equal @listing.id, listings.first.id
+  end
+
+  test "advertiser can retrieve multiple favorited listing" do
+    favorite_setup true
+    @advertiser.favorite_listing @listing.id
+    @advertiser.favorite_listing @listing2.id
+    listings = @advertiser.get_favorited_listings
+    assert_equal 2, listings.size 
+    assert_equal @listing.id, listings.first.id
+    assert_equal @listing2.id, listings.second.id
+  end
+
 end

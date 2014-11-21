@@ -3,363 +3,195 @@
 Minor changes by Jhoong
 Note: Advertiser: 0, Owner: 1 -->
 <html>
+<%= yield :javascript %>
 <head>
-  <title>Crowdcast</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+  <title>Crowdcast</title>
+  <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-            </button>
-            <% if @current_user == nil%>
-               <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a><%end%>
-            <% if @current_user%>
-               <% if @dashboard_state == 0 %>
-                  <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle" style = "color:#d4b02e"></i>WDCAST</a>
-               <% elsif @dashboard_state == 1 %>
-                  <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
-               <% end %>
-            <% end %>
-        </div>
-
-
-
-<div class="navbar-collapse collapse">
-   <form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
-      <div class="form-group">
-         <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
-      </div>
-   </form>
-    <div class="nav navbar-nav navbar-right">
-
-    <% if @current_user == nil %>
-
-        <section>
-            <div class=
-            "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" type="button" id = "login-button" data-toggle = "modal" data-target="#login-modal" >Login</button>
-          </div>
-
-            <div class=
-            "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" type="button" id = "signup-button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
-            </div>
-            <% end %>
-
-     <% if @current_user %>
-
-            <% if @dashboard_state == 1%>
-               <div class=
-               "morph-button morph-button-modal morph-button-fixed">
-                  <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
-                  type="button">Create Listing</button>
-               </div>
-            <% elsif @dashboard_state == 0%>
-               <div class=
-               "morph-button morph-button-modal morph-button-fixed">
-                  <button class = "regular-button" onclick="location.href='<%=new_advertisement_path%>'"
-                  type="button">Add Advertisement</button>
-               </div>
-            <%end%>
-
-            <div class= "morph-button morph-button-modal morph-button-fixed">
-          <button type="button" class="dropdown-toggle account" data-toggle="dropdown">
-              <%=@current_user.username %> <span class="caret"></span>
-            </button>
-
-              <ul class="dropdown-menu" role="menu">
-                <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
-                <% if @dashboard_state == 0 %>
-                  <% if @usertype.equal? 2 or @usertype.eql? '2' %>
-                    <li><%= link_to 'Switch to Owner', owner_dashboard_path %></li>
-                  <%end%>
-                  <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
-                <%end%>
-                <% if @dashboard_state == 1 %>
-                  <% if @usertype.equal? 2 or @usertype.eql? '2' %>
-                    <li><%= link_to 'Switch to Advertiser', advertiser_dashboard_path %></li>
-                  <%end%>
-                  <li><%= link_to 'My Account', owner_path(@current_user) %></li>
-                <%end%>
-
-                <li class="divider"></li>
-                <li><a class = "signout-link" href="/api/signout">Log out</a></li>
-              </ul>
-            </div>
-
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <% if @current_user == nil%>
+        <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a><%end%>
+        <% if @current_user%>
+        <% if @dashboard_state == 0 %>
+        <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle" style = "color:#d4b02e"></i>WDCAST</a>
+        <% elsif @dashboard_state == 1 %>
+        <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
         <% end %>
-
-        </section>
+        <% end %>
+      </div>
+      <div class="navbar-collapse collapse">
+        <form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
+          <div class="form-group">
+            <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
+          </div>
+        </form>
+        <div class="nav navbar-nav navbar-right">
+          <% if @current_user == nil %>
+          <section>
+            <div class=
+            "morph-button morph-button-modal morph-button-fixed">
+            <button class = "regular-button" type="button" data-toggle = "modal" data-target="#login-modal" >Login</button>
+          </div>
+          <div class=
+          "morph-button morph-button-modal morph-button-fixed">
+          <button class = "regular-button" type="button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
+        </div>
+        <% end %>
+        <% if @current_user %>
+        <% if @dashboard_state == 1%>
+        <div class=
+        "morph-button morph-button-modal morph-button-fixed">
+        <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
+          type="button">Create Listing</button>
+        </div>
+        <% elsif @dashboard_state == 0%>
+        <div class=
+        "morph-button morph-button-modal morph-button-fixed">
+        <button class = "regular-button" onclick="location.href='<%=new_advertisement_path%>'"
+          type="button">Add Advertisement</button>
+        </div>
+        <%end%>
+        <div class= "morph-button morph-button-modal morph-button-fixed">
+          <button type="button" class="dropdown-toggle account" data-toggle="dropdown">
+            <%=@current_user.username %> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
+            <% if @dashboard_state == 0 %>
+            <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+            <li><%= link_to 'Switch to Owner', owner_dashboard_path %></li>
+            <%end%>
+            <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
+            <%end%>
+            <% if @dashboard_state == 1 %>
+            <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+            <li><%= link_to 'Switch to Advertiser', advertiser_dashboard_path %></li>
+            <%end%>
+            <li><%= link_to 'My Account', owner_path(@current_user) %></li>
+            <%end%>
+            <li class="divider"></li>
+            <li><a class = "signout-link" href="/api/signout">Log out</a></li>
+          </ul>
+        </div>
+        <% end %>
+      </section>
     </div>
-</div><!-- /form-mockup -->
-
-    </div><!--/.nav-collapse -->
+  </div>
+  <!-- /form-mockup -->
 </div>
-
-
-
+<!--/.nav-collapse -->
+</div>
 <!--Login lightbox-->
 <div class="modal fade login" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-header">
-        <button type="button" id = "inner-login-button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
         <form>
-            <p>
+          <p>
             <label>Username</label><input id="username-login"
-            type="text"></p>
-
-            <p>
+            type="text">
+          </p>
+          <p>
             <label>Password</label><input id="password-login"
-            type="password"></p>
-
-            <p><button id=
+            type="password">
+          </p>
+          <p><button id=
             "login">Login</button></p>
-
             <div class="alert fade in" id=
             "login-error" style=
             "display:none;">
-                 Invalid
-                credentials! Please enter your
-                username and password again.
-            </div>
+            Invalid
+            credentials! Please enter your
+            username and password again.
+          </div>
         </form>
       </div>
-
       <div class="alert fade in" id=
       "login-error" style=
       "display:none;">
-           Invalid
-          credentials! Please enter your
-          username and password again.
-      </div>
+      Invalid
+      credentials! Please enter your
+      username and password again.
     </div>
   </div>
 </div>
-
-
+</div>
 <!-- Signup lightbox -->
-
 <div class="modal fade login" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Sign up</h4>
       </div>
       <div class="modal-body">
-
         <form>
-            <label><input checked class=
+          <label><input checked class=
             "user-option" id=
             "advertiser-option" name=
             "signup-user" type="radio" value=
             "0"> Advertiser</label>
             <label><input class="user-option"
-            id="owner-option" name=
-            "signup-user" type="radio" value=
-            "1"> Property owner</label>
-
-            <p>
-            <label>Username</label><input id='username-signup'
-            type="text"></p>
-
-            <p>
-            <label>Password</label><input id='password-signup'
-            type="password"></p>
-
-            <p><label>Email</label><input id=
-            'email-signup' type="text"></p>
-
-            <p><label>Company</label><input id=
-            'company-signup' type="text"></p>
-
-            <p><button id="signup">Sign
-            Up</button></p>
-
-            <div class="alert fade in" id=
-            "signup-usernametaken-e" style=
-            "display:none;">
-              This username has already been
-                taken.
+              id="owner-option" name=
+              "signup-user" type="radio" value=
+              "1"> Property owner</label>
+              <p>
+                <label>Username</label><input id='username-signup'
+                type="text">
+              </p>
+              <p>
+                <label>Password</label><input id='password-signup'
+                type="password">
+              </p>
+              <p><label>Email</label><input id=
+                'email-signup' type="text"></p>
+                <p><label>Company</label><input id=
+                  'company-signup' type="text"></p>
+                  <p><button id="signup">Sign
+                    Up</button>
+                  </p>
+                  <div class="alert fade in" id=
+                  "signup-usernametaken-e" style=
+                  "display:none;">
+                  This username has already been
+                  taken.
+                </div>
+                <div class="alert fade in" id=
+                "signup-username-e" style=
+                "display:none;">
+                Please enter a valid username. Must have more than 8 characters.
+              </div>
+              <div class="alert fade in" id=
+              "signup-password-e" style=
+              "display:none;">
+              Please enter a valid password. A
+              password must have more than 6
+              characters.
             </div>
-            <div class="alert fade in" id=
-            "signup-username-e" style=
-            "display:none;">
-              Please enter a valid username. Must have more than 8 characters.
-            </div>
-
-            <div class="alert fade in" id=
-            "signup-password-e" style=
-            "display:none;">
-                Please enter a valid password. A
-                password must have more than 6
-                characters.
-            </div>
-
             <div class="alert fade in" id=
             "signup-email-e" style=
             "display:none;">
-              Please enter a valid email.
-            </div>
+            Please enter a valid email.
+          </div>
         </form>
-
-
       </div>
-
-
     </div>
   </div>
 </div>
-
-
-
-
 <%= yield %>
-
 </body>
-
-
-
-
-    <script type="text/javascript">
-    // Deal with radio button options (choose either advertiser or owner)
-    var radio = $('input[name=signup-user]');
-    var checkedValue = 0;
-    $('.user-option').click(function() {
-    checkedValue = radio.filter(':checked').val();
-    });
-
-    // Click signup button
-    $('#signup').click(function(e) {
-    e.preventDefault();
-
-    $.ajax({
-           //First send a post request, get the response back. On successful message back, check the data
-           url: "" + window.location.protocol + '//' + window.location.host + "/api/create_user",
-           type: "POST",
-           /* radio button vals: 0 = advertiser, 1 = owner */
-
-           data: JSON.stringify( {username: $('#username-signup').val(), password: $('#password-signup').val(), email: $('#email-signup').val(), company: $('#company-signup').val(), usertype: checkedValue} ),
-           contentType: "application/json",
-           dataType: "json",
-           success: function(data){
-             signupSuccess(data);
-           },
-           failure: function(errorMsg) {
-             failure(data);
-           }
-        });
-    })
-
-
-
-    function signupSuccess(data) {
-    var status = data.status;
-    if (status == 1) {
-    if (checkedValue == 0) {
-      window.location.href = window.location.protocol + "//" + window.location.host + '/search';
-    }
-    else {
-    window.location.href = window.location.protocol + "//" + window.location.host + '/listings/new';
-    }
-    }
-    else {
-    if (status == -1) {
-    // error message
-    $('#signup-usernametaken-e').show();
-    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-    // hide error message after five seconds, or it will stay there forever
-    $("#signup-usernametaken-e").hide();
-
-    }, 5000);
-    }
-    if (status == -2) {
-    // error message
-    $('#signup-username-e').show();
-    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-    // hide error message after five seconds, or it will stay there forever
-    $("#signup-username-e").hide();
-
-    }, 5000);
-    }
-    if (status == -3) {
-    // error message
-    $('#signup-password-e').show();
-    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-    // hide error message after five seconds, or it will stay there forever
-    $("#signup-password-e").hide();
-
-    }, 5000);
-    }
-    if (status == -4) {
-    // error message
-    $('#signup-email-e').show();
-    setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-    // hide error message after five seconds, or it will stay there forever
-    $("#signup-email-e").hide();
-
-    }, 5000);
-    }
-    }
-    }
-
-    $('#login').click(function(e) {
-    e.preventDefault();
-    $.ajax({
-            //First send a post request, get the response back. On successful message back, check the data
-            url: "" + window.location.protocol + '//' + window.location.host + "/api/login",
-            type: "POST",
-            data: JSON.stringify({username: $('#username-login').val(), password: $('#password-login').val()}),
-            contentType: "application/json",
-            dataType: "json",
-            success: function(data){
-              loginSuccess(data);
-            },
-            failure: function(errorMsg) {
-              failure(data);
-            }
-         });
-    })
-
-    function loginSuccess(data){
-    // Wrong login credentials
-    if (data.status == -1) {
-
-     // error message
-     $('#login-error').show();
-     setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-    // hide error message after five seconds, or it will stay there forever
-      $("#login-error").hide();
-
-    }, 5000);
-    }
-    else if (data.status == 1) {
-     window.location.href =  window.location.protocol + '//' + window.location.host + '/search';
-    }
-
-    };
-
-
-
-
-    </script>
 </html>
