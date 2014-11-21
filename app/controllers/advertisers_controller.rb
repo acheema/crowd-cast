@@ -78,6 +78,15 @@ class AdvertisersController < ApplicationController
     @dashboard_state = 0
   end
 
+  def favorite_listing
+    advertiser = Advertiser.find_by_username(cookies[:username])
+  end
+
+  def get_favorited_listings
+    advertiser = Advertiser.find_by_username(cookies[:username])
+    @favorites = advertiser.get_favorited_listings
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_advertiser

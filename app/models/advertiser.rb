@@ -1,6 +1,7 @@
 # Written by: Jhoong Roh and a few lines by Jason Clark
 class Advertiser < ActiveRecord::Base
-   has_many :advertisements
+  has_and_belongs_to_many :listings
+  has_many :advertisements
 
   attr_accessor :password
   before_save :encrypt_password
@@ -56,6 +57,19 @@ class Advertiser < ActiveRecord::Base
         return -4
       end
     end
+  end
+
+  def favorite_listing(listing_id)
+    if Listing.exists?(:id => listing_id)
+      listing = Listing.find(listing_id)
+      if listing
+        self.listings << listing 
+      end
+    end
+  end
+
+  def get_favorited_listings
+    return self.listings
   end
 
   # Clear out the table

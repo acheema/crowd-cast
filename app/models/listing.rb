@@ -1,8 +1,9 @@
 #Written by Jason, Sukriti, Jhoong
 
 class Listing < ActiveRecord::Base
-   belongs_to :owner
-   has_many :messages
+  has_and_belongs_to_many :advertisements
+  belongs_to :owner
+  has_many :messages
 
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
