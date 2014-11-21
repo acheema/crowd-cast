@@ -74,6 +74,7 @@
          </table>
       </div>
       <div id='calendar'></div>
+      <div id="dialog" title="" style="display:none;">Are you sure want to delete it?</div>
    </div>
 </div>
 <div class="modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
@@ -147,7 +148,12 @@
       var today = moment()
       var today_date = today.format('YYYY-MM-DD');
       var year_from_today_date = today.add(1, "years").format('YYYY-MM-DD');
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
       $('#calendar').fullCalendar({
+        // put your options and callbacks here
          allDayDefault: true,
          selectable: true,
          selectHelper: true,
@@ -176,10 +182,30 @@
          editable: true,
          events: [
             {
-               start: '2014-11-23',
-               end: '2014-11-26'
-            },
+               id: 7,
+               title: 'Keepo',
+               start: new Date(y, m, d-5),
+               end: new Date(y, m, d-2),
+            }
          ],
+         eventClick: function(calEvent, jsEvent, view) {
+            id=calEvent.id;
+            $( '#dialog' ).dialog({
+               resizable: false,
+               height:200,
+               width:500,
+               modal: true,
+               title: 'Want you want to do?',
+               buttons: {
+                          CLOSE: function() {
+                              $("#dialog").dialog( "close" );
+                          },
+                          "DELETE": function() {
+                              $('#calendar').fullCalendar('removeEvents', calEvent._id);
+                          }
+                        }
+            });
+         },
       });
    });
 </script>
