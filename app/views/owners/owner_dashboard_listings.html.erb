@@ -1,0 +1,62 @@
+<div class = "row">
+  <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
+    <div id="sidebar"  class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu owner" id="nav-accordion">
+        <h4 class="centered"><%=@current_user.username %></h4>
+
+        <li>
+          <%= link_to owner_dashboard_path do %>
+          <i class="fa fa-tasks"></i> Dashboard
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to owner_dashboard_mail_path do %>
+          <i class="fa fa-envelope"></i> Mail
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to(owner_dashboard_listings_path, :class => 'active') do %>
+          <i class="fa fa-tasks"></i> My Listings
+          <% end %>
+        </li>
+
+
+      </div></div>
+
+
+      <!--sidebar end-->
+
+      <div id="listings">
+        <div class = "col-lg-10 col-md-8">
+
+        <h1 align="center">Current Listings</h1>
+        <%if @current_listings then %>
+        <% @current_listings.each do |listing|%>
+        <%= div_for listing, :class => "col-lg-4 result location#{listing.id}" do %>
+        <div style="max-width:400px;">
+          <a href="/listings/show?listing_id=<%=listing.id%>">
+            <div style="background-color: #d3d3d3;"><%= image_tag listing.image.url, class: "img"%></div>
+          </a>
+          <h4>
+            <a href="/listings/show?listing_id=<%=listing.id%>"><%= listing.title %></a>
+          </h4>
+          <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
+          <p><%= "#{listing.street}, #{listing.city}, #{listing.state} #{listing.zip}" %></p>
+          <%else%>
+          <p><%= "#{sprintf('%.2f', listing.latitude)}, #{sprintf('%.2f', listing.longitude)}" %></p>
+          <%end%>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
+
+
+
+    </div>

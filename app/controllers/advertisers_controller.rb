@@ -72,6 +72,18 @@ class AdvertisersController < ApplicationController
     render 'advertiser_dashboard'
   end
 
+  def advertiser_dashboard_ads
+    @current_ads = Advertisement.getAds(@current_user.id)
+    self.reset_cookie
+    render 'advertiser_dashboard_ads'
+  end
+
+  def advertiser_dashboard_mail
+    @messages = Message.getMessages(cookies[:username])
+    self.reset_cookie
+    render 'advertiser_dashboard_mail'
+  end
+
 
   def reset_cookie
     cookies.permanent[:dashboard_state] = 0

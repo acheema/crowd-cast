@@ -1,0 +1,151 @@
+ <style> @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
+
+ .message_field{
+   color:#000;
+ }
+
+
+ </style>
+<div class = "row">
+  <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
+    <div id="sidebar"  class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu adr" id="nav-accordion">
+        <h4 class="centered"><%=@current_user.username %></h4>
+
+        <li>
+          <%= link_to advertiser_dashboard_path do %>
+          <i class="fa fa-tasks"></i> Dashboard
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to(advertiser_dashboard_mail_path, :class => 'active') do %>
+          <i class="fa fa-envelope"></i> Mail
+          <% end %>
+        </li>
+
+
+        <li>
+          <%= link_to advertiser_dashboard_ads_path do %>
+          <i class="fa fa-tasks"></i> My Advertisements
+          <% end %>
+        </li>
+</ul>
+      </div></div>
+
+
+      <!--sidebar end-->
+      <div class = "dashboard-content col-lg-8 col-md-7 col-md-offset-1">
+        <section id="main-content">
+          <section class="wrapper">
+
+
+
+               <div class="content-panel">
+                <table class="table table-hover">
+                  <h4>All Messages </h4>
+                  <hr>
+
+                  <thead>
+                    <tr>
+                      <th>From</th>
+                      <th>Subject</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tbody>
+                      <% @messages.each do |message|%>
+                      <tr>
+                        <td>
+                          <a class="message-listing-link" data-toggle="modal" data-target="#reply-message-modal",
+                          data-subject="<%=message.listing.title%>" data-message="<%=message.text%>",
+                          data-from="<%=message.from_username%>" data-id="<%=message.listing.id%>">
+                          <%=message.listing_title%>
+                        </a>
+                      </td>
+                      <td><%=message.text%></td>
+                      <td><%=message.created_at%></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </tbody>
+              </table>
+            </div><! --/content-panel -->
+         </div><!-- row -->
+
+
+      </section><! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+  </div>
+
+
+  <div class="modal message" id="reply-message-modal" tabindex="-1" role="dialog" aria-labelledby="reply-message-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Send Message To Owner</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="field-bold" id="field-replyId" value=""></div>
+            <p><label class="messageLabel">From</label><div class="field-bold" id="field-replyFrom" value=""></div></p>
+            <p><label class="messageLabel">Subject</label><div class="field-bold" id="field-replySubject" value=""></div></p>
+            <p><label class="messageLabel">Message</label><div id="field-replyMessageContent" value=""></div></p>
+            <div class="alert in hideMessage" id="message-error">
+              Invalid message!
+            </div>
+            <div class="success in hideMessage" id="message-success">
+              Successful message!
+            </div>
+            <p><label>Reply</label><textarea class="message_field inlineField" id="field-replyMessageBody"></textarea></p>
+            <p><button id="send">Send</button></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $(document).on("click", ".message-listing-link", function () {
+    var id =  $(this).data('id');
+    var message = $(this).data('message');
+    var from = $(this).data('from')
+    var subject = $(this).data('subject');
+    $('#field-replyId').text(id);
+    $("#field-replyFrom").text(from);
+    $("#field-replyMessageContent").text(message);
+    $('#field-replySubject').text(subject);
+  });
+  $('#send').click(function(e) {
+    var id =  document.getElementById('field-replyId').innerHTML;
+    var text = $('#field-replyMessageBody').val();
+    var title = document.getElementById('field-replySubject').innerHTML;
+    var to_user = document.getElementById('field-replyFrom').innerHTML;
+    e.preventDefault();
+    $.ajax({
+      //First send a post request, get the response back. On successful message back, check the data
+      url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
+      type: "POST",
+      data: JSON.stringify({listing_id: id, listing_title: title, to_username: to_user, text: text}),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data){
+        if (data.status == -1){
+          $('#message-error').show();
+        }
+        else if (data.status == 1){
+          $('#message-success').show();
+        }
+      },
+      failure: function(errorMsg) {
+        failure(data);
+      }
+    });
+  });
+  $('#field-replySubject').on('change keyup paste', function(e) {
+    $('#message-error').hide();
+    $('#message-success').hide();
+  });
+  </script>
