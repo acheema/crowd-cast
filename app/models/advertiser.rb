@@ -64,7 +64,10 @@ class Advertiser < ActiveRecord::Base
       listing = Listing.find(listing_id)
       if listing
         self.listings << listing 
+        return true 
       end
+    else
+      return false
     end
   end
 

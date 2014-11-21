@@ -91,8 +91,17 @@ class AdvertisersController < ApplicationController
   end
 
   def favorite_listing
-    advertiser = Advertiser.find_by_username(cookies[:username])
-    advertiser.favorite_listing(params(:listing_id))
+    puts 'here'
+    username = cookies[:username]
+    listing_id = params[:listing_id]
+    if username and listing_id
+      advertiser = Advertiser.find_by_username(cookies[:username])
+      success = advertiser.favorite_listing(listing_id)
+      if success
+        render :json => { :success => "success", :status_code => "200" }
+      end
+    end
+    render :json => { :success => "failure", :status_code => "200" }
   end
 
   def get_favorited_listings

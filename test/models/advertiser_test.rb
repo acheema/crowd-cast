@@ -145,7 +145,8 @@ class AdvertiserTest < ActiveSupport::TestCase
   test "advertiser can favorite listing" do
     favorite_setup false
     assert_difference "@advertiser.listings.size", 1 do
-      @advertiser.favorite_listing @listing.id
+      success = @advertiser.favorite_listing @listing.id
+      assert success == true
     end
   end
 
@@ -153,7 +154,8 @@ class AdvertiserTest < ActiveSupport::TestCase
     params = { username: "User Name", password: "password", email: "asdf@asdf.com", company: "my comp", usertype: 0}
     advertiser = Advertiser.createUser(params)
     assert_difference "advertiser.listings.size", 0 do
-      advertiser.favorite_listing 99999 
+      success = advertiser.favorite_listing 99999 
+      assert success == false
     end
   end
 
