@@ -80,6 +80,7 @@ class AdvertisersController < ApplicationController
 
   def favorite_listing
     advertiser = Advertiser.find_by_username(cookies[:username])
+    advertiser.favorite_listing(params(:listing_id))
   end
 
   def get_favorited_listings
