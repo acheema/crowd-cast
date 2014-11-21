@@ -67,6 +67,7 @@ class AdvertisersController < ApplicationController
   def advertiser_dashboard
     @current_ads = Advertisement.getAds(@current_user.id)
     @messages = Message.getMessages(cookies[:username])
+    @favorites = Advertiser.get_favorited_listings @current_user.id
     #reset the cookie to advertiser view and reset the dashboard state
     self.reset_cookie
     render 'advertiser_dashboard'
@@ -91,7 +92,6 @@ class AdvertisersController < ApplicationController
   end
 
   def favorite_listing
-    puts 'here'
     username = cookies[:username]
     listing_id = params[:listing_id]
     if username and listing_id
@@ -99,14 +99,12 @@ class AdvertisersController < ApplicationController
       success = advertiser.favorite_listing(listing_id)
       if success
         render :json => { :success => "success", :status_code => "200" }
+      else
+        render :json => { :success => "failure", :status_code => "200" }
       end
+    else
+      render :json => { :success => "failure", :status_code => "200" }
     end
-    render :json => { :success => "failure", :status_code => "200" }
-  end
-
-  def get_favorited_listings
-    advertiser = Advertiser.find_by_username(cookies[:username])
-    @favorites = advertiser.get_favorited_listings
   end
 
   private
