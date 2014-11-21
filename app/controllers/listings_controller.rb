@@ -23,10 +23,6 @@ class ListingsController < ApplicationController
     @listing = Listing.new
   end
 
-  def show
-  end
-
-
   def getListings
     listings = Listing.getListings(listings_params[:city])
     render :json => { status: 1, listings: listings }
