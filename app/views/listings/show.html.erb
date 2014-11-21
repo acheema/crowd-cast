@@ -144,25 +144,42 @@
          $('#message-error').hide();
          $('#message-success').hide();
       });
+      var today = moment()
+      var today_date = today.format('YYYY-MM-DD');
+      var year_from_today_date = today.add(1, "years").format('YYYY-MM-DD');
       $('#calendar').fullCalendar({
-        // put your options and callbacks here
          allDayDefault: true,
          selectable: true,
          selectHelper: true,
+         eventBackgroundColor: 'grey',
+         eventBorderColor: 'grey',
          select: function(start, end) {
-            var title = prompt('Event Title:');
-            var eventData;
-            if (title) {
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            if (start_date < today_date) {
+               alert("Can't select days in the past");
+            }
+            else if (end_date >= year_from_today_date){
+               alert("Can't select days a year in the future");
+            }
+            else {
+               var eventData;
                eventData = {
-                  title: title,
                   start: start,
-                  end: end
+                  end: end,
+                  color: 'green'
                };
                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-            }
+            }   
             $('#calendar').fullCalendar('unselect');
          },
          editable: true,
+         events: [
+            {
+               start: '2014-11-23',
+               end: '2014-11-26'
+            },
+         ],
       });
    });
 </script>
