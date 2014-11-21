@@ -1,197 +1,196 @@
 <!DOCTYPE html>
 <!--Written by Jessica Wong
-Minor changes by Jhoong
-Note: Advertiser: 0, Owner: 1 -->
+   Minor changes by Jhoong
+   Note: Advertiser: 0, Owner: 1 -->
 <html>
-<%= yield :javascript %>
-<head>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <title>Crowdcast</title>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <% if @current_user == nil%>
-        <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a><%end%>
-        <% if @current_user%>
-        <% if @dashboard_state == 0 %>
-        <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle" style = "color:#d4b02e"></i>WDCAST</a>
-        <% elsif @dashboard_state == 1 %>
-        <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
-        <% end %>
-        <% end %>
-      </div>
-      <div class="navbar-collapse collapse">
-        <form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
-          <div class="form-group">
-            <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
-          </div>
-        </form>
-        <div class="nav navbar-nav navbar-right">
-          <% if @current_user == nil %>
-          <section>
-            <div class=
-            "morph-button morph-button-modal morph-button-fixed">
-            <button class = "regular-button" type="button" data-toggle = "modal" data-target="#login-modal" >Login</button>
-          </div>
-          <div class=
-          "morph-button morph-button-modal morph-button-fixed">
-          <button class = "regular-button" type="button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
-        </div>
-        <% end %>
-        <% if @current_user %>
-        <% if @dashboard_state == 1%>
-        <div class=
-        "morph-button morph-button-modal morph-button-fixed">
-        <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
-          type="button">Create Listing</button>
-        </div>
-        <% elsif @dashboard_state == 0%>
-        <div class=
-        "morph-button morph-button-modal morph-button-fixed">
-        <button class = "regular-button" onclick="location.href='<%=new_advertisement_path%>'"
-          type="button">Add Advertisement</button>
-        </div>
-        <%end%>
-        <div class= "morph-button morph-button-modal morph-button-fixed">
-          <button type="button" class="dropdown-toggle account" data-toggle="dropdown">
-            <%=@current_user.username %> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
-            <% if @dashboard_state == 0 %>
-            <% if @usertype.equal? 2 or @usertype.eql? '2' %>
-            <li><%= link_to 'Switch to Owner', owner_dashboard_path %></li>
-            <%end%>
-            <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
-            <%end%>
-            <% if @dashboard_state == 1 %>
-            <% if @usertype.equal? 2 or @usertype.eql? '2' %>
-            <li><%= link_to 'Switch to Advertiser', advertiser_dashboard_path %></li>
-            <%end%>
-            <li><%= link_to 'My Account', owner_path(@current_user) %></li>
-            <%end%>
-            <li class="divider"></li>
-            <li><a class = "signout-link" href="/api/signout">Log out</a></li>
-          </ul>
-        </div>
-        <% end %>
-      </section>
-    </div>
-  </div>
-  <!-- /form-mockup -->
-</div>
-<!--/.nav-collapse -->
-</div>
-<!--Login lightbox-->
-<div class="modal fade login" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Login</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-          <p>
-            <label>Username</label><input id="username-login"
-            type="text">
-          </p>
-          <p>
-            <label>Password</label><input id="password-login"
-            type="password">
-          </p>
-          <p><button id=
-            "login">Login</button></p>
-            <div class="alert fade in" id=
-            "login-error" style=
-            "display:none;">
-            Invalid
-            credentials! Please enter your
-            username and password again.
-          </div>
-        </form>
-      </div>
-      <div class="alert fade in" id=
-      "login-error" style=
-      "display:none;">
-      Invalid
-      credentials! Please enter your
-      username and password again.
-    </div>
-  </div>
-</div>
-</div>
-<!-- Signup lightbox -->
-<div class="modal fade login" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Sign up</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-          <label><input checked class=
-            "user-option" id=
-            "advertiser-option" name=
-            "signup-user" type="radio" value=
-            "0"> Advertiser</label>
-            <label><input class="user-option"
-              id="owner-option" name=
-              "signup-user" type="radio" value=
-              "1"> Property owner</label>
-              <p>
-                <label>Username</label><input id='username-signup'
-                type="text">
-              </p>
-              <p>
-                <label>Password</label><input id='password-signup'
-                type="password">
-              </p>
-              <p><label>Email</label><input id=
-                'email-signup' type="text"></p>
-                <p><label>Company</label><input id=
-                  'company-signup' type="text"></p>
-                  <p><button id="signup">Sign
-                    Up</button>
-                  </p>
-                  <div class="alert fade in" id=
-                  "signup-usernametaken-e" style=
-                  "display:none;">
-                  This username has already been
-                  taken.
-                </div>
-                <div class="alert fade in" id=
-                "signup-username-e" style=
-                "display:none;">
-                Please enter a valid username. Must have more than 8 characters.
-              </div>
-              <div class="alert fade in" id=
-              "signup-password-e" style=
-              "display:none;">
-              Please enter a valid password. A
-              password must have more than 6
-              characters.
+   <head>
+      <%= stylesheet_link_tag    'application', media: 'all' %>
+      <%= javascript_include_tag 'application' %>
+      <%= csrf_meta_tags %>
+   </head>
+   <body>
+      <title>Crowdcast</title>
+      <div class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <% if @current_user == nil%>
+               <a class="navbar-brand" href="/">CR<i class="fa fa-circle"></i>WDCAST</a><%end%>
+               <% if @current_user%>
+               <% if @dashboard_state == 0 %>
+               <a class="navbar-brand" href="<%=advertiser_dashboard_path%>">CR<i class="fa fa-circle" style = "color:#d4b02e"></i>WDCAST</a>
+               <% elsif @dashboard_state == 1 %>
+               <a class="navbar-brand" href="<%=owner_dashboard_path%>">CR<i class="fa fa-circle"></i>WDCAST</a>
+               <% end %>
+               <% end %>
             </div>
-            <div class="alert fade in" id=
-            "signup-email-e" style=
-            "display:none;">
-            Please enter a valid email.
-          </div>
-        </form>
+            <div class="navbar-collapse collapse">
+               <form class="navbar-form navbar-left" name="searchForm" action="/search" role="search">
+                  <div class="form-group">
+                     <input type="text" name="city" class="barInitial form-control" style="font-family:Lato, FontAwesome"  placeholder= "<%= @city.nil? ? 'Enter a city' : @city %>" >
+                  </div>
+               </form>
+               <div class="nav navbar-nav navbar-right">
+                  <% if @current_user == nil %>
+                  <section>
+                     <div class=
+                        "morph-button morph-button-modal morph-button-fixed">
+                        <button class = "regular-button" type="button" data-toggle = "modal" data-target="#login-modal" >Login</button>
+                     </div>
+                     <div class=
+                        "morph-button morph-button-modal morph-button-fixed">
+                        <button class = "regular-button" type="button" class = "regular-button" data-toggle = "modal" data-target = "#signup-modal">Signup</button>
+                     </div>
+                     <% end %>
+                     <% if @current_user %>
+                     <% if @dashboard_state == 1%>
+                     <div class=
+                        "morph-button morph-button-modal morph-button-fixed">
+                        <button class = "regular-button" onclick="location.href='<%=new_listing_path%>'"
+                           type="button">Create Listing</button>
+                     </div>
+                     <% elsif @dashboard_state == 0%>
+                     <div class=
+                        "morph-button morph-button-modal morph-button-fixed">
+                        <button class = "regular-button" onclick="location.href='<%=new_advertisement_path%>'"
+                           type="button">Add Advertisement</button>
+                     </div>
+                     <%end%>
+                     <div class= "morph-button morph-button-modal morph-button-fixed">
+                        <button type="button" class="dropdown-toggle account" data-toggle="dropdown">
+                        <%=@current_user.username %> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                           <!-- need to add if current_user.usertype == 2 as a condition before being able to switch, will do that later -->
+                           <% if @dashboard_state == 0 %>
+                           <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+                           <li><%= link_to 'Switch to Owner', owner_dashboard_path %></li>
+                           <%end%>
+                           <li><%= link_to 'My Account', advertiser_path(@current_user) %></li>
+                           <%end%>
+                           <% if @dashboard_state == 1 %>
+                           <% if @usertype.equal? 2 or @usertype.eql? '2' %>
+                           <li><%= link_to 'Switch to Advertiser', advertiser_dashboard_path %></li>
+                           <%end%>
+                           <li><%= link_to 'My Account', owner_path(@current_user) %></li>
+                           <%end%>
+                           <li class="divider"></li>
+                           <li><a class = "signout-link" href="/api/signout">Log out</a></li>
+                        </ul>
+                     </div>
+                     <% end %>
+                  </section>
+               </div>
+            </div>
+            <!-- /form-mockup -->
+         </div>
+         <!--/.nav-collapse -->
       </div>
-    </div>
-  </div>
-</div>
-<%= yield %>
-</body>
+      <!--Login lightbox-->
+      <div class="modal fade login" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title">Login</h4>
+               </div>
+               <div class="modal-body">
+                  <form>
+                     <p>
+                        <label>Username</label><input id="username-login"
+                           type="text">
+                     </p>
+                     <p>
+                        <label>Password</label><input id="password-login"
+                           type="password">
+                     </p>
+                     <p><button id=
+                        "login">Login</button></p>
+                     <div class="alert fade in" id=
+                        "login-error" style=
+                        "display:none;">
+                        Invalid
+                        credentials! Please enter your
+                        username and password again.
+                     </div>
+                  </form>
+               </div>
+               <div class="alert fade in" id=
+                  "login-error" style=
+                  "display:none;">
+                  Invalid
+                  credentials! Please enter your
+                  username and password again.
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Signup lightbox -->
+      <div class="modal fade login" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title">Sign up</h4>
+               </div>
+               <div class="modal-body">
+                  <form>
+                     <label><input checked class=
+                        "user-option" id=
+                        "advertiser-option" name=
+                        "signup-user" type="radio" value=
+                        "0"> Advertiser</label>
+                     <label><input class="user-option"
+                        id="owner-option" name=
+                        "signup-user" type="radio" value=
+                        "1"> Property owner</label>
+                     <p>
+                        <label>Username</label><input id='username-signup'
+                           type="text">
+                     </p>
+                     <p>
+                        <label>Password</label><input id='password-signup'
+                           type="password">
+                     </p>
+                     <p><label>Email</label><input id=
+                        'email-signup' type="text"></p>
+                     <p><label>Company</label><input id=
+                        'company-signup' type="text"></p>
+                     <p><button id="signup">Sign
+                        Up</button>
+                     </p>
+                     <div class="alert fade in" id=
+                        "signup-usernametaken-e" style=
+                        "display:none;">
+                        This username has already been
+                        taken.
+                     </div>
+                     <div class="alert fade in" id=
+                        "signup-username-e" style=
+                        "display:none;">
+                        Please enter a valid username. Must have more than 8 characters.
+                     </div>
+                     <div class="alert fade in" id=
+                        "signup-password-e" style=
+                        "display:none;">
+                        Please enter a valid password. A
+                        password must have more than 6
+                        characters.
+                     </div>
+                     <div class="alert fade in" id=
+                        "signup-email-e" style=
+                        "display:none;">
+                        Please enter a valid email.
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <%= yield %>
+   </body>
 </html>
