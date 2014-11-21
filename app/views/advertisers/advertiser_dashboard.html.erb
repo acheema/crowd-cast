@@ -38,10 +38,10 @@
   <section class="wrapper">
 
     <div class="row">
-      <div class="col-lg-12 main-chart dashboard-content">
+      <div class="col-lg-10 col-lg-offset-2 main-chart dashboard-content">
 
         <div class="row mtbox">
-          <div class="col-md-2 col-sm-3  col-lg-offset-2 box0">
+          <div class="col-md-2 col-sm-3  col-lg-offset-1 box0">
             <div class="box1">
               <center><span class="fa fa-heart"></span></center>
               <h3>Liked listings</h3>
@@ -74,19 +74,19 @@
 
 
         </div><!-- /row mt -->
-
+        <div class = "row mt">
         <div id="listings">
             <%if @favorites then %>
             <% @favorites.each do |fav|%>
-            <%= div_for listing, :class => "col-lg-4 result location#{listing.id}" do %>
+            <%= div_for fav, :class => "col-lg-4 result location#{fav.id}" do %>
             <div style="max-width:400px;">
-              <a href="/listings/show?listing_id=<%=listing.id%>">
-                <div style="background-color: #d3d3d3;"><%= image_tag listing.image.url, class: "img"%></div>
+              <a href="/listings/show?listing_id=<%=fav.id%>">
+                <div style="background-color: #d3d3d3;"><%= image_tag fav.image.url, class: "img"%></div>
               </a>
               <h4>
                 <a href="/listings/show?listing_id=<%=fav.id%>"><%= fav.title %></a>
               </h4>
-              <%if listing.street.present? and listing.city.present? and listing.state.present? and listing.zip.present? then %>
+              <%if fav.street.present? and fav.city.present? and fav.state.present? and fav.zip.present? then %>
               <p><%= "#{fav.street}, #{fav.city}, #{fav.state} #{fav.zip}" %></p>
               <%else%>
               <p><%= "#{sprintf('%.2f', fav.latitude)}, #{sprintf('%.2f', fav.longitude)}" %></p>
@@ -96,7 +96,9 @@
             <% end %>
             <% end %>
          </div>
-
+       </div>
+     </div>
+</div>
       </section></section>
 
 
