@@ -14,7 +14,9 @@
    </div>
    <div class="col-lg-6">
       <div>
-         <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
+        <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
+        <button class="btn" id = "fave">kslfd</button>
+
       </div>
       <div class="table-responsive">
          <table class="table table-striped table-bordered">
@@ -111,7 +113,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function() {
-      handler = Gmaps.build('Google');
+       handler = Gmaps.build('Google');
       var mapOptions = { mapTypeId: google.maps.MapTypeId.HYBRID };
       handler.buildMap({ internal: {id: 'map'}, provider: mapOptions}, function(){
          var location = { "lat": <%=@listing.latitude%>, "lng": <%=@listing.longitude%> };
@@ -121,7 +123,6 @@
          handler.getMap().setZoom(17);
       });
       $('#send').click(function(e) {
-         e.preventDefault();
          $.ajax({
             //First send a post request, get the response back. On successful message back, check the data
             url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
@@ -135,7 +136,7 @@
                }
                else {
                   $('#message-error').show();
-               } 
+               }
             },
             failure: function(errorMsg) {
                failure(data);
@@ -149,6 +150,25 @@
       $('#calendar').fullCalendar({
         // put your options and callbacks here
       });
+
+
+      $('#fave').click(function(e) {
+        $.ajax({
+          url: "" + window.location.protocol + '//' + window.location.host + "/api/favorite_listing/",
+          type: "POST",
+          data: JSON.stringify({listing_id: '<%=@listing.id%>'}),
+          contentType: "application/json",
+          dataType:"json",
+          success: function() {
+          }
+        })
+      });
    });
+
+
+
+
 </script>
+
+
 <% end %>
