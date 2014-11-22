@@ -16,7 +16,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "listings page" do
     get new_listing_path
     assert_template 'listings/new'
-    assert_select "form[class=?]", "form-horizontal col-lg-8 col-lg-offset-2"
   end
 
   test "search page layout by going to /search" do

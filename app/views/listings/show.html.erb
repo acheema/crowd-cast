@@ -88,9 +88,30 @@
 
 
       </div>
-      <div id='calendar' class = "hidden"></div>
+      <div id='calendar'></div>
+      <!-- Button trigger modal -->
+         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+           Launch demo modal
+         </button>
 
-      <div id="dialog" title="" style="display:none;">Are you sure want to delete it?</div>
+         <!-- Modal -->
+         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 <h4 class="modal-title" id="myModalLabel">Delete event</h4>
+               </div>
+               <div class="modal-body">
+                 Are you sure you want to delete it?
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" id="deleteEvent" class="btn btn-primary">Delete</button>
+               </div>
+             </div>
+           </div>
+         </div> <!-- end of modal-->
    </div>
 </div>
 </div>
@@ -168,6 +189,7 @@
       var d = date.getDate();
       var m = date.getMonth();
       var y = date.getFullYear();
+      var eventid = 0
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          allDayDefault: true,
@@ -187,11 +209,13 @@
             else {
                var eventData;
                eventData = {
+                  id: eventid,
                   start: start,
                   end: end,
                   color: 'green'
                };
                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+               eventid += 1
             }
             $('#calendar').fullCalendar('unselect');
          },
@@ -205,24 +229,16 @@
             }
          ],
          eventClick: function(calEvent, jsEvent, view) {
-            id=calEvent.id;
-            $( '#dialog' ).dialog({
-               resizable: false,
-               height:200,
-               width:500,
-               modal: true,
-               title: 'Want you want to do?',
-               buttons: {
-                          CLOSE: function() {
-                              $("#dialog").dialog( "close" );
-                          },
-                          "DELETE": function() {
-                              $('#calendar').fullCalendar('removeEvents', calEvent._id);
-                          }
-                        }
-            });
+            //id=calEvent.id;
+            $('#myModal').modal('show');
          },
       });
+      $("#deleteEvent").on("click", function(e) {
+         deleteEvent(e.id);
+      });
+      function deleteEvent(id){
+         $('#calendar').fullCalendar('removeEvents', id);
+      }
 
 
       $('#fave').click(function(e) {
