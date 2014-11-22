@@ -81,7 +81,11 @@ class Advertiser < ActiveRecord::Base
 
   def self.listing_favorited listing_id, advertiser_username
     user = Advertiser.find_by_username advertiser_username
-    return user.listings.exists? :id => listing_id
+    if user
+      return user.listings.exists? :id => listing_id
+    else
+      return false
+    end
   end
 
   def self.get_favorited_listings advertiser_id 
