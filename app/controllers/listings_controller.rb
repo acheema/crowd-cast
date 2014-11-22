@@ -48,11 +48,12 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.getListingDetails(params[:listing_id])
     @owner_username = Owner.find(@listing.owner_id).username
+    @usertype = cookies[:usertype]
     if Advertiser.listing_favorited @listing.id, cookies[:username]
       @listing_favorited = true
     else 
       @listing_favorited = false
-    end
+    end   
   end
 
   def activate
