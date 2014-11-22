@@ -24,13 +24,34 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    params = reservation_params
+    status = true    
+
+    # lets verify these entries actually exist
     username = cookies[:username]
     advertiser = Advertiser.find_by_username(username)
-    status = Listing.createListing(reservation_params.merge(:advertiser => advertiser))
-    @reservation = Reservation.create(reservation_params)      
-
-
-
+    listing = Listing.find(params[:listing_id])
+    advertisement = Advertisement.find(params[:advertisement_id])
+    params.delete("listing_id")
+    params.delete("advertisement_id")
+    params.merge(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
+    
+    # For each reservation, create
+    reservations = params.reservations
+    params.delete("reservations")
+    reservations.each do |reservation|
+       status = Reservation.create(params.merge(:start_date => reservation[:start_date], \ 
+                                                :end_date => reservation[:end_date], \
+                                                :price => reservation[:price] ))
+       if not status 
+          break
+       end
+    end
+    if status
+      render :json => { status: 1 }
+    else
+      render :json => { status: -1 }
+    end
   end
 
   # PATCH/PUT /reservations/1
@@ -65,6 +86,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id, :start_date, :end_date, :price)
+      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id, :reservations)
     end
 end
