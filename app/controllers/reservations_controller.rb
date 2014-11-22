@@ -24,25 +24,28 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    params = reservation_params
+    reservation_params = create_reservation_params
     status = true    
+    puts "hello"
+    puts reservation_params
+    puts "yello"
 
     # lets verify these entries actually exist
     username = cookies[:username]
     advertiser = Advertiser.find_by_username(username)
-    listing = Listing.find(params[:listing_id])
-    advertisement = Advertisement.find(params[:advertisement_id])
-    params.delete("listing_id")
-    params.delete("advertisement_id")
-    params.merge(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
+    listing = Listing.find(reservation_params[:listing_id])
+    advertisement = Advertisement.find(reservation_params[:advertisement_id])
+    reservation_params.delete("listing_id")
+    reservation_params.delete("advertisement_id")
+    reservation_params.merge!(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
     
     # For each reservation, create
-    reservations = params.reservations
-    params.delete("reservations")
-    reservations.each do |reservation|
-       status = Reservation.create(params.merge(:start_date => reservation[:start_date], \ 
-                                                :end_date => reservation[:end_date], \
-                                                :price => reservation[:price] ))
+    dates = reservation_params[:dates]
+    reservation_params.delete("dates")
+    dates.each do |reservation|
+       status = Reservation.create(reservation_params.merge(:start_date => reservation[:start_date],  
+                                                            :end_date => reservation[:end_date], 
+                                                            :price => reservation[:price] ))
        if not status 
           break
        end
@@ -85,7 +88,8 @@ class ReservationsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def reservation_params
-      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id, :reservations)
+    def create_reservation_params
+      param = params.permit(dates: [ :start_date, :end_date, :price])
+      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id).merge!(param)
     end
 end

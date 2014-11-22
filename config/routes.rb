@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :reservations
-
   resources :advertisements
   resources :messages
   resources :advertisers
