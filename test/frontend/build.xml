@@ -1,0 +1,188 @@
+<project name="testng_webdriver_echosign_automation" default="test" basedir=".">
+  <description>
+    Build file for Echosign Automated Functional TestSuite with TestNG and Selenium WebDriver
+  </description>
+
+  <!-- ant-contrib provides expanded ant syntax -->
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="${basedir}/lib/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
+
+  <!-- ============== SETUP ==================== -->
+
+  <!-- Set global properties for this build -->
+  <property name="bin" location="bin"/>
+  <property name="conf" location="conf"/>
+  <property name="lib" location="lib"/>
+  <property name="logs" location="logs"/>
+  <property name="src" location="src"/>
+
+  <!-- Directory name where the TestNG report will be saved. -->
+  <property name="testng.output.dir" value="test-output"/>
+
+  <!-- Setup the testng classpath -->
+  <path id="classpath">
+    <fileset dir="${lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <pathelement location="${bin}"/>
+  </path>
+
+  <!-- ============== COMPILE TESTS ==================== -->
+
+  <target name="init" depends="clean">
+    <mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init" description="Compile the source">
+    <javac debug="true" srcdir="${src}" destdir="${bin}" includeantruntime="false">
+      <classpath>
+        <path refid="classpath"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <!-- Clean up -->
+  <target name="clean" description="Clean out the compiled class files in bin/">
+    <delete dir="${bin}"/>
+  </target>
+
+  <target name="cleanall" depends="clean">
+    <delete dir="${testng.output.dir}"/>
+    <delete>
+      <fileset dir="${logs}" includes="*.log"/>
+    </delete>
+  </target>
+
+  <!-- ============== TESTNG ==================== -->
+
+  <!-- Define <testng> task -->
+  <taskdef name="testng" classname="org.testng.TestNGAntTask">
+    <classpath>
+      <path refid="classpath"/>
+    </classpath>
+  </taskdef>
+
+  <!-- Debug mode enables FINE log level-->
+  <target name="debug" description="Output all debug/FINE level logging">
+    <property name="log.level" value="fine"/>
+  </target>
+
+  <!-- Quiet mode turns off all logging from inside test suite -->
+  <target name="quiet" description="Output bare miniumum logging">
+    <property name="log.level" value="quiet"/>
+  </target>
+
+  <!-- Retry failures-->
+  <target name="retry" description="Retry the previously failed tests">
+    <property name="testng.xmldir" value="${testng.output.dir}"/>
+    <property name="testng.xmlfile" value="testng-failed.xml"/>
+    <available file="${testng.xmldir}/${testng.xmlfile}" property="test.failures.found"/>
+    <if>
+      <equals arg1="${test.failures.found}" arg2="true"/>
+      <then>
+        <echo message="[RETRY FAILURES]"/>
+        <property name="test.retry" value="true"/>
+        <antcall target="test"/>
+      </then>
+      <else>
+        <echo message="[NO FAILURES FOUND]"/>
+      </else>
+    </if>
+  </target>
+
+  <!-- Run checkin tests on local dev env -->
+  <target name="checkin" description="Run the check-in tests locally on dev env">
+    <echo message="[RUN CHECK-IN TESTS]"/>
+    <property name="test.checkin" value="true"/>
+    <antcall target="test"/>
+  </target>
+
+  <!-- Retry checkin failures on local dev env -->
+  <target name="retryCheckin" description="Retry the previously failed check-in tests locally on dev env">
+    <echo message="[RETRY CHECK-IN FAILURES]"/>
+    <property name="test.retryCheckin" value="true"/>
+    <antcall target="test"/>
+  </target>
+
+  <!-- The home target to run testng test suite -->
+  <target name="test" depends="compile" description="Run the full TestNG test suite">
+    <!-- default to very minimal logging -->
+    <condition property="log.level" else="info">
+      <isset property="log.level"/>
+    </condition>
+
+    <!-- determine whether we are running all tests, the checkin tests only, or retrying failures -->
+    <if>
+      <equals arg1="${test.retry}" arg2="true"/>
+      <then>
+        <property name="testng.xmldir" value="${testng.output.dir}"/>
+        <property name="testng.xmlfile" value="testng-failed.xml"/>
+        <property name="test.propertiesfile" value="${conf}/local.properties"/>
+      </then>
+      <elseif>
+        <equals arg1="${test.checkin}" arg2="true"/>
+        <then>
+          <property name="testng.xmldir" value="${conf}"/>
+          <property name="testng.xmlfile" value="dev_checkin_testng.xml"/>
+          <property name="test.propertiesfile" value="${conf}/dev.properties"/>
+        </then>
+      </elseif>
+      <elseif>
+        <equals arg1="${test.retryCheckin}" arg2="true"/>
+        <then>
+          <property name="testng.xmldir" value="${testng.output.dir}"/>
+          <property name="testng.xmlfile" value="testng-failed.xml"/>
+          <property name="test.propertiesfile" value="${conf}/dev.properties"/>
+        </then>
+      </elseif>
+      <else>
+        <echo message="[RUNNING ALL TEST SUITE]"/>
+        <property name="testng.xmldir" value="${conf}"/>
+        <!-- Default to use the main testng.xml file, not an environment specific one -->
+        <property name="testng.xmlfile" value="testng.xml"/>
+        <!-- Default to the local.properties file -->
+        <property name="test.propertiesfile" value="${conf}/local.properties"/>
+        <mkdir dir="${testng.output.dir}"/>
+      </else>
+    </if>
+
+    <property file="${test.propertiesfile}"/>
+
+    <echo message="-Dtest.propertiesfile=${test.propertiesfile}"/>
+    <echo message="-Dtest.protocol=${test.protocol}"/>
+    <echo message="-Dtest.host=${test.host}"/>
+    <echo message="-Dtest.port=${test.port}"/>
+    <echo message="-Dtest.context=${test.context}"/>
+    <echo message="-Dtest.driver=${test.driver}"/>
+    <echo message="-Dtest.grid=${test.grid}"/>
+    <echo message="-Dtest.hub=${test.hub}"/>
+    <echo message="testng.xmldir=${testng.xmldir}"/>
+    <echo message="testng.xmlfile=${testng.xmlfile}"/>
+
+    <testng outputdir="${testng.output.dir}" classpathref="classpath">
+      <!-- the sysproperty flag will pass in configFile as a parameter to the test -->
+      <jvmarg value="-Dtest.propertiesfile=${test.propertiesfile}"/>
+      <jvmarg value="-Dtest.protocol=${test.protocol}"/>
+      <jvmarg value="-Dtest.host=${test.host}"/>
+      <jvmarg value="-Dtest.port=${test.port}"/>
+      <jvmarg value="-Dtest.context=${test.context}"/>
+      <jvmarg value="-Dtest.driver=${test.driver}"/>
+      <jvmarg value="-Dtest.grid=${test.grid}"/>
+      <jvmarg value="-Dtest.hub=${test.hub}"/>
+      <jvmarg value="-Djava.util.logging.config.file=${conf}/commons-logging-${log.level}.properties"/>
+      <xmlfileset dir="${testng.xmldir}" includes="${testng.xmlfile}"/>
+    </testng>
+
+  </target>
+
+  <target name="report" description="View TestNG report in browser">
+    <echo message="Launching TestNG report"/>
+    <exec executable="${my.browser}" failonerror="false" failifexecutionfails="false">
+      <arg value="file:///${basedir}/${testng.output.dir}/index.html"/>
+    </exec>
+  </target>
+
+</project>
