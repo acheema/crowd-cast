@@ -2,25 +2,10 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   wrap_parameters :reservation, include: [:advertisement_id, :listing_id, :dates, :start_date, :end_date, :price]
 
-  # GET /reservations
-  # GET /reservations.json
-  def index
-    @reservations = Reservation.all
-  end
-
-  # GET /reservations/1
-  # GET /reservations/1.json
-  def show
-  end
-
   # GET /reservations/new
   def new
     @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.new
-  end
-
-  # GET /reservations/1/edit
-  def edit
   end
 
   def get
@@ -44,7 +29,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     reservation_params = create_reservations_params
-    status = true    
+    status = 1
 
     # lets verify these entries actually exist
     username = cookies[:username]
@@ -60,40 +45,16 @@ class ReservationsController < ApplicationController
     reservation_params.delete("dates")
     dates.each do |reservation|
        status = Reservation.create(reservation_params.merge(:start_date => reservation[:start_date],  
-                                                            :end_date => reservation[:end_date], 
-                                                            :price => reservation[:price] ))
-       if not status 
-          break
+                                                         :end_date => reservation[:end_date], 
+                                                         :price => reservation[:price] ))
+       if status == -1 
+          return render :json => {status: -1}
+       elsif status != 1
+          return render :json => {status: -1, conflicts: status}
        end
     end
-    if status
+    if status == 1
       render :json => { status: 1 }
-    else
-      render :json => { status: -1 }
-    end
-  end
-
-  # PATCH/PUT /reservations/1
-  # PATCH/PUT /reservations/1.json
-  def update
-    respond_to do |format|
-      if @reservation.update(reservation_params)
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reservation }
-      else
-        format.html { render :edit }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /reservations/1
-  # DELETE /reservations/1.json
-  def destroy
-    @reservation.destroy
-    respond_to do |format|
-      format.html { redirect_to reservations_url, notice: 'Reservation was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

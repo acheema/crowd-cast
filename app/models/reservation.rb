@@ -16,11 +16,15 @@ class Reservation < ActiveRecord::Base
    def self.create(params)
       reservation = Reservation.new(params)
       if reservation.save
-         return true
+         return 1
       else
          errors = reservation.errors
          if errors.any?
-            return false
+            if errors[:full_dates].any?
+               return errors[:full_dates]
+            else
+               return -1
+            end
          end
       end
    end 
@@ -36,11 +40,19 @@ class Reservation < ActiveRecord::Base
       else
          reservations = Reservation.reservationsInRange(listing, start_date, end_date)
          dates = {}
+         reservation_dates = Hash.new(0)
+         #make sure none of these dates have more than 8 reservations
          reservations.each do |reservation|
-            puts reservation 
+            current_date = [ start_date, reservation.start_date ].max
+            last_date = [ end_date, reservation.end_date ].min
+            while current_date < last_date do
+               reservation_dates[current_date.to_formatted_s(:iso8601)] += 1
+               current_date = current_date.tomorrow()
+            end
          end
-         if false
-            errors.add(:fuck, "some error")
+         reservation_dates.delete_if { |date, number| number < 8 }
+         if reservation_dates.any?
+            errors.add(:full_dates, reservation_dates.keys)
          end
       end
    end
