@@ -35,6 +35,7 @@
       var year_from_today_date = moment().add(1, "years").utc().startOf('day');
       var eventid = 0
       var eventArrayID = [];
+      var colors = ['blue', 'green', 'black', 'yellow', 'red', 'purple']
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          startParam: "start_date",
@@ -104,7 +105,7 @@
                      id: eventid,
                      start: start_date,
                      end: end_date,
-                     color: 'green'
+                     color: colors[Math.floor(Math.random()*colors.length)]
                   };
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
                   eventArrayID.push(eventid);
