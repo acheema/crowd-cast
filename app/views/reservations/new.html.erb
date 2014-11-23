@@ -16,7 +16,7 @@
                  <h4 class="modal-title" id="myModalLabel">Delete event</h4>
                </div>
                <div class="modal-body">
-                 Are you sure you want to delete it?
+                 Are you sure you want to delete all reservations?
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -127,7 +127,8 @@
          ],
          eventClick: function(calEvent, jsEvent, view) {
             if (confirm('--Reservation details--\nReservation ID: '+calEvent.id
-              +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)+'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
+              +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)
+              +'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
               +'\n\nIf you wish to delete this listing press OK')){
               $('#calendar').fullCalendar('removeEvents', calEvent._id);
             }
@@ -138,6 +139,7 @@
       });
       $("#deleteEvent").on("click", function(e) {
          deleteEvent(e.id);
+         $('#myModal').modal('hide');
       });
       function deleteEvent(id){
          $('#calendar').fullCalendar('removeEvents', id);
