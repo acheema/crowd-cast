@@ -1,11 +1,69 @@
-<!--Written by: Akaljot, Jessica, Jhoong -->
+<!--Written by: Akaljot, Jessica, Jhoong, Sukriti -->
 <div id="content">
-   <div style="max-height:400px; padding: 10px 30px 10px 80px">
+  <div id="displayInline">
+    <div id="imageContainer">
       <div><%= image_tag @listing.image.url, class: "img"%></div>
-   </div>
-   <div class="container">
-      <div class="col-lg-6">
-         <div>
+    </div>
+    <div class="container">
+      <div class="col-lg-10">
+        <div class="table-responsive" id="listingTable">
+          <table class="table table-striped table-bordered">
+             <tbody>
+                <tr>
+                   <td class="listinfo">Owner</td>
+                   <td><%= @owner_username %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Title</td>
+                   <td><%= @listing.title %></td>
+                </tr>
+                <%if @listing.street.present? and @listing.city.present? and @listing.state.present? and @listing.zip.present? then %>
+                <tr>
+                   <td class="listinfo">Address</td>
+                   <td><%= "#{@listing.street}, #{@listing.city}, #{@listing.state}, #{@listing.zip}" %></td>
+                </tr>
+                <%else %>
+                <tr>
+                   <td class="listinfo">GPS Coordinate</td>
+                   <td><%= "#{@listing.latitude}, #{@listing.longitude}" %></td>
+                </tr>
+                <%end%>
+                <tr>
+                   <td class="listinfo">Size</td>
+                   <td><%= "#{@listing.height}x#{@listing.width}"%></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Resolution</td>
+                   <td><%= "#{@listing.screen_resolution_x} x #{@listing.screen_resolution_y}" %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Views per week</td>
+                   <td><%= @listing.views_per_week %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Time per click</td>
+                   <td><%= @listing.time_per_click %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Cost per week</td>
+                   <td><%= @listing.cost_per_week %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Description</td>
+                   <td><%= @listing.description %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Active</td>
+                   <td><%= @listing.active %></td>
+                </tr>
+                <tr>
+                   <td class="listinfo">Views</td>
+                   <td><%= @listing.views %></td>
+                </tr>
+             </tbody>
+          </table>
+        </div>
+        <div id="buttonContainer">
             <button class="btn btn-default" type="button" id="btn-messageOwner" data-toggle = "modal" data-target="#message-modal">Send Message To Owner</button>
             <% if @dashboard_state == 0 %>
               <% if not @listing_favorited%>
@@ -17,76 +75,32 @@
                   <i class="fa fa-heart-o"></i> Favorited!
                 <% end %>
               <% end %>
+            <button class="btn" id = "book">Reserve Advertising Space</button>
+
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+              <input type="hidden" name="cmd" value="_xclick">
+              <input type="hidden" name="business" value="business-crowdcast@gmail.com">
+              <input type="hidden" name="item_name" value="hat">
+              <input type="hidden" name="amount" value="15.00">
+              <input type="hidden" NAME="notify_url" value="www.google.com">
+              <input type="image" name="submit" border="0"
+              src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+              alt="PayPal - The safer, easier way to pay online">
+            </form>
             <% end %>
-            <button class="btn" id = "book">reserve advertising space</button>
-         </div>
-         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-               <tbody>
-                  <tr>
-                     <td class="listinfo">Owner</td>
-                     <td><%= @owner_username %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Title</td>
-                     <td><%= @listing.title %></td>
-                  </tr>
-                  <%if @listing.street.present? and @listing.city.present? and @listing.state.present? and @listing.zip.present? then %>
-                  <tr>
-                     <td class="listinfo">Address</td>
-                     <td><%= "#{@listing.street}, #{@listing.city}, #{@listing.state}, #{@listing.zip}" %></td>
-                  </tr>
-                  <%else %>
-                  <tr>
-                     <td class="listinfo">GPS Coordinate</td>
-                     <td><%= "#{@listing.latitude}, #{@listing.longitude}" %></td>
-                  </tr>
-                  <%end%>
-                  <tr>
-                     <td class="listinfo">Size</td>
-                     <td><%= "#{@listing.height}x#{@listing.width}"%></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Resolution</td>
-                     <td><%= "#{@listing.screen_resolution_x} x #{@listing.screen_resolution_y}" %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Views per week</td>
-                     <td><%= @listing.views_per_week %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Time per click</td>
-                     <td><%= @listing.time_per_click %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Cost per week</td>
-                     <td><%= @listing.cost_per_week %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Description</td>
-                     <td><%= @listing.description %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Active</td>
-                     <td><%= @listing.active %></td>
-                  </tr>
-                  <tr>
-                     <td class="listinfo">Views</td>
-                     <td><%= @listing.views %></td>
-                  </tr>
-               </tbody>
-            </table>
-         </div>
+        </div>
       </div>
-      <div class="col-lg-6">
-         <div id='calendar'></div>
-      </div>
-   </div>
-   <div class="googlemap">
-      <div>
-         <div id="map" style='height: 600px; width: 100%;'></div>
-      </div>
-   </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="col-lg-6">
+       <div id='calendar'></div>
+    </div>
+  </div>
+  <div class="googlemap">
+    <div>
+      <div id="map" style='height: 600px; width: 100%;'></div>
+    </div>
+  </div>
 </div>
 <div class="modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal" aria-hidden="true">
    <div class="modal-dialog">
