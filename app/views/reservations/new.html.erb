@@ -126,7 +126,9 @@
             }
          ],
          eventClick: function(calEvent, jsEvent, view) {
-            if (confirm('Are you sure you want to delete this event?')){
+            if (confirm('--Reservation details--\nReservation ID: '+calEvent.id
+              +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)+'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
+              +'\n\nIf you wish to delete this listing press OK')){
               $('#calendar').fullCalendar('removeEvents', calEvent._id);
             }
             else{
