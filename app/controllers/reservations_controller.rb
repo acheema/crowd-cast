@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  wrap_parameters :reservation, include: [:advertisement_id, :listing_id, :dates, :start_date, :end_date, :price]
 
   # GET /reservations
   # GET /reservations.json
@@ -14,6 +15,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
+    @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.new
   end
 
@@ -21,14 +23,28 @@ class ReservationsController < ApplicationController
   def edit
   end
 
+  def get
+    reservation_params = get_reservations_params
+    listing = Listing.find(reservation_params[:listing_id])
+    reservation_params.delete("listing_id")
+    reservation_params.merge!(:listing => listing)
+    reservations = Reservation.get(reservation_params)
+    if reservations and reservations.any?
+      reservation_dates = []
+      reservations.each do |reservation|
+         reservation_dates.push({ start: reservation.start_date, end: reservation.end_date})
+      end
+      render :json => reservation_dates
+    else
+      render :json => { status: -1 }
+    end
+  end
+
   # POST /reservations
   # POST /reservations.json
   def create
-    reservation_params = create_reservation_params
+    reservation_params = create_reservations_params
     status = true    
-    puts "hello"
-    puts reservation_params
-    puts "yello"
 
     # lets verify these entries actually exist
     username = cookies[:username]
@@ -88,8 +104,11 @@ class ReservationsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def create_reservation_params
-      param = params.permit(dates: [ :start_date, :end_date, :price])
-      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id).merge!(param)
+    def create_reservations_params
+      params.require(:reservation).permit(:listing_id, :advertiser_id, :advertisement_id, dates: [ :start_date, :end_date, :price])
+    end
+   
+    def get_reservations_params
+      params.permit(:listing_id, :start_date, :end_date)
     end
 end

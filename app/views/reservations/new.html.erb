@@ -1,5 +1,5 @@
 <!--Written by: Akaljot, Jessica, Jhoong -->
-<div class='content'>
+<div id='content'>
    <div class='container'>
       <div id='calendar'></div>
       <!-- Button trigger modal -->
@@ -41,6 +41,8 @@
       var eventid = 0
       $('#calendar').fullCalendar({
         // put your options and callbacks here
+         startParam: "start_date",
+         endParam: "end_date",
          allDayDefault: true,
          selectable: true,
          selectHelper: true,
@@ -69,6 +71,16 @@
             $('#calendar').fullCalendar('unselect');
          },
          editable: true,
+         eventSources: [
+            {
+               url: "" + window.location.protocol + '//' + window.location.host + 
+                    "/api/reservations?listing_id=" + '<%=@listing.id%>',
+               type: "GET",
+               error: function() {
+                  alert('there was an error while fetching events!');
+               },
+            }
+         ],
          events: [
             {
                id: 7,
