@@ -34,6 +34,13 @@
       var today_date = moment().utc().startOf('day');
       var year_from_today_date = moment().add(1, "years").utc().startOf('day');
       var eventid = 0
+      var eventArrayID = [];
+
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          startParam: "start_date",
@@ -106,7 +113,8 @@
                      color: 'green'
                   };
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                  eventid += 1
+                  eventArrayID.push(eventid);
+                  eventid += 1;
                }
                else {
                   alert("Listings only support 8 ads per day");
@@ -115,6 +123,20 @@
             }
          },
          editable: true,
+         /*events: [
+          {
+            id: 5,
+            title: 'All Day Event',
+            start: new Date(y, m, d+4)
+            end: new Date(y, m, d+6)
+          },
+          {
+          id: 10,
+          title: 'Long Event',
+          start: new Date(y, m, d+3),
+          end: new Date(y, m, d+5)
+          }
+         ],*/
          eventSources: [
             {
                url: "" + window.location.protocol + '//' + window.location.host + 
@@ -126,7 +148,8 @@
             }
          ],
          eventClick: function(calEvent, jsEvent, view) {
-            if (confirm('--Reservation details--\nReservation ID: '+calEvent.id
+            var recentlyCreated = eventArrayID.indexOf(calEvent.id) != -1;
+            if (recentlyCreated && confirm('--Reservation details--\nReservation ID: '+calEvent.id
               +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)
               +'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
               +'\n\nIf you wish to delete this listing press OK')){
