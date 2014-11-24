@@ -18,14 +18,13 @@ public class FrontPage extends Page{
 		  }
 		  
 		  public FrontPage clickLogin() {
-		      WebElement loginButton = driver.findElement(By.id("login-button"));
-
+		      WebElement loginButton = driver.findElement(By.id("loginmodalbutton"));
 			  loginButton.click();
 			  return this;
 		  }
 		  
 		  public FrontPage loginFail(String username, String password) {
-		      WebElement innerLoginButton = driver.findElement(By.id("inner-login-button"));
+		      WebElement innerLoginButton = driver.findElement(By.id("login"));
 		      WebElement usernameInput = driver.findElement(By.id("username-login"));
 		      WebElement passwordInput = driver.findElement(By.id("password-login"));
 		      
@@ -37,7 +36,9 @@ public class FrontPage extends Page{
 		  }
 		  
 		  public DashboardPage loginSuccess(String username, String password) {
-		      WebElement innerLoginButton = driver.findElement(By.id("inner-login-button"));
+			  WebElement loginButton = driver.findElement(By.id("loginmodalbutton"));
+			  loginButton.click();
+		      WebElement innerLoginButton = driver.findElement(By.id("login"));
 		      WebElement usernameInput = driver.findElement(By.id("username-login"));
 		      WebElement passwordInput = driver.findElement(By.id("password-login"));
 		      
