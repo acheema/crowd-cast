@@ -43,9 +43,6 @@ class Message < ActiveRecord::Base
          elsif errors[:listing_title].any?
             return -6
          else
-         errors.each do |key, value|
-            puts "#{key}:#{value}"
-         end
             return -7
          end
       end

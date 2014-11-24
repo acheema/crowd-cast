@@ -2,9 +2,9 @@
 class Advertisement < ActiveRecord::Base
   belongs_to :advertiser
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
-   validates :advertiser, :presence => true
-   validates :height, presence: true, numericality: {only_integer: true}
-   validates :width, presence: true, numericality: {only_integer: true}
+  validates :advertiser, :presence => true
+  validates :height, presence: true, numericality: {only_integer: true}
+  validates :width, presence: true, numericality: {only_integer: true}
 
    has_attached_file :ad, :storage => :s3, :bucket => ENV['AWS_BUCKET'], styles: {
      thumb: '100x100>',

@@ -29,7 +29,6 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     reservation_params = create_reservations_params
-    status = 1
 
     # lets verify these entries actually exist
     username = cookies[:username]
@@ -44,18 +43,19 @@ class ReservationsController < ApplicationController
     dates = reservation_params[:dates]
     reservation_params.delete("dates")
     dates.each do |reservation|
-       status = Reservation.create(reservation_params.merge(:start_date => reservation[:start_date],  
+       reservation = Reservation.new(reservation_params.merge(:start_date => reservation[:start_date],  
                                                          :end_date => reservation[:end_date], 
                                                          :price => reservation[:price] ))
-       if status == -1 
-          return render :json => {status: -1}
-       elsif status != 1
-          return render :json => {status: -1, conflicts: status}
+       if not reservation.save
+          errors = reservation.errors
+          if errors[:full_dates].any?
+            return render :json => {status: -1, conflicts: errors[:full_dates]}
+          else
+            return render :json => {status: -1}
+          end
        end
     end
-    if status == 1
-      render :json => { status: 1 }
-    end
+    return render :json => { status: 1 }
   end
 
   private
