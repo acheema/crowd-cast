@@ -12,3 +12,7 @@ or in postman, get
 http://crowd-cast.herokuapp.com/api/TESTAPI_tests for the heroku app
 or
 heroku run rake test RAILS_ENV=test
+
+To use paypal:
+username: crowdcast-buyer@gmail.com
+password: crowdcast#
