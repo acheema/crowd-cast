@@ -36,6 +36,7 @@
       var eventid = 0
       var eventArrayID = [];
       var colors = ['blue', 'green', 'black', 'yellow', 'red', 'purple']
+      var globalsearchid = 0
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          startParam: "start_date",
@@ -132,6 +133,7 @@
          eventClick: function(calEvent, jsEvent, view) {
             var recentlyCreated = eventArrayID.indexOf(calEvent.id) != -1;
             if(calEvent.id != undefined && recentlyCreated){
+              globalsearchid = calEvent.id
               var msg = 'Reservation details<br><br>Reservation ID: '+calEvent.id+'<br>Reservation start: '+(calEvent.start).toISOString().slice(0, 10)+'<br>Reservation end: '+(calEvent.end).toISOString().slice(0, 10); 
               document.getElementById("innerbodymodal").innerHTML = msg;
               document.getElementById("myModalLabel").innerHTML = "Details";
@@ -160,11 +162,16 @@
          },
       });
       $("#deleteEvent").on("click", function(e) {
-         deleteEvent(e.id);
+         deleteEvent();
          $('#myModal').modal('hide');
       });
-      function deleteEvent(id){
-         $('#calendar').fullCalendar('removeEvents', id);
+      function deleteEvent(){
+        $('#calendar').fullCalendar( 'clientEvents', function(event){
+            if (event.id == globalsearchid){
+              $('#calendar').fullCalendar('removeEvents', globalsearchid);
+            }
+          }
+         
       }
    })
 
