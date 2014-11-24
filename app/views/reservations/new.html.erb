@@ -17,15 +17,15 @@
               </tr>
               <tr>
                 <td><b> Cost per Day: </b></td>
-                <td> <%=@listing.cost_per_day%> </td>
+                <td><div><%=@listing.cost_per_day%></div></td>
               </tr>
               <tr>
                 <td> <b> Number of Days: <b></td>
-                <td> <div id="numberOfDays"> </div></td>
+                <td> <div id="numberOfDays">0</div></td>
               </tr>
               <tr>
                 <td><b>Total Amount: <b></td>
-                <td> <div id="totalAmount"> </div></td>
+                <td> <div id="totalAmount">0</div></td>
               </tr>
             </tbody>
           </table>
@@ -143,12 +143,18 @@
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
                   eventArrayID.push(eventid);
                   eventid += 1;
+                  $("#numberOfDays").text(parseInt($("#numberOfDays").text()) + end_date.diff(start_date, 'days'));
+                  $("#totalAmount").text(parseInt($("#numberOfDays").text()) * <%= @listing.cost_per_day %>);
                }
                else {
                   alert("Listings only support 8 ads per day");
                }
             }
             $('#calendar').fullCalendar('unselect');
+         },
+         eventResize: function(event, delta, revertFunc) {
+            $("#numberOfDays").text(parseInt($("#numberOfDays").text()) + delta.asDays());
+            $("#totalAmount").text(parseInt($("#numberOfDays").text()) * <%= @listing.cost_per_day %>);
          },
          eventSources: [
             {
@@ -188,6 +194,8 @@
       function deleteEvent(){
         $('#calendar').fullCalendar( 'clientEvents', function(event){
             if (event.id == globalsearchid){
+              $("#numberOfDays").text(parseInt($("#numberOfDays").text()) - event.end.diff(event.start, 'days'));
+              $("#totalAmount").text(parseInt($("#numberOfDays").text()) * <%= @listing.cost_per_day %>);
               $('#calendar').fullCalendar('removeEvents', globalsearchid);
             }
           });

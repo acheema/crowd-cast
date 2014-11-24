@@ -12,7 +12,9 @@ class Reservation < ActiveRecord::Base
   validates_format_of :end_date, :with => /\A\d{4}-\d{2}-\d{2}\z/
   validate :dateValidation
   validates :price, presence: true, numericality: true
-   
+  validates :completed, inclusion: { in: [true, false] }
+  validates :order, :presence => true   
+ 
    def self.get(params)
       if (/\A\d{4}-\d{2}-\d{2}\z/.match(params[:start_date]) and /\A\d{4}-\d{2}-\d{2}\z/.match(params[:end_date])) 
          self.reservationsInRange(params[:listing], params[:start_date], params[:end_date])
@@ -52,5 +54,9 @@ class Reservation < ActiveRecord::Base
          query += "or ('#{start_date}' <= start_date and '#{end_date}' >= end_date))"
          Reservation.where(query)
       end
+   end
+
+   def self.completePayment(order)
+      Reservation.where(:order => order).update_all(:completed => true)
    end
 end

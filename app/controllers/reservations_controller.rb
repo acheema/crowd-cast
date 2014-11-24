@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   wrap_parameters :reservation, include: [:advertisement_id, :listing_id, :dates, :start_date, :end_date, :price]
@@ -42,14 +44,17 @@ class ReservationsController < ApplicationController
     reservation_params.delete("listing_id")
     reservation_params.delete("advertisement_id")
     reservation_params.merge!(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
+    order = Digest::SHA1.hexdigest "" + advertiser.id.to_s + reservation_params[:dates].to_s + Time.new.to_s 
     
     # For each reservation, create
     dates = reservation_params[:dates]
     reservation_params.delete("dates")
     dates.each do |reservation|
        reservation = Reservation.new(reservation_params.merge(:start_date => reservation[:start_date],  
-                                                         :end_date => reservation[:end_date], 
-                                                         :price => reservation[:price] ))
+                                                              :end_date => reservation[:end_date], 
+                                                              :price => reservation[:price],
+                                                              :completed => false,
+                                                              :order => order ))
        if not reservation.save
           errors = reservation.errors
           if errors[:full_dates].any?
