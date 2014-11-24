@@ -35,9 +35,11 @@
       var year_from_today_date = moment().add(1, "years").utc().startOf('day');
       var eventid = 0;
       var eventArrayID = [];
-      var colors = ['blue', 'green', 'black', 'yellow', 'red', 'purple']
+      var color_index = 0;
+      var colors = ['blue', 'green', 'yellow', 'red', 'purple', 'aqua', 'fuchsia', 'lime', 'maroon', 'navy', 'olive', 'orange', 'teal' ];
       $('#calendar').fullCalendar({
         // put your options and callbacks here
+         eventStartEditable: false,
          startParam: "start_date",
          endParam: "end_date",
          allDayDefault: true,
@@ -105,8 +107,9 @@
                      id: eventid,
                      start: start_date.format('YYYY-MM-DD'),
                      end: end_date.format('YYYY-MM-DD'),
-                     color: colors[Math.floor(Math.random()*colors.length)]
+                     color: colors[color_index]
                   };
+                  color_index = (color_index + 1) % colors.length
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
                   eventArrayID.push(eventid);
                   eventid += 1;
