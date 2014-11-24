@@ -209,9 +209,9 @@
             var dates = [];
             for (var i in events){
                reservation = {};
-               reservation["start_date"] = events[i].start.format('YYYY-MM-DD');
-               reservation["end_date"] = events[i].end.format('YYYY-MM-DD');
-               reservation["price"] = <%= @listing.cost_per_day %> * events[i].end.diff(event.start, 'days');
+               reservation["start_date"] = events[i].start.clone().format('YYYY-MM-DD');
+               reservation["end_date"] = events[i].end.clone().format('YYYY-MM-DD');
+               reservation["price"] = <%= @listing.cost_per_day %> * events[i].end.diff(events[i].start, 'days');
                dates.push(reservation);
             }
             var e = document.getElementById("adsDropwdown");
@@ -224,8 +224,8 @@
               dataType: "json",
               success: function(data) {
                   if (data["status"] == 1){
+                  alert(data["total"]);
                   //ENTER PATH HERE 
-                  alert("success");
                   }
                   else {
                      alert("Failure");
@@ -235,6 +235,5 @@
             });
        });
    });
-
 </script>
 

@@ -1,3 +1,4 @@
+# Written by Jhoong and Sukriti
 require 'digest/sha1'
 require 'net/http'
 
