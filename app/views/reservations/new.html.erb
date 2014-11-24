@@ -7,7 +7,8 @@
               <tr>
                 <td><b>Select Advertisment: <b></td>
                 <td>
-                  <select>
+                  <select id="adsDropwdown">
+                    <option value='-1'> Choose One </option>
                     <% @ads.each do |ad|%>
                       <option value="<%=ad.id%>"><%=ad.title%></option>
                     <% end %>
