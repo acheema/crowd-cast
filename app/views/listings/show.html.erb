@@ -113,7 +113,7 @@
                <div class="field-boldFont"><%= @listing.title %></div>
                </p>
                <p><label class="messageLabel">Message</label><textarea class="message_field inlineField" id="field-messageBody"></textarea></p>
-               <p><button id="send">Send</button></p>
+               <p><button id="send_message">Send</button></p>
             </form>
          </div>
       </div>
@@ -133,7 +133,7 @@
          handler.fitMapToBounds();
          handler.getMap().setZoom(17);
       });
-      $('#send').click(function(e) {
+      $('#send_message').click(function(e) {
          $.ajax({
             //First send a post request, get the response back. On successful message back, check the data
             url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
