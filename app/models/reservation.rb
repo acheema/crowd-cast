@@ -61,7 +61,7 @@ class Reservation < ActiveRecord::Base
    end
 
    def self.deleteOrder(order)
-      Reservation.where(:order => order).destroy_all
+      Reservation.where(:order => order).delete_all
    end
   
    # Clear out the table
