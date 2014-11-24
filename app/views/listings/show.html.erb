@@ -134,6 +134,7 @@
          handler.getMap().setZoom(17);
       });
       $('#send_message').click(function(e) {
+         e.preventDefault();
          $.ajax({
             //First send a post request, get the response back. On successful message back, check the data
             url: "" + window.location.protocol + '//' + window.location.host + "/api/send_message",
