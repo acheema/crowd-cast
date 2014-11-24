@@ -224,8 +224,8 @@
               dataType: "json",
               success: function(data) {
                   if (data["status"] == 1){
-                  //ENTER PATH HERE 
-                  alert("success");
+                    window.location.href = window.location.protocol + '//' + window.location.host + "/reservations/show?order_id=" + data["order"] + "&total_amount=" + data["total"]; 
+                    alert("success");
                   }
                   else {
                      alert("Failure");

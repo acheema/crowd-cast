@@ -1,34 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div id="paymentScreen">
+  <h1> Payment Screen </h1>
+  <p> The reservation has been saved. Please pay the amount in order to keep the reservation. If not payed, the reservation will be cancelled. </p>
+  <table>
+    <tbody>
+      <tr>
+        <td><b> Total Cost: </b></td>
+        <td> <%=@order_price%> </td>
+      </tr>
+  </table>
 
-<p>
-  <strong>Listing:</strong>
-  <%= @reservation.listing %>
-</p>
-
-<p>
-  <strong>Advertiser:</strong>
-  <%= @reservation.advertiser %>
-</p>
-
-<p>
-  <strong>Advertisement:</strong>
-  <%= @reservation.advertisement %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @reservation.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @reservation.end_date %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @reservation.price %>
-</p>
-
-<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+  <div id="payPalScreen">
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="custom" value="<%=@order_id%>">
+      <input type="hidden" name="business" value="business-crowdcast@gmail.com">
+      <input type="hidden" name="item_name" value="Reservation Payment">
+      <input type="hidden" name="amount" value="<%=@order_price%>">
+      <input type="hidden" name="notify_url" value="crowd-cast.herokuapp.com/api/confirm_payment">
+      <input type="hidden" NAME="notify_url" value="www.google.com">
+      <input type="image" name="submit" border="0" id="buttonClick"
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+        alt="PayPal - The safer, easier way to pay online">
+    </form>
+  <div/>
+<div/>

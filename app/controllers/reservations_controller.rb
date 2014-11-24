@@ -2,7 +2,6 @@ require 'digest/sha1'
 require 'net/http'
 
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   wrap_parameters :reservation, include: [:advertisement_id, :listing_id, :dates, :start_date, :end_date, :price]
 
   # GET /reservations/new
@@ -83,6 +82,11 @@ class ReservationsController < ApplicationController
         Reservation.TESTAPI_resetFixture
         render :json => { status: 1 }
     end
+
+  def show
+    @order_id = params[:order_id]
+    @order_price = params[:total_amount]
+  end
 
   def confirm_payment 
     # Used as guide: http://stackoverflow.com/questions/14316426/is-there-a-paypal-ipn-code-sample-for-ruby-on-rails
