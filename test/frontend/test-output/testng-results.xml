@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="10098" started-at="2014-11-21T00:11:06Z" finished-at="2014-11-21T00:11:16Z">
+  <suite name="Default suite" duration-ms="6142" started-at="2014-11-24T13:10:33Z" finished-at="2014-11-24T13:10:39Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="10098" started-at="2014-11-21T00:11:06Z" finished-at="2014-11-21T00:11:16Z">
-      <class name="frontpage.LoginTest">
-        <test-method status="PASS" signature="loginLogout()[pri:0, instance:frontpage.LoginTest@3c5a99da]" name="loginLogout" duration-ms="9977" started-at="2014-11-20T16:11:06Z" finished-at="2014-11-20T16:11:16Z">
+    <test name="Default test" duration-ms="6142" started-at="2014-11-24T13:10:33Z" finished-at="2014-11-24T13:10:39Z">
+      <class name="tests.LoginLogout">
+        <test-method status="PASS" signature="loginLogout()[pri:0, instance:tests.LoginLogout@5e025e70]" name="loginLogout" duration-ms="6131" started-at="2014-11-24T05:10:33Z" finished-at="2014-11-24T05:10:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginLogout -->
-      </class> <!-- frontpage.LoginTest -->
+      </class> <!-- tests.LoginLogout -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
