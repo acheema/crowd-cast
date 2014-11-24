@@ -6,6 +6,10 @@ class ReservationsController < ApplicationController
   def new
     @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.new
+    username = cookies[:username]
+    if (advertiser = Advertiser.find_by_username(username))
+      @ads = Advertisement.getAds(advertiser.id)
+    end
   end
 
   def get

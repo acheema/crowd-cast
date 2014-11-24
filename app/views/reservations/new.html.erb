@@ -2,6 +2,33 @@
 <div id='content'>
    <div class='container'>
       <div id='calendar'></div>
+       <table id="tableProperties">
+            <tbody>
+              <tr>
+                <td><b>Select Advertisment: <b></td>
+                <td>
+                  <select>
+                    <% @ads.each do |ad|%>
+                      <option value="<%=ad.id%>"><%=ad.title%></option>
+                    <% end %>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><b> Cost per Day: </b></td>
+                <td> <%=@listing.cost_per_day%> </td>
+              </tr>
+              <tr>
+                <td> <b> Number of Days: <b></td>
+                <td> <div id="numberOfDays"> </div></td>
+              </tr>
+              <tr>
+                <td><b>Total Amount: <b></td>
+                <td> <div id="totalAmount"> </div></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn" id = "reserveButton"> Reserve these Dates </button>
       <!-- Button trigger modal -->
          <!-- Modal -->
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
