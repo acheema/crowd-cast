@@ -14,7 +14,7 @@ class ReservationTest < ActiveSupport::TestCase
     @listing = Listing.create(params)
     params = { title: "A valid title", height: 30, width: 31, advertiser: @advertiser }     
     @advertisement = Advertisement.create(params)
-    @params = { start_date: "2014-11-12", end_date: "2014-11-30", price: 14,
+    @params = { start_date: "2014-11-12", end_date: "2014-11-30", price: 14, completed: false, order: "1",
                advertiser: @advertiser, advertisement: @advertisement, listing: @listing }     
   end
    
@@ -52,4 +52,12 @@ class ReservationTest < ActiveSupport::TestCase
      assert_equal(nil, Reservation.get(listing: @listing, start_date: "-3014-11-11", end_date: "3014-11-11"), "valid get")
   end
 
+  test "valid complete payments" do
+     reservation = Reservation.create(@params)
+     order = reservation.order
+     assert_equal(false, reservation.completed, "should not be completed")
+     Reservation.completePayment(order)
+     completed_reservation = Reservation.find(reservation.id)
+     assert_equal(true, completed_reservation.completed, "should be completed") 
+  end
 end
