@@ -94,9 +94,8 @@ class ReservationsController < ApplicationController
     response = validate_IPN_notification(request.raw_post)
     case response
     when "VERIFIED"
-      if params[:payment_status] == Pending
-        if params[:receiver_email] == "business-crowdcast@gmail.com"
-            Reservation.completePayment(params[:custom])
+      if params[:payment_status] == "Pending" || params[:payment_status] == "Completed"
+          Reservation.completePayment(params[:custom])
         end
       end
       # check that paymentStatus=Completed
