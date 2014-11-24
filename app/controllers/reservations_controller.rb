@@ -96,7 +96,6 @@ class ReservationsController < ApplicationController
     when "VERIFIED"
       if params[:payment_status] == "Pending" || params[:payment_status] == "Completed"
           Reservation.completePayment(params[:custom])
-        end
       end
       # check that paymentStatus=Completed
       # check that txnId has not been previously processed
