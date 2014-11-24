@@ -9,8 +9,9 @@ public abstract class Page {
 	  protected Page(WebDriver driver) {
 	    this.driver = driver;
 	  }
-	    
-		  public String getUrl() {
-			  return driver.getCurrentUrl();
-		  }
+	  
+	  public String getUrl() {
+		  return driver.getCurrentUrl();
+	  }
+
 }
