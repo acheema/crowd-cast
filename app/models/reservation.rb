@@ -49,7 +49,7 @@ class Reservation < ActiveRecord::Base
          query = "listing_id = #{listing.id} and "
          query += "(('#{start_date}' between start_date and end_date) "
          query += "or ('#{end_date}' between start_date and end_date)"
-         query += "or ('#{start_date}' <= start_date and '#{end_date}' >=  end_date))"
+         query += "or ('#{start_date}' <= start_date and '#{end_date}' >= end_date))"
          Reservation.where(query)
       end
    end
