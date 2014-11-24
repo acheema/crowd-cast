@@ -36,17 +36,14 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     reservation_params = create_reservations_params
-   puts reservation_params
     # lets verify these entries actually exist
     username = cookies[:username]
-    puts username
     advertiser = Advertiser.find_by_username(username)
     listing = Listing.find(reservation_params[:listing_id])
     advertisement = Advertisement.find(reservation_params[:advertisement_id])
     reservation_params.delete("listing_id")
     reservation_params.delete("advertisement_id")
     reservation_params.merge!(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
-    puts advertiser
     order = Digest::SHA1.hexdigest "" + advertiser.id.to_s + reservation_params[:dates].to_s + Time.new.to_s 
     
     # For each reservation, create
@@ -72,11 +69,13 @@ class ReservationsController < ApplicationController
        end
     end
     # Save reservations
+    total_amount = 0
     reservations.each do |reservation|
       reservation.save
+      total_amount += reservation.price
     end
     Reservation.delay(run_at: 2.minutes.from_now).deleteOrder(order)
-    return render :json => { status: 1 }
+    return render :json => { status: 1, order: order, total: total_amount }
   end
    
    # Clean out the tables
