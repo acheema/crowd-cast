@@ -37,6 +37,7 @@
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          eventStartEditable: false,
+         eventDurationEditable: false,
          startParam: "start_date",
          endParam: "end_date",
          allDayDefault: true,
@@ -44,6 +45,7 @@
          selectHelper: true,
          eventBackgroundColor: 'grey',
          eventBorderColor: 'grey',
+         editable: true,
          select: function(start, end) {
             var start_date = start.utc().startOf('day');
             var end_date = end.utc().startOf('day');
@@ -56,8 +58,8 @@
             else {
                var events = $('#calendar').fullCalendar( 'clientEvents', 
                   function(event){
-                     var event_start_date = event.start.utc().startOf('day');
-                     var event_end_date = event.end.utc().startOf('day');
+                     var event_start_date = event.start.clone().utc().startOf('day');
+                     var event_end_date = event.end.clone().utc().startOf('day');
                      if (start_date >= event_start_date && start_date <= event_end_date) return true;
                      else if (end_date >= event_start_date && end_date <= event_end_date) return true;
                      else if (start_date <= event_start_date && end_date >= event_end_date) return true;
@@ -65,8 +67,8 @@
                   });
                var dates = new Object(); 
                for (var i in events){
-                  var event_start_date = events[i].start.utc().startOf('day');
-                  var event_end_date = events[i].end.utc().startOf('day');
+                  var event_start_date = events[i].start.clone().utc().startOf('day');
+                  var event_end_date = events[i].end.clone().utc().startOf('day');
                   var current_date;
                   var last_date;
                   if (start_date.isBefore(event_start_date)){
@@ -102,9 +104,12 @@
                   var eventData;
                   eventData = {
                      id: eventid,
-                     start: start_date.format('YYYY-MM-DD'),
-                     end: end_date.format('YYYY-MM-DD'),
-                     color: colors[color_index]
+                     start: start_date,
+                     end: end_date,
+                     color: colors[color_index],
+                     borderColor: 'black',
+                     startEditable: true,
+                     durationEditable: true
                   };
                   color_index = (color_index + 1) % colors.length
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
@@ -117,7 +122,6 @@
             }
             $('#calendar').fullCalendar('unselect');
          },
-         editable: true,
          eventSources: [
             {
                url: "" + window.location.protocol + '//' + window.location.host + 
