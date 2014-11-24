@@ -135,10 +135,12 @@
               var msg = 'Reservation details<br><br>Reservation ID: '+calEvent.id+'<br>Reservation start: '+(calEvent.start).toISOString().slice(0, 10)+'<br>Reservation end: '+(calEvent.end).toISOString().slice(0, 10); 
               document.getElementById("innerbodymodal").innerHTML = msg;
               document.getElementById("myModalLabel").innerHTML = "Details";
+              var close = document.getElementById('deleteEvent');
+              close.style.display = '';
               $('#myModal').modal('show');
             }
             if (calEvent.id == undefined){
-              var msg = 'Reservation details<br><br>Reservation ID: '+calEvent.id+'<br>Reservation start: '+(calEvent.start).toISOString().slice(0, 10)+'<br>Reservation end: '+(calEvent.end).toISOString().slice(0, 10); 
+              var msg = 'Reservation details<br>'+'<br>Reservation start: '+(calEvent.start).toISOString().slice(0, 10)+'<br>Reservation end: '+(calEvent.end).toISOString().slice(0, 10); 
               document.getElementById("innerbodymodal").innerHTML = msg;
               document.getElementById("myModalLabel").innerHTML = "Details";
               var close = document.getElementById('deleteEvent');
