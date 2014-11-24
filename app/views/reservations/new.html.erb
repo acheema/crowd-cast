@@ -199,19 +199,19 @@
               $('#calendar').fullCalendar('removeEvents', globalsearchid);
             }
           });
-        }
+        };
       $("#reserveButton").on("click", function(e) {
            var events = $('#calendar').fullCalendar( 'clientEvents', 
               function(event){
-                  if (eventArrayID.indexOf(event) != -1) return true;
+                  if (eventArrayID.indexOf(event.id) != -1) return true;
                   else return false;
                });
             var dates = [];
-            for (var event in events){
+            for (var i in events){
                reservation = {};
-               reservation["start_date"] = event.start;
-               reservation["end_date"] = event.end;
-               reservation["price"] = <%= @listing.cost_per_day %> * event.end.diff(event.start, 'days'));
+               reservation["start_date"] = events[i].start.format('YYYY-MM-DD');
+               reservation["end_date"] = events[i].end.format('YYYY-MM-DD');
+               reservation["price"] = <%= @listing.cost_per_day %> * events[i].end.diff(event.start, 'days');
                dates.push(reservation);
             }
             var e = document.getElementById("adsDropwdown");
@@ -223,8 +223,10 @@
               contentType: "application/json",
               dataType: "json",
               success: function(data) {
+                  alert(data[0]["status"]);
                   if (data[0]["status"] == 1){
                   //ENTER PATH HERE 
+                  alert("success");
                   }
                   else {
                      alert("Failure");
