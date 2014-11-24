@@ -33,7 +33,8 @@ class ReservationIntegrationTest < ActionDispatch::IntegrationTest
    test 'valid reservation' do
       post '/reservations', { reservation: { listing_id: @listing_id, \
                                               advertisement_id: @advertisement_id, \
-                                              dates: [ {start_date: '2014-11-12', end_date: '2014-11-13', price: 14}] } } 
+                                              dates: [ {start_date: '2014-11-12', end_date: '2014-11-13', price: 14},
+                                                       {start_date: '2014-11-13', end_date: '2014-11-14', price: 15}] } } 
       assert json_response['status'] == 1
    end
 

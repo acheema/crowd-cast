@@ -31,4 +31,8 @@ class Advertisement < ActiveRecord::Base
       return ads
    end 
 
+  # Clear out the table
+  def self.TESTAPI_resetFixture
+    Advertisement.delete_all
+  end
 end

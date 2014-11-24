@@ -49,23 +49,38 @@ class ReservationsController < ApplicationController
     # For each reservation, create
     dates = reservation_params[:dates]
     reservation_params.delete("dates")
+    reservations = []
     dates.each do |reservation|
        reservation = Reservation.new(reservation_params.merge(:start_date => reservation[:start_date],  
                                                               :end_date => reservation[:end_date], 
                                                               :price => reservation[:price],
                                                               :completed => false,
                                                               :order => order ))
-       if not reservation.save
+        # If one reservation is invalid, abort
+        if not reservation.valid?
           errors = reservation.errors
           if errors[:full_dates].any?
             return render :json => {status: -1, conflicts: errors[:full_dates]}
           else
             return render :json => {status: -1}
           end
+       else
+          reservations.push(reservation)
        end
     end
+    # Save reservations
+    reservations.each do |reservation|
+      reservation.save
+    end
+    Reservation.delay(run_at: 2.minutes.from_now).deleteOrder(order)
     return render :json => { status: 1 }
   end
+   
+   # Clean out the tables
+    def resetFixture
+        Reservation.TESTAPI_resetFixture
+        render :json => { status: 1 }
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

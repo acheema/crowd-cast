@@ -59,4 +59,13 @@ class Reservation < ActiveRecord::Base
    def self.completePayment(order)
       Reservation.where(:order => order).update_all(:completed => true)
    end
+
+   def self.deleteOrder(order)
+      Reservation.where(:order => order).destroy_all
+   end
+  
+   # Clear out the table
+  def self.TESTAPI_resetFixture
+    Reservation.delete_all
+  end
 end

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     match '/api/TESTAPI_resetListingsFixture', to: 'listings#resetFixture', via: 'get'
     match '/api/send_message', to: 'messages#sendMessage', via: 'post'
     match '/api/TESTAPI_resetMessageFixture', to: 'listings#resetFixture', via: 'get'
+    match '/api/TESTAPI_resetAdvertisementFixture', to: 'advertisements#resetFixture', via: 'get'
+    match '/api/TESTAPI_resetReservationFixture', to: 'reservations#resetFixture', via: 'get'
     match '/api/create_ad', to: 'advertisements#createAd', via: 'post'
     match '/api/TESTAPI_tests', to: 'application#tests', via: 'get'
     match '/api/create_listing_with_image', to: 'listings#createListingWithImage', via: 'post'
