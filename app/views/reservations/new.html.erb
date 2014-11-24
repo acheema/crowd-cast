@@ -3,10 +3,6 @@
    <div class='container'>
       <div id='calendar'></div>
       <!-- Button trigger modal -->
-         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-           Delete all reservations
-         </button>
-
          <!-- Modal -->
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
@@ -148,16 +144,6 @@
               close.style.display = 'none';
               $('#myModal').modal('show');
             }
-            /*
-            if (calEvent.id != undefined  && recentlyCreated && confirm('--Reservation details--\nReservation ID: '+calEvent.id
-              +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)
-              +'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
-              +'\n\nIf you wish to delete this listing press OK')){
-              $('#calendar').fullCalendar('removeEvents', calEvent._id);
-            }
-            if (calEvent.id == undefined){
-              alert("--Reservation details--\n PUT STUFF HERE")
-            }*/
          },
       });
       $("#deleteEvent").on("click", function(e) {
