@@ -24,7 +24,7 @@ class MessageTest < ActiveSupport::TestCase
     	width: 31, 
     	time_per_click: 8, 
 		views_per_week: 8, 
-		cost_per_week: 100, 
+		cost_per_day: 100, 
 		street: "College Ave", 
 		city: "Berkeley", 
 		state: "CA", 

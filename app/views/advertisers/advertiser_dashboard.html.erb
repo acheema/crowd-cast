@@ -1,110 +1,91 @@
 <style>
-@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
-
-}
+   @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 </style>
- <div class = "row">
-  <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
-   <div id="sidebar"  class="nav-collapse ">
-    <!-- sidebar menu start-->
-    <ul class="sidebar-menu adr" id="nav-accordion">
-      <h4 class="centered"><%=@current_user.username %></h4>
-
-      <li>
-        <%= link_to(advertiser_dashboard_path, :class => 'active') do %>
-        <i class="fa fa-tasks"></i> Dashboard
-          <% end %>
-      </li>
-
-      <li>
-        <%= link_to advertiser_dashboard_mail_path do %>
-        <i class="fa fa-envelope"></i> Mail
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to advertiser_dashboard_ads_path do %>
-        <i class="fa fa-tasks"></i> My Advertisements
-        <% end %>
-      </li>
-</ul>
-
-    </div></div>
-
-
-<!--sidebar end-->
-
-<section id="main-dashboard-content">
-  <section class="wrapper">
-
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-2 main-chart dashboard-content">
-
-        <div class="row mtbox">
-          <div class="col-md-2 col-sm-3  col-lg-offset-1 box0">
-            <div class="box1">
-              <center><span class="fa fa-heart"></span></center>
-              <h3>Liked listings</h3>
+<div class = "row">
+   <div class = "col-lg-2 col-md-2 hidden-sm hidden-xs">
+      <div id="sidebar"  class="nav-collapse ">
+         <!-- sidebar menu start-->
+         <ul class="sidebar-menu adr" id="nav-accordion">
+            <h4 class="centered"><%=@current_user.username %></h4>
+            <li>
+               <%= link_to(advertiser_dashboard_path, :class => 'active') do %>
+                <i class="fa fa-tasks"></i> Dashboard
+               <% end %>
+            </li>
+            <li>
+               <%= link_to advertiser_dashboard_mail_path do %>
+                <i class="fa fa-envelope"></i> Mail
+               <% end %>
+            </li>
+            <li>
+               <%= link_to advertiser_dashboard_ads_path do %>
+                <i class="fa fa-tasks"></i> My Advertisements
+               <% end %>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <!--sidebar end-->
+   <section id="main-dashboard-content">
+      <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-10 col-lg-offset-2 main-chart dashboard-content">
+               <div class="row mtbox">
+                  <div class="col-md-2 col-sm-3  col-lg-offset-1 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-heart"></span></center>
+                        <h3>Liked listings</h3>
+                     </div>
+                     <p>View all listings you have previously liked</p>
+                  </div>
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-envelope"></span></center>
+                        <h3>+1</h3>
+                     </div>
+                     <p>You have 1 new message in your inbox</p>
+                  </div>
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-eye"></span></center>
+                        <h3>+230</h3>
+                     </div>
+                     <p>230 people have viewed your ad in the last day!</p>
+                  </div>
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-suitcase"></span></center>
+                        <h3>3</h3>
+                     </div>
+                     <p>3 active advertisements. Click to view stats</p>
+                  </div>
+               </div>
+               <!-- /row mt -->
+               <div class = "row mt">
+                  <div id="listings">
+                     <%if @favorites then %>
+                       <% @favorites.each do |fav|%>
+                         <%= div_for fav, :class => "col-lg-4 result location#{fav.id}" do %>
+                           <div style="max-width:400px;">
+                              <a href="/listings/show?listing_id=<%=fav.id%>">
+                                 <div style="background-color: #d3d3d3;"><%= image_tag fav.image.url, class: "img"%></div>
+                              </a>
+                              <h4>
+                                 <a href="/listings/show?listing_id=<%=fav.id%>"><%= fav.title %></a>
+                              </h4>
+                              <%if fav.street.present? and fav.city.present? and fav.state.present? and fav.zip.present? then %>
+                                <p><%= "#{fav.street}, #{fav.city}, #{fav.state} #{fav.zip}" %></p>
+                              <%else%>
+                                <p><%= "#{sprintf('%.2f', fav.latitude)}, #{sprintf('%.2f', fav.longitude)}" %></p>
+                              <%end%>
+                           </div>
+                         <% end %>
+                       <% end %>
+                     <% end %>
+                  </div>
+               </div>
             </div>
-            <p>View all listings you have previously liked</p>
-          </div>
-          <div class="col-md-2 col-sm-2 box0">
-            <div class="box1">
-              <center><span class="fa fa-envelope"></span></center>
-              <h3>+1</h3>
-            </div>
-            <p>You have 1 new message in your inbox</p>
-          </div>
-
-          <div class="col-md-2 col-sm-2 box0">
-            <div class="box1">
-              <center><span class="fa fa-eye"></span></center>
-              <h3>+230</h3>
-            </div>
-            <p>230 people have viewed your ad in the last day!</p>
-          </div>
-
-          <div class="col-md-2 col-sm-2 box0">
-            <div class="box1">
-              <center><span class="fa fa-suitcase"></span></center>
-              <h3>3</h3>
-            </div>
-            <p>3 active advertisements. Click to view stats</p>
-          </div>
-
-
-        </div><!-- /row mt -->
-        <div class = "row mt">
-        <div id="listings">
-            <%if @favorites then %>
-            <% @favorites.each do |fav|%>
-            <%= div_for fav, :class => "col-lg-4 result location#{fav.id}" do %>
-            <div style="max-width:400px;">
-              <a href="/listings/show?listing_id=<%=fav.id%>">
-                <div style="background-color: #d3d3d3;"><%= image_tag fav.image.url, class: "img"%></div>
-              </a>
-              <h4>
-                <a href="/listings/show?listing_id=<%=fav.id%>"><%= fav.title %></a>
-              </h4>
-              <%if fav.street.present? and fav.city.present? and fav.state.present? and fav.zip.present? then %>
-              <p><%= "#{fav.street}, #{fav.city}, #{fav.state} #{fav.zip}" %></p>
-              <%else%>
-              <p><%= "#{sprintf('%.2f', fav.latitude)}, #{sprintf('%.2f', fav.longitude)}" %></p>
-              <%end%>
-            </div>
-            <% end %>
-            <% end %>
-            <% end %>
          </div>
-       </div>
-     </div>
-</div>
-      </section></section>
-
-
-
-
-
-
-
+      </section>
+   </section>
 </div>

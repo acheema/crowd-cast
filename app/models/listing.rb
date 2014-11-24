@@ -19,7 +19,7 @@ class Listing < ActiveRecord::Base
   validates :width, presence: true, numericality: true
   validates :time_per_click, presence: true, numericality: { only_integer: true }
   validates :views_per_week, presence: true, numericality: { only_integer: true }
-  validates :cost_per_week, presence: true, numericality: true
+  validates :cost_per_day, presence: true, numericality: true
   validates :street, presence: true, :unless => [ :latitude?, :longitude? ]
   validates :city, presence: true, :unless => [:latitude?, :longitude?]
   validates :state, presence: true, :unless => [:latitude?, :longitude?]
@@ -65,7 +65,7 @@ class Listing < ActiveRecord::Base
          return -3 if errors[:width].any?
          return -4 if errors[:time_per_click].any?
          return -5 if errors[:views_per_week].any?
-         return -6 if errors[:cost_per_week].any?
+         return -6 if errors[:cost_per_day].any?
          return -7 if errors[:street].any?
          return -8 if errors[:city].any?
          return -9 if errors[:state].any?

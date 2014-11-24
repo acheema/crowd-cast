@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122053103) do
+ActiveRecord::Schema.define(version: 20141124030033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20141122053103) do
     t.float    "width"
     t.integer  "time_per_click"
     t.integer  "views_per_week"
-    t.float    "cost_per_week"
     t.string   "street"
     t.string   "city"
     t.string   "state"
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(version: 20141122053103) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.float    "cost_per_day"
   end
 
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree

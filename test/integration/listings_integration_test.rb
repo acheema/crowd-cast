@@ -16,7 +16,7 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               width: 1, height: 1, \
                                               time_per_click: 1, \
                                               views_per_week: 1, \
-                                              cost_per_week: 1, \
+                                              cost_per_day: 1, \
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
@@ -31,7 +31,7 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                    listing: { title: 'Title1111', \
                                               width: 1, height: 1, \
                                               views_per_week: 1, \
-                                              cost_per_week: 1, \
+                                              cost_per_day: 1, \
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
@@ -47,7 +47,7 @@ class ListingsIntegrationControllerTest < ActionDispatch::IntegrationTest
                                               width: 1, height: 1, \
                                               time_per_click: 1, \
                                               views_per_week: 1, \
-                                              cost_per_week: 1, \
+                                              cost_per_day: 1, \
                                               street: "640 Dory Lane", \
                                               city: "Redwood City", \
                                               state: "CA", \
