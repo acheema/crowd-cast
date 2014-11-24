@@ -33,7 +33,7 @@
    $(document).ready(function() {
       var today_date = moment().utc().startOf('day');
       var year_from_today_date = moment().add(1, "years").utc().startOf('day');
-      var eventid = 0
+      var eventid = 0;
       var eventArrayID = [];
       var colors = ['blue', 'green', 'black', 'yellow', 'red', 'purple']
       var globalsearchid = 0
@@ -69,28 +69,28 @@
                for (var i in events){
                   var event_start_date = events[i].start.utc().startOf('day');
                   var event_end_date = events[i].end.utc().startOf('day');
-                  var current;
-                  var end;
+                  var current_date;
+                  var last_date;
                   if (start_date.isBefore(event_start_date)){
-                     current = event_start_date;
+                     current_date = event_start_date.clone();
                   }
                   else {
-                     current = start_date.clone();
+                     current_date = start_date.clone();
                   }
                   if (end_date.isAfter(event_end_date)){
-                     end = event_end_date;
+                     last_date = event_end_date.clone();
                   }
                   else {
-                     end = end_date.clone();
+                     last_date = end_date.clone();
                   }
-                  while (current < end){
-                     if (dates.hasOwnProperty(current)){
-                        dates[current] += 1;
+                  while (current_date < last_date){
+                     if (dates.hasOwnProperty(current_date)){
+                        dates[current_date] += 1;
                      }
                      else {
-                        dates[current] = 1;
+                        dates[current_date] = 1;
                      }
-                     current = current.add(1, "days");
+                     current_date = current_date.add(1, "days");
                   }
                }
                var valid = true;
@@ -104,8 +104,8 @@
                   var eventData;
                   eventData = {
                      id: eventid,
-                     start: start_date,
-                     end: end_date,
+                     start: start_date.format('YYYY-MM-DD'),
+                     end: end_date.format('YYYY-MM-DD'),
                      color: colors[Math.floor(Math.random()*colors.length)]
                   };
                   $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
@@ -115,8 +115,8 @@
                else {
                   alert("Listings only support 8 ads per day");
                }
-               $('#calendar').fullCalendar('unselect');
             }
+            $('#calendar').fullCalendar('unselect');
          },
          editable: true,
          events: [ {start: '2014-11-17', end: '2014-11-20'}],
