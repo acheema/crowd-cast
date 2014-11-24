@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.FrontPage;
 
-
+/*Written by Jessica
+minor fixes: Akaljot*/
 @Test
 public class LoginTest {
  
