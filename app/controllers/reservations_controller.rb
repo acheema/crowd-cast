@@ -4,7 +4,6 @@ require 'net/http'
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   wrap_parameters :reservation, include: [:advertisement_id, :listing_id, :dates, :start_date, :end_date, :price]
-  protect_from_forgery :except => [:confirm_payment] #Otherwise the request from PayPal wouldn't make it to the controller
 
   # GET /reservations/new
   def new
@@ -37,37 +36,54 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     reservation_params = create_reservations_params
-
+   puts reservation_params
     # lets verify these entries actually exist
     username = cookies[:username]
+    puts username
     advertiser = Advertiser.find_by_username(username)
     listing = Listing.find(reservation_params[:listing_id])
     advertisement = Advertisement.find(reservation_params[:advertisement_id])
     reservation_params.delete("listing_id")
     reservation_params.delete("advertisement_id")
     reservation_params.merge!(:advertiser => advertiser, :listing => listing, :advertisement => advertisement)
+    puts advertiser
     order = Digest::SHA1.hexdigest "" + advertiser.id.to_s + reservation_params[:dates].to_s + Time.new.to_s 
     
     # For each reservation, create
     dates = reservation_params[:dates]
     reservation_params.delete("dates")
+    reservations = []
     dates.each do |reservation|
        reservation = Reservation.new(reservation_params.merge(:start_date => reservation[:start_date],  
                                                               :end_date => reservation[:end_date], 
                                                               :price => reservation[:price],
                                                               :completed => false,
                                                               :order => order ))
-       if not reservation.save
+        # If one reservation is invalid, abort
+        if not reservation.valid?
           errors = reservation.errors
           if errors[:full_dates].any?
             return render :json => {status: -1, conflicts: errors[:full_dates]}
           else
             return render :json => {status: -1}
           end
+       else
+          reservations.push(reservation)
        end
     end
+    # Save reservations
+    reservations.each do |reservation|
+      reservation.save
+    end
+    Reservation.delay(run_at: 2.minutes.from_now).deleteOrder(order)
     return render :json => { status: 1 }
   end
+   
+   # Clean out the tables
+    def resetFixture
+        Reservation.TESTAPI_resetFixture
+        render :json => { status: 1 }
+    end
 
   def confirm_payment 
     # Used as guide: http://stackoverflow.com/questions/14316426/is-there-a-paypal-ipn-code-sample-for-ruby-on-rails

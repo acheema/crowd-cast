@@ -29,6 +29,10 @@ class AdvertisementsController < ApplicationController
          @ads = Advertisment.getAds(@advertiser.id)
       end
    end
+  
+   def TESTAPI_resetFixture
+     Advertisements.TESTAPI_resetFixture
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

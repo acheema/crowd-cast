@@ -43,6 +43,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'rmagick', '2.13.2'
 gem 'simplecov', :require => false
+gem 'delayed_job_active_record'
 # for heroku
 group :production do
   gem 'rails_12factor'

@@ -200,6 +200,39 @@
             }
           });
         }
+      $("#reserveButton").on("click", function(e) {
+           var events = $('#calendar').fullCalendar( 'clientEvents', 
+              function(event){
+                  if (eventArrayID.indexOf(event) != -1) return true;
+                  else return false;
+               });
+            var dates = [];
+            for (var event in events){
+               reservation = {};
+               reservation["start_date"] = event.start;
+               reservation["end_date"] = event.end;
+               reservation["price"] = <%= @listing.cost_per_day %> * event.end.diff(event.start, 'days'));
+               dates.push(reservation);
+            }
+            var e = document.getElementById("adsDropwdown");
+            var adID= e.options[e.selectedIndex].value;
+          $.ajax({
+              type: 'POST',
+              url: window.location.protocol + '//' + window.location.host + "/reservations/",
+              data: JSON.stringify({ listing_id: <%= @listing.id %>, advertisement_id: adID, dates: dates}),
+              contentType: "application/json",
+              dataType: "json",
+              success: function(data) {
+                  if (data[0]["status"] == 1){
+                  //ENTER PATH HERE 
+                  }
+                  else {
+                     alert("Failure");
+                  }
+              },
+              failure: function(data) { alert("Failure"); }
+            });
+       });
    });
 
 </script>

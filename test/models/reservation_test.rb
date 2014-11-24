@@ -60,4 +60,12 @@ class ReservationTest < ActiveSupport::TestCase
      completed_reservation = Reservation.find(reservation.id)
      assert_equal(true, completed_reservation.completed, "should be completed") 
   end
+   
+   test "valid delete order" do
+     reservation = Reservation.create(@params)
+     order = reservation.order
+     Reservation.deleteOrder(order)
+     completed_reservation = Reservation.where(:id => reservation.id)
+     assert_equal(false, completed_reservation.any?, "should be emppty") 
+  end
 end
