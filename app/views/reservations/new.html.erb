@@ -3,10 +3,6 @@
    <div class='container'>
       <div id='calendar'></div>
       <!-- Button trigger modal -->
-         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-           Delete all reservations
-         </button>
-
          <!-- Modal -->
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
@@ -37,6 +33,7 @@
       var eventArrayID = [];
       var color_index = 0;
       var colors = ['blue', 'green', 'yellow', 'red', 'purple', 'aqua', 'fuchsia', 'lime', 'maroon', 'navy', 'olive', 'orange', 'teal' ];
+      var globalsearchid = 0
       $('#calendar').fullCalendar({
         // put your options and callbacks here
          eventStartEditable: false,
@@ -121,7 +118,6 @@
             $('#calendar').fullCalendar('unselect');
          },
          editable: true,
-         events: [ {start: '2014-11-17', end: '2014-11-20'}],
          eventSources: [
             {
                url: "" + window.location.protocol + '//' + window.location.host + 
@@ -135,6 +131,7 @@
          eventClick: function(calEvent, jsEvent, view) {
             var recentlyCreated = eventArrayID.indexOf(calEvent.id) != -1;
             if(calEvent.id != undefined && recentlyCreated){
+              globalsearchid = calEvent.id
               var msg = 'Reservation details<br><br>Reservation ID: '+calEvent.id+'<br>Reservation start: '+(calEvent.start).toISOString().slice(0, 10)+'<br>Reservation end: '+(calEvent.end).toISOString().slice(0, 10); 
               document.getElementById("innerbodymodal").innerHTML = msg;
               document.getElementById("myModalLabel").innerHTML = "Details";
@@ -150,26 +147,20 @@
               close.style.display = 'none';
               $('#myModal').modal('show');
             }
-            /*
-            if (calEvent.id != undefined  && recentlyCreated && confirm('--Reservation details--\nReservation ID: '+calEvent.id
-              +'\nReservation start: '+(calEvent.start).toISOString().slice(0, 10)
-              +'\nReservation end: '+(calEvent.end).toISOString().slice(0, 10)
-              +'\n\nIf you wish to delete this listing press OK')){
-              $('#calendar').fullCalendar('removeEvents', calEvent._id);
-            }
-            if (calEvent.id == undefined){
-              alert("--Reservation details--\n PUT STUFF HERE")
-            }*/
          },
       });
       $("#deleteEvent").on("click", function(e) {
-         deleteEvent(e.id);
+         deleteEvent();
          $('#myModal').modal('hide');
       });
-      function deleteEvent(id){
-         $('#calendar').fullCalendar('removeEvents', id);
-      }
-   })
+      function deleteEvent(){
+        $('#calendar').fullCalendar( 'clientEvents', function(event){
+            if (event.id == globalsearchid){
+              $('#calendar').fullCalendar('removeEvents', globalsearchid);
+            }
+          });
+        }
+   });
 
 </script>
 
