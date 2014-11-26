@@ -228,7 +228,7 @@
                     window.location.href = window.location.protocol + '//' + window.location.host + "/reservations/show?order_id=" + data["order"] + "&total_amount=" + data["total"]; 
                   }
                   else {
-                     alert("Failure");
+                     alert("Conflicts: " + data["conflicts"]);
                   }
               },
               failure: function(data) { alert("Failure"); }
