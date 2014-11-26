@@ -22,7 +22,7 @@
 
 
         <li>
-          <%= link_to(advertiser_dashboard_ads_path, :id => "my-ads", :class => 'active') do %>
+          <%= link_to(advertiser_dashboard_ads_path, :id => "my-advs", :class => 'active') do %>
           <i class="fa fa-tasks"></i> My Advertisements
           <% end %>
         </li>
@@ -37,7 +37,7 @@
         <section id="ads">
           <section class="wrapper">
             <div class="content-panel">
-              <table class="table table-hover">
+              <table id = "ad-table" class="table table-hover">
                 <h4>My Advertisements</h4>
                 <hr>
 
