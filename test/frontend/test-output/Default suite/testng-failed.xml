@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="tests.OwnerDashboardTest">
+      <class name="tests.FavoriteListingTest">
         <methods>
-          <include name="loginLogout"/>
+          <include name="favoriteListingTest"/>
         </methods>
-      </class> <!-- tests.OwnerDashboardTest -->
+      </class> <!-- tests.FavoriteListingTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

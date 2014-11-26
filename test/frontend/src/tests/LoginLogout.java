@@ -24,6 +24,7 @@ public class LoginLogout {
         FrontPage f = new FrontPage(driver).open().clickLogin();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("login")));
+        
         String credentials = LocatorStrings.UsernameAdvertiser;
         
         f.loginSuccess(credentials,credentials);

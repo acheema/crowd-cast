@@ -1,14 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-
-import strings.LocatorStrings;
 
 public class NavbarPage extends Page{
 
@@ -42,5 +37,24 @@ public class NavbarPage extends Page{
 	      return new FrontPage(driver);
 	  }
 	  
+	  public MyAccountPage clickMyAccount() {
+	      WebElement myAcc = driver.findElement(By.id("link-my-account"));
+	      myAcc.click();
+	      return new MyAccountPage(driver);
+	  }
+	  
+	  public NewAdvertisementPage clickNewAd() {
+	      WebElement ad = driver.findElement(By.id("add-ad-button"));
+	      ad.click();
+	      return new NewAdvertisementPage(driver);
+
+	  }
+	  
+	  public SearchPage search(String city) {
+	      WebElement sb = driver.findElement(By.id("searchbar"));
+	      sb.sendKeys(city);
+	      sb.sendKeys(Keys.ENTER);
+	      return new SearchPage(driver);
+	  }
 
 }

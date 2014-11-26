@@ -1,17 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="6142" started-at="2014-11-24T13:10:33Z" finished-at="2014-11-24T13:10:39Z">
+  <suite name="Default suite" duration-ms="15080" started-at="2014-11-26T09:43:33Z" finished-at="2014-11-26T09:43:48Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="6142" started-at="2014-11-24T13:10:33Z" finished-at="2014-11-24T13:10:39Z">
-      <class name="tests.LoginLogout">
-        <test-method status="PASS" signature="loginLogout()[pri:0, instance:tests.LoginLogout@5e025e70]" name="loginLogout" duration-ms="6131" started-at="2014-11-24T05:10:33Z" finished-at="2014-11-24T05:10:39Z">
+    <test name="Default test" duration-ms="15080" started-at="2014-11-26T09:43:33Z" finished-at="2014-11-26T09:43:48Z">
+      <class name="tests.FavoriteListingTest">
+        <test-method status="FAIL" signature="favoriteListingTest()[pri:0, instance:tests.FavoriteListingTest@11531931]" name="favoriteListingTest" duration-ms="15064" started-at="2014-11-26T01:43:33Z" finished-at="2014-11-26T01:43:48Z">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[Unable to locate element: {"method":"id","selector":"fave"}
+Command duration or timeout: 3.21 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:03:00'
+System info: host: 'Jessicas-MacBook-Pro-2.local', ip: '192.168.0.102', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.1', java.version: '1.8.0_25'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=33.1, platform=MAC, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a1799520-2bad-1f40-91f4-58134b9bf186]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"fave"}
+Command duration or timeout: 3.21 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:03:00'
+System info: host: 'Jessicas-MacBook-Pro-2.local', ip: '192.168.0.102', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.1', java.version: '1.8.0_25'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=33.1, platform=MAC, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a1799520-2bad-1f40-91f4-58134b9bf186
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:393)
+	at org.openqa.selenium.By$ById.findElement(By.java:214)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+	at pages.SearchPage.clickFavorite(SearchPage.java:20)
+	at tests.FavoriteListingTest.favoriteListingTest(FavoriteListingTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"fave"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:03:00'
+System info: host: 'Jessicas-MacBook-Pro-2.local', ip: '192.168.0.102', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.1', java.version: '1.8.0_25'
+Driver info: driver.version: unknown
+	at <anonymous class>.FirefoxDriver.prototype.findElementInternal_(file:///var/folders/gg/csg30qqs05s07d_qlrtrkvfr0000gn/T/anonymous8329128141561609404webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:9641:26)
+	at <anonymous class>.FirefoxDriver.prototype.findElement(file:///var/folders/gg/csg30qqs05s07d_qlrtrkvfr0000gn/T/anonymous8329128141561609404webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:9650:3)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_/h(file:///var/folders/gg/csg30qqs05s07d_qlrtrkvfr0000gn/T/anonymous8329128141561609404webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11635:16)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_(file:///var/folders/gg/csg30qqs05s07d_qlrtrkvfr0000gn/T/anonymous8329128141561609404webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11640:7)
+	at <anonymous class>.DelayedCommand.prototype.execute/<(file:///var/folders/gg/csg30qqs05s07d_qlrtrkvfr0000gn/T/anonymous8329128141561609404webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11582:5)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginLogout -->
-      </class> <!-- tests.LoginLogout -->
+        </test-method> <!-- favoriteListingTest -->
+      </class> <!-- tests.FavoriteListingTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
