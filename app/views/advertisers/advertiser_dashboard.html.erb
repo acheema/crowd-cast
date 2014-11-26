@@ -68,7 +68,7 @@
                          <%= div_for fav, :class => "col-lg-4 result location#{fav.id}" do %>
                            <div style="max-width:400px;">
                               <a href="/listings/show?listing_id=<%=fav.id%>">
-                                 <div style="background-color: #d3d3d3;"><%= image_tag fav.image.url, class: "img"%></div>
+                                 <div><%= image_tag fav.image.url, class: "img"%></div>
                               </a>
                               <h4>
                                  <a href="/listings/show?listing_id=<%=fav.id%>"><%= fav.title %></a>

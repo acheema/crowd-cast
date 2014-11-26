@@ -10,7 +10,7 @@ class Advertisement < ActiveRecord::Base
      thumb: '100x100>',
      square: '200x200#',
      medium: '300x300>'
-     }
+   }, :default_url => "default.png"
   validates_attachment_content_type :ad, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   
    def self.createAd(params)
