@@ -15,8 +15,8 @@ class Listing < ActiveRecord::Base
   after_validation :geocode, :if => [:street?, :city?, :state?, :zip?]
 
   validates :title, presence: true, length: { maximum: 128, minimum: 4 }
-  validates :height, presence: true, numericality: true
-  validates :width, presence: true, numericality: true
+  validates :height, presence: true, numericality: {greater_than: 0}
+  validates :width, presence: true, numericality: {greater_than: 0}
   validates :time_per_click, presence: true, numericality: { only_integer: true }
   validates :views_per_week, presence: true, numericality: { only_integer: true }
   validates :cost_per_day, presence: true, numericality: true
@@ -25,8 +25,8 @@ class Listing < ActiveRecord::Base
   validates :state, presence: true, :unless => [:latitude?, :longitude?]
   validates :zip, presence: true, :unless => [:latitude?, :longitude?]
   validates :owner, :presence => true
-  validates :screen_resolution_x, presence: true, numericality: {only_integer: true}
-  validates :screen_resolution_y, presence: true, numericality: {only_integer: true}
+  validates :screen_resolution_x, presence: true, numericality: {only_integer: true, greater_than: 0}
+  validates :screen_resolution_y, presence: true, numericality: {only_integer: true, greater_than: 0}
   validates :active, presence: true, :inclusion => {:in => [true, false]}
   validates :views, presence: true, numericality: {only_integer: true}
   #Image validation

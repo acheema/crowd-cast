@@ -40,8 +40,8 @@
                             <li>
                                 <span><label for="q2">Address or GPS Location
                                 of your listing</label></span><h4>Select a location from the map, or enter in your address</h4>
-                                            <%= f.number_field :latitude, step: 'any', class: "text_field form-control gps listingForm", placeholder: "Enter latitude" %>
-            <%= f.number_field :longitude, step: 'any', class: "text_field form-control gps listingForm", placeholder: "Enter longitude" %>
+                                <%= f.number_field :latitude, step: 'any', class: "text_field form-control gps listingForm", placeholder: "Enter latitude", style: "display:none"%>
+                                <%= f.number_field :longitude, step: 'any', class: "text_field form-control gps listingForm", placeholder: "Enter longitude", style: "display:none" %>
 
 
                                 <div class="select-gps" id="select_location">
@@ -53,15 +53,20 @@
 
                             <li><span><label for="q3">Listing
                             information</label></span>
+                            <p>The height of the display</p>
                             <%= f.number_field :height, class: "form-control listingForm", placeholder: "Enter height" %>
+                            <p>The width of the display</p>
                             <%= f.number_field :width, class: "form-control listingForm", placeholder: "Enter width" %>
+                            <p>The x value of the screen resolution (the 1920 of 1920x1080p)</p>
                             <%= f.number_field :screen_resolution_x, class:"form-control listingForm",placeholder:"Enter resolution x" %>
+                            <p>The y value of the screen resolution (the 1080 of 1920x1080p)</p>
                             <%= f.number_field :screen_resolution_y, class:"form-control listingForm",placeholder:"Enter resolution y" %></li>
 
                             <li><span><label for="q4">Listing
                             Cost</label></span>
                             <%= f.number_field :views_per_week, class: "form-control listingForm",placeholder: "Enter number of views per week" %>
                             <%= f.number_field :cost_per_day, class:"form-control listingForm",  placeholder:"Cost per day (dollars)" %>
+                            <p>Number of seconds for each advertiserment in a rotation</p>
                             <%= f.number_field :time_per_click, class: "form-control listingForm", placeholder: "Enter time (s)" %>
 
 

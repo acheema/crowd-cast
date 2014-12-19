@@ -1,48 +1,60 @@
 <style>
-@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
-
-}
-
+   @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 </style>
 <div class = "row">
-  <div class = "col-lg-2 col-md-2 ">
-    <div id="sidebar"  class="nav-collapse ">
-      <!-- sidebar menu start-->
-      <ul class="sidebar-menu owner" id="nav-accordion">
-        <h4 class="centered"><%=@current_user.username %></h4>
-
-        <li>
-          <%= link_to(owner_dashboard_path, :class => 'active') do %>
-          <i class="fa fa-tasks"></i> Dashboard
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to owner_dashboard_mail_path do %>
-          <i class="fa fa-envelope"></i> Mail
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to owner_dashboard_listings_path do %>
-          <i class="fa fa-tasks"></i> My Listings
-          <% end %>
-        </li>
-</ul>
-
-      </div></div>
-
-
-      <!--sidebar end-->
-
-
-
-
-
-
-
-
-
-
-
-    </div>
+   <div class = "col-lg-2 col-md-2 ">
+      <div id="sidebar"  class="nav-collapse ">
+         <!-- sidebar menu start-->
+         <ul class="sidebar-menu owner" id="nav-accordion">
+            <h4 class="centered"><%=@current_user.username %></h4>
+            <li>
+               <%= link_to(owner_dashboard_path, :class => 'active') do %>
+               <i class="fa fa-tasks"></i> Dashboard
+               <% end %>
+            </li>
+            <li>
+               <%= link_to owner_dashboard_mail_path do %>
+               <i class="fa fa-envelope"></i> Mail
+               <% end %>
+            </li>
+            <li>
+               <%= link_to owner_dashboard_listings_path do %>
+               <i class="fa fa-tasks"></i> My Listings
+               <% end %>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <!--sidebar end-->
+   <section id="main-dashboard-content">
+      <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 main-chart dashboard-content">
+               <div class="row mtbox">
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-envelope"></span></center>
+                        <h3>+1</h3>
+                     </div>
+                     <p>You have 1 new message in your inbox</p>
+                  </div>
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-eye"></span></center>
+                        <h3>+230</h3>
+                     </div>
+                     <p>230 people have viewed your ad in the last day!</p>
+                  </div>
+                  <div class="col-md-2 col-sm-2 box0">
+                     <div class="box1">
+                        <center><span class="fa fa-suitcase"></span></center>
+                        <h3>3</h3>
+                     </div>
+                     <p>1 active listings. Click to view stats</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </section>
+</div>

@@ -24,8 +24,10 @@
   <strong>Usertype:</strong>
   <%= @advertiser.usertype %>
 </p>
-<button id = "create_a" class = "create_a">Create an Owner Account</button></div>
-<%= link_to 'Edit Account', edit_owner_path(@advertiser) %> |
+<% if @advertiser.usertype != 2 %>
+   <button id = "create_a" class = "create_a">Create an Owner Account</button>
+<% end %>
+</div>
 
 <script>
 
