@@ -1,18 +1,5 @@
 == CROWDCAST
-Iteration 1:
-To run the application, have psql running. 
-rake db:reset
-rake db:migrate
-Run rails s in the app folder.
+The application serves as a platform that makes easy for both owners of digital signage and advertisers do business in a transparent manner instead of having to agree to the terms of one of three big outdoor advertisers. We deployed a fully functional site allowing interested advertisers to bid for digital signage places, and for owners of space to list their available advertising space online to potential advertisers (much like google adwords for physical advertising spaces).
 
-To run tests locally:
-rake test
-
-or in postman, get
-http://crowd-cast.herokuapp.com/api/TESTAPI_tests for the heroku app
-or
-heroku run rake test RAILS_ENV=test
-
-To use paypal:
-username: crowdcast-buyer@gmail.com
-password: crowdcast#
+Some of the features for production have been disabled since the completion of the project (like image upload).
+To use paypal sandbox - contact me
